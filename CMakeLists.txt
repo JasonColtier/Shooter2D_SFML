@@ -8,10 +8,12 @@ set(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(HEADERS
-
+    ${HEADER_DIR}/signal.h
+    ${HEADER_DIR}/TestSignalSimple.h
 )
 
 set(SOURCES
+    ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/main.cpp
 )
 
