@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "signal.h"
+#include "Signal.h"
 #include <any>
 
 class TestSignalSimple

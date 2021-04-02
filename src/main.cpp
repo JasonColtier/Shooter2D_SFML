@@ -1,13 +1,14 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <ostream>
-
 #include "GameLoop.h"
 #include "TestSignalSimple.h"
+#include "Tools/Print.h"
 
 int main()
 {
-    GameLoop::GetInstance();
+
+    Print::PrintString(WARN,"test warning" , "test");
+    Print::PrintString(ERROR,"test error");
+    
+    new GameLoop(); 
     
     // /*
     //  *  Test du signal

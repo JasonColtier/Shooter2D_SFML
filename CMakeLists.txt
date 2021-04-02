@@ -8,7 +8,8 @@ set(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(HEADERS
-    ${HEADER_DIR}/signal.h
+    ${HEADER_DIR}/Tools/Print.h
+    ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TestSignalSimple.h
 )

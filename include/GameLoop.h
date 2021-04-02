@@ -12,25 +12,29 @@ namespace sf
 class GameLoop
 {
 public:
-    static GameLoop& GetInstance();
+    GameLoop();
+    ~GameLoop();
+
+    // //getter de singleton
+    // static GameLoop& GetInstance();
 
 private:
 
+    //global parameters
     bool useFullscreen = false;
-    float targetFPS = 36.0f;
-    
-    bool updateFinished = false;
-    static GameLoop m_Instance;
+    float targetFPS = 42.0f;
+
+    // //instance
+    // static GameLoop m_Instance;
+
+    //temps entre chaque frame
     float deltaTime;
+
+    //notre window
     sf::RenderWindow* window;
     sf::Vector2f sizeWindow;
     
 
-    GameLoop();
-    ~GameLoop();
-
-    //Looping part
-    void Loop();
 
     //update all game objects
     void Update();
