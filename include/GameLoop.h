@@ -22,7 +22,7 @@ private:
 
     //global parameters
     bool useFullscreen = false;
-    float targetFPS = 60.0f;
+    float targetFPS = 120.0f;
 
     // //instance
     // static GameLoop m_Instance;

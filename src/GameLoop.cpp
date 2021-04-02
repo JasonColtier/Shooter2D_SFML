@@ -54,12 +54,13 @@ GameLoop::GameLoop()
         {
             deltaTime = clock.restart().asMicroseconds();//on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
             updateTime += deltaTime;
-            
+            // Print::PrintString("max :  ",(1.0 / targetFPS)*1000000);
+        
             Update();
         }
 
         //pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
-        updateTime = updateTime - (1.0 / targetFPS)*1000000;
+        updateTime -= ((1.0 / targetFPS)*1000000);
         
         Print::PrintString(LOG,"last update surplus : ",updateTime);
 
