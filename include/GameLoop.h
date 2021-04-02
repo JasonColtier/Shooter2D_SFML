@@ -29,6 +29,7 @@ private:
 
     //temps entre chaque frame
     float deltaTime;
+    int updateTime = 0;
 
     //notre window
     sf::RenderWindow* window;

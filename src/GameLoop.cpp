@@ -49,17 +49,19 @@ GameLoop::GameLoop()
          * updating game 
          */
 
-        float updateTime = 0.f;//pas reset, on garde le temps de frame d'avant
-
         //tant qu'on a pas atteint le nombre de fps voulu on continue les updates
         while (updateTime < (1.0 / targetFPS)*1000000)
         {
-            deltaTime = clock.restart().asMicroseconds();//on utilise les microsec pour éviter de travailler avec des nombres minuscules
+            deltaTime = clock.restart().asMicroseconds();//on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
             updateTime += deltaTime;
-            Print::PrintString(LOG,"deltaTime : ",deltaTime);
-            Print::PrintString(LOG,"updateTime : ",updateTime);
+            
             Update();
         }
+
+        //pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
+        updateTime = updateTime - (1.0 / targetFPS)*1000000;
+        
+        Print::PrintString(LOG,"last update surplus : ",updateTime);
 
         /*
          *  rendering game
@@ -80,6 +82,8 @@ GameLoop::~GameLoop()
 
 void GameLoop::Update()
 {
+    Print::PrintString(LOG,"deltaTime : ",deltaTime);
+    Print::PrintString(LOG,"updateTime : ",updateTime);
 }
 
 void GameLoop::Render()
