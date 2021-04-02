@@ -6,8 +6,6 @@
 #include "Tools/Print.h"
 
 
-// GameLoop GameLoop::m_Instance = GameLoop();
-
 GameLoop::GameLoop()
 {
     std::cout << "init Game loop" << std::endl;
@@ -75,11 +73,6 @@ GameLoop::~GameLoop()
 {
     std::cout << "destruction";
 }
-
-// GameLoop& GameLoop::GetInstance()
-// {
-//     return m_Instance;
-// }
 
 void GameLoop::Update()
 {

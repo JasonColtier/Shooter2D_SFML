@@ -3,29 +3,27 @@
 #include <ostream>
 #include <SFML/System/Vector2.hpp>
 
+#include "Singleton.h"
+
 namespace sf
 {
     class Clock;
     class RenderWindow;
 }
 
-class GameLoop
+class GameLoop : public Singleton<GameLoop>
 {
+
+    friend class Singleton<GameLoop>;
 public:
     GameLoop();
     ~GameLoop();
-
-    // //getter de singleton
-    // static GameLoop& GetInstance();
 
 private:
 
     //global parameters
     bool useFullscreen = false;
     float targetFPS = 120.0f;
-
-    // //instance
-    // static GameLoop m_Instance;
 
     //temps entre chaque frame
     float deltaTime;
