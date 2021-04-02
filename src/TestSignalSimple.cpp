@@ -1,12 +1,15 @@
 ﻿#include "TestSignalSimple.h"
 
 #include <iostream>
+#include <iterator>
 #include <ostream>
+
 
 TestSignalSimple::TestSignalSimple()
 {
 
 }
+
 
 void TestSignalSimple::Test()
 {
@@ -15,12 +18,17 @@ void TestSignalSimple::Test()
     {
         std::cout << "print called in Test : " << std::any_cast<int>(myInt) <<std::endl;
     });
+
+    //on connecte une fonction membre
+    m_signal.Connect<TestSignalSimple>(this,&TestSignalSimple::Print);
     
     //on call une update, toutes les fonctions connectées seront appelées
     m_signal(100);
 }
 
-void TestSignalSimple::Print()
+
+
+void TestSignalSimple::Print(std::any i)
 {
-    std::cout << "print called" <<std::endl;
+    std::cout << "print called here" <<std::endl;
 }

@@ -15,12 +15,15 @@ class GameLoop : public Singleton<GameLoop>
 {
 
     friend class Singleton<GameLoop>;
+
 public:
-    GameLoop();
-    ~GameLoop();
+
 
 private:
 
+    GameLoop();
+    ~GameLoop();
+    
     //global parameters
     bool useFullscreen = false;
     float targetFPS = 120.0f;

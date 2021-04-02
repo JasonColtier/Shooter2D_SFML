@@ -18,7 +18,7 @@ public:
     }
 
 private:
-    void Print();//on essayera de s'y connecter plus tard
+    void Print(std::any i);//on essayera de s'y connecter plus tard
     std::function<void(std::any)> m_function; //void est le type de retour
     Signal<std::any> m_signal;//notre signal
 };
