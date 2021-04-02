@@ -55,4 +55,12 @@ public:
         PrintArgs(args...);
         std::cout << std::endl;
     }
+
+    template <typename... Args>
+    static void PrintString(Args ... args)
+    {
+        std::cout << EnumToString(LOG) << " - ";
+        PrintArgs(args...);
+        std::cout << std::endl;
+    }
 };

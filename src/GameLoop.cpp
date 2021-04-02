@@ -49,15 +49,16 @@ GameLoop::GameLoop()
          * updating game 
          */
 
-        float updateTime = 0;//pas reset, on garde le temps de frame d'avant
+        float updateTime = 0.f;//pas reset, on garde le temps de frame d'avant
 
         //tant qu'on a pas atteint le nombre de fps voulu on continue les updates
-        while (updateTime < 1.0 / targetFPS)
+        while (updateTime < (1.0 / targetFPS)*1000000)
         {
-            deltaTime = clock.restart().asSeconds();
-            Update();
+            deltaTime = clock.restart().asMicroseconds();//on utilise les microsec pour éviter de travailler avec des nombres minuscules
             updateTime += deltaTime;
-            // std::cout << "updateTime : " << updateTime << std::endl;
+            Print::PrintString(LOG,"deltaTime : ",deltaTime);
+            Print::PrintString(LOG,"updateTime : ",updateTime);
+            Update();
         }
 
         /*
@@ -79,12 +80,12 @@ GameLoop::~GameLoop()
 
 void GameLoop::Update()
 {
-    std::cout << "deltaTime : " << deltaTime << std::endl;
 }
 
 void GameLoop::Render()
 {
-    std::cout << "render" << std::endl;
+    Print::PrintString(WARN,"render : ");
+
     window->clear();
 
     //render loop
