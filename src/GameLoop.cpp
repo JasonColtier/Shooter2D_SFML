@@ -3,6 +3,8 @@
 #include <iostream>
 #include <ostream>
 
+
+#include "Player.h"
 #include "Tools/Print.h"
 
 
@@ -27,6 +29,8 @@ GameLoop::GameLoop()
     sf::Event event;
     sf::Clock clock;
 
+    player = new Player();
+    
     //la partie qui loop ! On reste dedans tant qu'on est dans le jeu
     while (window->isOpen())
     {
@@ -77,6 +81,7 @@ void GameLoop::Update()
 {
     // Print::PrintString(LOG,"deltaTime : ",deltaTime);
     // Print::PrintString(LOG,"updateTime : ",updateTime);
+
 }
 
 void GameLoop::Render()
@@ -86,6 +91,10 @@ void GameLoop::Render()
     window->clear();
 
     //render loop
+
+    //foreach gameObject call draw
+    
+    window->draw(player->sprite);
 
     window->display();
 }

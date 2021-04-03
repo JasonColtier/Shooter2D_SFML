@@ -3,7 +3,10 @@
 #include <ostream>
 #include <SFML/System/Vector2.hpp>
 
+
 #include "Singleton.h"
+
+class Player;
 
 namespace sf
 {
@@ -36,6 +39,8 @@ private:
     sf::RenderWindow* window;
     sf::Vector2f sizeWindow;
     
+    Player* player;
+
 
 
     //update all game objects

@@ -30,5 +30,5 @@ void TestSignalSimple::Test()
 
 void TestSignalSimple::Print(std::any i)
 {
-    std::cout << "print called here" <<std::endl;
+    std::cout << "print called here"<<std::any_cast<int>(i) <<std::endl;
 }

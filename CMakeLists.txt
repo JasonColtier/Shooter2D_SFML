@@ -13,11 +13,17 @@ set(HEADERS
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TestSignalSimple.h
+    ${HEADER_DIR}/Player.h
+    ${HEADER_DIR}/GameObject.h
+    ${HEADER_DIR}/TextureManager.h
 )
 
 set(SOURCES
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
+    ${SOURCE_DIR}/Player.cpp
+    ${SOURCE_DIR}/GameObject.cpp
+    ${SOURCE_DIR}/TextureManager.cpp
     ${SOURCE_DIR}/main.cpp
 )
 
