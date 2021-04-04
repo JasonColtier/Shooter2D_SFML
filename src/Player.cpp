@@ -9,6 +9,8 @@
 
 Player::Player()
 {
+    Print::PrintString("new player");
+    
     //test rapide pour afficher une texture
     texture.loadFromFile(TextureManager::textureMap.at("Ship")), sf::IntRect(0, 0, 100, 100);
     sprite.setTexture(texture);
@@ -39,6 +41,8 @@ void Player::Tick(int64_t deltaTime)
     pos.y += deltaPosY/(10000 * speed) * deltaTime;
     sprite.setPosition(pos);
 
+    // Print::PrintString(pos.x);
+    // Print::PrintString(pos.y);
 }
 
 void Player::Render(sf::RenderWindow* window)

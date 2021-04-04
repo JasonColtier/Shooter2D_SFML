@@ -10,13 +10,13 @@ GameLoop::GameLoop()
     {
         sizeWindow.x = 1920.0f;
         sizeWindow.y = 1080.0f;
-        window = new sf::RenderWindow(sf::VideoMode(this->sizeWindow.x, this->sizeWindow.y), "Shooter 2D SFML", sf::Style::Fullscreen);
+        window = new sf::RenderWindow(sf::VideoMode(this->sizeWindow.x, this->sizeWindow.y), gameName, sf::Style::Fullscreen);
     }
     else
     {
         sizeWindow.x = 1920.0f / 2;
         sizeWindow.y = 1080.0f / 2;
-        window = new sf::RenderWindow(sf::VideoMode(this->sizeWindow.x, this->sizeWindow.y), "Shooter 2D SFML", sf::Style::Default);
+        window = new sf::RenderWindow(sf::VideoMode(this->sizeWindow.x, this->sizeWindow.y), gameName, sf::Style::Default);
     }
 
     window->setVerticalSyncEnabled(true);
@@ -42,22 +42,22 @@ void GameLoop::StartGame()
         //marche à peu près mais c'est pas foufou
         int maxX = window->getSize().x;
         int maxY = window->getSize().y;
-
+        
         int mX = sf::Mouse::getPosition(*window).x;
         int mY = sf::Mouse::getPosition(*window).y;
-
+        
         if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
         {
             if (mX < 0)
                 mX = 0;
             else if (mX > maxX)
                 mX = maxX;
-
+        
             if (mY < 0)
                 mY = 0;
             else if (mY > maxY)
                 mY = maxY;
-
+        
             sf::Mouse::setPosition(sf::Vector2i(mX, mY), *window);
         }
             
@@ -105,12 +105,14 @@ void GameLoop::StartGame()
         */
         Render();
     }
+
 }
 
 void GameLoop::Update()
 {
     // Print::PrintString(LOG,"updateTime : ",updateTime);
     gameLevel->Update(deltaTime);
+    // Print::PrintString("deltatime : ", deltaTime);
 }
 
 void GameLoop::Render() const
@@ -120,6 +122,7 @@ void GameLoop::Render() const
     window->clear();
 
     gameLevel->Render(window);
+
 
     window->display();
 }

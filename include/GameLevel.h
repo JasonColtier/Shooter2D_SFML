@@ -26,7 +26,7 @@ private:
      */
 
     //TODO une liste ou un array ?
-    std::list<GameObject*> gameObjectsList;
+    std::vector<GameObject*> gameObjectsList;
     
     Player* player;
     //EnemySpawner*

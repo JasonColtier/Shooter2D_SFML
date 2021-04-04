@@ -6,7 +6,6 @@ GameLevel::GameLevel()
     Print::PrintString("level created");
     player = new Player();
 
-    
     gameObjectsList.push_back(player);
 }
 

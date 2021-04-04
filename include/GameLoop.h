@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <ostream>
+#include <string>
 #include <SFML/System/Vector2.hpp>
 
 #include "Singleton.h"
@@ -31,9 +32,9 @@ private:
     ~GameLoop();
     
     //global parameters
-    // bool useFullscreen = false;
     bool useFullscreen = true;
     float targetFPS = 60.0f;
+    std::string gameName = "Shooter 2D SFML";
 
     //temps entre chaque frame
     int64_t deltaTime; //en microsecondes !
