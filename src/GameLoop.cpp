@@ -1,16 +1,11 @@
 ﻿#include "GameLoop.h"
 #include "SFML/Graphics.hpp"
-#include <iostream>
-#include <ostream>
-
-
-#include "Player.h"
-#include "Tools/Print.h"
+#include "GameLevel.h"
 
 
 GameLoop::GameLoop()
 {
-    std::cout << "init Game loop" << std::endl;
+    Print::PrintString("init game loop");
     if (useFullscreen)
     {
         sizeWindow.x = 1920.0f;
@@ -25,15 +20,49 @@ GameLoop::GameLoop()
     }
 
     window->setVerticalSyncEnabled(true);
+}
 
+GameLoop::~GameLoop()
+{
+    std::cout << "destruction";
+}
+
+void GameLoop::StartGame()
+{
     sf::Event event;
     sf::Clock clock;
 
-    player = new Player();
-    
+    gameLevel = gameLevel->GetInstance();
+
     //la partie qui loop ! On reste dedans tant qu'on est dans le jeu
     while (window->isOpen())
     {
+
+        //keeps cursor inside of the window
+        //marche à peu près mais c'est pas foufou
+        int maxX = window->getSize().x;
+        int maxY = window->getSize().y;
+
+        int mX = sf::Mouse::getPosition(*window).x;
+        int mY = sf::Mouse::getPosition(*window).y;
+
+        if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
+        {
+            if (mX < 0)
+                mX = 0;
+            else if (mX > maxX)
+                mX = maxX;
+
+            if (mY < 0)
+                mY = 0;
+            else if (mY > maxY)
+                mY = maxY;
+
+            sf::Mouse::setPosition(sf::Vector2i(mX, mY), *window);
+        }
+            
+
+
         //check for closing window
         while (window->pollEvent(event))
         {
@@ -48,53 +77,49 @@ GameLoop::GameLoop()
         }
 
         /*
-         * updating game 
-         */
+        * updating game 
+        */
+
+        cursorPos = sf::Mouse::getPosition();
+        cursorPos.x -= window->getPosition().x;
+        cursorPos.y -= window->getPosition().y;
 
         //tant qu'on a pas atteint le nombre de fps voulu on continue les updates
-        while (updateTime < (1.0 / targetFPS)*1000000)
+        while (updateTime < (1.0 / targetFPS) * 1000000)
         {
-            deltaTime = clock.restart().asMicroseconds();//on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
+
+
+            deltaTime = clock.restart().asMicroseconds(); //on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
             updateTime += deltaTime;
-        
+
             Update();
         }
 
         //pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
-        updateTime -= ((1.0 / targetFPS)*1000000);
-        
+        updateTime -= ((1.0 / targetFPS) * 1000000);
+
         // Print::PrintString(LOG,"last update surplus : ",updateTime);
 
         /*
-         *  rendering game
-         */
+        *  rendering game
+        */
         Render();
     }
 }
 
-GameLoop::~GameLoop()
-{
-    std::cout << "destruction";
-}
-
 void GameLoop::Update()
 {
-    // Print::PrintString(LOG,"deltaTime : ",deltaTime);
     // Print::PrintString(LOG,"updateTime : ",updateTime);
-
+    gameLevel->Update(deltaTime);
 }
 
-void GameLoop::Render()
+void GameLoop::Render() const
 {
     // Print::PrintString(LOG,"render : ");
 
     window->clear();
 
-    //render loop
-
-    //foreach gameObject call draw
-    
-    window->draw(player->sprite);
+    gameLevel->Render(window);
 
     window->display();
 }

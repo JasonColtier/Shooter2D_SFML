@@ -1,18 +1,22 @@
 ﻿#pragma once
-#include <SFML/Graphics/Rect.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 
 #include "GameObject.h"
 
-class Player : GameObject
+class Player : public GameObject
 {
 public:
     sf::Texture texture;
-
     sf::Sprite sprite;
+
 
     
    Player();
+    void Tick(int64_t deltaTime) override;
+    void Render(sf::RenderWindow* window) override;
+
+private:
+    int offsetAngle = 90;
+    int speed = 100;
+    sf::Vector2f offsetPos = sf::Vector2f(50,50);
+
 };

@@ -11,20 +11,22 @@ set(HEADERS
     ${HEADER_DIR}/Tools/Print.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
-    ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/Player.h
     ${HEADER_DIR}/GameObject.h
+    ${HEADER_DIR}/GameLevel.h
+    ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TextureManager.h
 )
 
 set(SOURCES
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
-    ${SOURCE_DIR}/Player.cpp
     ${SOURCE_DIR}/GameObject.cpp
+    ${SOURCE_DIR}/GameLevel.cpp
+    ${SOURCE_DIR}/Player.cpp
     ${SOURCE_DIR}/TextureManager.cpp
-    ${SOURCE_DIR}/main.cpp
+    ${SOURCE_DIR}/Main.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

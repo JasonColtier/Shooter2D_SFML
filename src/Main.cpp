@@ -1,10 +1,9 @@
 #include "GameLoop.h"
 #include "TestSignalSimple.h"
-#include "Tools/Print.h"
 
 int main()
 {    
-    GameLoop::GetInstance(); 
+    GameLoop::GetInstance()->StartGame(); 
     
     // /*
     //  *  Test du signal

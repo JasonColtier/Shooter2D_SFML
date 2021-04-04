@@ -2,8 +2,10 @@
 #define SINGLETON_H
 #include <mutex>
 #include <iostream>
+#include <ostream>
 
-template<typename T>  
+
+template <typename T>
 class Singleton
 {
 public:
@@ -16,14 +18,14 @@ public:
     static T* GetInstance()
     {
         std::call_once(m_onceFlag, []()
-            {
-                m_pInstance = new T;
-            });
-        
+        {
+            m_pInstance = new T;
+        });
+
         return m_pInstance;
     }
 
-    Singleton(const Singleton&) = delete; 
+    Singleton(const Singleton&) = delete;
     Singleton(Singleton&&) = delete;
     Singleton& operator=(const Singleton&) = delete;
     Singleton& operator=(Singleton&&) = delete;
@@ -31,7 +33,7 @@ public:
 protected:
     Singleton()
     {
-        std::cout << "Construction" << std::endl;
+        std::cout << "singleton construction"<<std::endl;
     }
 
 private:
@@ -39,10 +41,10 @@ private:
     static std::once_flag m_onceFlag;
 };
 
-template<typename T>
+template <typename T>
 T* Singleton<T>::m_pInstance = nullptr;
 
-template<typename T>
+template <typename T>
 std::once_flag Singleton<T>::m_onceFlag;
 
 #endif // SINGLETON_H

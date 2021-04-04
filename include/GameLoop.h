@@ -3,10 +3,9 @@
 #include <ostream>
 #include <SFML/System/Vector2.hpp>
 
-
 #include "Singleton.h"
 
-class Player;
+class GameLevel;
 
 namespace sf
 {
@@ -20,31 +19,32 @@ class GameLoop : public Singleton<GameLoop>
     friend class Singleton<GameLoop>;
 
 public:
+    //notre window
+    sf::RenderWindow* window;
+    sf::Vector2f sizeWindow;
+    sf::Vector2i cursorPos;
 
+    void StartGame();
 
 private:
-
     GameLoop();
     ~GameLoop();
     
     //global parameters
-    bool useFullscreen = false;
-    float targetFPS = 120.0f;
+    // bool useFullscreen = false;
+    bool useFullscreen = true;
+    float targetFPS = 60.0f;
 
     //temps entre chaque frame
-    float deltaTime;
-    int updateTime = 0;
+    int64_t deltaTime; //en microsecondes !
+    int updateTime = 0;//temps pour faire toutes les boucles updates avant un rendu
 
-    //notre window
-    sf::RenderWindow* window;
-    sf::Vector2f sizeWindow;
+
+
+    GameLevel* gameLevel;
     
-    Player* player;
-
-
-
     //update all game objects
     void Update();
     //after all updates, one render
-    void Render();
+    void Render() const;
 };
