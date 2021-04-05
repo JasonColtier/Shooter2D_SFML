@@ -32,13 +32,14 @@ private:
     ~GameLoop();
     
     //global parameters
-    bool useFullscreen = true;
-    float targetFPS = 60.0f;
+    bool useFullscreen = false;
+    float targetFPS = 59.0f;
     std::string gameName = "Shooter 2D SFML";
 
     //temps entre chaque frame
     int64_t deltaTime; //en microsecondes !
     int updateTime = 0;//temps pour faire toutes les boucles updates avant un rendu
+    int updateSurplus = 0;//temps pour faire toutes les boucles updates avant un rendu
 
 
 

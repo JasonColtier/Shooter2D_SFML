@@ -34,6 +34,7 @@ void GameLoop::StartGame()
 
     gameLevel = gameLevel->GetInstance();
 
+
     //la partie qui loop ! On reste dedans tant qu'on est dans le jeu
     while (window->isOpen())
     {
@@ -62,7 +63,6 @@ void GameLoop::StartGame()
         }
             
 
-
         //check for closing window
         while (window->pollEvent(event))
         {
@@ -84,26 +84,29 @@ void GameLoop::StartGame()
         cursorPos.x -= window->getPosition().x;
         cursorPos.y -= window->getPosition().y;
 
+        updateTime = 0;
+        int updateCounter = 0;
+        
         //tant qu'on a pas atteint le nombre de fps voulu on continue les updates
-        while (updateTime < (1.0 / targetFPS) * 1000000)
+        while (updateTime < (1.0 / targetFPS) * 1000000 - updateSurplus)
         {
-
-
             deltaTime = clock.restart().asMicroseconds(); //on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
             updateTime += deltaTime;
 
             Update();
+            updateCounter++;
         }
 
         //pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
-        updateTime -= ((1.0 / targetFPS) * 1000000);
 
-        // Print::PrintString(LOG,"last update surplus : ",updateTime);
+        Print::PrintString("update counter ",updateCounter);
 
         /*
         *  rendering game
         */
         Render();
+        updateSurplus = updateTime - ((1.0 / targetFPS) * 1000000);
+
     }
 
 }
