@@ -21,6 +21,7 @@ void GameLevel::Render(sf::RenderWindow* window)
 {
     for (GameObject* gameObject : gameObjectsList)
     {
+        //TODO 2 listes dont une seule avec les rendus 
         gameObject->Render(window);
     }
 }

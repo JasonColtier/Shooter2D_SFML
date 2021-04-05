@@ -29,16 +29,21 @@ GameLoop::~GameLoop()
 
 void GameLoop::StartGame()
 {
+    Print::PrintString("start game");
     sf::Event event;
     sf::Clock clock;
 
     gameLevel = gameLevel->GetInstance();
 
-
     //la partie qui loop ! On reste dedans tant qu'on est dans le jeu
     while (window->isOpen())
     {
 
+        //dupplication de code ici à cleaner
+        cursorPos = sf::Mouse::getPosition();
+        cursorPos.x -= window->getPosition().x;
+        cursorPos.y -= window->getPosition().y;
+        
         //keeps cursor inside of the window
         //marche à peu près mais c'est pas foufou
         int maxX = window->getSize().x;
@@ -80,13 +85,10 @@ void GameLoop::StartGame()
         * updating game 
         */
 
-        cursorPos = sf::Mouse::getPosition();
-        cursorPos.x -= window->getPosition().x;
-        cursorPos.y -= window->getPosition().y;
+
+        ProcessInputs();
 
         updateTime = 0;
-        int updateCounter = 0;
-        
         //tant qu'on a pas atteint le nombre de fps voulu on continue les updates
         while (updateTime < (1.0 / targetFPS) * 1000000 - updateSurplus)
         {
@@ -94,12 +96,9 @@ void GameLoop::StartGame()
             updateTime += deltaTime;
 
             Update();
-            updateCounter++;
         }
 
         //pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
-
-        Print::PrintString("update counter ",updateCounter);
 
         /*
         *  rendering game
@@ -111,11 +110,16 @@ void GameLoop::StartGame()
 
 }
 
+void GameLoop::ProcessInputs()
+{
+    
+}
+
 void GameLoop::Update()
 {
     // Print::PrintString(LOG,"updateTime : ",updateTime);
     gameLevel->Update(deltaTime);
-    // Print::PrintString("deltatime : ", deltaTime);
+    Print::PrintString("deltatime : ", deltaTime);
 }
 
 void GameLoop::Render() const

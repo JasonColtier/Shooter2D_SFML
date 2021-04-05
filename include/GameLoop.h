@@ -23,7 +23,7 @@ public:
     //notre window
     sf::RenderWindow* window;
     sf::Vector2f sizeWindow;
-    sf::Vector2i cursorPos;
+    sf::Vector2i cursorPos;//TODO on laisse ça ici ?
 
     void StartGame();
 
@@ -33,7 +33,7 @@ private:
     
     //global parameters
     bool useFullscreen = false;
-    float targetFPS = 59.0f;
+    float targetFPS = 60.0f;
     std::string gameName = "Shooter 2D SFML";
 
     //temps entre chaque frame
@@ -44,7 +44,8 @@ private:
 
 
     GameLevel* gameLevel;
-    
+
+    void ProcessInputs();
     //update all game objects
     void Update();
     //after all updates, one render
