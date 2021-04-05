@@ -14,4 +14,7 @@ public:
         {
             {"Ship","../medias/Ship.png"}
         };
+
+    //shared ptr
+    //singleton
 };
