@@ -10,10 +10,9 @@
 Player::Player()
 {
     Print::PrintString("new player");
-    
-    //test rapide pour afficher une texture
-    texture.loadFromFile(TextureManager::textureMap.at("Ship")), sf::IntRect(0, 0, 100, 100);
-    sprite.setTexture(texture);
+    texture = TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship);
+    Print::PrintString("use count shared texture : ",texture.use_count());
+    sprite.setTexture(*texture.get());    //déréférencement du pointeur pour accéder à la texture
     sprite.setPosition(sf::Vector2f(300.f, 300.f));
     sprite.setOrigin(sf::Vector2f(50.f, 50.f));
     sprite.setScale(sf::Vector2f(0.5f, 0.5f));

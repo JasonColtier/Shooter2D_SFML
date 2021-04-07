@@ -1,20 +1,25 @@
 ﻿#pragma once
 #include <map>
 #include <string>
+#include <vector>
+#include <SFML/Graphics/Texture.hpp>
+#include "Singleton.h"
 
-class TextureManager
+
+class TextureManager : public Singleton<TextureManager>
 {
 public:
 
-    //TODO
-    //on map le nom d'une texture à son path
-    //on pourrait utiliser un enum ?
-    //il faudrait aussi utiliser des pointeurs pour que plusieurs objets puissent partager les mêmes textures
-    inline static std::map<std::string,std::string> textureMap =
-        {
-            {"Ship","../medias/Ship.png"}
-        };
+    friend class Singleton<TextureManager>;
 
-    //shared ptr
-    //singleton
+    enum EnumTextures { Ship };
+    std::map<EnumTextures,std::shared_ptr<sf::Texture>> mapTextures;
+    
+    const char* GetPath(EnumTextures t);
+
+    std::shared_ptr<sf::Texture> GetTexturePtr(EnumTextures t);
+
+private:
+    TextureManager()=default;
+    ~TextureManager();
 };
