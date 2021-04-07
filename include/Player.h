@@ -5,7 +5,7 @@
 class Player : public GameObject
 {
 public:
-    std::shared_ptr<sf::Texture> texture;
+    sf::Texture* texture;
     sf::Sprite sprite;
 
 

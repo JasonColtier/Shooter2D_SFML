@@ -12,14 +12,19 @@ public:
 
     friend class Singleton<TextureManager>;
 
+    //toutes les textures
     enum EnumTextures { Ship };
-    std::map<EnumTextures,std::shared_ptr<sf::Texture>> mapTextures;
-    
-    const char* GetPath(EnumTextures t);
 
-    std::shared_ptr<sf::Texture> GetTexturePtr(EnumTextures t);
+    //retourne le path associé à un nom de texture
+    const char* GetPath(EnumTextures t);
+    //retourne un pointeur vers la texture
+    sf::Texture* GetTexturePtr(EnumTextures t);
+
+    ~TextureManager();
 
 private:
     TextureManager()=default;
-    ~TextureManager();
+
+    //une map qui associe les textures chargées en mémoire à leur nom
+    std::map<EnumTextures,sf::Texture*> mapTextures;
 };

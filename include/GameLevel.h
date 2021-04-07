@@ -19,14 +19,14 @@ public:
     virtual void Update(int64_t deltaTime);
     virtual void Render(sf::RenderWindow* window);
 
+    std::vector<GameObject*> gameObjectsList;
+
 private:
 
     /*
      *Level assets
      */
 
-    //TODO une liste ou un array ?
-    std::vector<GameObject*> gameObjectsList;
     
     Player* player;
     //EnemySpawner*
