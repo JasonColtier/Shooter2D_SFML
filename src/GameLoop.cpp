@@ -79,8 +79,11 @@ void GameLoop::StartGame()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             window->close();
-        }
 
+            delete TextureManager::GetInstance();
+
+        }
+        
         /*
         * updating game 
         */
