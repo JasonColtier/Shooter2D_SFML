@@ -29,6 +29,8 @@ private:
     std::vector<GameObject*> gameObjectsList;
     
     Player* player;
+    Player* player2;
+    Player* player3;
     //EnemySpawner*
    
     //contiendra toutes les instances de nos gameObjects

@@ -52,20 +52,20 @@ void GameLoop::StartGame()
         int mX = sf::Mouse::getPosition(*window).x;
         int mY = sf::Mouse::getPosition(*window).y;
         
-        if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
-        {
-            if (mX < 0)
-                mX = 0;
-            else if (mX > maxX)
-                mX = maxX;
-        
-            if (mY < 0)
-                mY = 0;
-            else if (mY > maxY)
-                mY = maxY;
-        
-            sf::Mouse::setPosition(sf::Vector2i(mX, mY), *window);
-        }
+        // if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
+        // {
+        //     if (mX < 0)
+        //         mX = 0;
+        //     else if (mX > maxX)
+        //         mX = maxX;
+        //
+        //     if (mY < 0)
+        //         mY = 0;
+        //     else if (mY > maxY)
+        //         mY = maxY;
+        //
+        //     sf::Mouse::setPosition(sf::Vector2i(mX, mY), *window);
+        // }
             
 
         //check for closing window
@@ -119,7 +119,7 @@ void GameLoop::Update()
 {
     // Print::PrintString(LOG,"updateTime : ",updateTime);
     gameLevel->Update(deltaTime);
-    Print::PrintString("deltatime : ", deltaTime);
+    // Print::PrintString("deltatime : ", deltaTime);
 }
 
 void GameLoop::Render() const
