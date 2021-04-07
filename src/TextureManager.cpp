@@ -17,8 +17,8 @@ std::shared_ptr<sf::Texture> TextureManager::GetTexturePtr(EnumTextures t)
 
     Print::PrintString("map size : ", mapTextures.size());
 
-    //si on a déja un pointeur
-    if (iterator != mapTextures.end())
+    //si on a déja un pointeur et qu'il pointe bien vers une texture valide
+    if (iterator != mapTextures.end() && iterator->second.get()!=nullptr)
     {
         return iterator->second;
     }
