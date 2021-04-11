@@ -17,6 +17,8 @@ set(HEADERS
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TextureManager.h
+    ${HEADER_DIR}/Component.h
+    ${HEADER_DIR}/CollisionComponent.h
     ${HEADER_DIR}/RenderedGameObject.h
 )
 
@@ -28,6 +30,7 @@ set(SOURCES
     ${SOURCE_DIR}/Player.cpp
     ${SOURCE_DIR}/TextureManager.cpp
     ${SOURCE_DIR}/Main.cpp
+    ${SOURCE_DIR}/CollisionComponent.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
