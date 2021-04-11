@@ -1,17 +1,21 @@
-﻿
-#include "RenderedGameObject.h"
+﻿#include <SFML/Graphics/Sprite.hpp>
+#include "GameObject.h"
 
-class Player : public RenderedGameObject
+class RenderComponent;
+
+namespace sf {
+    class Texture;
+}
+
+class Player : public GameObject
 {
 public:
-    sf::Texture* texture;
-    sf::Sprite sprite;
 
+    RenderComponent* renderComponent;
 
     Player();
     ~Player()=default;
     void Tick(int64_t deltaTime) override;
-    void Render(sf::RenderWindow* window) override;
 
 private:
     int offsetAngle = 90;//on offset l'angle de rotation de notre sprite

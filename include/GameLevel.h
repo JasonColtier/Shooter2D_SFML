@@ -1,9 +1,10 @@
 ﻿#include <cstdint>
 #include <list>
 #include <SFML/Window/Window.hpp>
+
 #include "Singleton.h"
 
-class RenderedGameObject;
+class Component;
 class GameObject;
 
 namespace sf {
@@ -26,8 +27,8 @@ public:
 
     void SpawnObject(GameObject* gameObject);
     
-    std::vector<GameObject*> gameObjectsList;
-    std::vector<RenderedGameObject*> renderedList;
+    std::vector<GameObject*> l_gameObjects;
+    std::vector<Component*> l_renderComponents;
 
 private:
 
