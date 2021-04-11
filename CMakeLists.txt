@@ -19,6 +19,7 @@ set(HEADERS
     ${HEADER_DIR}/TextureManager.h
     ${HEADER_DIR}/Component.h
     ${HEADER_DIR}/CollisionComponent.h
+    ${HEADER_DIR}/CollisionManager.h
 )
 
 set(SOURCES
@@ -30,6 +31,7 @@ set(SOURCES
     ${SOURCE_DIR}/TextureManager.cpp
     ${SOURCE_DIR}/Main.cpp
     ${SOURCE_DIR}/CollisionComponent.cpp
+    ${SOURCE_DIR}/CollisionManager.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
