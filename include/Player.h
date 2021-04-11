@@ -1,8 +1,7 @@
-﻿#pragma once
+﻿
+#include "RenderedGameObject.h"
 
-#include "GameObject.h"
-
-class Player : public GameObject
+class Player : public RenderedGameObject
 {
 public:
     sf::Texture* texture;

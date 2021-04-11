@@ -45,7 +45,7 @@ void Player::Tick(int64_t deltaTime)
     //si on veut avancer
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     {
-        
+        //avant d'appliquer directement l'input, on va tester cette acceleration
         sf::Vector2f acceleration = inertia;
         acceleration.x += normDelta.x * speed * deltaTime * 0.0001f;
         acceleration.y += normDelta.y * speed * deltaTime * 0.0001f;

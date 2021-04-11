@@ -1,6 +1,8 @@
 ﻿#include "GameLoop.h"
 #include "SFML/Graphics.hpp"
 #include "GameLevel.h"
+#include "TextureManager.h"
+#include "Tools/Print.h"
 
 
 GameLoop::GameLoop()

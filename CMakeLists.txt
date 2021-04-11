@@ -17,6 +17,7 @@ set(HEADERS
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/TextureManager.h
+    ${HEADER_DIR}/RenderedGameObject.h
 )
 
 set(SOURCES
