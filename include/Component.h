@@ -3,7 +3,8 @@
 
 class Component
 {
-
+public:
+	virtual void UpdateComponent() = 0;
 };
 
 #endif //COMPONENT_H

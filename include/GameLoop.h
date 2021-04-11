@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿#ifndef GAMELOOP_H
+#define GAMELOOP_H
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -52,3 +53,4 @@ private:
     //after all updates, one render
     void Render() const;
 };
+#endif

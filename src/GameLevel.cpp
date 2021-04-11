@@ -1,17 +1,20 @@
 ﻿#include "GameLevel.h"
 #include "Player.h"
+#include "RenderComponent.h"
+#include <typeinfo>
+
 
 GameLevel::GameLevel()
 {
     Print::PrintString("level created");
     player = new Player();
 
-    gameObjectsList.push_back(player);
+    SpawnObject(player);
 }
 
 void GameLevel::Update(int64_t deltaTime)
 {
-    for (GameObject* gameObject : gameObjectsList)
+    for (GameObject* gameObject : l_gameObjects)
     {
         gameObject->Tick(deltaTime);
     }
@@ -19,9 +22,25 @@ void GameLevel::Update(int64_t deltaTime)
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
-    for (GameObject* gameObject : gameObjectsList)
+    for (Component* rendered : l_renderComponents)
     {
-        //TODO 2 listes dont une seule avec les rendus 
-        gameObject->Render(window);
+        //TODO : render par index
+        //TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
+        rendered->UpdateComponent();
+    }
+}
+
+void GameLevel::SpawnObject(GameObject* gameObject)
+{
+    Print::PrintString("spawn new object !");
+    l_gameObjects.push_back(gameObject);
+
+
+    for (Component* component : gameObject->componentList)
+    {
+        if (typeid(*component) == typeid(RenderComponent))
+        {
+            l_renderComponents.push_back(component);
+        }
     }
 }
