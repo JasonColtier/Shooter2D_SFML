@@ -37,7 +37,7 @@ private:
     static void SimplePrint(Arg arg)
     {
         std::cout << arg;
-    }
+    } 
 
     //Pour print tous les arguments un à un
     template <typename First,typename... Args>

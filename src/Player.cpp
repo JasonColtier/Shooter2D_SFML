@@ -72,6 +72,33 @@ void Player::Tick(int64_t deltaTime)
 
     //on set la position, toujours en fonction du deltatime
     position = pos + (inertia * (deltaTime * 1.f));
+
+
+    /*
+     * Check for side wrap of the player's position. TP from one side of the window to the other
+     */
+    
+    auto window = GameLoop::GetInstance()->window;
+
+    int leftBorder = 0;
+    int topBorder = 0;
+    int rightBorder = leftBorder + window->getSize().x;
+    int bottomBorder = topBorder + window->getSize().y;
+
+    //si on est trop à gauche on TP à droite
+    if(position.x < leftBorder)
+    {
+        position.x = rightBorder;
+    }if(position.y < topBorder)
+    {
+        position.y = bottomBorder;
+    }if(position.x > rightBorder)
+    {
+        position.x = leftBorder;
+    }if(position.y > bottomBorder)
+    {
+        position.y = topBorder;
+    }
 }
 
 

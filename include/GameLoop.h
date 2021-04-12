@@ -34,7 +34,7 @@ private:
     ~GameLoop();
     
     //global parameters
-    bool useFullscreen = false;
+    bool useFullscreen = true;
     float targetFPS = 60.0f;
     std::string gameName = "Shooter 2D SFML";
 
