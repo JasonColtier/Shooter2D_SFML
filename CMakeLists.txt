@@ -20,6 +20,7 @@ set(HEADERS
     ${HEADER_DIR}/Component.h
     ${HEADER_DIR}/CollisionComponent.h
     ${HEADER_DIR}/CollisionManager.h
+    ${HEADER_DIR}/RenderComponent.h
 )
 
 set(SOURCES
@@ -32,6 +33,7 @@ set(SOURCES
     ${SOURCE_DIR}/Main.cpp
     ${SOURCE_DIR}/CollisionComponent.cpp
     ${SOURCE_DIR}/CollisionManager.cpp
+    ${SOURCE_DIR}/RenderComponent.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
