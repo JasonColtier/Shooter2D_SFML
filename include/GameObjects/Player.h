@@ -11,8 +11,6 @@ class Player : public GameObject
 {
 public:
 
-    RenderComponent* renderComponent;
-
     Player();
     ~Player()=default;
     void Tick(int64_t deltaTime) override;

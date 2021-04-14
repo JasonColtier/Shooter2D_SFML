@@ -2,8 +2,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "Component.h"
-#include "TextureManager.h"
+#include "Components/Component.h"
+#include "Managers/TextureManager.h"
 #include "Tools/Print.h"
 
 namespace sf {
@@ -18,6 +18,7 @@ public:
     GameObject();
 
     virtual void Tick(int64_t deltaTime) = 0;
+    virtual void TickComponents(int64_t deltaTime);
 
     virtual void Activate();
     virtual void Deactivate();
@@ -30,6 +31,6 @@ public:
     std::vector<Component*> componentList;
 
 protected:
-
+    //TODO gerer la destruction de notre objet et la suppression des listes
     virtual ~GameObject();
 };

@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <SFML/System/Vector2.hpp>
-#include "Component.h"
+#include "Components/Component.h"
 #include <math.h>
 
 #define PI 3.14159265
@@ -74,7 +74,7 @@ public:
 		return (position->x + radius);
 	}
 
-	void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
+	virtual void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
 
 	CollisionChannel e_Channel;
 	std::vector<CollisionChannel> l_ExcludedCollisionChannel;

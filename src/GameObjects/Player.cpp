@@ -1,4 +1,4 @@
-﻿#include "Player.h"
+﻿#include "GameObjects/Player.h"
 
 
 #include <ostream>
@@ -9,22 +9,27 @@
 #include <SFML/Window/Mouse.hpp>
 #include "GameLevel.h"
 #include "GameLoop.h"
-#include "RenderComponent.h"
+#include "Components/RenderComponent.h"
+#include "Components/ShootComponent.h"
 #include "Tools/VectorTools.h"
 
 
 Player::Player()
 {
-    Print::PrintString("new player");
+    Print::PrintLog("new player");
 
-    renderComponent = new RenderComponent(this,GameLoop::GetInstance()->window,TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
+    RenderComponent* renderComponent = new RenderComponent(this,GameLoop::GetInstance()->window,TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
     renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
     AddComponent(renderComponent);
 
+    ShootComponent* shootComponent = new ShootComponent();
+
+    AddComponent(shootComponent);
+
     //position de départ du vaisseau
-    position = sf::Vector2f(300.f, 300.f);
+    // position = ;
 
     //offset pour que le nez du vaisseau soit vers la souris
     offsetPos.x = 100 * 0.5f / 2;

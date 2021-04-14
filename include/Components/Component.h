@@ -9,10 +9,13 @@ public:
 
 	virtual ~Component() = default;
 
-	virtual void UpdateComponent() = 0;
-
+	virtual void UpdateComponent(int64_t deltaTime){};
+	virtual void UpdateComponent(){};
 
 	GameObject* Owner = nullptr;
+
+	//est ce que notre component tick
+	bool activateTick = false;
 };
 
 #endif //COMPONENT_H

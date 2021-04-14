@@ -1,8 +1,8 @@
-﻿#include "RenderComponent.h"
+﻿#include "Components/RenderComponent.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-#include "GameObject.h"
+#include "GameObjects/GameObject.h"
 
 
 RenderComponent::RenderComponent(GameObject* parentGameObject, sf::RenderWindow* window, sf::Texture* texture) : parentGameObject(parentGameObject), window(window), texture(texture)
