@@ -59,11 +59,6 @@ public:
 		return 	l_pointsInWorld;
 	}
 
-	virtual void UpdateComponent() override
-	{
-		return;
-	}
-
 	float GetStartAbscisse() const
 	{
 		return (position->x - radius);

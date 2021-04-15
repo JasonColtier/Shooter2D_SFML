@@ -11,8 +11,7 @@ class ShootComponent : public Component
 public:
     ShootComponent();
 
-    Bullet* bullet;
-    virtual void UpdateComponent(int64_t deltaTime) override;
+    virtual void TickComponent(int64_t deltaTime = 0) override;
 
 private:
     bool test = false;

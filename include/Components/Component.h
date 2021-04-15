@@ -7,15 +7,14 @@ class Component
 {
 public:
 
-	virtual ~Component() = default;
+    virtual ~Component() = default;
 
-	virtual void UpdateComponent(int64_t deltaTime){};
-	virtual void UpdateComponent(){};
+    virtual void TickComponent(int64_t deltaTime = 0) {};
 
-	GameObject* Owner = nullptr;
+    GameObject* Owner = nullptr;
 
-	//est ce que notre component tick
-	bool activateTick = false;
+    //est ce que notre component tick
+    bool activateTick = false;
 };
 
 #endif //COMPONENT_H

@@ -6,4 +6,5 @@ Bullet::Bullet()
 
 void Bullet::Tick(int64_t deltaTime)
 {
+    
 }

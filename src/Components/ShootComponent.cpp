@@ -5,6 +5,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "GameLevel.h"
+#include "Tools/Print.h"
 #include "GameObjects/Bullet.h"
 
 ShootComponent::ShootComponent()
@@ -12,25 +13,16 @@ ShootComponent::ShootComponent()
     activateTick = true;
 }
 
-void ShootComponent::UpdateComponent(int64_t deltaTime)
+
+void ShootComponent::TickComponent(int64_t deltaTime)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    Component::TickComponent(deltaTime);
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        // if(test)
-        //     return;
 
-        test = true;
-        
-        bullet = new Bullet();
-        
-        GameLevel::GetInstance();
-        GameLevel::GetInstance()->SpawnObject(bullet,sf::Vector2f(deltaTime, deltaTime));
-        
+        Bullet* bullet = GameLevel::GetInstance()->SpawnObject<Bullet>();
+        bullet->position = Owner->position;
         Print::PrintLog("shoot");
-    }
-
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Middle))
-    {
-        test = false;
     }
 }

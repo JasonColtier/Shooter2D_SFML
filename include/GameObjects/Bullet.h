@@ -6,6 +6,7 @@
 class Bullet : public GameObject
 {
 public:
+    
     Bullet();
 
     void Tick(int64_t deltaTime) override;

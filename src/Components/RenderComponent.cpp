@@ -10,7 +10,7 @@ RenderComponent::RenderComponent(GameObject* parentGameObject, sf::RenderWindow*
     sprite.setTexture(*texture);
 }
 
-void RenderComponent::UpdateComponent()
+void RenderComponent::TickComponent(int64_t deltaTime)
 {
     sprite.setRotation(parentGameObject->rotation);
     sprite.setPosition(parentGameObject->position);

@@ -75,6 +75,7 @@ void GameLoop::StartGame()
         {
             if (event.type == sf::Event::Closed)
             {
+                //TODO call destructeurs
                 window->close();
             }
         }

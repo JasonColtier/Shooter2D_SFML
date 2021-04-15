@@ -1,6 +1,5 @@
 ﻿#include "GameObjects/Player.h"
 
-
 #include <ostream>
 #include <random>
 #include <valarray>
@@ -9,7 +8,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include "GameLevel.h"
 #include "GameLoop.h"
-#include "Components/RenderComponent.h"
+#include "Tools/Print.h"
 #include "Components/ShootComponent.h"
 #include "Tools/VectorTools.h"
 
@@ -40,6 +39,8 @@ Player::Player()
 
 void Player::Tick(int64_t deltaTime)
 {
+    GameObject::Tick(deltaTime);
+    
     auto mousePos = GameLoop::GetInstance()->cursorPos;
     auto pos = position;
 

@@ -4,6 +4,7 @@
 void GameObject::AddComponent(Component* component)
 {
     componentList.push_back(component);
+    component->Owner = this;
 }
 
 GameObject::GameObject()
@@ -11,13 +12,13 @@ GameObject::GameObject()
     
 }
 
-void GameObject::TickComponents(int64_t deltaTime)
+void GameObject::Tick(int64_t deltaTime)
 {
     for (Component* component : componentList)
     {
         if(component->activateTick)
         {
-            component->UpdateComponent(deltaTime);
+            component->TickComponent(deltaTime);
         }
     }
 }
