@@ -4,8 +4,6 @@
 #include <ostream>
 #include <string>
 #include <SFML/System/Vector2.hpp>
-
-#include "CollisionManager.h"
 #include "Singleton.h"
 
 class GameLevel;

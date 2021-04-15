@@ -5,10 +5,13 @@
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include <typeinfo>
-
+#include "Managers/CollisionManager.h"
 
 GameLevel::GameLevel()
 {
+	Print::PrintLog("level created");
+	collisionManager = CollisionManager::GetInstance();
+
     Print::PrintLog("level created");
     player = SpawnObject<Player>();
     player->position = sf::Vector2f(300.f, 300.f);
@@ -18,13 +21,25 @@ void GameLevel::Update(int64_t deltaTime)
 {
     for (GameObject* gameObject : l_gameObjects)
     {
-        std::cout << "adresse" << &gameObject << std::endl;
         gameObject->Tick(deltaTime);
     }
+	collisionManager->UpdateCollision(l_collisionComponents);
+	
+	for (GameObject* gameObject : l_gameObjects)
+	{
+		gameObject->Tick(deltaTime);
+	}
+	
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
+	for (Component* rendered : l_renderComponents)
+	{
+		//TODO : render par index
+		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
+		rendered->TickComponent();
+	}
     for (Component* rendered : l_renderComponents)
     {
         //TODO : render par index
@@ -32,3 +47,4 @@ void GameLevel::Render(sf::RenderWindow* window)
         rendered->TickComponent();
     }
 }
+

@@ -1,6 +1,6 @@
-#include "CollisionManager.h"
+#include "Managers/CollisionManager.h"
 #include <algorithm>
-#include "CollisionComponent.h"
+#include "Components/CollisionComponent.h"
 #include "GameObjects/GameObject.h"
 
 void CollisionManager::UpdateCollision(std::vector<CollisionComponent*>& abscisseTab)
@@ -13,6 +13,7 @@ void CollisionManager::UpdateCollision(std::vector<CollisionComponent*>& absciss
 		{
 			break;
 		}
+		
 		for (int j = i + 1; j < abscisseTab.size(); ++j)
 		{
 			if (abscisseTab[i]->GetEndAbscisse() > abscisseTab[j]->GetStartAbscisse() && abscisseTab[j]->Owner->isActivated)
@@ -38,7 +39,7 @@ void CollisionManager::SortByAbscisse(std::vector<CollisionComponent*>& abscisse
 	std::sort(abscisseTab.begin(), abscisseTab.end(), abscisseSort);
 }
 
-void CollisionManager::CheckCollision(CollisionComponent* g1, CollisionComponent* g2)
+void CollisionManager::CheckCollision(CollisionComponent* g1, CollisionComponent* g2) const
 {
 
 	for (CollisionChannel channel : g1->l_ExcludedCollisionChannel)

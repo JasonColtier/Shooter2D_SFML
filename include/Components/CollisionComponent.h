@@ -69,13 +69,16 @@ public:
 		return (position->x + radius);
 	}
 
-	virtual void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
+	void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
+	{
+		return;
+	}
 
 	CollisionChannel e_Channel;
 	std::vector<CollisionChannel> l_ExcludedCollisionChannel;
-	float radius;
 	sf::Vector2f* position;
-
+	float radius;
+	
 private:
 
 	std::vector<sf::Vector2f> l_Points;

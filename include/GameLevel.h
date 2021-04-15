@@ -7,16 +7,20 @@
 
 #include "Singleton.h"
 #include "Components/RenderComponent.h"
+#include "Components/CollisionComponent.h"
 
 class Component;
 class GameObject;
+class CollisionManager;
+class Player;
+class CollisionComponent;
 
 namespace sf
 {
     class RenderWindow;
 }
 
-class Player;
+
 
 
 class GameLevel : public Singleton<GameLevel>
@@ -49,6 +53,10 @@ public:
                 {
                     l_renderComponents.push_back(component);
                 }
+                if (typeid(*component) == typeid(CollisionComponent))
+                {
+                    l_collisionComponents.push_back(dynamic_cast<CollisionComponent*>(component));
+                }
             }
         }
         return ptr;
@@ -58,7 +66,8 @@ public:
     std::vector<GameObject*> l_gameObjects;
     std::vector<GameObject> l_gameObjectsSRC;
     std::vector<Component*> l_renderComponents;
-
+    std::vector<CollisionComponent*> l_collisionComponents;
+	
 private:
 
     /*
@@ -68,7 +77,7 @@ private:
 
     Player* player;
     //EnemySpawner*
-
+    CollisionManager* collisionManager;
     //contiendra toutes les instances de nos gameObjects
     GameLevel();
 };
