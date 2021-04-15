@@ -6,13 +6,13 @@
 
 class Component;
 class GameObject;
+class CollisionManager;
+class Player;
+class CollisionComponent;
 
 namespace sf {
     class RenderWindow;
 }
-
-class Player;
-
 
 
 class GameLevel : public Singleton<GameLevel>
@@ -29,7 +29,8 @@ public:
     
     std::vector<GameObject*> l_gameObjects;
     std::vector<Component*> l_renderComponents;
-
+    std::vector<CollisionComponent*> l_collisionComponents;
+	
 private:
 
     /*
@@ -39,7 +40,9 @@ private:
     
     Player* player;
     //EnemySpawner*
-   
+
+    CollisionManager* collisionManager;
+	
     //contiendra toutes les instances de nos gameObjects
     GameLevel();
     

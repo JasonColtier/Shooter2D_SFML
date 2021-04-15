@@ -17,11 +17,11 @@ Player::Player()
 {
     Print::PrintString("new player");
 
-    renderComponent = new RenderComponent(this,GameLoop::GetInstance()->window,TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
-    renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-    renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+    auto* renderComponents = new RenderComponent(this,GameLoop::GetInstance()->window,TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
+    renderComponents->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
+    renderComponents->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
-    AddComponent(renderComponent);
+    AddComponent(renderComponents);
 
     //position de départ du vaisseau
     position = sf::Vector2f(300.f, 300.f);

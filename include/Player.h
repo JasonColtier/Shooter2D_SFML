@@ -11,7 +11,7 @@ class Player : public GameObject
 {
 public:
 
-    RenderComponent* renderComponent;
+    //RenderComponent* renderComponent;
 
     Player();
     ~Player()=default;
