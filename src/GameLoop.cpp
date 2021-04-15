@@ -1,13 +1,13 @@
 ﻿#include "GameLoop.h"
 #include "SFML/Graphics.hpp"
 #include "GameLevel.h"
-#include "TextureManager.h"
+#include "Managers/TextureManager.h"
 #include "Tools/Print.h"
 
 
 GameLoop::GameLoop()
 {
-    Print::PrintString("init game loop");
+    Print::PrintLog("init game loop");
     if (useFullscreen)
     {
         sizeWindow.x = 1920.0f;
@@ -31,7 +31,7 @@ GameLoop::~GameLoop()
 
 void GameLoop::StartGame()
 {
-    Print::PrintString("start game");
+    Print::PrintLog("start game");
     sf::Event event;
     sf::Clock clock;
 
@@ -75,6 +75,7 @@ void GameLoop::StartGame()
         {
             if (event.type == sf::Event::Closed)
             {
+                //TODO call destructeurs
                 window->close();
             }
         }
@@ -122,14 +123,14 @@ void GameLoop::ProcessInputs()
 
 void GameLoop::Update()
 {
-    // Print::PrintString(LOG,"updateTime : ",updateTime);
+    // Print::PrintLog(LOG,"updateTime : ",updateTime);
     gameLevel->Update(deltaTime);
-    // Print::PrintString("deltatime : ", deltaTime);
+    // Print::PrintLog("deltatime : ", deltaTime);
 }
 
 void GameLoop::Render() const
 {
-    // Print::PrintString(LOG,"render : ");
+    // Print::PrintLog(LOG,"render : ");
 
     window->clear();
 

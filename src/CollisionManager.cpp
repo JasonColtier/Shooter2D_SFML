@@ -1,7 +1,7 @@
-#include "CollisionManager.h"
+#include "Managers/CollisionManager.h"
 #include <algorithm>
-#include "CollisionComponent.h"
-#include "GameObject.h"
+#include "Components/CollisionComponent.h"
+#include "GameObjects/GameObject.h"
 
 void CollisionManager::UpdateCollision(std::vector<CollisionComponent*>& abscisseTab)
 {

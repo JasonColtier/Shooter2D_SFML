@@ -1,21 +1,28 @@
 ﻿#include "GameLevel.h"
-#include "Player.h"
-#include "RenderComponent.h"
+
+#include <ostream>
+
+#include "GameObjects/Player.h"
+#include "Tools/Print.h"
 #include <typeinfo>
-#include "CollisionManager.h"
-#include "CollisionComponent.h"
+#include "Managers/CollisionManager.h"
 
 GameLevel::GameLevel()
 {
-	Print::PrintString("level created");
-	player = new Player();
+	Print::PrintLog("level created");
 	collisionManager = CollisionManager::GetInstance();
 
-	SpawnObject(player);
+    Print::PrintLog("level created");
+    player = SpawnObject<Player>();
+    player->position = sf::Vector2f(300.f, 300.f);
 }
 
 void GameLevel::Update(int64_t deltaTime)
 {
+    for (GameObject* gameObject : l_gameObjects)
+    {
+        gameObject->Tick(deltaTime);
+    }
 	collisionManager->UpdateCollision(l_collisionComponents);
 	
 	for (GameObject* gameObject : l_gameObjects)
@@ -31,25 +38,13 @@ void GameLevel::Render(sf::RenderWindow* window)
 	{
 		//TODO : render par index
 		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
-		rendered->UpdateComponent();
+		rendered->TickComponent();
 	}
+    for (Component* rendered : l_renderComponents)
+    {
+        //TODO : render par index
+        //TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
+        rendered->TickComponent();
+    }
 }
 
-void GameLevel::SpawnObject(GameObject* gameObject)
-{
-	Print::PrintString("spawn new object !");
-	l_gameObjects.push_back(gameObject);
-
-
-	for (Component* component : gameObject->componentList)
-	{
-		if (typeid(*component) == typeid(RenderComponent))
-		{
-			l_renderComponents.push_back(component);
-		}
-		if (typeid(*component) == typeid(CollisionComponent))
-		{
-			l_collisionComponents.push_back(dynamic_cast<CollisionComponent*>(component));
-		}
-	}
-}

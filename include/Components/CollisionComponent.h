@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <SFML/System/Vector2.hpp>
-#include "Component.h"
+#include "Components/Component.h"
 #include <math.h>
 
 #define PI 3.14159265
@@ -57,11 +57,6 @@ public:
 		}
 
 		return 	l_pointsInWorld;
-	}
-
-	virtual void UpdateComponent() override
-	{
-		return;
 	}
 
 	float GetStartAbscisse() const

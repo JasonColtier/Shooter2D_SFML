@@ -1,4 +1,4 @@
-﻿#include "TextureManager.h"
+﻿#include "Managers/TextureManager.h"
 
 #include "Tools/Print.h"
 
@@ -15,7 +15,7 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
 {
     auto iterator = mapTextures.find(t);
 
-    Print::PrintString("map size : ", mapTextures.size());
+    Print::PrintLog("map size : ", mapTextures.size());
 
     //si on a notre texture de chargé
     if (iterator != mapTextures.end())
@@ -28,7 +28,7 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
         sf::Texture* texture = new sf::Texture();
         texture->loadFromFile(GetPath(t));//on charge l'image voulue
         mapTextures[t] = texture;//on conserve la donnée dans la map
-        Print::PrintString("create new texture ptr ");
+        Print::PrintLog("create new texture ptr ");
 
         return texture;
     }
@@ -43,5 +43,5 @@ TextureManager::~TextureManager()
     }
     
     mapTextures.clear();
-    Print::PrintString("destruction of textureManager finished ");
+    Print::PrintLog("destruction of textureManager finished ");
 }

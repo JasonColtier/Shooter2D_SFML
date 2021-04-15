@@ -26,41 +26,29 @@ private:
         }
     }
 
-    //un print basic sans argument, appelé si on ne passe qu'un seul argument à notre fontion PrintString
-    static void SimplePrint()
+    template <typename Arg, typename... Args>
+    static void doPrint(std::ostream& out, Arg&& arg, Args&&... args)
     {
-        std::cout << "";
-    }
-
-    //un print simple utilisé pour unpacker le Args...
-    template <typename Arg>
-    static void SimplePrint(Arg arg)
-    {
-        std::cout << arg;
-    } 
-
-    //Pour print tous les arguments un à un
-    template <typename First,typename... Args>
-    static void PrintArgs(First first,Args ... args) // recursive variadic function
-    {
-        SimplePrint(first);
-        SimplePrint(args...);
+        out << std::forward<Arg>(arg);
+        using expander = int[];
+        (void)expander{0, (void(out << std::forward<Args>(args)), 0)...};
     }
 
 public:
+
     template <typename... Args>
-    static void PrintString(LogType logType, Args ... args)
+static void PrintLog(LogType logType,Args ... args)
     {
         std::cout << EnumToString(logType) << " - ";
-        PrintArgs(args...);
+        doPrint(std::cout,args...);
         std::cout << std::endl;
     }
 
     template <typename... Args>
-    static void PrintString(Args ... args)
+    static void PrintLog(Args ... args)
     {
         std::cout << EnumToString(LOG) << " - ";
-        PrintArgs(args...);
+        doPrint(std::cout,args...);
         std::cout << std::endl;
     }
 };
