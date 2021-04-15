@@ -21,6 +21,8 @@ set(HEADERS
     ${HEADER_DIR}/CollisionComponent.h
     ${HEADER_DIR}/CollisionManager.h
     ${HEADER_DIR}/RenderComponent.h
+    ${HEADER_DIR}/Spawner.h
+    ${HEADER_DIR}/Enemy.h
 )
 
 set(SOURCES
@@ -34,6 +36,8 @@ set(SOURCES
     ${SOURCE_DIR}/CollisionComponent.cpp
     ${SOURCE_DIR}/CollisionManager.cpp
     ${SOURCE_DIR}/RenderComponent.cpp
+	${SOURCE_DIR}/Spawner.cpp
+	${SOURCE_DIR}/Enemy.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
