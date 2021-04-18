@@ -20,10 +20,7 @@ class GameLoop : public Singleton<GameLoop>
     friend class Singleton<GameLoop>;
 
 public:
-    //notre window
-    sf::RenderWindow* window;
-    sf::Vector2f sizeWindow;
-    sf::Vector2i cursorPos;//TODO on laisse ça ici ?
+    
 
     void StartGame();
 
@@ -31,10 +28,7 @@ private:
     GameLoop();
     ~GameLoop();
     
-    //global parameters
-    bool useFullscreen = false;
     float targetFPS = 60.0f;
-    std::string gameName = "Shooter 2D SFML";
 
     //temps entre chaque frame
     int64_t deltaTime; //en microsecondes !

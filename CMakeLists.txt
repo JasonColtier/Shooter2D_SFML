@@ -17,12 +17,13 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
+    ${HEADER_DIR}/GameWorld.h
     ${HEADER_DIR}/Managers/TextureManager.h
+    ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderComponent.h
     ${HEADER_DIR}/Components/ShootComponent.h
-    ${HEADER_DIR}/CollisionComponent.h
-    ${HEADER_DIR}/CollisionManager.h
+    ${HEADER_DIR}/Components/CollisionComponent.h
 )
 
 set(SOURCES
@@ -34,8 +35,8 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
-    ${SOURCE_DIR}/CollisionComponent.cpp
-    ${SOURCE_DIR}/CollisionManager.cpp
+    ${SOURCE_DIR}/Managers/CollisionManager.cpp
+    ${SOURCE_DIR}/Components/CollisionComponent.cpp
     ${SOURCE_DIR}/Components/RenderComponent.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
 )

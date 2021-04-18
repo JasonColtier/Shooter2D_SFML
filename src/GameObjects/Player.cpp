@@ -8,16 +8,18 @@
 #include <SFML/Window/Mouse.hpp>
 #include "GameLevel.h"
 #include "GameLoop.h"
+#include "GameWorld.h"
 #include "Tools/Print.h"
 #include "Components/ShootComponent.h"
 #include "Tools/VectorTools.h"
+
 
 
 Player::Player()
 {
     Print::PrintLog("new player");
 
-    RenderComponent* renderComponent = new RenderComponent(this,GameLoop::GetInstance()->window,TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
+    RenderComponent* renderComponent = new RenderComponent(this,GameWorld::window,TextureManager::GetTexturePtr(TextureManager::Ship));
     renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
@@ -41,7 +43,7 @@ void Player::Tick(int64_t deltaTime)
 {
     GameObject::Tick(deltaTime);
     
-    auto mousePos = GameLoop::GetInstance()->cursorPos;
+    auto mousePos = GameWorld::cursorPos;
     auto pos = position;
 
     //distance vers la souris
@@ -84,7 +86,7 @@ void Player::Tick(int64_t deltaTime)
      * Check for side wrap of the player's position. TP from one side of the window to the other
      */
     
-    auto window = GameLoop::GetInstance()->window;
+    auto window = GameWorld::window;
 
     int leftBorder = 0;
     int topBorder = 0;

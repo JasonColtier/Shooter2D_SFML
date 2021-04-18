@@ -2,6 +2,9 @@
 
 #include "Tools/Print.h"
 
+
+std::map<TextureManager::EnumTextures,sf::Texture*> TextureManager::mapTextures;
+
 const char* TextureManager::GetPath(EnumTextures t)
 {
     switch (t)
@@ -14,9 +17,9 @@ const char* TextureManager::GetPath(EnumTextures t)
 sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
 {
     auto iterator = mapTextures.find(t);
-
+    
     Print::PrintLog("map size : ", mapTextures.size());
-
+    
     //si on a notre texture de chargé
     if (iterator != mapTextures.end())
     {
@@ -29,9 +32,10 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
         texture->loadFromFile(GetPath(t));//on charge l'image voulue
         mapTextures[t] = texture;//on conserve la donnée dans la map
         Print::PrintLog("create new texture ptr ");
-
+    
         return texture;
     }
+
 }
 
 

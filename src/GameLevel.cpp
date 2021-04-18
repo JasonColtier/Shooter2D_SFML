@@ -10,7 +10,6 @@
 GameLevel::GameLevel()
 {
 	Print::PrintLog("level created");
-	collisionManager = CollisionManager::GetInstance();
 
     Print::PrintLog("level created");
     player = SpawnObject<Player>();
@@ -40,11 +39,5 @@ void GameLevel::Render(sf::RenderWindow* window)
 		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
 		rendered->TickComponent();
 	}
-    for (Component* rendered : l_renderComponents)
-    {
-        //TODO : render par index
-        //TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
-        rendered->TickComponent();
-    }
 }
 

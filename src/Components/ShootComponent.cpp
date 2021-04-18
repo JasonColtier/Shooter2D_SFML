@@ -5,6 +5,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "GameLevel.h"
+#include "GameWorld.h"
 #include "Tools/Print.h"
 #include "GameObjects/Bullet.h"
 
@@ -21,7 +22,7 @@ void ShootComponent::TickComponent(int64_t deltaTime)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
 
-        Bullet* bullet = GameLevel::GetInstance()->SpawnObject<Bullet>();
+        Bullet* bullet = GameWorld::GetGameLevel()->SpawnObject<Bullet>();
         bullet->position = Owner->position;
         Print::PrintLog("shoot");
     }

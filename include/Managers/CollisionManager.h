@@ -6,23 +6,21 @@
 
 class CollisionComponent;
 
-class CollisionManager : public Singleton<CollisionManager>
+class CollisionManager
 {
 
 public:
-	friend class Singleton<CollisionManager>;
 
-
-	void UpdateCollision(std::vector<CollisionComponent*>& abscisseTab);
+	static void UpdateCollision(std::vector<CollisionComponent*>& abscisseTab);
 
 private:
 
 	CollisionManager() = default;
 
 
-	void SortByAbscisse(std::vector<CollisionComponent*>& abscisseTab) const;
+	static void SortByAbscisse(std::vector<CollisionComponent*>& abscisseTab);
 
-	void CheckCollision(CollisionComponent* g1, CollisionComponent* g2) const;
+	static void CheckCollision(CollisionComponent* g1, CollisionComponent* g2);
 };
 
 #endif //COLLISIONMANAGER_H
