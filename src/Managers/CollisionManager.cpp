@@ -28,7 +28,7 @@ void CollisionManager::UpdateCollision(std::vector<CollisionComponent*>& absciss
 	}
 }
 
-void CollisionManager::SortByAbscisse(std::vector<CollisionComponent*>& abscisseTab) const
+void CollisionManager::SortByAbscisse(std::vector<CollisionComponent*>& abscisseTab)
 {
 	auto abscisseSort = [](CollisionComponent* const g1, CollisionComponent* const g2) -> bool
 	{
@@ -39,7 +39,7 @@ void CollisionManager::SortByAbscisse(std::vector<CollisionComponent*>& abscisse
 	std::sort(abscisseTab.begin(), abscisseTab.end(), abscisseSort);
 }
 
-void CollisionManager::CheckCollision(CollisionComponent* g1, CollisionComponent* g2) const
+void CollisionManager::CheckCollision(CollisionComponent* g1, CollisionComponent* g2)
 {
 
 	for (CollisionChannel channel : g1->l_ExcludedCollisionChannel)

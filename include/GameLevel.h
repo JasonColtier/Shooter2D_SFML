@@ -22,10 +22,8 @@ namespace sf
 
 
 
-
-class GameLevel : public Singleton<GameLevel>
+class GameLevel
 {
-    friend class Singleton<GameLevel>;
 
 public:
 
@@ -67,7 +65,12 @@ public:
     std::vector<GameObject> l_gameObjectsSRC;
     std::vector<Component*> l_renderComponents;
     std::vector<CollisionComponent*> l_collisionComponents;
-	
+
+
+
+    ~GameLevel() = default;
+    GameLevel();
+
 private:
 
     /*
@@ -79,7 +82,6 @@ private:
     //EnemySpawner*
     CollisionManager* collisionManager;
     //contiendra toutes les instances de nos gameObjects
-    GameLevel();
 };
 
 
