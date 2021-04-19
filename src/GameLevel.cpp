@@ -23,12 +23,6 @@ void GameLevel::Update(int64_t deltaTime)
         gameObject->Tick(deltaTime);
     }
 	collisionManager->UpdateCollision(l_collisionComponents);
-	
-	for (GameObject* gameObject : l_gameObjects)
-	{
-		gameObject->Tick(deltaTime);
-	}
-	
 }
 
 void GameLevel::Render(sf::RenderWindow* window)

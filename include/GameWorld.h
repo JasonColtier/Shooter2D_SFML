@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML/System/Vector2.hpp>
 
+class GameLevel;
 
 namespace sf {
     class RenderWindow;
@@ -20,10 +21,7 @@ public:
 
     inline static std::string gameName = "Shooter 2D SFML";
 
-    static void LoadGameLevel()
-    {
-        currentGameLevel = new GameLevel();
-    }
+    static void LoadGameLevel();
     
     static GameLevel* GetGameLevel()
     {    
@@ -33,3 +31,5 @@ public:
 private:
     inline static GameLevel* currentGameLevel;
 };
+
+
