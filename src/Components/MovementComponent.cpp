@@ -22,7 +22,7 @@ MovementComponent::MovementComponent()
     offsetPos.x = 100 * 0.5f / 2;
     offsetPos.y = 100 * 0.5f / 2;
 
-    InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputForward);
+    InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputChanged);
 }
 
 void MovementComponent::TickComponent(int64_t deltaTime)
@@ -40,21 +40,6 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     //rotation pour se tourner vers la souris
     float rot = std::atan2(deltaPosY, deltaPosX) * 180 / std::_Pi;
     Owner->rotation = rot + offsetAngle;
-
-    // //si on veut avancer
-    // if (sf::Mouse::isButtonPressed(sf::Mouse::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-    // {
-    //     //avant d'appliquer directement l'input, on va tester cette acceleration
-    //     sf::Vector2f acceleration = inertia;
-    //     acceleration.x += normDelta.x * speed * deltaTime * 0.0001f;
-    //     acceleration.y += normDelta.y * speed * deltaTime * 0.0001f;
-    //
-    //     //ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
-    //     if (VectorTools::Length(acceleration) < maxVelocity)
-    //     {
-    //         inertia = acceleration;
-    //     }
-    // }
 
     //si on veut avancer
     if (moveTowardMouse)
@@ -111,14 +96,18 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     }
 }
 
-void MovementComponent::OnInputForward(std::any i)
+void MovementComponent::OnInputChanged(InputMapping input)
 {
-    moveTowardMouse = false;
-    
-    std::string s = std::any_cast<const char*>(i);
-    if (s == "forward")
+    //si on a appuyé ou relaché la touche pour tirer
+    if (input.first==Shoot)
     {
-        moveTowardMouse = true;
+        Print::PrintLog("pressed shoot : ",input.second);
     }
 
+    if (input.first==Forward)
+    {
+        Print::PrintLog("pressed forward : ",input.second);
+
+        moveTowardMouse = input.second;
+    }
 }
