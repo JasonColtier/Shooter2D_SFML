@@ -1,5 +1,6 @@
 ﻿#include "GameLevel.h"
 #include "Player.h"
+//#include "Enemy.h"
 #include "RenderComponent.h"
 #include <typeinfo>
 #include "CollisionManager.h"
@@ -9,9 +10,11 @@ GameLevel::GameLevel()
 {
 	Print::PrintString("level created");
 	player = new Player();
+	//enemy = new Enemy();
 	collisionManager = CollisionManager::GetInstance();
 
 	SpawnObject(player);
+	//SpawnObject(enemy);
 }
 
 void GameLevel::Update(int64_t deltaTime)
