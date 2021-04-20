@@ -14,7 +14,7 @@ public:
     GameObject* Owner = nullptr;
 
     //est ce que notre component tick
-    bool activateTick = false;
+    bool activateTick = true;
 };
 
 #endif //COMPONENT_H

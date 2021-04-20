@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "GameLevel.h"
 #include "GameWorld.h"
+#include "Managers/InputManager.h"
 #include "Managers/TextureManager.h"
 #include "Tools/Print.h"
 
@@ -123,8 +124,10 @@ void GameLoop::ProcessInputs()
 
 void GameLoop::Update()
 {
-    // Print::PrintLog(LOG,"updateTime : ",updateTime);
+    InputManager::HandleInputs();
+
     gameLevel->Update(deltaTime);
+    // Print::PrintLog(LOG,"updateTime : ",updateTime);
     // Print::PrintLog("deltatime : ", deltaTime);
 }
 
