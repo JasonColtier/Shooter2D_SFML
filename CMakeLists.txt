@@ -24,7 +24,6 @@ set(HEADERS
     ${HEADER_DIR}/Components/RenderComponent.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionComponent.h
-    ${HEADER_DIR}/GameObjectFactory.h
 )
 
 set(SOURCES
