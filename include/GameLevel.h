@@ -13,6 +13,7 @@ class Component;
 class GameObject;
 class CollisionManager;
 class Player;
+//class Enemy;
 class CollisionComponent;
 
 namespace sf
