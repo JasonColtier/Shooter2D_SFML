@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <complex>
 #include <ostream>
+#include <iostream>
 #include <SFML/System/Vector2.hpp>
 
 class VectorTools

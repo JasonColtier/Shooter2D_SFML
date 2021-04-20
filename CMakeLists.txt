@@ -20,10 +20,12 @@ set(HEADERS
     ${HEADER_DIR}/GameWorld.h
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
+    ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderComponent.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionComponent.h
+    ${HEADER_DIR}/Components/MovementComponent.h
 )
 
 set(SOURCES
@@ -36,9 +38,11 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp
+    ${SOURCE_DIR}/Managers/InputManager.cpp
     ${SOURCE_DIR}/Components/CollisionComponent.cpp
     ${SOURCE_DIR}/Components/RenderComponent.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
+    ${SOURCE_DIR}/Components/MovementComponent.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
