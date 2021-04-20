@@ -12,30 +12,39 @@ set(HEADERS
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/TestSignalSimple.h
-    ${HEADER_DIR}/Player.h
-    ${HEADER_DIR}/GameObject.h
+    ${HEADER_DIR}/GameObjects/Player.h
+    ${HEADER_DIR}/GameObjects/Bullet.h
+    ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
-    ${HEADER_DIR}/TextureManager.h
-    ${HEADER_DIR}/Component.h
-    ${HEADER_DIR}/CollisionComponent.h
-    ${HEADER_DIR}/CollisionManager.h
-    ${HEADER_DIR}/RenderComponent.h
+    ${HEADER_DIR}/GameWorld.h
+    ${HEADER_DIR}/Managers/TextureManager.h
+    ${HEADER_DIR}/Managers/CollisionManager.h
+    ${HEADER_DIR}/Managers/InputManager.h
+    ${HEADER_DIR}/Components/Component.h
+    ${HEADER_DIR}/Components/RenderComponent.h
+    ${HEADER_DIR}/Components/ShootComponent.h
+    ${HEADER_DIR}/Components/CollisionComponent.h
+    ${HEADER_DIR}/Components/MovementComponent.h
     ${HEADER_DIR}/Spawner.h
     ${HEADER_DIR}/Enemy.h
 )
 
 set(SOURCES
+    ${SOURCE_DIR}/Main.cpp
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
-    ${SOURCE_DIR}/GameObject.cpp
     ${SOURCE_DIR}/GameLevel.cpp
-    ${SOURCE_DIR}/Player.cpp
-    ${SOURCE_DIR}/TextureManager.cpp
-    ${SOURCE_DIR}/Main.cpp
-    ${SOURCE_DIR}/CollisionComponent.cpp
-    ${SOURCE_DIR}/CollisionManager.cpp
-    ${SOURCE_DIR}/RenderComponent.cpp
+    ${SOURCE_DIR}/GameObjects/GameObject.cpp
+    ${SOURCE_DIR}/GameObjects/Player.cpp
+    ${SOURCE_DIR}/GameObjects/Bullet.cpp
+    ${SOURCE_DIR}/Managers/TextureManager.cpp
+    ${SOURCE_DIR}/Managers/CollisionManager.cpp
+    ${SOURCE_DIR}/Managers/InputManager.cpp
+    ${SOURCE_DIR}/Components/CollisionComponent.cpp
+    ${SOURCE_DIR}/Components/RenderComponent.cpp
+    ${SOURCE_DIR}/Components/ShootComponent.cpp
+    ${SOURCE_DIR}/Components/MovementComponent.cpp
 	${SOURCE_DIR}/Spawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
 )

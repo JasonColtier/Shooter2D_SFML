@@ -22,7 +22,7 @@ public:
     sf::Texture* texture;
     sf::Sprite sprite;
     
-    virtual void UpdateComponent();
+    void TickComponent(int64_t deltaTime) override;;
 
 };
 
