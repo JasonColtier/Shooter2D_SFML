@@ -1,5 +1,6 @@
 ﻿#ifndef GAMELOOP_H
 #define GAMELOOP_H
+
 #include <iostream>
 #include <ostream>
 #include <string>

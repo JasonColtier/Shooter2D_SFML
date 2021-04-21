@@ -30,39 +30,39 @@ int Spawner::ChooseSide()
 
 void Spawner::RandomLocation()
 {
-	auto window = GameLoop::GetInstance()->window;
-	int Value1 = ChooseSide();
-	float RandomX = 0;
-	float RandomY = 0;
+	//auto window = GameLoop::GetInstance()->window;
+	//int Value1 = ChooseSide();
+	//float RandomX = 0;
+	//float RandomY = 0;
 
-	switch (Value1)
-	{
-	//le Spawn se fera à gauche de l'écran
-	case 0:
-		RandomX = -1;
-		RandomY = std::rand() % window->getSize().y + 1;
-		break;
+	//switch (Value1)
+	//{
+	////le Spawn se fera à gauche de l'écran
+	//case 0:
+	//	RandomX = -1;
+	//	RandomY = std::rand() % window->getSize().y + 1;
+	//	break;
 
-	//le spawn se fera à droite de l'écran
-	case 1:
-		RandomX = window->getSize().x + 1;
-		RandomY = std::rand() % window->getSize().y + 1;
-		break;
-	//le spawn se fera en haut de l'écran
-	case 2:
-		RandomX = std::rand() % window->getSize().x + 1;
-		RandomY = -1;
-		break;
+	////le spawn se fera à droite de l'écran
+	//case 1:
+	//	RandomX = window->getSize().x + 1;
+	//	RandomY = std::rand() % window->getSize().y + 1;
+	//	break;
+	////le spawn se fera en haut de l'écran
+	//case 2:
+	//	RandomX = std::rand() % window->getSize().x + 1;
+	//	RandomY = -1;
+	//	break;
 
-		//le spawn se fera en bas de l'écran
-	case 3:
-		RandomX = std::rand() % window->getSize().x + 1;
-		RandomY = window->getSize().y + 1;
-		break;
+	//	//le spawn se fera en bas de l'écran
+	//case 3:
+	//	RandomX = std::rand() % window->getSize().x + 1;
+	//	RandomY = window->getSize().y + 1;
+	//	break;
 
-	default:
-		break;
-	}
+	//default:
+	//	break;
+	//}
 }
 
 void Spawner::DoSpawn(int X, int Y)

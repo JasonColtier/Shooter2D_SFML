@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include <cstdint>
 #include <SFML/System/Vector2.hpp>
-
-
 #include "Component.h"
 #include "Managers/InputManager.h"
 

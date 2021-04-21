@@ -1,5 +1,7 @@
-#include "GameObject.h"
+#ifndef SPAWNER_H
+#define SPAWNER_H
 
+#include "GameObjects/GameObject.h"
 
 class Spawner : public GameObject
 {
@@ -7,7 +9,7 @@ class Spawner : public GameObject
 public:
 
 	Spawner();
-	~Spawner() = default;
+	~Spawner() override = default;
 
 	void Tick(int64_t deltaTime) override;
 
@@ -19,6 +21,6 @@ public:
 
 private:
 
-	
-
 };
+
+#endif //SPAWNER_H

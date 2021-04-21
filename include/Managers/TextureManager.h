@@ -1,4 +1,8 @@
-﻿#include <map>
+﻿#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
+
+
+#include <map>
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Texture.hpp>
@@ -22,6 +26,8 @@ public:
     TextureManager()=default;
 
     //une map qui associe les textures chargées en mémoire à leur nom
-    static std::map<EnumTextures,sf::Texture*> mapTextures;
+   inline static std::map<EnumTextures,sf::Texture*> mapTextures;
 
 };
+
+#endif //TEXTUREMANAGER_H

@@ -3,14 +3,13 @@
 
 #include <vector>
 #include <SFML/System/Vector2.hpp>
-#include "Components/Component.h"
-#include <math.h>
+#include <cmath>
 
 #define PI 3.14159265
 
 class GameObject;
 
-enum CollisionChannel
+enum CollisionType
 {
 	PlayerChannel,
 	EnemyChannel,
@@ -18,23 +17,25 @@ enum CollisionChannel
 	EnemyProjectileChannel,
 };
 
-class CollisionComponent : public Component
+class CollisionComponent
 {
 
 public:
 	CollisionComponent() = default;
 
-	CollisionComponent(std::vector<sf::Vector2f> t_Points, CollisionChannel t_Channel, std::vector<CollisionChannel> t_ExcludedCollisionChannel, float* t_Rotation, sf::Vector2f* t_Position)
-		:l_Points(t_Points)
-		, e_Channel(t_Channel)
-		, l_ExcludedCollisionChannel(t_ExcludedCollisionChannel)
-		, rotation(t_Rotation)
+	CollisionComponent(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType> t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, std::vector<sf::Vector2f> t_Points)
+		: owner(t_owner)
+		, e_Type(t_Type)
+		, l_ExcludedCollisionType(std::move(t_ExcludedCollisionType))
 		, position(t_Position)
+		, radius(t_radius)
+		, l_Points(std::move(t_Points))
+		, rotation(t_Rotation)
 	{
 
 	}
 
-	virtual ~CollisionComponent() override = default;
+	~CollisionComponent() = default;
 
 	std::vector<sf::Vector2f> getPoints()
 	{
@@ -74,17 +75,16 @@ public:
 		return;
 	}
 
-	CollisionChannel e_Channel;
-	std::vector<CollisionChannel> l_ExcludedCollisionChannel;
+	GameObject* owner;
+	CollisionType e_Type;
+	std::vector<CollisionType> l_ExcludedCollisionType;
 	sf::Vector2f* position;
 	float radius;
-	
+
 private:
 
 	std::vector<sf::Vector2f> l_Points;
-
 	float* rotation;
-
 };
 
 #endif //COLLISIONCOMPONENT_H
