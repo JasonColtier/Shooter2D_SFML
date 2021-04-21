@@ -16,7 +16,7 @@ class InputManager
 {
 public:
 
-    virtual ~InputManager() = default;
+    ~InputManager() = default;
 
     //appelé à chaque tick, check les inputs clavier
     static void HandleInputs();

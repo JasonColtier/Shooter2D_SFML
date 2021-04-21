@@ -13,13 +13,11 @@ class ShootComponent : public Component
 {
 public:
     ShootComponent();
-    ~ShootComponent() = default;
+    ~ShootComponent() override = default;
     
     void TickComponent(int64_t deltaTime = 0) override;
 
     void ShootBullet(int initialAngle);
-
-    
 
     void OnInputChanged(InputMapping input);
 
