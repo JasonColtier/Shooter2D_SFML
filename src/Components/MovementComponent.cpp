@@ -7,20 +7,13 @@
 #include <SFML/Window/Mouse.hpp>
 #include <Tools/VectorTools.h>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
-
-
 #include "GameWorld.h"
-#include "GameObjects/Player.h"
+#include "GameObjects/GameObject.h"
 #include "Managers/InputManager.h"
 #include "Tools/Print.h"
 
 MovementComponent::MovementComponent()
 {
-    //offset pour que le nez du vaisseau soit vers la souris
-    offsetPos.x = 100 * 0.5f / 2;
-    offsetPos.y = 100 * 0.5f / 2;
 
     InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputChanged);
 }
@@ -31,8 +24,8 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     auto pos = Owner->position;
 
     //distance vers la souris
-    float deltaPosX = mousePos.x - (pos.x + offsetPos.x);
-    float deltaPosY = mousePos.y - (pos.y + offsetPos.y);
+    float deltaPosX = mousePos.x - (pos.x + Owner->offsetPos.x);
+    float deltaPosY = mousePos.y - (pos.y + Owner->offsetPos.y);
 
     //on normalise cette distance
     sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
@@ -98,12 +91,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
 
 void MovementComponent::OnInputChanged(InputMapping input)
 {
-    //si on a appuyé ou relaché la touche pour tirer
-    if (input.first==Shoot)
-    {
-        Print::PrintLog("pressed shoot : ",input.second);
-    }
-
+    //si on a appuyé ou relaché la touche pour bouger
     if (input.first==Forward)
     {
         Print::PrintLog("pressed forward : ",input.second);

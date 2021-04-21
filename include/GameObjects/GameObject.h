@@ -1,4 +1,7 @@
-﻿#include <SFML/Graphics/Rect.hpp>
+﻿#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
@@ -26,6 +29,7 @@ public:
     bool isActivated = true;
     float rotation = 0;
     sf::Vector2f position = sf::Vector2f(0.f,0.f);
+    sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position pour avoir le nez du vaisseau au milieu
     std::vector<Component*> componentList;
 
     //TODO gerer la destruction de notre objet et la suppression des listes
@@ -34,3 +38,5 @@ public:
 protected:
 
 };
+
+#endif

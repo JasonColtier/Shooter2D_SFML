@@ -18,7 +18,8 @@ GameLevel::GameLevel()
 
 void GameLevel::Update(int64_t deltaTime)
 {
-    for (GameObject* gameObject : l_gameObjects)
+	auto copy = l_gameObjects;
+    for (GameObject* gameObject : copy)
     {
         gameObject->Tick(deltaTime);
     }

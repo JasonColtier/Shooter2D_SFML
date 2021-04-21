@@ -32,6 +32,7 @@ set(SOURCES
     ${SOURCE_DIR}/Main.cpp
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
+    ${SOURCE_DIR}/GameWorld.cpp
     ${SOURCE_DIR}/GameLevel.cpp
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp

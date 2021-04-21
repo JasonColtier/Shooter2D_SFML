@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿#ifndef GAMEWORLD_H
+#define GAMEWORLD_H
 #include <string>
 #include <SFML/System/Vector2.hpp>
 
@@ -32,4 +33,5 @@ private:
     inline static GameLevel* currentGameLevel;
 };
 
+#endif
 

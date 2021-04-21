@@ -1,4 +1,6 @@
-﻿#include <SFML/Graphics/Sprite.hpp>
+﻿#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "GameObject.h"
 
 class RenderComponent;
@@ -18,3 +20,5 @@ public:
 private:
     
 };
+
+#endif

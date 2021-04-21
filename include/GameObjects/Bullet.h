@@ -10,6 +10,9 @@ public:
     Bullet();
 
     void Tick(int64_t deltaTime) override;
+
+private:
+    float speed = 0.5f;
     
 };
 #endif

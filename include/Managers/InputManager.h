@@ -1,10 +1,7 @@
-﻿#pragma once
+﻿#ifndef INPUTMANAGER_H
+#define INPUTMANAGER_H
 #include "Signal.h"
-
 #include <any>
-
-#include "Signal.h"
-#include "Components/ShootComponent.h"
 
 //une enum pour 
 enum InputsEnum
@@ -45,3 +42,5 @@ private:
 
     
 };
+
+#endif

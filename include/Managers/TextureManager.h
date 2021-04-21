@@ -1,4 +1,6 @@
-﻿#include <map>
+﻿#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
+#include <map>
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Texture.hpp>
@@ -10,7 +12,7 @@ class TextureManager
 public:
 
     //toutes les textures
-    enum EnumTextures { Ship };
+    enum EnumTextures { Ship,Bullet };
 
     //retourne le path associé à un nom de texture
     static const char* GetPath(EnumTextures t);
@@ -25,3 +27,5 @@ public:
     static std::map<EnumTextures,sf::Texture*> mapTextures;
 
 };
+
+#endif

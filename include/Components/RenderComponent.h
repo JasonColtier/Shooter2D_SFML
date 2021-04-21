@@ -1,5 +1,5 @@
-﻿
-
+﻿#ifndef RENDERCOMPONENT_H
+#define RENDERCOMPONENT_H
 #include <SFML/Graphics/Sprite.hpp>
 
 #include "Component.h"
@@ -25,5 +25,7 @@ public:
     void TickComponent(int64_t deltaTime) override;;
 
 };
+
+#endif
 
 
