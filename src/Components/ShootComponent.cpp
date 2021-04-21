@@ -29,25 +29,29 @@ void ShootComponent::TickComponent(int64_t deltaTime)
         if(timer >= fireRate * 100000)
         {
             timer = 0;
-            ShootBullet();
+            for (int i = 0; i < shootNumber; ++i)
+            {
+                int x = (shootNumber - 1) /2; 
+                ShootBullet(-90 + ((i-x)*10));
+
+            }
         }
     }
     
 }
 
-void ShootComponent::ShootBullet()
+void ShootComponent::ShootBullet(int initialAngle)
 {
     Print::PrintLog("shoot");
     Bullet* bullet = GameWorld::GetGameLevel()->SpawnObject<Bullet>();
     bullet->position = Owner->position;
-    bullet->rotation = Owner->rotation - 90;
+    bullet->rotation = Owner->rotation + initialAngle;
 }
 
 void ShootComponent::OnInputChanged(InputMapping input)
 {
     if (input.first == Shoot)
     {
-        ShootBullet();
         wantToShoot = input.second;
     }
 }

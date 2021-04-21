@@ -17,7 +17,7 @@ public:
     
     void TickComponent(int64_t deltaTime = 0) override;
 
-    void ShootBullet();
+    void ShootBullet(int initialAngle);
 
     
 
@@ -28,6 +28,7 @@ private:
 
     float timer = 0;
     float fireRate = 1.f;
+    int shootNumber = 5;
 };
 #endif
 
