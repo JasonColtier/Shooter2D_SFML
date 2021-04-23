@@ -33,6 +33,10 @@ public:
 		return currentGameLevel;
 	}
 
+	//fonction utilitaire qui check si l'objet passé en paramètre est à l'intérieur de la fenêtre ou pas
+	static bool CheckIfInsideWindow(GameObject* gameObject);
+	
+
 private:
 
 	inline static GameLevel* currentGameLevel;

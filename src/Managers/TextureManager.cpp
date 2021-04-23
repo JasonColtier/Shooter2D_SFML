@@ -19,7 +19,7 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
 {
 	auto iterator = mapTextures.find(t);
 
-	Print::PrintLog("map size : ", mapTextures.size());
+	// Print::PrintLog("map size : ", mapTextures.size());
 
 	//si on a notre texture de chargé
 	if (iterator != mapTextures.end())

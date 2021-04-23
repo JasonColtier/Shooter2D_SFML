@@ -39,7 +39,7 @@ void ShootComponent::TickComponent(int64_t deltaTime)
 
 void ShootComponent::ShootBullet(int initialAngle)
 {
-    Print::PrintLog("shoot");
+    // Print::PrintLog("shoot");
     Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;

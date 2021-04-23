@@ -21,6 +21,7 @@ void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
 	auto copy = l_gameObjects;
+	Print::PrintLog("number of objects in level : ",copy.size());
 	for (GameObject* gameObject : copy)
 	{
 		gameObject->Tick(deltaTime);
@@ -50,5 +51,12 @@ void GameLevel::Render(sf::RenderWindow* window)
 		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
 		object->renderComponent->RenderUpdate();
 	}
+}
+
+void GameLevel::DestroyGameObject(GameObject* gameObject)
+{
+	l_gameObjects.remove(gameObject);
+	delete gameObject;
+	gameObject = nullptr;
 }
 
