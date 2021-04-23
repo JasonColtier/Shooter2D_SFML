@@ -3,7 +3,7 @@
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
-#include "GameObjects/Bullet.h"
+#include "GameObjects/GenericBullet.h"
 
 GameLevel::GameLevel()
 {
@@ -13,6 +13,8 @@ GameLevel::GameLevel()
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
+	// bgTexture = SpawnActor<BackgroundTexture>();
+
 	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
 	////player = SpawnObject<Player>();
 }
@@ -21,7 +23,7 @@ void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
 	auto copy = l_gameObjects;
-	Print::PrintLog("number of objects in level : ",copy.size());
+	// Print::PrintLog("number of objects in level : ",copy.size());
 	for (GameObject* gameObject : copy)
 	{
 		gameObject->Tick(deltaTime);

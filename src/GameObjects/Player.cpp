@@ -4,8 +4,8 @@
 #include "GameLevel.h"
 #include "GameWindow.h"
 #include "Components/MovementComponent.h"
+#include "Components/ShootBulletComponent.h"
 #include "Tools/Print.h"
-#include "Components/ShootComponent.h"
 #include "Tools/VectorTools.h"
 
 
@@ -17,10 +17,11 @@ Player::Player()
     renderComponent = new RenderComponent(this,TextureManager::GetTexturePtr(TextureManager::Ship));
     renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+    
 
     //AddComponent(renderComponent);
     offsetPos = sf::Vector2f(25.f, 25.f);
-    AddComponent(new ShootComponent());
+    AddComponent(new ShootBulletComponent());
     AddComponent(new MovementComponent());
 
     //position de départ du vaisseau
