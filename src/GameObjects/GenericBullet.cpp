@@ -8,7 +8,7 @@
 GenericBullet::GenericBullet()
 {
     // Print::PrintLog("new bullet !");
-    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet));
+    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 }
 

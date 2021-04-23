@@ -13,7 +13,7 @@ GameLevel::GameLevel()
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
-	// bgTexture = SpawnActor<BackgroundTexture>();
+	bgTexture = SpawnActor<BackgroundTexture>();
 
 	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
 	////player = SpawnObject<Player>();
