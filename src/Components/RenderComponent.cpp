@@ -5,14 +5,14 @@
 #include "GameObjects/GameObject.h"
 
 
-RenderComponent::RenderComponent(GameObject* parentGameObject, sf::RenderWindow* window, sf::Texture* texture) : parentGameObject(parentGameObject), window(window), texture(texture)
+RenderComponent::RenderComponent(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture) : parentGameObject(t_parentGameObject), window(t_window), texture(t_texture)
 {
-    sprite.setTexture(*texture);
+	sprite.setTexture(*texture);
 }
 
-void RenderComponent::TickComponent(int64_t deltaTime)
+void RenderComponent::RenderUpdate()
 {
-    sprite.setRotation(parentGameObject->rotation);
-    sprite.setPosition(parentGameObject->position);
-    window->draw(sprite);
+	sprite.setRotation(parentGameObject->rotation);
+	sprite.setPosition(parentGameObject->position);
+	window->draw(sprite);
 }

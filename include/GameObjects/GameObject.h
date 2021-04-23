@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 #include "Components/Component.h"
 #include "Managers/TextureManager.h"
 
+class CollisionComponent;
+class RenderComponent;
+
 namespace sf {
-    class RenderWindow;
+	class RenderWindow;
 }
 
 class GameObject
@@ -17,23 +18,27 @@ class GameObject
 
 public:
 
-    GameObject();
+	GameObject() = default;
 
-    virtual void Tick(int64_t deltaTime);
+	//TODO gerer la destruction de notre objet et la suppression des listes
+	virtual ~GameObject() = default;
 
-    virtual void Activate();
-    virtual void Deactivate();
-    
-    void AddComponent(Component* component);//pareil prend la classe et retourne un ptr
+	virtual void Tick(int64_t deltaTime);
 
-    bool isActivated = true;
-    float rotation = 0;
-    sf::Vector2f position = sf::Vector2f(0.f,0.f);
+	virtual void Activate();
+	virtual void Deactivate();
     sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position pour avoir le nez du vaisseau au milieu
-    std::vector<Component*> componentList;
 
-    //TODO gerer la destruction de notre objet et la suppression des listes
-    virtual ~GameObject();
+	void AddComponent(Component* component);//pareil prend la classe et retourne un ptr
+
+	bool isActivated = true;
+	float rotation = 0;
+	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
+	std::vector<Component*> componentList;
+
+	CollisionComponent* collisionComponent = nullptr;
+	RenderComponent* renderComponent = nullptr;
+
 
 protected:
 

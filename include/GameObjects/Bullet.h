@@ -15,5 +15,5 @@ private:
     float speed = 0.5f;
     
 };
-#endif
+#endif //BULLET_H
 

@@ -24,7 +24,7 @@ public:
     TextureManager()=default;
 
     //une map qui associe les textures chargées en mémoire à leur nom
-    static std::map<EnumTextures,sf::Texture*> mapTextures;
+   inline static std::map<EnumTextures,sf::Texture*> mapTextures;
 
 };
 

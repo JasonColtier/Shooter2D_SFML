@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿#ifndef PRINT_H
+#define PRINT_H
+
+#include <iostream>
 #include <ostream>
 #include <string>
 
@@ -52,3 +55,5 @@ static void PrintLog(LogType logType,Args ... args)
         std::cout << std::endl;
     }
 };
+
+#endif //PRINT_H

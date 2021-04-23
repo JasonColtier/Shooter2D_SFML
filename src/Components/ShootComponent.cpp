@@ -1,9 +1,6 @@
 ﻿#include "Components/ShootComponent.h"
-
-
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
-
 #include "GameLevel.h"
 #include "GameWorld.h"
 #include "Tools/Print.h"

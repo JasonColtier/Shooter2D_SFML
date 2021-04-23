@@ -26,6 +26,8 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionComponent.h
     ${HEADER_DIR}/Components/MovementComponent.h
+    ${HEADER_DIR}/Spawner.h
+    ${HEADER_DIR}/Enemy.h
 )
 
 set(SOURCES
@@ -44,6 +46,8 @@ set(SOURCES
     ${SOURCE_DIR}/Components/RenderComponent.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
     ${SOURCE_DIR}/Components/MovementComponent.cpp
+	${SOURCE_DIR}/Spawner.cpp
+	${SOURCE_DIR}/Enemy.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
