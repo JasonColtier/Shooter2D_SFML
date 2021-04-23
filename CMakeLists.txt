@@ -9,6 +9,7 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(HEADERS
     ${HEADER_DIR}/Tools/Print.h
+    ${HEADER_DIR}/Tools/VectorTools.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/TestSignalSimple.h
@@ -35,6 +36,7 @@ set(SOURCES
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
     ${SOURCE_DIR}/GameLevel.cpp
+    ${SOURCE_DIR}/GameWindow.cpp
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp

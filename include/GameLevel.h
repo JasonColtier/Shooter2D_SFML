@@ -36,6 +36,9 @@ public:
 	virtual void Update(int64_t deltaTime);
 	virtual void Render(sf::RenderWindow* window);
 
+	//fonction pour destroy un game object, à finir proprement et à supprimer de toutes les listes
+	virtual void DestroyGameObject(GameObject* gameObject);
+	
 	//template <class T>
 	//T* SpawnObject()
 	//{

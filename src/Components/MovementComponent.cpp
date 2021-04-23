@@ -94,7 +94,7 @@ void MovementComponent::OnInputChanged(InputMapping input)
     //si on a appuyé ou relaché la touche pour bouger
     if (input.first==Forward)
     {
-        Print::PrintLog("pressed forward : ",input.second);
+        // Print::PrintLog("pressed forward : ",input.second);
 
         moveTowardMouse = input.second;
     }
