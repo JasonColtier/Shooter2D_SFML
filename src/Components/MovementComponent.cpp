@@ -7,7 +7,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <Tools/VectorTools.h>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "GameWorld.h"
+#include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 #include "Managers/InputManager.h"
 #include "Tools/Print.h"
@@ -20,7 +20,7 @@ MovementComponent::MovementComponent()
 
 void MovementComponent::TickComponent(int64_t deltaTime)
 {
-    auto mousePos = GameWorld::cursorPos;
+    auto mousePos = GameWindow::cursorPos;
     auto pos = Owner->position;
 
     //distance vers la souris
@@ -63,7 +63,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
      * Check for side wrap of the player's position. TP from one side of the window to the other
      */
 
-    auto window = GameWorld::window;
+    auto window = GameWindow::window;
 
     int leftBorder = 0;
     int topBorder = 0;
