@@ -13,13 +13,15 @@ GameLevel::GameLevel()
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
-	//player = GameWorld::GetGameLevel()->SpawnActor<Player>();
+	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
 	////player = SpawnObject<Player>();
 }
 
 void GameLevel::Update(int64_t deltaTime)
 {
-	for (GameObject* gameObject : l_gameObjects)
+	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
+	auto copy = l_gameObjects;
+	for (GameObject* gameObject : copy)
 	{
 		gameObject->Tick(deltaTime);
 	}

@@ -1,7 +1,7 @@
 ﻿#include "GameLoop.h"
 #include "SFML/Graphics.hpp"
 #include "GameLevel.h"
-#include "GameWorld.h"
+#include "GameWindow.h"
 #include "Managers/InputManager.h"
 #include "Managers/TextureManager.h"
 #include "Tools/Print.h"
@@ -12,20 +12,20 @@
 GameLoop::GameLoop()
 {
 	Print::PrintLog("init game loop");
-	if (GameWorld::useFullscreen)
+	if (GameWindow::useFullscreen)
 	{
-		GameWorld::sizeWindow.x = 1920.0f;
-		GameWorld::sizeWindow.y = 1080.0f;
-		GameWorld::window = new sf::RenderWindow(sf::VideoMode(GameWorld::sizeWindow.x, GameWorld::sizeWindow.y), GameWorld::gameName, sf::Style::Fullscreen);
+		GameWindow::sizeWindow.x = 1920.0f;
+		GameWindow::sizeWindow.y = 1080.0f;
+		GameWindow::window = new sf::RenderWindow(sf::VideoMode(GameWindow::sizeWindow.x, GameWindow::sizeWindow.y), GameWindow::gameName, sf::Style::Fullscreen);
 	}
 	else
 	{
-		GameWorld::sizeWindow.x = 1920.0f / 2;
-		GameWorld::sizeWindow.y = 1080.0f / 2;
-		GameWorld::window = new sf::RenderWindow(sf::VideoMode(GameWorld::sizeWindow.x, GameWorld::sizeWindow.y), GameWorld::gameName, sf::Style::Default);
+		GameWindow::sizeWindow.x = 1920.0f / 2;
+		GameWindow::sizeWindow.y = 1080.0f / 2;
+		GameWindow::window = new sf::RenderWindow(sf::VideoMode(GameWindow::sizeWindow.x, GameWindow::sizeWindow.y), GameWindow::gameName, sf::Style::Default);
 	}
 
-	GameWorld::window->setVerticalSyncEnabled(true);
+	GameWindow::window->setVerticalSyncEnabled(true);
 }
 
 GameLoop::~GameLoop()
@@ -39,29 +39,26 @@ void GameLoop::StartGame()
 	sf::Event events;
 	sf::Clock clock;
 
-	GameWorld::LoadGameLevel();
+	GameWindow::LoadGameLevel();
 
-	gameLevel = GameWorld::GetGameLevel();
-
-	//auto* player = gameLevel->SpawnActor<Player>();
-	//player->position = sf::Vector2f(300.f, 300.f);
+	gameLevel = GameWindow::GetGameLevel();
 
 	//la partie qui loop ! On reste dedans tant qu'on est dans le jeu
-	while (GameWorld::window->isOpen())
+	while (GameWindow::window->isOpen())
 	{
 
 		//dupplication de code ici à cleaner
-		GameWorld::cursorPos = sf::Mouse::getPosition();
-		GameWorld::cursorPos.x -= GameWorld::window->getPosition().x;
-		GameWorld::cursorPos.y -= GameWorld::window->getPosition().y;
+		GameWindow::cursorPos = sf::Mouse::getPosition();
+		GameWindow::cursorPos.x -= GameWindow::window->getPosition().x;
+		GameWindow::cursorPos.y -= GameWindow::window->getPosition().y;
 
 		//keeps cursor inside of the window
 		//marche à peu près mais c'est pas foufou
-		int maxX = GameWorld::window->getSize().x;
-		int maxY = GameWorld::window->getSize().y;
+		int maxX = GameWindow::window->getSize().x;
+		int maxY = GameWindow::window->getSize().y;
 
-		int mX = sf::Mouse::getPosition(*GameWorld::window).x;
-		int mY = sf::Mouse::getPosition(*GameWorld::window).y;
+		int mX = sf::Mouse::getPosition(*GameWindow::window).x;
+		int mY = sf::Mouse::getPosition(*GameWindow::window).y;
 
 		// if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
 		// {
@@ -80,17 +77,17 @@ void GameLoop::StartGame()
 
 
 		//check for closing window
-		while (GameWorld::window->pollEvent(events))
+		while (GameWindow::window->pollEvent(events))
 		{
 			if (events.type == sf::Event::Closed)
 			{
 				//TODO call destructeurs
-				GameWorld::window->close();
+				GameWindow::window->close();
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
-			GameWorld::window->close();
+			GameWindow::window->close();
 
 		}
 
@@ -141,9 +138,9 @@ void GameLoop::Render() const
 {
 	// Print::PrintLog(LOG,"render : ");
 
-	GameWorld::window->clear();
+	GameWindow::window->clear();
 
-	gameLevel->Render(GameWorld::window);
+	gameLevel->Render(GameWindow::window);
 
-	GameWorld::window->display();
+	GameWindow::window->display();
 }

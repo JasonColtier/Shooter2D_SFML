@@ -17,7 +17,7 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
-    ${HEADER_DIR}/GameWorld.h
+    ${HEADER_DIR}/GameWindow.h
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h

@@ -1,6 +1,7 @@
 ﻿#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Components/Component.h"
 #include "Managers/TextureManager.h"
@@ -26,6 +27,7 @@ public:
 
 	virtual void Activate();
 	virtual void Deactivate();
+    sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position pour avoir le nez du vaisseau au milieu
 
 	void AddComponent(Component* component);//pareil prend la classe et retourne un ptr
 
@@ -42,4 +44,4 @@ protected:
 
 };
 
-#endif //GAMEOBJECT_H
+#endif

@@ -1,7 +1,5 @@
 ﻿#ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
-
-
 #include <map>
 #include <string>
 #include <vector>
@@ -14,7 +12,7 @@ class TextureManager
 public:
 
     //toutes les textures
-    enum EnumTextures { Ship };
+    enum EnumTextures { Ship,Bullet };
 
     //retourne le path associé à un nom de texture
     static const char* GetPath(EnumTextures t);
@@ -30,4 +28,4 @@ public:
 
 };
 
-#endif //TEXTUREMANAGER_H
+#endif

@@ -7,11 +7,12 @@
 
 const char* TextureManager::GetPath(EnumTextures t)
 {
-	switch (t)
-	{
-	case Ship: return "../medias/Ship.png";
-	default: return "error texture";
-	}
+    switch (t)
+    {
+    case Ship: return "../medias/Ship.png";
+    case Bullet: return "../medias/Bullet.png";
+    default: return "error texture";
+    }
 }
 
 sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
