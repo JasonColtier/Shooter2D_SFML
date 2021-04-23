@@ -14,16 +14,15 @@ class RenderComponent
 {
 public:
 
-	RenderComponent(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture);
+	RenderComponent(GameObject* t_parentGameObject, sf::Texture* t_texture);
 
 	//Ordre de rendu
 	int zIndex = 0;
 
 	GameObject* parentGameObject;
-	sf::RenderWindow* window;
 	sf::Texture* texture;
 	sf::Sprite sprite;
-
+	
 	void RenderUpdate();
 };
 

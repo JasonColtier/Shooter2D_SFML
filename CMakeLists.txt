@@ -17,7 +17,7 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
-    ${HEADER_DIR}/GameWorld.h
+    ${HEADER_DIR}/GameWindow.h
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
@@ -34,7 +34,6 @@ set(SOURCES
     ${SOURCE_DIR}/Main.cpp
     ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
-    ${SOURCE_DIR}/GameWorld.cpp
     ${SOURCE_DIR}/GameLevel.cpp
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp

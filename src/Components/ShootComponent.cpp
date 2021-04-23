@@ -2,7 +2,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include "GameLevel.h"
-#include "GameWorld.h"
+#include "GameWindow.h"
 #include "Tools/Print.h"
 #include "GameObjects/Bullet.h"
 #include "Managers/InputManager.h"
@@ -40,7 +40,7 @@ void ShootComponent::TickComponent(int64_t deltaTime)
 void ShootComponent::ShootBullet(int initialAngle)
 {
     Print::PrintLog("shoot");
-    Bullet* bullet = GameWorld::GetGameLevel()->SpawnObject<Bullet>();
+    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
 }

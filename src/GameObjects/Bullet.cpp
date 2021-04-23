@@ -1,5 +1,5 @@
 ﻿#include "GameObjects/Bullet.h"
-#include "GameWorld.h"
+#include "GameWindow.h"
 #include "Components/RenderComponent.h"
 #include "Tools/Print.h"
 
@@ -8,10 +8,8 @@
 Bullet::Bullet()
 {
     Print::PrintLog("new bullet !");
-    RenderComponent* renderComponent = new RenderComponent(this, GameWorld::window, TextureManager::GetTexturePtr(TextureManager::Bullet));
+    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet));
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
-
-    AddComponent(renderComponent);
 }
 
 void Bullet::Tick(int64_t deltaTime)

@@ -10,13 +10,13 @@ namespace sf {
 }
 
 
-class GameWorld
+class GameWindow
 {
 public:
 
 	inline static sf::RenderWindow* window;
 	inline static sf::Vector2f sizeWindow;
-	inline static sf::Vector2i cursorPos;//TODO on laisse ça ici ?
+	inline static sf::Vector2i cursorPos;
 
 	//global parameters
 	inline static bool useFullscreen = false;
@@ -25,7 +25,7 @@ public:
 
 	static void LoadGameLevel()
 	{
-		GameWorld::currentGameLevel = new GameLevel();
+		currentGameLevel = new GameLevel();
 	}
 
 	static GameLevel* GetGameLevel()
