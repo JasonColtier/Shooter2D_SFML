@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Components/Component.h"
+#include "Components/RenderComponent.h"
 #include "Managers/TextureManager.h"
 
 class CollisionComponent;

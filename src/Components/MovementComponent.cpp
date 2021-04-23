@@ -24,14 +24,14 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     auto pos = Owner->position;
 
     //distance vers la souris
-    float deltaPosX = mousePos.x - (pos.x + Owner->offsetPos.x);
-    float deltaPosY = mousePos.y - (pos.y + Owner->offsetPos.y);
+    const auto deltaPosX = mousePos.x - (pos.x + Owner->offsetPos.x);
+    const auto deltaPosY = mousePos.y - (pos.y + Owner->offsetPos.y);
 
     //on normalise cette distance
-    sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
+    const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
 
     //rotation pour se tourner vers la souris
-    float rot = std::atan2(deltaPosY, deltaPosX) * 180 / std::_Pi;
+    const float rot = std::atan2(deltaPosY, deltaPosX) * 180 / std::_Pi;
     Owner->rotation = rot + offsetAngle;
 
     //si on veut avancer
@@ -50,7 +50,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     }
 
     //la force de ralentissement
-    float dragForce = 1 - (drag * (deltaTime / 1000.f));
+    const auto dragForce = 1 - (drag * (deltaTime / 1000.f));
 
     //on applique cette force, proche de 0,999
     inertia *= dragForce;
@@ -65,10 +65,10 @@ void MovementComponent::TickComponent(int64_t deltaTime)
 
     auto window = GameWindow::window;
 
-    int leftBorder = 0;
-    int topBorder = 0;
-    int rightBorder = leftBorder + window->getSize().x;
-    int bottomBorder = topBorder + window->getSize().y;
+    const int leftBorder = 0;
+    const int topBorder = 0;
+    const int rightBorder = leftBorder + window->getSize().x;
+    const int bottomBorder = topBorder + window->getSize().y;
 
     //si on est trop à gauche on TP à droite
     if (Owner->position.x < leftBorder)
@@ -89,7 +89,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     }
 }
 
-void MovementComponent::OnInputChanged(InputMapping input)
+void MovementComponent::OnInputChanged(const InputMapping input)
 {
     //si on a appuyé ou relaché la touche pour bouger
     if (input.first==Forward)

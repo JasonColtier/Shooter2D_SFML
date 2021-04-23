@@ -19,7 +19,7 @@ public:
 	inline static sf::Vector2i cursorPos;
 
 	//global parameters
-	inline static bool useFullscreen = false;
+	inline static bool useFullscreen = true;
 
 	inline static std::string gameName = "Shooter 2D SFML";
 

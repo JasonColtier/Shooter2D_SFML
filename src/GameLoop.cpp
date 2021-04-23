@@ -6,7 +6,7 @@
 #include "Managers/TextureManager.h"
 #include "Tools/Print.h"
 #include "GameObjects/Player.h"
-#include "GameObjects/Bullet.h"
+#include "GameObjects/GenericBullet.h"
 #include "Managers/CollisionManager.h"
 
 GameLoop::GameLoop()
@@ -95,9 +95,6 @@ void GameLoop::StartGame()
 		* updating game
 		*/
 
-
-		ProcessInputs();
-
 		updateTime = 0;
 		//tant qu'on a pas atteint le nombre de fps voulu on continue les updates
 		while (updateTime < (1.0 / targetFPS) * 1000000 - updateSurplus)
@@ -117,11 +114,6 @@ void GameLoop::StartGame()
 		updateSurplus = updateTime - ((1.0 / targetFPS) * 1000000);
 
 	}
-
-}
-
-void GameLoop::ProcessInputs()
-{
 
 }
 

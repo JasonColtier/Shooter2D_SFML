@@ -38,7 +38,6 @@ private:
 
     GameLevel* gameLevel;
 
-    void ProcessInputs();
     //update all game objects
     void Update();
     //after all updates, one render

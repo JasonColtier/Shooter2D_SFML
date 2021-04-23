@@ -22,7 +22,7 @@ public:
     void TickComponent(int64_t deltaTime) override;
 
     //fired by InputManager when an input changes
-    void OnInputChanged(InputMapping input);
+    void OnInputChanged(const InputMapping input);
 
 private:
     int offsetAngle = 90;//on offset l'angle de rotation de notre sprite

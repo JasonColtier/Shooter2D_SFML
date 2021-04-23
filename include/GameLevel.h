@@ -8,6 +8,7 @@
 #include "Singleton.h"
 #include "Components/RenderComponent.h"
 #include "Components/CollisionComponent.h"
+#include "GameObjects/BackgroundTexture.h"
 #include "GameObjects/GameObject.h"
 
 class Component;
@@ -126,10 +127,9 @@ private:
 	 *Level assets
 	 */
 
+	Player* player = nullptr;
+	BackgroundTexture* bgTexture = nullptr;
 
-	Player* player;
-	//EnemySpawner*
-	//contiendra toutes les instances de nos gameObjects
 };
 
 
