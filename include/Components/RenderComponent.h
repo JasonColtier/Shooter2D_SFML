@@ -14,7 +14,7 @@ class RenderComponent
 {
 public:
 
-	RenderComponent(GameObject* t_parentGameObject, sf::Texture* t_texture);
+	RenderComponent(GameObject* t_parentGameObject, sf::Texture* t_texture, int zIndex);
 
 	//Ordre de rendu
 	int zIndex = 0;

@@ -14,7 +14,7 @@ Player::Player()
 {
     Print::PrintLog("new player");
 
-    renderComponent = new RenderComponent(this,TextureManager::GetTexturePtr(TextureManager::Ship));
+    renderComponent = new RenderComponent(this,TextureManager::GetTexturePtr(TextureManager::Ship),1);
     renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
     renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
     

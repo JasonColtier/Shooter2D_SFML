@@ -84,6 +84,14 @@ void GameLoop::StartGame()
 				//TODO call destructeurs
 				GameWindow::window->close();
 			}
+
+			// catch the resize events
+			if (events.type == sf::Event::Resized)
+			{
+				// update the view to the new size of the window
+				sf::FloatRect visibleArea(0, 0, events.size.width, events.size.height);
+				GameWindow::window->setView(sf::View(visibleArea));
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
