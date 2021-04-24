@@ -3,14 +3,17 @@
 
 #include "GameObject.h"
 
-class Bullet : public GameObject
+class GenericBullet : public GameObject
 {
 public:
     
-    Bullet();
+    GenericBullet();
 
     void Tick(int64_t deltaTime) override;
+
+private:
+    float speed = 0.5f;
     
 };
-#endif
+#endif //BULLET_H
 

@@ -1,29 +1,29 @@
-﻿
+﻿#ifndef RENDERCOMPONENT_H
+#define RENDERCOMPONENT_H
 
 #include <SFML/Graphics/Sprite.hpp>
-
-#include "Component.h"
-
 
 class GameObject;
 
 namespace sf {
-    class RenderWindow;
+	class RenderWindow;
 }
 
-class RenderComponent : public Component
+//TODO ne plus faire 
+class RenderComponent
 {
 public:
-    
-    RenderComponent(GameObject* parentGameObject,sf::RenderWindow* window,sf::Texture* texture);
-    
-    GameObject* parentGameObject;
-    sf::RenderWindow* window;
-    sf::Texture* texture;
-    sf::Sprite sprite;
-    
-    void TickComponent(int64_t deltaTime) override;;
 
+	RenderComponent(GameObject* t_parentGameObject, sf::Texture* t_texture, int zIndex);
+
+	//Ordre de rendu
+	int zIndex = 0;
+
+	GameObject* parentGameObject;
+	sf::Texture* texture;
+	sf::Sprite sprite;
+	
+	void RenderUpdate();
 };
 
-
+#endif //RENDERCOMPONENT_H

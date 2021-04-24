@@ -2,17 +2,19 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
+
+#include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 
 
-RenderComponent::RenderComponent(GameObject* parentGameObject, sf::RenderWindow* window, sf::Texture* texture) : parentGameObject(parentGameObject), window(window), texture(texture)
+RenderComponent::RenderComponent(GameObject* t_parentGameObject, sf::Texture* t_texture, int t_zIndex) : parentGameObject(t_parentGameObject), texture(t_texture), zIndex(t_zIndex)
 {
-    sprite.setTexture(*texture);
+	sprite.setTexture(*texture);
 }
 
-void RenderComponent::TickComponent(int64_t deltaTime)
+void RenderComponent::RenderUpdate()
 {
-    sprite.setRotation(parentGameObject->rotation);
-    sprite.setPosition(parentGameObject->position);
-    window->draw(sprite);
+	sprite.setRotation(parentGameObject->rotation);
+	sprite.setPosition(parentGameObject->position);
+	GameWindow::window->draw(sprite);
 }

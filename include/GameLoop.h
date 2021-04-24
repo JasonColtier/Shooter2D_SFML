@@ -1,5 +1,6 @@
 ﻿#ifndef GAMELOOP_H
 #define GAMELOOP_H
+
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -37,7 +38,6 @@ private:
 
     GameLevel* gameLevel;
 
-    void ProcessInputs();
     //update all game objects
     void Update();
     //after all updates, one render

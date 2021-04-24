@@ -1,5 +1,5 @@
 #include <SFML/Graphics/Sprite.hpp>
-#include "GameObject.h"
+#include "GameObjects/GameObject.h"
 
 
 class RenderComponent;
@@ -14,7 +14,7 @@ class Enemy : public GameObject
 public:
 
     Enemy();
-    ~Enemy() = default;
+    ~Enemy() override = default;
     void Tick(int64_t deltaTime) override;
 
 private:

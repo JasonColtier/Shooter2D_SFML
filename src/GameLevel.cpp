@@ -1,37 +1,64 @@
 ﻿#include "GameLevel.h"
 
-#include <ostream>
-
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
-#include <typeinfo>
 #include "Managers/CollisionManager.h"
+#include "GameObjects/GenericBullet.h"
 
 GameLevel::GameLevel()
 {
 	Print::PrintLog("level created");
 
-    Print::PrintLog("level created");
-    player = SpawnObject<Player>();
-    player->position = sf::Vector2f(300.f, 300.f);
+	//TODO Faire spawn après la création du gamelevel dans gameLoop
+	player = SpawnActor<Player>();
+	player->position = sf::Vector2f(300.f, 300.f);
+
+	bgTexture = SpawnActor<BackgroundTexture>();
+
+	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
+	////player = SpawnObject<Player>();
 }
 
 void GameLevel::Update(int64_t deltaTime)
 {
-    for (GameObject* gameObject : l_gameObjects)
-    {
-        gameObject->Tick(deltaTime);
-    }
-	collisionManager->UpdateCollision(l_collisionComponents);
+	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
+	auto copy = l_gameObjects;
+	// Print::PrintLog("number of objects in level : ",copy.size());
+	for (GameObject* gameObject : copy)
+	{
+		gameObject->Tick(deltaTime);
+	}
+
+	CollisionManager::UpdateCollision(l_gameObjects);
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
-	for (Component* rendered : l_renderComponents)
+	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
+		if (!g1->renderComponent || !g2->renderComponent) return g1->renderComponent > g2->renderComponent;
+		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
+		return (g1->renderComponent->zIndex) < (g2->renderComponent->zIndex);
+	};
+
+	l_gameObjects.sort(renderPrioritySort);
+
+	for (auto* object : l_gameObjects)
+	{
+		if (!object->isActivated)
+		{
+			break;
+		}
 		//TODO : render par index
 		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
-		rendered->TickComponent();
+		object->renderComponent->RenderUpdate();
 	}
+}
+
+void GameLevel::DestroyGameObject(GameObject* gameObject)
+{
+	l_gameObjects.remove(gameObject);
+	delete gameObject;
+	gameObject = nullptr;
 }
 
