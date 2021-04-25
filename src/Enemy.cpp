@@ -2,14 +2,11 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLevel.h"
 #include "GameLoop.h"
-<<<<<<< HEAD
 //#include "Player.h"
 //#include "RenderHandler.h"
-=======
 #include "GameObjects/Player.h"
-#include "Components/RenderComponent.h"
+#include "Components/RenderHandler.h"
 #include "GameWindow.h"
->>>>>>> main
 #include "Tools/VectorTools.h"
 #include "Tools/Print.h"
 #include <ostream>
@@ -18,7 +15,6 @@
 
 
 Enemy::Enemy()
-<<<<<<< HEAD
 {
 	////TODO mettre la récup du Player
 	////player = .....
@@ -38,14 +34,11 @@ Enemy::Enemy()
 	////offset pour que le nez du vaisseau soit vers la souris
 	//offsetPos.x = 100 * 0.5f / 2;
 	//offsetPos.y = 100 * 0.5f / 2;
-=======
-{	
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
-	renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::ShipEnemy), 1);
-	renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));	
->>>>>>> main
+	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ShipEnemy), 1);
+	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
+	renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
 }
 

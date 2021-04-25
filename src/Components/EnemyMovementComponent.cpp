@@ -6,7 +6,7 @@
 #include "Components/IMovementComponent.h"
 #include "Components/Component.h"
 #include "GameObjects/Player.h"
-#include "Components/RenderComponent.h"
+#include "Components/RenderHandler.h"
 #include "Tools/VectorTools.h"
 #include <ostream>
 #include <random>
