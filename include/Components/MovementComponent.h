@@ -12,7 +12,7 @@ namespace std {
 
 // typedef class InputManager InputMapping;
 
-class MovementComponent : public TestMovementComponent
+class MovementComponent : public Component
 {
 public:
 

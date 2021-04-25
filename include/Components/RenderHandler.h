@@ -1,5 +1,5 @@
-﻿#ifndef RENDERCOMPONENT_H
-#define RENDERCOMPONENT_H
+﻿#ifndef RenderHandler_H
+#define RenderHandler_H
 
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -14,17 +14,16 @@ class RenderHandler
 {
 public:
 
-	RenderHandler(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture);
+	RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, int t_zIndex);
 
-	//Ordre de rendu
-	int zIndex = 0;
 
 	GameObject* parentGameObject;
-	sf::RenderWindow* window;
 	sf::Texture* texture;
 	sf::Sprite sprite;
+	//Ordre de rendu
+	int zIndex = 0;
 
 	void RenderUpdate();
 };
 
-#endif //RENDERCOMPONENT_H
+#endif //RenderHandler_H

@@ -8,18 +8,18 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 
 	for (auto objet1 = abscisseTab.begin(); objet1 != abscisseTab.end(); ++objet1)
 	{
-		if (!(*objet1)->isActivated || !(*objet1)->collisionComponent)
+		if (!(*objet1)->isActivated || !(*objet1)->collisionHandler)
 		{
 			break;
 		}
 
 		for (auto objet2 = ++objet1; objet2 != abscisseTab.end(); ++objet2)
 		{
-			if ((*objet2)->isActivated || (*objet2)->collisionComponent)
+			if ((*objet2)->isActivated && (*objet2)->collisionHandler)
 			{
-				if ((*objet1)->collisionComponent->GetEndAbscisse() > (*objet2)->collisionComponent->GetStartAbscisse())
+				if ((*objet1)->collisionHandler->GetEndAbscisse() > (*objet2)->collisionHandler->GetStartAbscisse())
 				{
-					CheckCollision((*objet1)->collisionComponent, (*objet2)->collisionComponent);
+					CheckCollision((*objet1)->collisionHandler, (*objet2)->collisionHandler);
 				}
 				else
 				{
@@ -39,9 +39,9 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 
 			//	for (int j = i + 1; j < abscisseTab.size(); ++j)
 			//	{
-			//if (abscisseTab[i]->collisionComponent->GetEndAbscisse() > abscisseTab[j]->collisionComponent->GetStartAbscisse() && abscisseTab[j]->isActivated)
+			//if (abscisseTab[i]->collisionHandler->GetEndAbscisse() > abscisseTab[j]->collisionHandler->GetStartAbscisse() && abscisseTab[j]->isActivated)
 			//{
-			//	CheckCollision(abscisseTab[i]->collisionComponent, abscisseTab[j]->collisionComponent);
+			//	CheckCollision(abscisseTab[i]->collisionHandler, abscisseTab[j]->collisionHandler);
 			//}
 			//else
 			//{
@@ -57,9 +57,9 @@ void CollisionManager::SortByAbscisse(std::list<GameObject*>& abscisseTab)
 {
 	auto abscisseSort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (!g1->collisionComponent || !g2->collisionComponent) return g1->collisionComponent > g2->collisionComponent;
+		if (!g1->collisionHandler || !g2->collisionHandler) return g1->collisionHandler > g2->collisionHandler;
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
-		return (g1->collisionComponent->GetStartAbscisse()) < (g2->collisionComponent->GetStartAbscisse());
+		return (g1->collisionHandler->GetStartAbscisse()) < (g2->collisionHandler->GetStartAbscisse());
 	};
 	abscisseTab.sort(abscisseSort);
 }
@@ -67,7 +67,7 @@ void CollisionManager::SortByAbscisse(std::list<GameObject*>& abscisseTab)
 void CollisionManager::CheckCollision(CollisionHandler* g1, CollisionHandler* g2)
 {
 
-	for (CollisionType channel : g1->l_ExcludedCollisionType)
+	for (CollisionType channel : *g1->l_ExcludedCollisionType)
 	{
 		if (channel == g2->e_Type)
 		{

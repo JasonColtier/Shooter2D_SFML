@@ -32,20 +32,20 @@ void GameLevel::Render(sf::RenderWindow* window)
 {
 	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (!g1->renderComponent || !g2->renderComponent) return g1->renderComponent > g2->renderComponent;
+		if (!g1->renderHandler || !g2->renderHandler) return g1->renderHandler > g2->renderHandler;
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
-		return (g1->renderComponent->zIndex) < (g2->renderComponent->zIndex);
+		return (g1->renderHandler->zIndex) < (g2->renderHandler->zIndex);
 	};
 
 	l_gameObjects.sort(renderPrioritySort);
 
 	for (auto* object : l_gameObjects)
 	{
-		if (!object->isActivated || !object->renderComponent)
+		if (!object->isActivated || !object->renderHandler)
 		{
 			break;
 		}
-		object->renderComponent->RenderUpdate();
+		object->renderHandler->RenderUpdate();
 	}
 }
 

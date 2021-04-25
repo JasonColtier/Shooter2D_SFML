@@ -3,7 +3,7 @@
 #include "GameLevel.h"
 #include "GameLoop.h"
 //#include "Player.h"
-//#include "RenderComponent.h"
+//#include "RenderHandler.h"
 #include "Tools/VectorTools.h"
 #include <ostream>
 #include <random>
@@ -17,11 +17,11 @@ Enemy::Enemy()
 
 	//Print::PrintString("here comes a new challenger");
 
-	//auto* renderComponents = new RenderComponent(this, GameLoop::GetInstance()->window, TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
-	//renderComponents->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	//renderComponents->sprite.setScale(sf::Vector2f(1.0f, 1.0f));
+	//auto* RenderHandlers = new RenderHandler(this, GameLoop::GetInstance()->window, TextureManager::GetInstance()->GetTexturePtr(TextureManager::Ship));
+	//RenderHandlers->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
+	//RenderHandlers->sprite.setScale(sf::Vector2f(1.0f, 1.0f));
 
-	//AddComponent(renderComponents);
+	//AddComponent(RenderHandlers);
 
 	////position de départ du vaisseau
 	//position = sf::Vector2f(300.f, 300.f);

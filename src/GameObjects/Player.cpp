@@ -8,33 +8,34 @@
 #include "Tools/Print.h"
 #include "Tools/VectorTools.h"
 
-
+#include "Components/RenderHandler.h"
 
 Player::Player()
 {
-    Print::PrintLog("new player");
+	Print::PrintLog("new player");
 
-    renderComponent = new RenderHandler(this,GameWorld::window,TextureManager::GetTexturePtr(TextureManager::Ship));
-    renderComponent->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-    renderComponent->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
-    
+	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Ship), 1);
+	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
+	//renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
-    //AddComponent(renderComponent);
-    offsetPos = sf::Vector2f(25.f, 25.f);
-    AddComponent(new ShootBulletComponent());
-    AddComponent(new MovementComponent());
+	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
+	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 10, &position, tmp);
+	//AddComponent(RenderHandler);
+	offsetPos = sf::Vector2f(25.f, 25.f);
+	AddComponent(new ShootBulletComponent());
+	AddComponent(new MovementComponent());
 
-    //position de départ du vaisseau
-    // position = ;
+	//position de départ du vaisseau
+	// position = ;
 
 }
 
 
 void Player::Tick(int64_t deltaTime)
 {
-    GameObject::Tick(deltaTime);
-    
-   
+	GameObject::Tick(deltaTime);
+
+
 }
 
 
