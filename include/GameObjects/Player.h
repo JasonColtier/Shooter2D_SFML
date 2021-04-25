@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 
-class RenderComponent;
+class RenderHandler;
 
 namespace sf {
     class Texture;

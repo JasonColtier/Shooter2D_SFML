@@ -1,14 +1,12 @@
 ﻿#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Components/Component.h"
-#include "Components/RenderComponent.h"
 #include "Managers/TextureManager.h"
 
-class CollisionComponent;
-class RenderComponent;
+class CollisionHandler;
+class RenderHandler;
 
 namespace sf {
 	class RenderWindow;
@@ -37,8 +35,8 @@ public:
 	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
 	std::vector<Component*> componentList;
 
-	CollisionComponent* collisionComponent = nullptr;
-	RenderComponent* renderComponent = nullptr;
+	CollisionHandler* collisionHandler = nullptr;
+	RenderHandler* renderHandler = nullptr;
 
 
 protected:

@@ -1,22 +1,19 @@
 ﻿#include "GameLevel.h"
-
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "GameObjects/GenericBullet.h"
+#include "Spawner.h"
 
 GameLevel::GameLevel()
 {
 	Print::PrintLog("level created");
 
-	//TODO Faire spawn après la création du gamelevel dans gameLoop
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
 	bgTexture = SpawnActor<BackgroundTexture>();
-
-	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
-	////player = SpawnObject<Player>();
+	SpawnActor<Spawner>();
 }
 
 void GameLevel::Update(int64_t deltaTime)
@@ -29,29 +26,27 @@ void GameLevel::Update(int64_t deltaTime)
 		gameObject->Tick(deltaTime);
 	}
 
-	CollisionManager::UpdateCollision(l_gameObjects);
+	CollisionManager::UpdateCollision(l_abscisseGameObjects);
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
 	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (!g1->renderComponent || !g2->renderComponent) return g1->renderComponent > g2->renderComponent;
+		if (!g1->renderHandler || !g2->renderHandler) return g1->renderHandler > g2->renderHandler;
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
-		return (g1->renderComponent->zIndex) < (g2->renderComponent->zIndex);
+		return (g1->renderHandler->zIndex) < (g2->renderHandler->zIndex);
 	};
 
 	l_gameObjects.sort(renderPrioritySort);
 
 	for (auto* object : l_gameObjects)
 	{
-		if (!object->isActivated)
+		if (!object->isActivated || !object->renderHandler)
 		{
 			break;
 		}
-		//TODO : render par index
-		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
-		object->renderComponent->RenderUpdate();
+		object->renderHandler->RenderUpdate();
 	}
 }
 

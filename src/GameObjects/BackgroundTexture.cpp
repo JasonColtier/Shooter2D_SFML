@@ -1,8 +1,9 @@
 ﻿#include "GameObjects/BackgroundTexture.h"
+#include "Components/RenderHandler.h"
 
 BackgroundTexture::BackgroundTexture()
 {
-    renderComponent = new RenderComponent(this,TextureManager::GetTexturePtr(TextureManager::SpaceBackground),0);
-    renderComponent->sprite.setOrigin(sf::Vector2f(0, 0));
-    renderComponent->sprite.setScale(sf::Vector2f(1, 1));
+    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::SpaceBackground),0);
+    renderHandler->sprite.setOrigin(sf::Vector2f(0, 0));
+    renderHandler->sprite.setScale(sf::Vector2f(1, 1));
 }

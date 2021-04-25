@@ -25,13 +25,15 @@ set(HEADERS
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Components/Component.h
-    ${HEADER_DIR}/Components/RenderComponent.h
+    ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/ShootBulletComponent.h
-    ${HEADER_DIR}/Components/CollisionComponent.h
+    ${HEADER_DIR}/Components/CollisionHandler.h
     ${HEADER_DIR}/Components/MovementComponent.h
     ${HEADER_DIR}/Spawner.h
     ${HEADER_DIR}/Enemy.h
+	${HEADER_DIR}/Components/EnemyMovementComponent.h
+	${HEADER_DIR}/Components/IMovementComponent.h
 )
 
 set(SOURCES
@@ -48,13 +50,14 @@ set(SOURCES
     ${SOURCE_DIR}/Managers/AudioManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp
     ${SOURCE_DIR}/Managers/InputManager.cpp
-    ${SOURCE_DIR}/Components/CollisionComponent.cpp
-    ${SOURCE_DIR}/Components/RenderComponent.cpp
+    ${SOURCE_DIR}/Components/CollisionHandler.cpp
+    ${SOURCE_DIR}/Components/RenderHandler.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
     ${SOURCE_DIR}/Components/ShootBulletComponent.cpp
     ${SOURCE_DIR}/Components/MovementComponent.cpp
 	${SOURCE_DIR}/Spawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
+	${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
