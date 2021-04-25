@@ -43,16 +43,7 @@ public:
 
 		for (const auto point : *l_Points)
 		{
-			//const auto norm = sqrtf(pow(point.x, 2) + pow(point.y, 2));
-			//auto t_point = sf::Vector2f((cosf(*rotation * (PI / 180)) * norm), (sinf(*rotation * (PI / 180)) * norm));
 
-			//t_point.x *= 100;
-			//t_point.x = truncf(t_point.x);
-			//t_point.x /= 100;
-
-			//t_point.y *= 100;
-			//t_point.y = truncf(t_point.y);
-			//t_point.y /= 100;
 			float angle = -(*rotation) * PI / 180;
 			auto xM = point.x;
 			auto yM = point.y;
