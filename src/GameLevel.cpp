@@ -3,6 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "GameObjects/GenericBullet.h"
+#include "Spawner.h"
 
 GameLevel::GameLevel()
 {
@@ -12,7 +13,7 @@ GameLevel::GameLevel()
 	player->position = sf::Vector2f(300.f, 300.f);
 
 	bgTexture = SpawnActor<BackgroundTexture>();
-
+	SpawnActor<Spawner>();
 }
 
 void GameLevel::Update(int64_t deltaTime)
