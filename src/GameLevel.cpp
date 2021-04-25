@@ -1,5 +1,4 @@
 ﻿#include "GameLevel.h"
-
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
@@ -9,14 +8,11 @@ GameLevel::GameLevel()
 {
 	Print::PrintLog("level created");
 
-	//TODO Faire spawn après la création du gamelevel dans gameLoop
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
 	bgTexture = SpawnActor<BackgroundTexture>();
 
-	//player = GameWindow::GetGameLevel()->SpawnActor<Player>();
-	////player = SpawnObject<Player>();
 }
 
 void GameLevel::Update(int64_t deltaTime)
@@ -29,7 +25,7 @@ void GameLevel::Update(int64_t deltaTime)
 		gameObject->Tick(deltaTime);
 	}
 
-	CollisionManager::UpdateCollision(l_gameObjects);
+	CollisionManager::UpdateCollision(l_abscisseGameObjects);
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
@@ -45,12 +41,10 @@ void GameLevel::Render(sf::RenderWindow* window)
 
 	for (auto* object : l_gameObjects)
 	{
-		if (!object->isActivated)
+		if (!object->isActivated || !object->renderComponent)
 		{
 			break;
 		}
-		//TODO : render par index
-		//TODO : render par activé / désactivé avec un break qnd on rencontre le premier objet désactivé
 		object->renderComponent->RenderUpdate();
 	}
 }

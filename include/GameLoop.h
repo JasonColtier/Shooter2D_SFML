@@ -1,10 +1,6 @@
 ﻿#ifndef GAMELOOP_H
 #define GAMELOOP_H
 
-#include <iostream>
-#include <ostream>
-#include <string>
-#include <SFML/System/Vector2.hpp>
 #include "Singleton.h"
 
 class GameLevel;

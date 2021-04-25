@@ -10,11 +10,11 @@ namespace sf {
 }
 
 //TODO ne plus faire 
-class RenderComponent
+class RenderHandler
 {
 public:
 
-	RenderComponent(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture);
+	RenderHandler(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture);
 
 	//Ordre de rendu
 	int zIndex = 0;

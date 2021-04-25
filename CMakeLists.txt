@@ -25,10 +25,10 @@ set(HEADERS
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Components/Component.h
-    ${HEADER_DIR}/Components/RenderComponent.h
+    ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/ShootBulletComponent.h
-    ${HEADER_DIR}/Components/CollisionComponent.h
+    ${HEADER_DIR}/Components/CollisionHandler.h
     ${HEADER_DIR}/Components/MovementComponent.h
     ${HEADER_DIR}/Spawner.h
     ${HEADER_DIR}/Enemy.h
@@ -48,8 +48,8 @@ set(SOURCES
     ${SOURCE_DIR}/Managers/AudioManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp
     ${SOURCE_DIR}/Managers/InputManager.cpp
-    ${SOURCE_DIR}/Components/CollisionComponent.cpp
-    ${SOURCE_DIR}/Components/RenderComponent.cpp
+    ${SOURCE_DIR}/Components/CollisionHandler.cpp
+    ${SOURCE_DIR}/Components/RenderHandler.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
     ${SOURCE_DIR}/Components/ShootBulletComponent.cpp
     ${SOURCE_DIR}/Components/MovementComponent.cpp

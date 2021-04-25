@@ -12,14 +12,15 @@ namespace std {
 
 // typedef class InputManager InputMapping;
 
-class MovementComponent : public Component
+class MovementComponent : public TestMovementComponent
 {
 public:
 
     MovementComponent();
-
+     virtual ~MovementComponent() = default;
+	
     //update component
-    void TickComponent(int64_t deltaTime) override;
+    void TickComponent(int64_t deltaTime = 0) override;
 
     //fired by InputManager when an input changes
     void OnInputChanged(const InputMapping input);

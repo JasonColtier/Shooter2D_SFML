@@ -2,7 +2,7 @@
 #include "GameObjects/GameObject.h"
 
 
-class RenderComponent;
+class RenderHandler;
 //class Player;
 
 namespace sf {

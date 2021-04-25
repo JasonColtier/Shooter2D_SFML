@@ -17,13 +17,13 @@ enum CollisionType
 	EnemyProjectileChannel,
 };
 
-class CollisionComponent
+class CollisionHandler
 {
 
 public:
-	CollisionComponent() = default;
+	CollisionHandler() = default;
 
-	CollisionComponent(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType> t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, std::vector<sf::Vector2f> t_Points)
+	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType> t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, std::vector<sf::Vector2f> t_Points)
 		: owner(t_owner)
 		, e_Type(t_Type)
 		, l_ExcludedCollisionType(std::move(t_ExcludedCollisionType))
@@ -35,7 +35,7 @@ public:
 
 	}
 
-	~CollisionComponent() = default;
+	~CollisionHandler() = default;
 
 	std::vector<sf::Vector2f> getPoints()
 	{
