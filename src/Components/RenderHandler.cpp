@@ -1,8 +1,6 @@
 ﻿#include "Components/RenderHandler.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
-
 #include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 

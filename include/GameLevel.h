@@ -3,13 +3,8 @@
 
 #include <cstdint>
 #include <list>
-#include <SFML/Window/Window.hpp>
-
 #include "Singleton.h"
-#include "Components/CollisionHandler.h"
 #include "GameObjects/BackgroundTexture.h"
-#include "Components/RenderHandler.h"
-#include "Components/CollisionHandler.h"
 #include "GameObjects/GameObject.h"
 
 class Component;

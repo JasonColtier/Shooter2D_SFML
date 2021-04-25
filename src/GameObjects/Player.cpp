@@ -2,12 +2,11 @@
 #include <random>
 #include <SFML/Window/Mouse.hpp>
 #include "GameLevel.h"
-#include "GameWindow.h"
+#include "Components/CollisionHandler.h"
 #include "Components/MovementComponent.h"
 #include "Components/ShootBulletComponent.h"
 #include "Tools/Print.h"
 #include "Tools/VectorTools.h"
-
 #include "Components/RenderHandler.h"
 
 Player::Player()
