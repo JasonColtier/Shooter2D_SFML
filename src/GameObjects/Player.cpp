@@ -4,8 +4,7 @@
 #include "GameLevel.h"
 #include "GameWindow.h"
 #include "Components/MovementComponent.h"
-#include "Components/ShootComponents/ShootBulletComponent.h"
-#include "Components/ShootComponents/ShootgunComponent.h"
+#include "Components/ShootComponent.h"
 #include "Tools/Print.h"
 #include "Tools/VectorTools.h"
 
@@ -22,7 +21,7 @@ Player::Player()
 
     //AddComponent(renderComponent);
     offsetPos = sf::Vector2f(0, 25.f);
-    AddComponent(new ShootgunComponent());
+    AddComponent(new ShootComponent());
     AddComponent(new MovementComponent());
 
     //position de départ du vaisseau

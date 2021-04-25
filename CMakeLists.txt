@@ -14,8 +14,7 @@ set(HEADERS
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/GameObjects/Player.h
-    ${HEADER_DIR}/GameObjects/Bullets/GenericBullet.h
-    ${HEADER_DIR}/GameObjects/Bullets/SniperBullet.h
+    ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/BackgroundTexture.h
     ${HEADER_DIR}/GameLevel.h
@@ -27,9 +26,7 @@ set(HEADERS
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderComponent.h
-    ${HEADER_DIR}/Components/ShootComponents/ShootComponent.h
-    ${HEADER_DIR}/Components/ShootComponents/ShootBulletComponent.h
-    ${HEADER_DIR}/Components/ShootComponents/ShootgunComponent.h
+    ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionComponent.h
     ${HEADER_DIR}/Components/MovementComponent.h
     ${HEADER_DIR}/Spawner.h
@@ -44,7 +41,7 @@ set(SOURCES
     ${SOURCE_DIR}/GameWindow.cpp
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp
-    ${SOURCE_DIR}/GameObjects/Bullets/GenericBullet.cpp
+    ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/GameObjects/BackgroundTexture.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
@@ -52,9 +49,7 @@ set(SOURCES
     ${SOURCE_DIR}/Managers/InputManager.cpp
     ${SOURCE_DIR}/Components/CollisionComponent.cpp
     ${SOURCE_DIR}/Components/RenderComponent.cpp
-    ${SOURCE_DIR}/Components/ShootComponents/ShootComponent.cpp
-    ${SOURCE_DIR}/Components/ShootComponents/ShootBulletComponent.cpp
-    ${SOURCE_DIR}/Components/ShootComponents/ShootgunComponent.cpp
+    ${SOURCE_DIR}/Components/ShootComponent.cpp
     ${SOURCE_DIR}/Components/MovementComponent.cpp
 	${SOURCE_DIR}/Spawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
