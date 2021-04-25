@@ -1,8 +1,10 @@
 ﻿#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "Components/Component.h"
+#include "Components/RenderComponent.h"
 #include "Managers/TextureManager.h"
 
 class CollisionHandler;
@@ -35,8 +37,8 @@ public:
 	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
 	std::vector<Component*> componentList;
 
-	CollisionHandler* collisionHandler = nullptr;
-	RenderHandler* renderHandler = nullptr;
+	CollisionHandler* collisionComponent = nullptr;
+	RenderHandler* renderComponent = nullptr;
 
 
 protected:

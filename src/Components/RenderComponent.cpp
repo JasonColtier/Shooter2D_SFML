@@ -1,16 +1,16 @@
-﻿#include "Components/RenderHandler.h"
+﻿#include "Components/RenderComponent.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include "GameObjects/GameObject.h"
 
 
-RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture) : parentGameObject(t_parentGameObject), window(t_window), texture(t_texture)
+RenderComponent::RenderComponent(GameObject* t_parentGameObject, sf::RenderWindow* t_window, sf::Texture* t_texture) : parentGameObject(t_parentGameObject), window(t_window), texture(t_texture)
 {
 	sprite.setTexture(*texture);
 }
 
-void RenderHandler::RenderUpdate()
+void RenderComponent::RenderUpdate()
 {
 	sprite.setRotation(parentGameObject->rotation);
 	sprite.setPosition(parentGameObject->position);
