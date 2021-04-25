@@ -1,5 +1,5 @@
 #include "Spawner.h"
-#include "Gameloop.h"
+#include "GameLoop.h"
 #include <random>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameWindow.h"

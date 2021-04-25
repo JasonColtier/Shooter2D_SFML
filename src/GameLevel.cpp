@@ -2,7 +2,6 @@
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
-#include "GameObjects/GenericBullet.h"
 
 GameLevel::GameLevel()
 {
