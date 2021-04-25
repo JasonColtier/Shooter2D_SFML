@@ -28,7 +28,7 @@ public:
 
 	virtual void Activate();
 	virtual void Deactivate();
-    sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position pour avoir le nez du vaisseau au milieu
+    sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 
 	void AddComponent(Component* component);//pareil prend la classe et retourne un ptr
 
