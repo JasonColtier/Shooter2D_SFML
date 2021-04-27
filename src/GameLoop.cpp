@@ -4,9 +4,6 @@
 #include "GameWindow.h"
 #include "Managers/InputManager.h"
 #include "Tools/Print.h"
-#include "GameObjects/Player.h"
-#include "GameObjects/GenericBullet.h"
-#include "Managers/CollisionManager.h"
 
 GameLoop::GameLoop()
 {
