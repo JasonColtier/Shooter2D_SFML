@@ -7,13 +7,15 @@ class Bullet : public GameObject
 {
 public:
     
-    Bullet(TextureManager::EnumTextures enumTextures = TextureManager::Bullet,sf::Vector2f scale = sf::Vector2f(1,1),float autoDestroyTimer=0);
+    Bullet();
 
     void Tick(int64_t deltaTime) override;
 
+    sf::Vector2f scale = sf::Vector2f(1,1);
+    float autoDestroyDelay = 0;
+
 private:
     float speed = 0.5f;
-    float autoDestroyDelai = 0;
     float timer = 0;
 };
 

@@ -5,21 +5,20 @@
 
 #define PI 3.14159265
 
-Bullet::Bullet(TextureManager::EnumTextures enumTextures,sf::Vector2f scale,float autoDestroyTimer)
+Bullet::Bullet()
 {
     // Print::PrintLog("new bullet !");
-    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(enumTextures),2);
+    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
     renderComponent->sprite.setScale(scale);
-    autoDestroyDelai = autoDestroyTimer;
 }
 
 void Bullet::Tick(int64_t deltaTime)
 {
 
-    if(autoDestroyDelai > 0)
+    if(autoDestroyDelay > 0)
     {
         timer += deltaTime;
-        if(timer > autoDestroyDelai * 1000000)
+        if(timer > autoDestroyDelay * 1000000)
         {
             GameWindow::GetGameLevel()->DestroyGameObject(this);
             return;
