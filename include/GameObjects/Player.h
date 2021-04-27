@@ -5,7 +5,7 @@
 #include "Components/ShootComponent.h"
 #include "Managers/InputManager.h"
 
-class RenderComponent;
+class RenderHandler;
 
 namespace sf {
     class Texture;

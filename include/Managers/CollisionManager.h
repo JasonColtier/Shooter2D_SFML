@@ -3,7 +3,7 @@
 
 #include <list>
 
-class CollisionComponent;
+class CollisionHandler;
 class GameObject;
 
 class CollisionManager
@@ -20,7 +20,7 @@ private:
 
 	static void SortByAbscisse(std::list<GameObject*>& abscisseTab);
 
-	static void CheckCollision(CollisionComponent* g1, CollisionComponent* g2);
+	static void CheckCollision(CollisionHandler* g1, CollisionHandler* g2);
 };
 
 #endif //COLLISIONMANAGER_H

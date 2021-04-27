@@ -1,7 +1,6 @@
 ﻿#include "GameObjects/Bullet.h"
 #include "GameWindow.h"
-#include "Components/RenderComponent.h"
-#include "Tools/Print.h"
+
 
 #define PI 3.14159265
 

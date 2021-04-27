@@ -1,6 +1,6 @@
 ﻿#include "GameObjects/Bullet.h"
 #include "GameWindow.h"
-#include "Components/RenderComponent.h"
+#include "Components/RenderHandler.h"
 #include "Tools/Print.h"
 
 #define PI 3.14159265
@@ -8,9 +8,9 @@
 Bullet::Bullet()
 {
     // Print::PrintLog("new bullet !");
-    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
-    renderComponent->sprite.setScale(scale);
-    renderComponent->sprite.setOrigin(10,5);
+    renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
+    renderHandler->sprite.setScale(scale);
+    renderHandler->sprite.setOrigin(10,5);
 }
 
 void Bullet::Tick(int64_t deltaTime)
