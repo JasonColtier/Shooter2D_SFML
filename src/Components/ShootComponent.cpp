@@ -12,7 +12,6 @@ ShootComponent::ShootComponent()
 {
     activateTick = true;
 
-    InputManager::GetSignal().Connect<ShootComponent>(this, &ShootComponent::OnInputChanged);
 }
 
 
@@ -31,7 +30,7 @@ void ShootComponent::TickComponent(int64_t deltaTime)
             for (int i = 0; i < g_shootNumber; ++i)
             {
                 auto offsetAngle = (g_shootNumber - 1) /2; 
-                ShootBullet(-90 + ((i-offsetAngle)*10));
+                ShootBullet(-90 + ((i-offsetAngle)*g_dispersion));
             }
         }
     }else
@@ -44,17 +43,4 @@ void ShootComponent::TickComponent(int64_t deltaTime)
     }
 }
 
-void ShootComponent::ShootBullet(int initialAngle)
-{
-    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
-    bullet->position = Owner->position;
-    bullet->rotation = Owner->rotation + initialAngle;
-}
 
-void ShootComponent::OnInputChanged(InputMapping input)
-{
-    if (input.first == Shoot)
-    {
-        wantToShoot = input.second;
-    }
-}

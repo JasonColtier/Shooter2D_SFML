@@ -19,14 +19,14 @@ public:
     virtual void TickComponent(int64_t deltaTime = 0) override;
 
     //on tire, overridé par les classes enfant
-    virtual void ShootBullet(int initialAngle);
+    virtual void ShootBullet(int initialAngle) = 0;
 
-    //quand on détecte un changement d'input
-    void OnInputChanged(InputMapping input);
+
 
     //modifiées par les amélioration globales de partie, sont indépendantes des armes récupérées
     int g_shootNumber = 1; //nombre de tir quand on shoot, doit être incrémenté de 2 en 2
     float g_fireRate = 2.f; //vitesse de tir, plus c'est grand plus on tire souvent
+    float g_dispersion = 15.f;//angle
     float g_damageMultiplier = 1.f;//TODO
     float g_velocityMultiplier = 1.f;//TODO
     
@@ -34,11 +34,10 @@ public:
     //fonction overridée par les components enfant en fonction des spécificités de chaque arme
     virtual float GetWeaponFireRate() const { return 1; }
     virtual float GetWeaponShootNumber() const { return 1; }
-
+    bool wantToShoot = false;
 
 private:
 
-    bool wantToShoot = false;
     float timer = 0;
 };
 #endif

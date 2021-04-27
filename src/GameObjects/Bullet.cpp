@@ -10,6 +10,7 @@ Bullet::Bullet()
     // Print::PrintLog("new bullet !");
     renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
     renderComponent->sprite.setScale(scale);
+    renderComponent->sprite.setOrigin(10,5);
 }
 
 void Bullet::Tick(int64_t deltaTime)
@@ -28,7 +29,7 @@ void Bullet::Tick(int64_t deltaTime)
     
     sf::Vector2f forward(cos(rotation * PI / 180), sin(rotation * PI / 180));
 
-    position += (forward / 1000.f * (deltaTime * 1.f)) * speed;
+    position += (forward / 1000.f * (deltaTime * 1.f)) * speed * speedMultiplier;
 
     if(!GameWindow::CheckIfInsideWindow(this))
     {
