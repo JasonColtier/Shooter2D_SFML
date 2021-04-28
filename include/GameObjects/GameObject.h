@@ -29,9 +29,22 @@ public:
 	virtual void Deactivate();
     sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 
-	void AddComponent(Component* component);//pareil prend la classe et retourne un ptr
-	void RemoveComponent(Component* component);
+	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
+	void RemoveComponent(Component* component);//supprime le component
 	
+	//retourne le premier component trouvé de la class souhaitée
+	template<class T>
+	T* GetComponentOfClass()
+	{
+		for (auto component : componentList)
+		{
+			if(typeid(*component) == typeid(T))
+			{
+				return dynamic_cast<T*>(component);
+			}
+		}
+		return nullptr;
+	}
 	
 	bool isActivated = true;
 	float rotation = 0;

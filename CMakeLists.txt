@@ -30,9 +30,11 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionHandler.h
     ${HEADER_DIR}/Components/MovementComponent.h
+    ${HEADER_DIR}/Components/LifeComponent.h
     ${HEADER_DIR}/Components/Sniper.h
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
+    ${HEADER_DIR}/HUD/PlayerHUD.h
     ${HEADER_DIR}/Spawner.h
     ${HEADER_DIR}/Enemy.h
 	${HEADER_DIR}/Components/EnemyMovementComponent.h
@@ -60,6 +62,8 @@ set(SOURCES
     ${SOURCE_DIR}/Components/Sniper.cpp
     ${SOURCE_DIR}/Components/ShotGun.cpp
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
+    ${SOURCE_DIR}/Components/LifeComponent.cpp
+    ${SOURCE_DIR}/HUD/PlayerHUD.cpp
 	${SOURCE_DIR}/Spawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
 	${SOURCE_DIR}/Components/EnemyMovementComponent.cpp

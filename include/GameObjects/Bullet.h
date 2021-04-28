@@ -17,7 +17,8 @@ public:
 
 private:
     float speed = 0.5f;
-    float timer = 0;
+    float timer = 0.f;
+    float damage = 1.f;
 };
 
 

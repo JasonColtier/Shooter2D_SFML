@@ -5,6 +5,7 @@
 #include "Components/CollisionHandler.h"
 #include "GameWindow.h"
 #include "Components/ClassicPistol.h"
+#include "Components/LifeComponent.h"
 #include "Components/MovementComponent.h"
 #include "Components/ShotGun.h"
 #include "Components/Sniper.h"
@@ -29,6 +30,8 @@ Player::Player()
 	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 10, &position, tmp);
     AddComponent(new MovementComponent());
 
+    AddComponent(new LifeComponent());
+    
     InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
 
 }

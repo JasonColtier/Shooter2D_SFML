@@ -51,10 +51,3 @@ void GameLevel::Render(sf::RenderWindow* window)
 	}
 }
 
-void GameLevel::DestroyGameObject(GameObject* gameObject)
-{
-	l_gameObjects.remove(gameObject);
-	delete gameObject;
-	gameObject = nullptr;
-}
-
