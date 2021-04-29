@@ -4,7 +4,9 @@
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
-#include "Components/RenderHandler.h"
+
+#include "Tools/Print.h"
+
 #define PI 3.14159265
 
 class GameObject;
@@ -29,15 +31,14 @@ public:
 		, l_ExcludedCollisionType((t_ExcludedCollisionType))
 		, position(t_Position)
 		, radius(t_radius)
-		, l_Points((t_Points))
 		, rotation(t_Rotation)
+		, l_Points((t_Points))
 	{
-
 	}
 
 	~CollisionHandler() = default;
 
-	std::vector<sf::Vector2f> getPoints()
+	std::vector<sf::Vector2f> getPoints() const
 	{
 		std::vector<sf::Vector2f> l_pointsInWorld;
 
@@ -53,12 +54,12 @@ public:
 			//t_point.y *= 100;
 			//t_point.y = truncf(t_point.y);
 			//t_point.y /= 100;
-			float angle = -(*rotation) * PI / 180;
-			auto xM = point.x;
-			auto yM = point.y;
+			const float angle = -(*rotation) * PI / 180;
+			const auto xM = point.x;
+			const auto yM = point.y;
 
-			auto x = xM * cosf(angle) - yM * sinf(angle);
-			auto y = xM * sinf(angle) + yM * cosf(angle);
+			const auto x = xM * cosf(angle) - yM * sinf(angle);
+			const auto y = xM * sinf(angle) + yM * cosf(angle);
 
 
 
@@ -66,7 +67,6 @@ public:
 		}
 
 		return 	l_pointsInWorld;
-		//return *l_Points;
 	}
 
 	float GetStartAbscisse() const
@@ -79,21 +79,16 @@ public:
 		return (position->x + radius);
 	}
 
-	void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
-	{
-		return;
-	}
-
 	GameObject* owner;
 	CollisionType e_Type;
 	std::vector<CollisionType>* l_ExcludedCollisionType;
 	sf::Vector2f* position;
 	float radius;
+	float* rotation;
 
 private:
 
 	std::vector<sf::Vector2f>* l_Points;
-	float* rotation;
 };
 
 #endif //CollisionHandler_H

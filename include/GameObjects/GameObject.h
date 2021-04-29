@@ -29,6 +29,7 @@ public:
 	virtual void Deactivate();
     sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 
+	virtual void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
 	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
 	void RemoveComponent(Component* component);//supprime le component
 	
