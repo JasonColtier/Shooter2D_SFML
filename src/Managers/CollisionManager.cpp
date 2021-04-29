@@ -12,8 +12,8 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 		{
 			break;
 		}
-
-		for (auto objet2 = ++objet1; objet2 != abscisseTab.end(); ++objet2)
+		
+		for (auto objet2 = std::next(objet1); objet2 != abscisseTab.end(); ++objet2)
 		{
 			if ((*objet2)->isActivated && (*objet2)->collisionHandler)
 			{

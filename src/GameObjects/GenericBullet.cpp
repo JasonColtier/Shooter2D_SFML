@@ -1,5 +1,6 @@
 ﻿#include "GameObjects/GenericBullet.h"
 #include "GameWindow.h"
+#include "Components/RenderHandler.h"
 
 
 #define PI 3.14159265

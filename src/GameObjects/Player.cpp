@@ -18,7 +18,7 @@ Player::Player()
 	//renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
 	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 10, &position, tmp);
+	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position, tmp);
 	//AddComponent(RenderHandler);
 	offsetPos = sf::Vector2f(25.f, 25.f);
 	AddComponent(new ShootBulletComponent());
