@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "GameObject.h"
+#include "Components/ShootComponent.h"
+#include "Managers/InputManager.h"
 
 class RenderHandler;
 
@@ -17,8 +19,11 @@ public:
     ~Player()=default;
     void Tick(int64_t deltaTime) override;
 
+    //quand on détecte un changement d'input
+    void OnInputChanged(InputMapping input);
 private:
-    
+
+    ShootComponent* shootComponent;
 };
 
 #endif

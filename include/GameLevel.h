@@ -32,8 +32,7 @@ public:
 	//called by the game loop
 	virtual void Update(int64_t deltaTime);
 	virtual void Render(sf::RenderWindow* window);
-
-	virtual void DestroyGameObject(GameObject* gameObject);
+	
 	template<class T>
 	std::enable_if_t<__is_base_of(GameObject, T), T*> SpawnActor()
 	{

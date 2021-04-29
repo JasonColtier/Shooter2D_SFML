@@ -31,7 +31,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
     const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
 
     //rotation pour se tourner vers la souris
-    const float rot = std::atan2(deltaPosY, deltaPosX) * 180 / std::_Pi;
+    const float rot = std::atan2(deltaPosY, deltaPosX) * 180.f / std::_Pi;
     Owner->rotation = rot + offsetAngle;
 
     //si on veut avancer
