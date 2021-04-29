@@ -31,18 +31,14 @@ public:
 		, l_ExcludedCollisionType((t_ExcludedCollisionType))
 		, position(t_Position)
 		, radius(t_radius)
-		, l_Points((t_Points))
 		, rotation(t_Rotation)
-		, OnCollision([](sf::Vector2f hitPoint, GameObject* otherObject)
-			{
-				Print::PrintLog("testCollision");
-			})
+		, l_Points((t_Points))
 	{
 	}
 
 	~CollisionHandler() = default;
 
-	std::vector<sf::Vector2f> getPoints()
+	std::vector<sf::Vector2f> getPoints() const
 	{
 		std::vector<sf::Vector2f> l_pointsInWorld;
 
@@ -71,7 +67,6 @@ public:
 		}
 
 		return 	l_pointsInWorld;
-		//return *l_Points;
 	}
 
 	float GetStartAbscisse() const
@@ -84,18 +79,12 @@ public:
 		return (position->x + radius);
 	}
 
-	//void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
-	//{
-	//	return;
-	//}
-
 	GameObject* owner;
 	CollisionType e_Type;
 	std::vector<CollisionType>* l_ExcludedCollisionType;
 	sf::Vector2f* position;
 	float radius;
 	float* rotation;
-	void (*OnCollision)(sf::Vector2f hitPoint, GameObject* otherObject);
 
 private:
 
