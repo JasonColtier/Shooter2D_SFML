@@ -17,6 +17,7 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/BackgroundTexture.h
+    ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/GameWindow.h
@@ -39,6 +40,7 @@ set(HEADERS
     ${HEADER_DIR}/Enemy.h
 	${HEADER_DIR}/Components/EnemyMovementComponent.h
 	${HEADER_DIR}/Components/IMovementComponent.h
+    ${HEADER_DIR}/StaticData.h
 )
 
 set(SOURCES
@@ -51,6 +53,7 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/GameObjects/BackgroundTexture.cpp
+    ${SOURCE_DIR}/GameObjects/Character.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp

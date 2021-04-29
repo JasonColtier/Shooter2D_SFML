@@ -41,4 +41,6 @@ void Bullet::Tick(int64_t deltaTime)
         // GameWindow::GetGameLevel()->DestroyGameObject(this);
         this->isActivated = false;
     }
+
+    GameObject::Tick(deltaTime);
 }
