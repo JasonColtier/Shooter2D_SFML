@@ -2,6 +2,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameWindow.h"
+#include "Components/CollisionHandler.h"
 #include "GameObjects/GameObject.h"
 
 

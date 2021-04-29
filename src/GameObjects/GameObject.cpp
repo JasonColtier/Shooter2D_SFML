@@ -12,6 +12,10 @@ void GameObject::RemoveComponent(Component* component)
 }
 
 
+void GameObject::OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
+{
+}
+
 void GameObject::Tick(int64_t deltaTime)
 {
 	for (Component* component : componentList)
