@@ -1,19 +1,33 @@
-﻿#include "GameObjects/GenericBullet.h"
+﻿#include "GameObjects/Bullet.h"
 #include "GameWindow.h"
 #include "Components/RenderHandler.h"
 
 
 #define PI 3.14159265
 
-GenericBullet::GenericBullet()
+Bullet::Bullet(TextureManager::EnumTextures enumTextures,sf::Vector2f scale,float autoDestroyTimer)
 {
     // Print::PrintLog("new bullet !");
-    renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
-    renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+    renderComponent = new RenderComponent(this, TextureManager::GetTexturePtr(enumTextures),2);
+    renderComponent->sprite.setScale(scale);
+    autoDestroyDelai = autoDestroyTimer;
 }
 
-void GenericBullet::Tick(int64_t deltaTime)
+
+void Bullet::Tick(int64_t deltaTime)
 {
+
+    if(autoDestroyDelai > 0)
+    {
+        timer += deltaTime;
+        if(timer > autoDestroyDelai * 1000000)
+        {
+            GameWindow::GetGameLevel()->DestroyGameObject(this);
+            return;
+        }
+    }
+    
+    
     sf::Vector2f forward(cos(rotation * PI / 180), sin(rotation * PI / 180));
 
     position += (forward / 1000.f * (deltaTime * 1.f)) * speed;

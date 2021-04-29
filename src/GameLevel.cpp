@@ -4,8 +4,8 @@
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
-#include "GameObjects/GenericBullet.h"
 #include "Components/RenderHandler.h"
+#include "GameObjects/Bullet.h"
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
 
@@ -59,12 +59,5 @@ void GameLevel::Render(sf::RenderWindow* window)
 		}
 		object->renderHandler->RenderUpdate();
 	}
-}
-
-void GameLevel::DestroyGameObject(GameObject* gameObject)
-{
-	l_gameObjects.remove(gameObject);
-	delete gameObject;
-	gameObject = nullptr;
 }
 
