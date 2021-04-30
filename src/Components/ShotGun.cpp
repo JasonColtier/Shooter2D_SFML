@@ -15,5 +15,5 @@ void ShotGun::ShootBullet(int initialAngle)
     Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
-    bullet->autoDestroyDelay = 0.2f;
+    bullet->autoDestroyDelay = 0.4f;
 }

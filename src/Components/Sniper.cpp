@@ -1,7 +1,7 @@
 ﻿#include "Components/Sniper.h"
 #include "Components/RenderHandler.h"
 #include "GameWindow.h"
-#include "GameObjects/Bullet.h"
+#include "GameObjects/SniperBullet.h"
 
 Sniper::Sniper()
 {
@@ -12,9 +12,7 @@ Sniper::Sniper()
 
 void Sniper::ShootBullet(int initialAngle)
 {
-    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
+    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<SniperBullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
-    bullet->renderHandler->sprite.setScale(sf::Vector2f(10,10));//TODO mieux ?
-    bullet->speedMultiplier = 3;
 }

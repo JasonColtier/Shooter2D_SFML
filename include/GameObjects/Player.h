@@ -1,6 +1,7 @@
 ﻿#ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Character.h"
 #include "GameObject.h"
 #include "Components/ShootComponent.h"
 #include "Managers/InputManager.h"
@@ -11,7 +12,7 @@ namespace sf {
     class Texture;
 }
 
-class Player : public GameObject
+class Player : public Character
 {
 public:
 
