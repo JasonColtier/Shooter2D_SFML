@@ -27,7 +27,6 @@ public:
 
 	virtual void Activate();
 	virtual void Deactivate();
-    sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 
 	virtual void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
 	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
@@ -41,7 +40,7 @@ public:
 		{
 			if(typeid(*component) == typeid(T))
 			{
-				return dynamic_cast<T*>(component);
+				return dynamic_cast<T*>(component);//TODO seulment ce check là
 			}
 		}
 		return nullptr;
@@ -50,11 +49,11 @@ public:
 	bool isActivated = true;
 	float rotation = 0;
 	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
-	std::list<Component*> componentList;
+	sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 
+	std::list<Component*> componentList;
 	CollisionHandler* collisionHandler = nullptr;
 	RenderHandler* renderHandler = nullptr;
-
 
 protected:
 

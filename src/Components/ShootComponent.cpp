@@ -10,7 +10,6 @@
 
 ShootComponent::ShootComponent()
 {
-    activateTick = true;
 
 }
 

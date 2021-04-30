@@ -4,6 +4,7 @@
 #include "GameLevel.h"
 #include "Components/CollisionHandler.h"
 #include "GameWindow.h"
+#include "StaticData.h"
 #include "Components/ClassicPistol.h"
 #include "Components/LifeComponent.h"
 #include "Components/MovementComponent.h"
@@ -19,14 +20,13 @@ Player::Player()
 
 	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Ship), 1);
 	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+	renderHandler->sprite.setScale(sf::Vector2f(1.f, 1.f));
 
 	offsetPos = sf::Vector2f(0, 25.f);
 	shootComponent = new ClassicPistol();
 	AddComponent(shootComponent);
 
-	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position, tmp);
+	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position,StaticData::ShipCollision);
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
@@ -44,6 +44,15 @@ void Player::OnInputChanged(InputMapping input)
 	if (input.first == Shoot)
 	{
 		shootComponent->wantToShoot = input.second;
+	}
+
+	if(input.first == DebugNum1)
+	{
+		lifeComponent->ModifyHealth(-1);
+	}
+	if(input.first == DebugNum2)
+	{
+		lifeComponent->ModifyHealth(+1);
 	}
 }
 

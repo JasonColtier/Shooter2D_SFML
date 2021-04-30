@@ -25,7 +25,7 @@ class CollisionHandler
 public:
 	CollisionHandler() = default;
 
-	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType>* t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, std::vector<sf::Vector2f>* t_Points)
+	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType>* t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position,const std::vector<sf::Vector2f>* t_Points)
 		: owner(t_owner)
 		, e_Type(t_Type)
 		, l_ExcludedCollisionType((t_ExcludedCollisionType))
@@ -38,8 +38,9 @@ public:
 
 	~CollisionHandler() = default;
 
-	std::vector<sf::Vector2f> getPoints() const
+	std::vector<sf::Vector2f> getPoints(/* prend en ref un vecteur  ou Move*/) const
 	{
+		//TODo réserver car on connait le nombre
 		std::vector<sf::Vector2f> l_pointsInWorld;
 
 		for (const auto point : *l_Points)
@@ -58,6 +59,8 @@ public:
 			const auto xM = point.x;
 			const auto yM = point.y;
 
+			//TODO virer yM et xM
+			//fonction à part avec un joli nom
 			const auto x = xM * cosf(angle) - yM * sinf(angle);
 			const auto y = xM * sinf(angle) + yM * cosf(angle);
 
@@ -88,7 +91,7 @@ public:
 
 private:
 
-	std::vector<sf::Vector2f>* l_Points;
+	const std::vector<sf::Vector2f>* l_Points;
 };
 
 #endif //CollisionHandler_H

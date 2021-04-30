@@ -24,7 +24,7 @@ public:
     void OnInputChanged(InputMapping input);
 private:
 
-    ShootComponent* shootComponent;
+    ShootComponent* shootComponent;//y accéder par le tableau
 };
 
 #endif

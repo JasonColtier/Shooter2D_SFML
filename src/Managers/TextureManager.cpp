@@ -13,6 +13,7 @@ const char* TextureManager::GetPath(EnumTextures t)
     case Bullet: return "../medias/Bullet.png";
     case SpaceBackground: return "../medias/spaceBG.jpg";
 	case ShipEnemy: return "../medias/Enemy.png";
+	case HealthBar: return "../medias/HealthBar.png";
     default: return "error texture";
     }
 }

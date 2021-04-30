@@ -8,6 +8,8 @@ enum InputsEnum
 {
     Shoot,
     Forward,
+    DebugNum1,
+    DebugNum2,
 };
 
 typedef std::pair<InputsEnum,bool> InputMapping;
@@ -38,6 +40,8 @@ private:
     //nos inputs et leurs valeures 
     inline static InputMapping shoot = std::make_pair(Shoot,false);
     inline static InputMapping forward = std::make_pair(Forward,false);
+    inline static InputMapping debugNum1 = std::make_pair(DebugNum1,false);
+    inline static InputMapping debugNum2 = std::make_pair(DebugNum2,false);
     InputManager() = default;
 
     

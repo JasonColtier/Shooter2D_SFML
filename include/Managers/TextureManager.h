@@ -12,7 +12,7 @@ class TextureManager
 public:
 
     //toutes les textures
-    enum EnumTextures { Ship,Bullet,SpaceBackground,ShipEnemy };
+    enum EnumTextures { Ship,Bullet,SpaceBackground,ShipEnemy,HealthBar };
 
     //retourne le path associé à un nom de texture
     static const char* GetPath(EnumTextures t);

@@ -1,6 +1,7 @@
 ﻿#ifndef RenderHandler_H
 #define RenderHandler_H
 
+#include <list>
 #include <SFML/Graphics/Sprite.hpp>
 
 class GameObject;
@@ -19,6 +20,8 @@ public:
 	GameObject* parentGameObject;
 	sf::Texture* texture;
 	sf::Sprite sprite;
+
+	// std::list<sf::Sprite> spriteList;
 	
 	//Ordre de rendu
 	int zIndex = 0;
