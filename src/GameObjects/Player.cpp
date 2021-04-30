@@ -21,19 +21,15 @@ Player::Player()
 	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
 	renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
-	//AddComponent(renderComponent);
 	offsetPos = sf::Vector2f(0, 25.f);
-	shootComponent = new Sniper();
-	AddComponent(shootComponent);//TODO : fonction remove component(Component *)
+	shootComponent = new ClassicPistol();
+	AddComponent(shootComponent);
 
 	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
 	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position, tmp);
 	AddComponent(new MovementComponent());
 
-	AddComponent(new LifeComponent());
-
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
-
 }
 
 

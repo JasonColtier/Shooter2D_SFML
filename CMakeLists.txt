@@ -15,6 +15,7 @@ set(HEADERS
     ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/GameObjects/Player.h
     ${HEADER_DIR}/GameObjects/Bullet.h
+    ${HEADER_DIR}/GameObjects/SniperBullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/BackgroundTexture.h
     ${HEADER_DIR}/GameObjects/Character.h
@@ -52,6 +53,7 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
+    ${SOURCE_DIR}/GameObjects/SniperBullet.cpp
     ${SOURCE_DIR}/GameObjects/BackgroundTexture.cpp
     ${SOURCE_DIR}/GameObjects/Character.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp

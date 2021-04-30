@@ -18,7 +18,7 @@ float LifeComponent::ModifyHealth(float modification)
     if(currentHealth < 0)
     {
         currentHealth = 0;
-        Owner->isActivated = false;
+        Owner->Deactivate();
     }
 
     return currentHealth;
