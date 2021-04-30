@@ -8,6 +8,7 @@ class Bullet : public GameObject
 public:
     
     Bullet();
+    virtual ~Bullet() = default;
 
     void Tick(int64_t deltaTime) override;
 

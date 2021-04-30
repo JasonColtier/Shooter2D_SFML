@@ -8,6 +8,7 @@
 #include "GameObjects/Bullet.h"
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
+#include "HUD/PlayerHUD.h"
 
 GameLevel::GameLevel()
 {
@@ -19,6 +20,8 @@ GameLevel::GameLevel()
 	bgTexture = SpawnActor<BackgroundTexture>();
 	SpawnActor<Spawner>();
 
+	SpawnActor<PlayerHUD>();
+	
 	//auto* tmp = SpawnActor<Enemy>();
 	//auto* col = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
 	//tmp->collisionHandler = new CollisionHandler(tmp, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &tmp->rotation, 50, &tmp->position, col);
@@ -46,6 +49,11 @@ void GameLevel::Update(int64_t deltaTime)
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
+	//TODO commenter un peu tout ça
+	/*
+	 *	quand on active / désactive, on peut mettre dans une autre liste
+	 */
+	
 	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
@@ -53,6 +61,8 @@ void GameLevel::Render(sf::RenderWindow* window)
 		return (g1->renderHandler->zIndex) < (g2->renderHandler->zIndex);
 	};
 
+	//améliorer ce sort ? trie par insertion ?
+	
 	l_gameObjects.sort(renderPrioritySort);
 
 	for (auto* object : l_gameObjects)
