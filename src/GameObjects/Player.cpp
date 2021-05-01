@@ -13,6 +13,7 @@
 #include "Tools/Print.h"
 #include "Tools/VectorTools.h"
 #include "Components/RenderHandler.h"
+#include "HUD/PlayerHUD.h"
 
 Player::Player()
 {
@@ -30,6 +31,9 @@ Player::Player()
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
+
+	auto hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
+	hud->player = this;
 }
 
 

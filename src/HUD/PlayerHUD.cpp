@@ -6,7 +6,7 @@
 
 PlayerHUD::PlayerHUD()
 {
-    player = nullptr;
+    
     renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::HealthBar), 1);
 
     //je place ma barre au centre en X et avec un offset de 50 du bas
@@ -16,17 +16,6 @@ PlayerHUD::PlayerHUD()
 void PlayerHUD::Tick(int64_t deltaTime)
 {
     GameObject::Tick(deltaTime);
-
-
-    //TODO ça c'est BOF BOF BOF !
-    if(!player)
-    {
-        auto p = GameWindow::GetGameLevel()->player;
-        if(p)
-        {
-            player = p;
-        }
-    }
 
     renderHandler->sprite.setScale(player->lifeComponent->currentHealth/player->lifeComponent->maxHealth,1);
     

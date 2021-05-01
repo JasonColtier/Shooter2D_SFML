@@ -22,6 +22,8 @@ public:
 
     //quand on détecte un changement d'input
     void OnInputChanged(InputMapping input);
+
+
 private:
 
     ShootComponent* shootComponent;//y accéder par le tableau

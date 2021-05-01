@@ -12,8 +12,9 @@ public:
 
     void Tick(int64_t deltaTime) override;
 
+    Player* player = nullptr; //set par le joueur en faisant spawner
+
 private:
-    Player* player;
 };
 
 #endif

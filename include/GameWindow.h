@@ -1,5 +1,5 @@
-﻿#ifndef GAMEWORLD_H
-#define GAMEWORLD_H
+﻿#ifndef GAMEWINDOW_H
+#define GAMEWINDOW_H
 
 #include <string>
 #include <SFML/System/Vector2.hpp>
@@ -26,6 +26,8 @@ public:
 	static void LoadGameLevel()
 	{
 		currentGameLevel = new GameLevel();
+		Print::PrintLog("game level created");
+		currentGameLevel->SpawnGameObjects();
 	}
 
 	static GameLevel* GetGameLevel()
@@ -42,4 +44,4 @@ private:
 	inline static GameLevel* currentGameLevel;
 };
 
-#endif //GAMEWORLD_H
+#endif //GAMEWINDOW_H
