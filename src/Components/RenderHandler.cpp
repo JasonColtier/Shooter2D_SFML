@@ -1,4 +1,6 @@
 ﻿#include "Components/RenderHandler.h"
+
+#include <map>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameWindow.h"
@@ -6,9 +8,23 @@
 #include "GameObjects/GameObject.h"
 
 
-RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, int t_zIndex) : parentGameObject(t_parentGameObject), texture(t_texture), zIndex(t_zIndex)
+RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture,std::string t_stringKey, int t_zIndex) : parentGameObject(t_parentGameObject), zIndex(t_zIndex)
 {
-    sprite.setTexture(*texture);
+    auto sprite = new sf::Sprite;
+    sprite->setTexture(*t_texture);
+    mapSprites[t_stringKey] = sprite;
+}
+
+sf::Sprite* RenderHandler::GetSprite(const std::string key) const
+{
+    auto iterator = mapSprites.find(key);
+
+    if (iterator != mapSprites.end())
+    {
+        return iterator->second;
+    }
+
+    return nullptr;
 }
 
 void RenderHandler::RenderUpdate()
@@ -28,7 +44,10 @@ void RenderHandler::RenderUpdate()
     // 	GameWindow::window->draw(vertice, 4, sf::Quads);
     // }
 
-    sprite.setRotation(parentGameObject->rotation);
-    sprite.setPosition(parentGameObject->position);
-    GameWindow::window->draw(sprite);
+    for (auto pair : mapSprites)
+    {
+        pair.second->setRotation(parentGameObject->rotation);
+        pair.second->setPosition(parentGameObject->position);
+        GameWindow::window->draw(*pair.second);
+    }
 }

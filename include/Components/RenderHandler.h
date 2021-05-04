@@ -2,7 +2,9 @@
 #define RenderHandler_H
 
 #include <list>
+#include <map>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/String.hpp>
 
 class GameObject;
 
@@ -15,13 +17,14 @@ class RenderHandler
 {
 public:
 
-	RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, int t_zIndex);
+	RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, std::string t_stringKey, int t_zIndex);
 
 	GameObject* parentGameObject;
-	sf::Texture* texture;
-	sf::Sprite sprite;
 
-	// std::list<sf::Sprite> spriteList;
+	std::map<std::string,sf::Sprite*> mapSprites;
+
+	sf::Sprite* GetSprite(const std::string key) const;
+
 	
 	//Ordre de rendu
 	int zIndex = 0;

@@ -20,9 +20,17 @@ Enemy::Enemy()
 {
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
-	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ShipEnemy), 1);
-	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	renderHandler->sprite.setScale(sf::Vector2f(1.f, 1.f));
+
+	renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::ShipEnemy),"enemy",1);
+
+	auto sprite = renderHandler->GetSprite("enemy");
+
+	if (sprite)
+	{
+		sprite->setOrigin(sf::Vector2f(50.f, 50.f));
+		sprite->setScale(sf::Vector2f(1.f, 1.f));
+	}
+	
 	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
 	collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({CollisionType::EnemyChannel}), &rotation, 50, &position, tmp);
 

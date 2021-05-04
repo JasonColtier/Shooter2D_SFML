@@ -19,9 +19,16 @@ Player::Player()
 {
 	Print::PrintLog("new player");
 
-	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Ship), 1);
-	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	renderHandler->sprite.setScale(sf::Vector2f(1.f, 1.f));
+
+	renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::Ship),"player",1);
+
+	auto sprite = renderHandler->GetSprite("player");
+
+	if (sprite)
+	{
+		sprite->setOrigin(sf::Vector2f(50.f, 50.f));
+		sprite->setScale(sf::Vector2f(1.f, 1.f));
+	}
 
 	offsetPos = sf::Vector2f(0, 25.f);
 	shootComponent = new ClassicPistol();

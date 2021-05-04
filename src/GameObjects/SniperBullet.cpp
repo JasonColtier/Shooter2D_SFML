@@ -7,7 +7,14 @@ SniperBullet::SniperBullet()
 {
     damage *= 3;
     speed *= 3;
-    renderHandler->sprite.setScale(sf::Vector2f(10,10));
+
+    auto sprite = renderHandler->GetSprite("bullet");
+
+    if (sprite)
+    {
+        sprite->setScale(sf::Vector2f(10,10));
+    }
+    
 }
 
 void SniperBullet::OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)

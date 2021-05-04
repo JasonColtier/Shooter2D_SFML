@@ -34,8 +34,8 @@ public:
     virtual void Update(int64_t deltaTime);
     virtual void Render(sf::RenderWindow* window);
 
-    template <class T = GameObject>
-    std::enable_if_t<__is_base_of(GameObject, T), T*> SpawnActor()
+    template <class T>
+    T* SpawnActor()
     {
         Print::PrintLog("spawn new actor : ", typeid(T).name());
 

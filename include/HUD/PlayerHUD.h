@@ -15,6 +15,7 @@ public:
     Player* player = nullptr; //set par le joueur en faisant spawner
 
 private:
+    sf::Sprite* healthBar;
 };
 
 #endif

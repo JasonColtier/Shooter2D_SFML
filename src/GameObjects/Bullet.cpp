@@ -12,9 +12,15 @@
 Bullet::Bullet()
 {
     // Print::PrintLog("new bullet !");
-    renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Bullet),2);
-    renderHandler->sprite.setScale(scale);
-    renderHandler->sprite.setOrigin(10,5);
+    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::Bullet),"bullet",2);
+
+    auto sprite = renderHandler->GetSprite("bullet");
+
+    if (sprite)
+    {
+        sprite->setScale(scale);
+        sprite->setOrigin(10,5);
+    }
 
     auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -4.0f), sf::Vector2f(0.0f, 9.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(0.0f, -9.0f) };
     collisionHandler = new CollisionHandler(this, CollisionType::PlayerProjectileChannel, new std::vector<CollisionType>({CollisionType::PlayerChannel}), &rotation, 10, &position, tmp);

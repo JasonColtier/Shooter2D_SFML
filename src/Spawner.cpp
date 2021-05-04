@@ -70,8 +70,9 @@ void Spawner::RandomLocation()
 }
 
 void Spawner::DoSpawn(int X, int Y)
-{
-	Enemy* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
+{ 
+	auto level = GameWindow::GetGameLevel();
+	Enemy* NewEnemy = level->SpawnActor<Enemy>();
 	NewEnemy->position = sf::Vector2f(X, Y);
 	NewEnemy->AddComponent(new KamikazeMovementComponent());
 	NewEnemy->rotation = 90;
