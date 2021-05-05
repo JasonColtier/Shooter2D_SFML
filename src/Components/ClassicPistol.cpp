@@ -14,8 +14,7 @@ ClassicPistol::ClassicPistol()
 
 void ClassicPistol::ShootBullet(int initialAngle)
 {
-    auto level = GameWindow::GetGameLevel();
-    Bullet* bullet = level->SpawnActor<Bullet>();
+    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
 

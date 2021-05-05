@@ -34,26 +34,26 @@ public:
     virtual void Update(int64_t deltaTime);
     virtual void Render(sf::RenderWindow* window);
 
-    template <class T>
+    template<class T = GameObject>
     T* SpawnActor()
     {
-        Print::PrintLog("spawn new actor : ", typeid(T).name());
-
         for (auto* object : l_gameObjects)
         {
-            auto objectOfClass = dynamic_cast<T*>(object);
-        
-            if (!object->isActivated && objectOfClass != nullptr)
+            if (!object->isActivated)
             {
-                object->Activate();
-                return objectOfClass;
+                auto* tmp = dynamic_cast<T*>(object);
+                if (tmp)
+                {
+                    tmp->Activate();
+                    return tmp;
+                }
             }
         }
 
-        GameObject* newObject = new T();
+        T* newObject = new T();
         l_gameObjects.push_back(newObject);
         l_abscisseGameObjects.push_back(newObject);
-        return dynamic_cast<T*>(newObject);
+        return newObject;
     }
 
     std::list<GameObject*> l_gameObjects;
