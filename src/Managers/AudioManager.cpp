@@ -3,20 +3,35 @@
 
 #include "Tools/Print.h"
 
-void AudioManager::PlaySound(EnumSounds enumSound)
+void AudioManager::PlaySound(EnumSounds enumSound, float volume)
 {
     if(!soundPlayer)
         soundPlayer = new sf::Sound();
 
     soundPlayer->setBuffer(*GetSoundPtr(enumSound));
+    soundPlayer->setVolume(volume);
     soundPlayer->play();
 }
+
+void AudioManager::PlayMusic(EnumSounds enumSounds)
+{
+    musicPlayer = new sf::Music;
+    if (!musicPlayer->openFromFile(GetPath(enumSounds)))
+        return; // error
+    musicPlayer->setVolume(20);
+    musicPlayer->setLoop(true);
+    musicPlayer->play();
+
+    Print::PrintLog("music playing");
+}
+
 
 const char* AudioManager::GetPath(EnumSounds s)
 {
     switch (s)
     {
     case FireBullet : return "../medias/Sons/sniper.wav";
+    case EmicGameMusic : return "../medias/Sons/Cjbeards - Fire And Thunder.wav";
     default: return "error texture";
     }
 }

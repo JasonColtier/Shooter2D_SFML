@@ -14,6 +14,7 @@
 #include <valarray>
 
 #include "Components/CollisionHandler.h"
+#include "Managers/ScoreManager.h"
 
 
 Enemy::Enemy()
@@ -39,4 +40,11 @@ Enemy::Enemy()
 void Enemy::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
+}
+
+void Enemy::Deactivate()
+{
+	GameObject::Deactivate();
+	ScoreManager::Score ++;//une façon d'augmenter le score rapide mais on peut faire mieux
+
 }

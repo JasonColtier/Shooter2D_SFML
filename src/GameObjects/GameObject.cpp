@@ -1,5 +1,6 @@
 ﻿#include "GameObjects/GameObject.h"
 
+
 void GameObject::AddComponent(Component* component)
 {
     componentList.push_back(component);

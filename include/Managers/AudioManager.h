@@ -3,6 +3,7 @@
 #include <map>
 
 namespace sf {
+    class Music;
     class Sound;
     class SoundBuffer;
 }
@@ -11,9 +12,11 @@ class AudioManager
 {
 public:
     //tous les sons
-    enum EnumSounds { FireBullet};
+    enum EnumSounds { FireBullet, EmicGameMusic};
 
-    static void PlaySound(EnumSounds enumSound);
+    static void PlaySound(EnumSounds enumSound,float volume = 20.f);
+
+    static void PlayMusic(EnumSounds enumSounds);
 
     //retourne le path associé à un nom de texture
     static const char* GetPath(EnumSounds s);
@@ -25,6 +28,7 @@ public:
     inline static std::map<EnumSounds,sf::SoundBuffer*> mapSons;
 
     static inline sf::Sound* soundPlayer = nullptr;
+    static inline sf::Music* musicPlayer = nullptr;
 };
 
 #endif

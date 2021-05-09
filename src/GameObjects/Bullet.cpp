@@ -28,6 +28,7 @@ Bullet::Bullet()
 
 void Bullet::Tick(int64_t deltaTime)
 {
+    GameObject::Tick(deltaTime);
     
     if(autoDestroyDelay > 0)
     {

@@ -9,6 +9,7 @@
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
 #include "HUD/PlayerHUD.h"
+#include "Managers/AudioManager.h"
 
 
 GameLevel::GameLevel()
@@ -23,7 +24,8 @@ void GameLevel::SpawnGameObjects()
 
 	SpawnActor<BackgroundTexture>();
 	SpawnActor<Spawner>();
-	SpawnActor<PlayerHUD>()->player = player;
+
+	AudioManager::PlayMusic(AudioManager::EmicGameMusic);
 }
 
 
@@ -55,7 +57,7 @@ void GameLevel::Render(sf::RenderWindow* window)
 	{
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
 		if (!g1->renderHandler || !g2->renderHandler) return g1->renderHandler > g2->renderHandler;
-		return (g1->renderHandler->zIndex) < (g2->renderHandler->zIndex);
+		return (g1->renderHandler->mapSprites.begin()->second->zIndex) < (g2->renderHandler->mapSprites.begin()->second->zIndex);
 	};
 
 	//améliorer ce sort ? trie par insertion ?

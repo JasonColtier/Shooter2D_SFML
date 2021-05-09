@@ -14,10 +14,12 @@ ClassicPistol::ClassicPistol()
 
 void ClassicPistol::ShootBullet(int initialAngle)
 {
+    
+    
     Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
 
-    AudioManager::PlaySound(AudioManager::FireBullet);
+    AudioManager::PlaySound(AudioManager::FireBullet,10);
 
 }

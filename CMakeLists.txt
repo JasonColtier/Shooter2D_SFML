@@ -24,6 +24,7 @@ set(HEADERS
     ${HEADER_DIR}/GameWindow.h
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/AudioManager.h
+    ${HEADER_DIR}/Managers/ScoreManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Components/Component.h
@@ -58,6 +59,7 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Character.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
+    ${SOURCE_DIR}/Managers/ScoreManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp
     ${SOURCE_DIR}/Managers/InputManager.cpp
     ${SOURCE_DIR}/Components/CollisionHandler.cpp

@@ -8,11 +8,9 @@
 #include "GameObjects/GameObject.h"
 
 
-RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture,std::string t_stringKey, int t_zIndex) : parentGameObject(t_parentGameObject), zIndex(t_zIndex)
+RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture,std::string t_stringKey, int t_zIndex) : parentGameObject(t_parentGameObject)
 {
-    auto sprite = new sf::Sprite;
-    sprite->setTexture(*t_texture);
-    mapSprites[t_stringKey] = sprite;
+    AddSprite(t_texture,t_stringKey,t_zIndex);
 }
 
 sf::Sprite* RenderHandler::GetSprite(const std::string key) const
@@ -21,10 +19,25 @@ sf::Sprite* RenderHandler::GetSprite(const std::string key) const
 
     if (iterator != mapSprites.end())
     {
-        return iterator->second;
+        return iterator->second->sprite;
     }
 
     return nullptr;
+}
+
+sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex,std::string key,int zIndex)
+{
+    auto sprite = new sf::Sprite;
+    sprite->setTexture(*tex);
+    SpriteContainer* customSprite = new SpriteContainer(sprite,zIndex);
+    mapSprites[key] = customSprite;
+    
+    sortedSprites.push_back(customSprite);
+    
+    // Sort using comparator function
+    std::sort(sortedSprites.begin(), sortedSprites.end(), cmp);
+    
+    return sprite;
 }
 
 void RenderHandler::RenderUpdate()
@@ -44,10 +57,11 @@ void RenderHandler::RenderUpdate()
     // 	GameWindow::window->draw(vertice, 4, sf::Quads);
     // }
 
-    for (auto pair : mapSprites)
+    for (auto customSprite : sortedSprites)
     {
-        pair.second->setRotation(parentGameObject->rotation);
-        pair.second->setPosition(parentGameObject->position);
-        GameWindow::window->draw(*pair.second);
+        customSprite->sprite->setRotation(parentGameObject->rotation);
+        customSprite->sprite->setPosition(parentGameObject->position);
+        GameWindow::window->draw(*customSprite->sprite);
     }
+    
 }
