@@ -1,4 +1,4 @@
-#include "Components/EnemyMovementComponent.h"
+#include "Components/ShotgunnerMovementComponent.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLevel.h"
 #include "GameLoop.h"
@@ -14,18 +14,12 @@
 #include <cmath>
 #include "Tools/Print.h"
 
+ShotgunnerMovementComponent::ShotgunnerMovementComponent(){}
 
-KamikazeMovementComponent::KamikazeMovementComponent()
+void ShotgunnerMovementComponent::TickComponent(int64_t deltaTime)
 {
-
-}
-
-void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
-{
-
 	////TODO insérer la récup de la Position du Player ici
-	auto level = GameWindow::GetGameLevel();
-	Playerposition = level->player->position;
+	Playerposition = GameWindow::GetGameLevel()->player->position;
 	auto pos = Owner->position;
 
 	//calcul de la disance avec le player
@@ -84,4 +78,5 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 
 	//calcul la distance entre le player afin de déterminer si un shoot est autorisé
 	distance = sqrt(pow((Playerposition.x - pos.x), 2) + (pow((Playerposition.y - pos.y), 2)));
+
 }

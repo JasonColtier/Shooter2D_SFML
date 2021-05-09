@@ -23,7 +23,7 @@ Bullet::Bullet()
     }
 
     auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -4.0f), sf::Vector2f(0.0f, 9.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(0.0f, -9.0f) };
-    collisionHandler = new CollisionHandler(this, CollisionType::PlayerProjectileChannel, new std::vector<CollisionType>({CollisionType::PlayerChannel}), &rotation, 10, &position, tmp);
+    collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, new std::vector<CollisionType>(), &rotation, 10, &position, tmp);
 }
 
 void Bullet::Tick(int64_t deltaTime)

@@ -18,6 +18,7 @@ public:
 	void DoSpawn(int X, int Y);
 
 	int64_t Timer = 0;
+	bool canSpawn = true;
 
 private:
 
