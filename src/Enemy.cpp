@@ -33,7 +33,7 @@ Enemy::Enemy()
 	}
 	
 	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({CollisionType::EnemyChannel}), &rotation, 50, &position, tmp);
+	collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({CollisionType::EnemyChannel, BonusChannel, EnemyProjectileChannel}), &rotation, 50, &position, tmp);
 
 }
 
@@ -45,14 +45,14 @@ void Enemy::Tick(int64_t deltaTime)
 	{
 		//modifier le changement de vitesse par le biai d'un multiplicateur
 		MovementCompo->speed = 0.0000005f;
-		ShootComponent->wantToShoot = true;
-		ShootComponent->g_fireRate = 10.0f;
+		shootComponent->wantToShoot = true;
+		shootComponent->g_fireRate = 10.0f;
 		//Print::PrintLog("Shoot Enabled");		
 	}
 	else
 	{
 		MovementCompo->speed = 0.001f;
-		ShootComponent->wantToShoot = false;
+		shootComponent->wantToShoot = false;
 		//Print::PrintLog("Shoot Not Enabled");
 	}
 }

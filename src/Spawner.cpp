@@ -8,6 +8,7 @@
 #include "Components/EnemyMovementComponent.h"
 #include "Components/ShotgunnerMovementComponent.h"
 #include "Components/ClassicPistol.h"
+#include "Components/ShotGun.h"
 
 Spawner::Spawner()
 {
@@ -78,8 +79,8 @@ void Spawner::DoSpawn(int X, int Y)
 	
 	NewEnemy->position = sf::Vector2f(X, Y);
 	NewEnemy->MovementCompo = new ShotgunnerMovementComponent();
-	NewEnemy->ShootComponent = new ClassicPistol();
+	NewEnemy->shootComponent = new ShotGun();
 	NewEnemy->AddComponent(NewEnemy->MovementCompo);
-	NewEnemy->AddComponent(NewEnemy->ShootComponent);
+	NewEnemy->AddComponent(NewEnemy->shootComponent);
 	NewEnemy->rotation = 90;
 }

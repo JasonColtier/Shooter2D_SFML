@@ -17,7 +17,7 @@ public:
 	};
 	virtual ~Character() = default;
 	LifeComponent* lifeComponent;
-	ShootComponent* ShootComponent = nullptr;
+	ShootComponent* shootComponent = nullptr;
 	IMovementComponent* MovementCompo = nullptr;
 };
 
