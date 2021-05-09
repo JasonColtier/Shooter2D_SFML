@@ -21,8 +21,10 @@ PlayerHUD::PlayerHUD()
     {
         position = sf::Vector2f(GameWindow::sizeWindow.x / 2 - healthBar->getTexture()->getSize().x / 2,GameWindow::sizeWindow.y - 50); 
     }
+    
+    renderHandler->AddText("0","scoreText",3,sf::Vector2f(GameWindow::sizeWindow.x-100,0));
 
-    renderHandler->AddText(ScoreManager::GetScoreText(),"testkey",3,sf::Vector2f(GameWindow::sizeWindow.x-100,0));
+    ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::HandleChangeScore);
 
 }
 
@@ -32,4 +34,9 @@ void PlayerHUD::Tick(int64_t deltaTime)
 
     healthBar->setScale(player->lifeComponent->currentHealth/player->lifeComponent->maxHealth,1);
     
+}
+
+void PlayerHUD::HandleChangeScore(int score)
+{
+    renderHandler->GetText("scoreText")->setString(std::to_string(score));
 }

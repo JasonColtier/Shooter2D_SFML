@@ -32,5 +32,8 @@ void GameObject::Activate()
 
 void GameObject::Deactivate()
 {
-    isActivated = false;
+    if(isActivated)
+    {
+        isActivated = false;
+    }
 }

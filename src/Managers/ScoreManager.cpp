@@ -5,15 +5,7 @@
 void ScoreManager::ModifyScore(int modif)
 {
     score += modif;
-    scoreText = &std::to_string(score);
     
-    Print::PrintLog("current score",score);
+    m_signal(score);
 }
 
-std::string* ScoreManager::GetScoreText()
-{
-    scoreText = &std::to_string(score);
-    
-    return scoreText;
-    
-}

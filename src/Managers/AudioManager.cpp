@@ -53,7 +53,7 @@ sf::SoundBuffer* AudioManager::GetSoundPtr(EnumSounds s)
         sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
         soundBuffer->loadFromFile(GetPath(s));//on charge l'image voulue
         mapSons[s] = soundBuffer;//on conserve la donnée dans la map
-        Print::PrintLog("create new sound ptr ");
+        Print::PrintLog("create new sound ptr for ",GetPath(s));
 
         return soundBuffer;
     }
