@@ -4,6 +4,7 @@
 #include <functional>
 #include <stdexcept>
 #include "Enemy.h"
+#include "GameObjects/BonusHeal.h"
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 
@@ -14,7 +15,7 @@ template<typename ...types>
 struct TypeList
 {};
 
-using AllCollisionTypes = TypeList<Player, Enemy, Bullet>;
+using AllCollisionTypes = TypeList<Player, Enemy, Bullet, BonusHeal>;
 
 template<typename GameObject1, typename GameObject2>
 struct OnCollision
@@ -27,7 +28,7 @@ struct OnCollision<Player, Enemy>
 {
 	static void Reaction(Player& player, Enemy& enemy)
 	{
-		std::cout << "Collision Ennemy, Player" << std::endl;
+		std::cout << "Collision Enemy, Player" << std::endl;
 	}
 };
 
@@ -45,7 +46,9 @@ struct OnCollision<Enemy, Bullet>
 {
 	static void Reaction(Enemy& enemy, Bullet& bullet)
 	{
-
+		std::cout << "Collision Ennemy, Bullet" << std::endl;
+		enemy.lifeComponent->ModifyHealth(-(bullet.GetDammage()) * bullet.damageMultiplier);
+		bullet.Deactivate();
 	}
 };
 

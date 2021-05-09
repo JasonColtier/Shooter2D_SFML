@@ -19,6 +19,8 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/BackgroundTexture.h
     ${HEADER_DIR}/GameObjects/Character.h
+    ${HEADER_DIR}/GameObjects/IBonus.h
+    ${HEADER_DIR}/GameObjects/BonusHeal.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/GameWindow.h

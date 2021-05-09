@@ -6,23 +6,31 @@
 class Bullet : public GameObject
 {
 public:
-    
-    Bullet();
-    virtual ~Bullet() = default;
 
-    void Tick(int64_t deltaTime) override;
+	Bullet();
+	virtual ~Bullet() = default;
 
-    void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject) override;
+	void Tick(int64_t deltaTime) override;
 
-    sf::Vector2f scale = sf::Vector2f(1,1);
-    float autoDestroyDelay = 0;
-    float speedMultiplier = 1.f;
-    float damageMultiplier = 1.f;
+	void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject) override;
+
+	virtual TypeId getTypeId() override { return getClassTypeId(); }
+	static TypeId getClassTypeId() { return 3; }
+
+	float GetDammage() const
+	{
+		return damage;
+	}
+
+	sf::Vector2f scale = sf::Vector2f(1, 1);
+	float autoDestroyDelay = 0;
+	float speedMultiplier = 1.f;
+	float damageMultiplier = 1.f;
 
 protected:
-    float speed = 0.5f;
-    float timer = 0.f;
-    float damage = 1.f;
+	float speed = 0.5f;
+	float timer = 0.f;
+	float damage = 1.f;
 };
 
 
