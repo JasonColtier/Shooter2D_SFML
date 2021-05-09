@@ -3,6 +3,7 @@
 #include "GameWindow.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
+#include "Managers/ScoreManager.h"
 
 PlayerHUD::PlayerHUD()
 {
@@ -20,6 +21,8 @@ PlayerHUD::PlayerHUD()
     {
         position = sf::Vector2f(GameWindow::sizeWindow.x / 2 - healthBar->getTexture()->getSize().x / 2,GameWindow::sizeWindow.y - 50); 
     }
+
+    renderHandler->AddText(ScoreManager::GetScoreText(),"testkey",3,sf::Vector2f(GameWindow::sizeWindow.x-100,0));
 
 }
 

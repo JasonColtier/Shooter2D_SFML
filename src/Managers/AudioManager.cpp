@@ -32,7 +32,7 @@ const char* AudioManager::GetPath(EnumSounds s)
     {
     case FireBullet : return "../medias/Sons/sniper.wav";
     case EmicGameMusic : return "../medias/Sons/Cjbeards - Fire And Thunder.wav";
-    default: return "error texture";
+    default: return "error audio";
     }
 }
 

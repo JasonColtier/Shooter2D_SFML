@@ -17,33 +17,33 @@ namespace sf
     class RenderWindow;
 }
 
+
+struct CustomContainer
+{
+    int zIndex = 0;
+};
+
 //Un container pour associer une sprite à un index
-struct SpriteContainer
+struct SpriteContainer : CustomContainer
 {
     sf::Sprite* sprite;
-    int zIndex = 0;
 
-    SpriteContainer(sf::Sprite* t_sprite, int t_zIndex) : sprite(t_sprite), zIndex(t_zIndex)
+    SpriteContainer(sf::Sprite* t_sprite, int t_zIndex) : sprite(t_sprite)
     {
+        zIndex = t_zIndex;
     }
 };
 
-// template <typename T>
-// struct CustomRenderContainer
-// {
-//     T* data;
-//     int zIndex = 0;
-//     std::string key;
-//
-//     CustomRenderContainer(int t_zIndex, std::string t_key): zIndex(t_zIndex), key(t_key)
-//     {
-//     }
-//
-//     T* AddData()
-//     {
-//         
-//     }
-// };
+struct TextContainer : CustomContainer
+{
+    sf::Text* text;
+
+    TextContainer(sf::Text* t_text, int t_zIndex) : text(t_text)
+    {
+        zIndex = t_zIndex;
+    }
+};
+
 
 typedef std::pair<std::string, SpriteContainer*> pairKeySprite;
 
@@ -58,13 +58,21 @@ public:
 
     std::map<std::string, SpriteContainer*> mapSprites;
     std::vector<SpriteContainer*> sortedSprites;
-    sf::Sprite* RenderHandler::GetSprite(const std::string key) const;
-    // auto x = new CustomRenderContainer<sf::Text>()
 
+
+    std::map<std::string, TextContainer*> mapText;
+    std::vector<TextContainer*> sortedText;
+    
+    
     sf::Sprite* AddSprite(sf::Texture* tex, std::string key, int zIndex);
+    sf::Sprite* GetSprite(std::string key) const;
 
+    sf::Text* AddText(std::string* userText,std::string key,int zIndex,sf::Vector2f pos = sf::Vector2f(0,0),sf::Color color = sf::Color::White,int size = 30);
+    sf::Text* GetText(std::string key) const;
+
+    
     //un comparateur pour 
-    static bool cmp(SpriteContainer*& a, SpriteContainer*& b)
+    static bool Comparator(CustomContainer* a, CustomContainer* b)
     {
         return a->zIndex < b->zIndex;
     };

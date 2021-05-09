@@ -17,9 +17,6 @@ public:
     static void PlaySound(EnumSounds enumSound,float volume = 20.f);
 
     static void PlayMusic(EnumSounds enumSounds);
-
-    //retourne le path associé à un nom de texture
-    static const char* GetPath(EnumSounds s);
     
     //retourne un pointeur vers la texture
     static sf::SoundBuffer* GetSoundPtr(EnumSounds s);
@@ -29,6 +26,14 @@ public:
 
     static inline sf::Sound* soundPlayer = nullptr;
     static inline sf::Music* musicPlayer = nullptr;
+
+    ~AudioManager() = default;//todo
+
+private:
+    //retourne le path associé à un nom de texture
+    static const char* GetPath(EnumSounds s);
+
+    AudioManager() = default;
 };
 
 #endif
