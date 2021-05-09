@@ -1,6 +1,7 @@
 ﻿#include "Components/LifeComponent.h"
 
 #include "GameObjects/GameObject.h"
+#include "Tools/Print.h"
 
 void LifeComponent::TickComponent(int64_t deltaTime)
 {
@@ -18,8 +19,9 @@ float LifeComponent::ModifyHealth(float modification)
     if(currentHealth < 0)
     {
         currentHealth = 0;
-        Owner->isActivated = false;
+        Owner->Deactivate();
     }
 
+    // Print::PrintLog("modified health, new life is : ",currentHealth);
     return currentHealth;
 }

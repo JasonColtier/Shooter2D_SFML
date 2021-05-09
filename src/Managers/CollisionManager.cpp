@@ -74,10 +74,11 @@ void CollisionManager::CheckCollision(CollisionHandler* g1, CollisionHandler* g2
 			return;
 		}
 	}
-
+	//fonction mise au carré
 	const auto dist = sqrtf(pow(g2->position->x - g1->position->x, 2) + pow(g2->position->y - g1->position->y, 2));
 	const auto maxDist = g1->radius + g2->radius;
 
+	//on compare les distances au carré et on vire sqrt
 	if (dist < maxDist)
 	{
 		auto l_g1 = g1->getPoints();
@@ -120,6 +121,13 @@ void CollisionManager::CheckCollision(CollisionHandler* g1, CollisionHandler* g2
 					if (t1 <= 1 && t1 >= 0 && t2 <= 1 && t2 >= 0)
 					{
 						const sf::Vector2f hitPoint = sf::Vector2f((point_A->x + t1 * (point_B->x - point_A->x)), point_A->y + t1 * (point_B->y - point_A->y));
+						//une liste de comportements de collisions ?
+						//gérer les collisions en dehors ?
+						//une liste de paire de collision processed après l'update qui gère la collision de la paire
+						//prendre l'owner en const ?
+						//protéger cette fonction ?
+						//si on delete ça pète
+						//problème de réentrance possible
 						CollisionDispatcher::DispatchOnCollision(*g1->owner, *g2->owner);
 						//g1->owner->OnCollision(hitPoint, g2->owner);
 						//g2->owner->OnCollision(hitPoint, g1->owner);
