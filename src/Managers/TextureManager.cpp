@@ -9,11 +9,12 @@ const char* TextureManager::GetPath(EnumTextures t)
 {
     switch (t)
     {
-    case Ship: return "../medias/Ship.png";
-    case Bullet: return "../medias/Bullet.png";
-    case SpaceBackground: return "../medias/spaceBG.jpg";
-	case ShipEnemy: return "../medias/Enemy.png";
-	case HealthBar: return "../medias/HealthBar.png";
+    case Ship: return "../medias/Textures/Ship.png";
+    case Bullet: return "../medias/Textures/Bullet.png";
+    case SpaceBackground: return "../medias/Textures/spaceBG.jpg";
+	case ShipEnemy: return "../medias/Textures/Enemy.png";
+	case HealthBar: return "../medias/Textures/HealthBar.png";
+	case HealthBarBG: return "../medias/Textures/HealthBar_BG.png";
     default: return "error texture";
     }
 }

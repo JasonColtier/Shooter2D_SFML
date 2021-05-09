@@ -5,7 +5,8 @@
 
 class RenderComponent;
 
-namespace sf {
+namespace sf
+{
     class Texture;
 }
 
@@ -16,7 +17,11 @@ public:
     Enemy();
     ~Enemy() override = default;
     void Tick(int64_t deltaTime) override;
-    
+    void Deactivate() override;
+
+    virtual TypeId getTypeId() override { return getClassTypeId(); }
+    static TypeId getClassTypeId() { return 2; }
+
+
 private:
-    
 };

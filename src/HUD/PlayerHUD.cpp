@@ -3,31 +3,33 @@
 #include "GameWindow.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
+#include "Managers/ScoreManager.h"
 
 PlayerHUD::PlayerHUD()
 {
-    player = nullptr;
-    renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::HealthBar), 1);
+    player = GameWindow::GetGameLevel()->player;
 
-    //je place ma barre au centre en X et avec un offset de 50 du bas
-    position = sf::Vector2f(GameWindow::sizeWindow.x / 2 - renderHandler->sprite.getTexture()->getSize().x / 2,GameWindow::sizeWindow.y - 50); 
+    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::HealthBar),"healthBar",4);
+
+    renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::HealthBarBG),"HealthBarBG",3);
+
+    
+    
+    healthBar = renderHandler->GetSprite("healthBar");
+
+    if (healthBar)
+    {
+        position = sf::Vector2f(GameWindow::sizeWindow.x / 2 - healthBar->getTexture()->getSize().x / 2,GameWindow::sizeWindow.y - 50); 
+    }
+
+    renderHandler->AddText(ScoreManager::GetScoreText(),"testkey",3,sf::Vector2f(GameWindow::sizeWindow.x-100,0));
+
 }
 
 void PlayerHUD::Tick(int64_t deltaTime)
 {
     GameObject::Tick(deltaTime);
 
-
-    //TODO ça c'est BOF BOF BOF !
-    if(!player)
-    {
-        auto p = GameWindow::GetGameLevel()->player;
-        if(p)
-        {
-            player = p;
-        }
-    }
-
-    renderHandler->sprite.setScale(player->lifeComponent->currentHealth/player->lifeComponent->maxHealth,1);
+    healthBar->setScale(player->lifeComponent->currentHealth/player->lifeComponent->maxHealth,1);
     
 }

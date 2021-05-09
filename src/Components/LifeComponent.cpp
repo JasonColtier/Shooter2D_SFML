@@ -22,6 +22,6 @@ float LifeComponent::ModifyHealth(float modification)
         Owner->Deactivate();
     }
 
-    Print::PrintLog("modified health, new life is : ",currentHealth);
+    // Print::PrintLog("modified health, new life is : ",currentHealth);
     return currentHealth;
 }

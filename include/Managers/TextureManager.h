@@ -12,20 +12,21 @@ class TextureManager
 public:
 
     //toutes les textures
-    enum EnumTextures { Ship,Bullet,SpaceBackground,ShipEnemy,HealthBar };
+    enum EnumTextures { Ship,Bullet,SpaceBackground,ShipEnemy,HealthBar,HealthBarBG };
 
-    //retourne le path associé à un nom de texture
-    static const char* GetPath(EnumTextures t);
-    
     //retourne un pointeur vers la texture
     static sf::Texture* GetTexturePtr(EnumTextures t);
-
-    ~TextureManager();
-    TextureManager()=default;
 
     //une map qui associe les textures chargées en mémoire à leur nom
    inline static std::map<EnumTextures,sf::Texture*> mapTextures;
 
+    ~TextureManager();
+
+private:
+    //retourne le path associé à un nom de texture
+    static const char* GetPath(EnumTextures t);
+
+    TextureManager() = default;
 };
 
 #endif

@@ -1,15 +1,81 @@
 ﻿#include "Components/RenderHandler.h"
+
+#include <map>
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameWindow.h"
 #include "Components/CollisionHandler.h"
 #include "GameObjects/GameObject.h"
+#include "Managers/FontManager.h"
 
 
-RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, int t_zIndex) : parentGameObject(t_parentGameObject), texture(t_texture), zIndex(t_zIndex)
+RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture,std::string t_stringKey, int t_zIndex) : parentGameObject(t_parentGameObject)
 {
-    sprite.setTexture(*texture);
+    AddSprite(t_texture,t_stringKey,t_zIndex);
 }
+
+sf::Sprite* RenderHandler::GetSprite(const std::string key) const
+{
+    auto iterator = mapSprites.find(key);
+
+    if (iterator != mapSprites.end())
+    {
+        return iterator->second->sprite;
+    }
+
+    return nullptr;
+}
+
+sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex,std::string key,int zIndex)
+{
+    auto sprite = new sf::Sprite;
+    sprite->setTexture(*tex);
+    SpriteContainer* customSprite = new SpriteContainer(sprite,zIndex);
+    mapSprites[key] = customSprite;
+    
+    sortedSprites.push_back(customSprite);
+    
+    // Sort using comparator function
+    std::sort(sortedSprites.begin(), sortedSprites.end(), Comparator);
+    
+    return sprite;
+}
+
+sf::Text* RenderHandler::AddText(std::string* userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color,int size)
+{
+    
+    // Create a text
+    //sf::Text* text = new sf::Text(*userText, *FontManager::GetFontPtr(FontManager::Mandalorian));
+    //text->setCharacterSize(size);
+    //text->setFillColor(color);
+    //text->setPosition(pos);
+    //
+    //TextContainer* customText = new TextContainer(text,zIndex);
+    //mapText[key] = customText;
+
+    //sortedText.push_back(customText);
+
+    //// Sort using comparator function
+    //std::sort(sortedText.begin(), sortedText.end(), Comparator);
+
+    //return customText->text;
+    return new sf::Text();
+} 
+
+sf::Text* RenderHandler::GetText(const std::string key) const
+{
+    auto iterator = mapText.find(key);
+
+    if (iterator != mapText.end())
+    {
+        return iterator->second->text;
+    }
+
+    return nullptr;
+}
+
+
 
 void RenderHandler::RenderUpdate()
 {
@@ -28,7 +94,25 @@ void RenderHandler::RenderUpdate()
     // 	GameWindow::window->draw(vertice, 4, sf::Quads);
     // }
 
-    sprite.setRotation(parentGameObject->rotation);
-    sprite.setPosition(parentGameObject->position);
-    GameWindow::window->draw(sprite);
+    for (auto customSprite : sortedSprites)
+    {
+        customSprite->sprite->setRotation(parentGameObject->rotation);
+        customSprite->sprite->setPosition(parentGameObject->position);
+        GameWindow::window->draw(*customSprite->sprite);
+    }
+
+    for (auto textContainer : sortedText)
+    {
+        GameWindow::window->draw(*textContainer->text);
+    }
+
+    // // Create a text
+    // sf::Text text("hello my name is Jason", *FontManager::GetFontPtr(FontManager::Mandalorian));
+    // text.setCharacterSize(100);
+    // text.setFillColor(sf::Color::Cyan);
+    // text.setPosition(100,10);
+    // // Draw it
+    // // Print::PrintLog("draw text");
+    // GameWindow::window->draw(text);
+    
 }
