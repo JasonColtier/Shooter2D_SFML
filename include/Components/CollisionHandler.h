@@ -17,6 +17,7 @@ enum CollisionType
 	EnemyChannel,
 	PlayerProjectileChannel,
 	EnemyProjectileChannel,
+	BonusChannel,
 };
 
 class CollisionHandler

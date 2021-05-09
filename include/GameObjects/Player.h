@@ -9,24 +9,27 @@
 class RenderHandler;
 
 namespace sf {
-    class Texture;
+	class Texture;
 }
 
 class Player : public Character
 {
 public:
 
-    Player();
-    ~Player()=default;
-    void Tick(int64_t deltaTime) override;
+	Player();
+	~Player() override = default;
+	void Tick(int64_t deltaTime) override;
 
-    //quand on détecte un changement d'input
-    void OnInputChanged(InputMapping input);
+	//quand on détecte un changement d'input
+	void OnInputChanged(InputMapping input);
+
+	virtual TypeId getTypeId() override { return getClassTypeId(); }
+	static TypeId getClassTypeId() { return 1; }
 
 
 private:
 
-    ShootComponent* shootComponent;//y accéder par le tableau
+	ShootComponent* shootComponent;//y accéder par le tableau
 };
 
 #endif
