@@ -54,13 +54,11 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
     TextContainer* customText = new TextContainer(text,zIndex);
     mapText[key] = customText;
 
-    //sortedText.push_back(customText);
+    sortedText.push_back(customText);
 
-    //// Sort using comparator function
-    //std::sort(sortedText.begin(), sortedText.end(), Comparator);
+    std::sort(sortedText.begin(), sortedText.end(), Comparator);
 
-    //return customText->text;
-    return new sf::Text();
+    return customText->text;
 } 
 
 sf::Text* RenderHandler::GetText(const std::string key) const
