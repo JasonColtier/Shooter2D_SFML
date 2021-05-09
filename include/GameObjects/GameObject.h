@@ -9,6 +9,8 @@
 class CollisionHandler;
 class RenderHandler;
 
+using TypeId = int;
+
 namespace sf {
 	class RenderWindow;
 }
@@ -46,6 +48,9 @@ public:
 		}
 		return nullptr;
 	}
+
+	virtual TypeId getTypeId() { return getClassTypeId(); }
+	static TypeId getClassTypeId() { return 0; }
 	
 	bool isActivated = true;
 	float rotation = 0;

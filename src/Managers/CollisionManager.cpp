@@ -1,6 +1,7 @@
 #include "Managers/CollisionManager.h"
 #include "Components/CollisionHandler.h"
 #include "GameObjects/GameObject.h"
+#include "Managers/CollisionDispatcher.h"
 
 void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 {
@@ -12,7 +13,7 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 		{
 			break;
 		}
-		
+
 		for (auto objet2 = std::next(objet1); objet2 != abscisseTab.end(); ++objet2)
 		{
 			if ((*objet2)->isActivated && (*objet2)->collisionHandler)
@@ -36,7 +37,6 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 			//	{
 			//		break;
 			//	}
-
 			//	for (int j = i + 1; j < abscisseTab.size(); ++j)
 			//	{
 			//if (abscisseTab[i]->collisionHandler->GetEndAbscisse() > abscisseTab[j]->collisionHandler->GetStartAbscisse() && abscisseTab[j]->isActivated)
@@ -120,8 +120,9 @@ void CollisionManager::CheckCollision(CollisionHandler* g1, CollisionHandler* g2
 					if (t1 <= 1 && t1 >= 0 && t2 <= 1 && t2 >= 0)
 					{
 						const sf::Vector2f hitPoint = sf::Vector2f((point_A->x + t1 * (point_B->x - point_A->x)), point_A->y + t1 * (point_B->y - point_A->y));
-						g1->owner->OnCollision(hitPoint, g2->owner);
-						g2->owner->OnCollision(hitPoint, g1->owner);
+						CollisionDispatcher::DispatchOnCollision(*g1->owner, *g2->owner);
+						//g1->owner->OnCollision(hitPoint, g2->owner);
+						//g2->owner->OnCollision(hitPoint, g1->owner);
 					}
 				}
 			}

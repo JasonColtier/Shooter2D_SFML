@@ -25,6 +25,7 @@ set(HEADERS
     ${HEADER_DIR}/Managers/AudioManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
+    ${HEADER_DIR}/Managers/CollisionDispatcher.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
@@ -40,7 +41,7 @@ set(HEADERS
     ${HEADER_DIR}/Enemy.h
 	${HEADER_DIR}/Components/EnemyMovementComponent.h
 	${HEADER_DIR}/Components/IMovementComponent.h
-    ${HEADER_DIR}/StaticData.h
+    ${HEADER_DIR}/StaticData.h  
 )
 
 set(SOURCES
