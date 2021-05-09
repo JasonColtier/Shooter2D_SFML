@@ -9,10 +9,12 @@ const char* TextureManager::GetPath(EnumTextures t)
 {
     switch (t)
     {
-    case Ship: return "../medias/Ship.png";
-    case Bullet: return "../medias/Bullet.png";
-    case SpaceBackground: return "../medias/spaceBG.jpg";
-	case ShipEnemy: return "../medias/Enemy.png";
+    case Ship: return "../medias/Textures/Ship.png";
+    case Bullet: return "../medias/Textures/Bullet.png";
+    case SpaceBackground: return "../medias/Textures/spaceBG.jpg";
+	case ShipEnemy: return "../medias/Textures/Enemy.png";
+	case HealthBar: return "../medias/Textures/HealthBar.png";
+	case HealthBarBG: return "../medias/Textures/HealthBar_BG.png";
     default: return "error texture";
     }
 }
@@ -34,7 +36,7 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile(GetPath(t));//on charge l'image voulue
 		mapTextures[t] = texture;//on conserve la donnée dans la map
-		Print::PrintLog("create new texture ptr ");
+		Print::PrintLog("create new texture ptr for ",GetPath(t));
 
 		return texture;
 	}

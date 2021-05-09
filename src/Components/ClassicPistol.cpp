@@ -3,6 +3,7 @@
 
 #include "GameWindow.h"
 #include "GameObjects/Bullet.h"
+#include "Managers/AudioManager.h"
 
 ClassicPistol::ClassicPistol()
 {
@@ -13,7 +14,12 @@ ClassicPistol::ClassicPistol()
 
 void ClassicPistol::ShootBullet(int initialAngle)
 {
+    
+    
     Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
     bullet->position = Owner->position;
     bullet->rotation = Owner->rotation + initialAngle;
+
+    AudioManager::PlaySound(AudioManager::FireBullet,10);
+
 }

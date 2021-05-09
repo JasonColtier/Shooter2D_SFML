@@ -4,6 +4,7 @@
 #include "GameLevel.h"
 #include "Components/CollisionHandler.h"
 #include "GameWindow.h"
+#include "StaticData.h"
 #include "Components/ClassicPistol.h"
 #include "Components/LifeComponent.h"
 #include "Components/MovementComponent.h"
@@ -12,28 +13,34 @@
 #include "Tools/Print.h"
 #include "Tools/VectorTools.h"
 #include "Components/RenderHandler.h"
+#include "HUD/PlayerHUD.h"
 
 Player::Player()
 {
 	Print::PrintLog("new player");
 
-	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::Ship), 1);
-	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
-	renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 
-	//AddComponent(renderComponent);
+	renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::Ship),"player",1);
+
+	auto sprite = renderHandler->GetSprite("player");
+
+	if (sprite)
+	{
+		sprite->setOrigin(sf::Vector2f(50.f, 50.f));
+		sprite->setScale(sf::Vector2f(1.f, 1.f));
+	}
+
 	offsetPos = sf::Vector2f(0, 25.f);
-	shootComponent = new Sniper();
-	AddComponent(shootComponent);//TODO : fonction remove component(Component *)
+	shootComponent = new ClassicPistol();
+	AddComponent(shootComponent);
 
-	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position, tmp);
+	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position,StaticData::ShipCollision);
 	AddComponent(new MovementComponent());
-
-	AddComponent(new LifeComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
 
+	auto hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
+	hud->player = this;
 }
 
 
@@ -48,6 +55,15 @@ void Player::OnInputChanged(InputMapping input)
 	if (input.first == Shoot)
 	{
 		shootComponent->wantToShoot = input.second;
+	}
+
+	if(input.first == DebugNum1)
+	{
+		lifeComponent->ModifyHealth(-1);
+	}
+	if(input.first == DebugNum2)
+	{
+		lifeComponent->ModifyHealth(+1);
 	}
 }
 

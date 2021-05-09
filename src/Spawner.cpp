@@ -16,7 +16,7 @@ Spawner::Spawner()
 
 void Spawner::Tick(int64_t deltaTime)
 {
-	//Va initier le processus de spawn à un point aléatoire une fois la condition initiale remplie (ici toute les 2 secondes pour 1 seule type ennemie)
+	//Va initier le processus de spawn Ã  un point alÃ©atoire une fois la condition initiale remplie (ici toute les 2 secondes pour 1 seule type ennemie)
 	Timer += deltaTime;
 	if (Timer >= 2000000 && canSpawn == true)
 	{
@@ -28,7 +28,7 @@ void Spawner::Tick(int64_t deltaTime)
 
 int Spawner::ChooseSide()
 {
-	//va déterminer aléatoirement de quel côté de l'écran va spawn l'ennemi
+	//va dÃ©terminer alÃ©atoirement de quel cÃ´tÃ© de l'Ã©cran va spawn l'ennemi
 	int Value = std::rand() % 4;
 	return Value;
 }
@@ -42,24 +42,24 @@ void Spawner::RandomLocation()
 
 	switch (Side)
 	{
-	//le Spawn se fera à gauche de l'écran
+	//le Spawn se fera Ã  gauche de l'Ã©cran
 	case 0:
 		RandomX = -1;
 		RandomY = std::rand() % window->getSize().y + 1;
 		break;
 
-	//le spawn se fera à droite de l'écran
+	//le spawn se fera Ã  droite de l'Ã©cran
 	case 1:
 		RandomX = window->getSize().x + 1;
 		RandomY = std::rand() % window->getSize().y + 1;
 		break;
-	//le spawn se fera en haut de l'écran
+	//le spawn se fera en haut de l'Ã©cran
 	case 2:
 		RandomX = std::rand() % window->getSize().x + 1;
 		RandomY = -1;
 		break;
 
-		//le spawn se fera en bas de l'écran
+		//le spawn se fera en bas de l'Ã©cran
 	case 3:
 		RandomX = std::rand() % window->getSize().x + 1;
 		RandomY = window->getSize().y + 1;
@@ -73,8 +73,9 @@ void Spawner::RandomLocation()
 }
 
 void Spawner::DoSpawn(int X, int Y)
-{
+{ 
 	Enemy* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
+	
 	NewEnemy->position = sf::Vector2f(X, Y);
 	NewEnemy->MovementCompo = new ShotgunnerMovementComponent();
 	NewEnemy->ShootComponent = new ClassicPistol();

@@ -24,7 +24,8 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {
 
 	////TODO insérer la récup de la Position du Player ici
-	Playerposition = GameWindow::GetGameLevel()->player->position;
+	auto level = GameWindow::GetGameLevel();
+	Playerposition = level->player->position;
 	auto pos = Owner->position;
 
 	//calcul de la disance avec le player

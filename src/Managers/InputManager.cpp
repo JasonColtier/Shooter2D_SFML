@@ -24,6 +24,25 @@ void InputManager::HandleInputs()
     {
         SendSignalIfNewInput(forward, false);
     }
+
+
+    // DEBUG
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
+    {
+        SendSignalIfNewInput(debugNum1, true);
+    }
+    else
+    {
+        SendSignalIfNewInput(debugNum1, false);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
+    {
+        SendSignalIfNewInput(debugNum2, true);
+    }
+    else
+    {
+        SendSignalIfNewInput(debugNum2, false);
+    }
 }
 
 void InputManager::SendSignalIfNewInput(InputMapping& input, bool pressed)

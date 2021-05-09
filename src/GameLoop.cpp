@@ -37,6 +37,8 @@ void GameLoop::StartGame()
 
 	GameWindow::LoadGameLevel();
 
+	Print::PrintLog("game level loaded");
+	
 	gameLevel = GameWindow::GetGameLevel();
 
 	//la partie qui loop ! On reste dedans tant qu'on est dans le jeu

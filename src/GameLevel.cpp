@@ -8,24 +8,26 @@
 #include "GameObjects/Bullet.h"
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
+#include "HUD/PlayerHUD.h"
+#include "Managers/AudioManager.h"
+
 
 GameLevel::GameLevel()
 {
-	Print::PrintLog("level created");
+	Print::PrintLog("game level construction");
+}
 
+void GameLevel::SpawnGameObjects()
+{
 	player = SpawnActor<Player>();
 	player->position = sf::Vector2f(300.f, 300.f);
 
-	bgTexture = SpawnActor<BackgroundTexture>();
+	SpawnActor<BackgroundTexture>();
 	SpawnActor<Spawner>();
 
-	//auto* tmp = SpawnActor<Enemy>();
-	//auto* col = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	//tmp->collisionHandler = new CollisionHandler(tmp, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &tmp->rotation, 50, &tmp->position, col);
-	//tmp->position = sf::Vector2f(100.f, 100.f);
-	//tmp->Activate();
-
+	AudioManager::PlayMusic(AudioManager::EmicGameMusic);
 }
+
 
 void GameLevel::Update(int64_t deltaTime)
 {
@@ -46,13 +48,20 @@ void GameLevel::Update(int64_t deltaTime)
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
+	//TODO commenter un peu tout ça
+	/*
+	 *	quand on active / désactive, on peut mettre dans une autre liste
+	 */
+	
 	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
 		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
 		if (!g1->renderHandler || !g2->renderHandler) return g1->renderHandler > g2->renderHandler;
-		return (g1->renderHandler->zIndex) < (g2->renderHandler->zIndex);
+		return (g1->renderHandler->mapSprites.begin()->second->zIndex) < (g2->renderHandler->mapSprites.begin()->second->zIndex);
 	};
 
+	//améliorer ce sort ? trie par insertion ?
+	
 	l_gameObjects.sort(renderPrioritySort);
 
 	for (auto* object : l_gameObjects)

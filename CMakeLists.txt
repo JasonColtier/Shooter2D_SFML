@@ -15,16 +15,22 @@ set(HEADERS
     ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/GameObjects/Player.h
     ${HEADER_DIR}/GameObjects/Bullet.h
+    ${HEADER_DIR}/GameObjects/SniperBullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/BackgroundTexture.h
     ${HEADER_DIR}/GameObjects/Character.h
+    ${HEADER_DIR}/GameObjects/IBonus.h
+    ${HEADER_DIR}/GameObjects/BonusHeal.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/GameWindow.h
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/AudioManager.h
+    ${HEADER_DIR}/Managers/ScoreManager.h
+    ${HEADER_DIR}/Managers/FontManager.h
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
+    ${HEADER_DIR}/Managers/CollisionDispatcher.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
@@ -56,10 +62,13 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/GameObject.cpp
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
+    ${SOURCE_DIR}/GameObjects/SniperBullet.cpp
     ${SOURCE_DIR}/GameObjects/BackgroundTexture.cpp
     ${SOURCE_DIR}/GameObjects/Character.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
+    ${SOURCE_DIR}/Managers/ScoreManager.cpp
+    ${SOURCE_DIR}/Managers/FontManager.cpp
     ${SOURCE_DIR}/Managers/CollisionManager.cpp
     ${SOURCE_DIR}/Managers/InputManager.cpp
     ${SOURCE_DIR}/Components/CollisionHandler.cpp

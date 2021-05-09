@@ -4,6 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "Component.h"
+#include "IMovementComponent.h"
 #include "Managers/InputManager.h"
 
 namespace std {
@@ -12,7 +13,7 @@ namespace std {
 
 // typedef class InputManager InputMapping;
 
-class MovementComponent : public Component
+class MovementComponent : public IMovementComponent
 {
 public:
 
