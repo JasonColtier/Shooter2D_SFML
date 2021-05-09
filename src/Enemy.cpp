@@ -39,10 +39,27 @@ Enemy::Enemy()
 	renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ShipEnemy), 1);
 	renderHandler->sprite.setOrigin(sf::Vector2f(50.f, 50.f));
 	renderHandler->sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+	/*AddComponent(MovementCompo);
+	AddComponent(ShootComponent);*/
 
 }
 
 void Enemy::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
+
+	if (MovementCompo->distance <= 300)
+	{
+		//modifier le changement de vitesse par le biai d'un multiplicateur
+		MovementCompo->speed = 0.0000005f;
+		ShootComponent->wantToShoot = true;
+		ShootComponent->g_fireRate = 10.0f;
+		//Print::PrintLog("Shoot Enabled");		
+	}
+	else
+	{
+		MovementCompo->speed = 0.001f;
+		ShootComponent->wantToShoot = false;
+		//Print::PrintLog("Shoot Not Enabled");
+	}
 }

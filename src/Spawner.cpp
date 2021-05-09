@@ -6,6 +6,8 @@
 #include "GameLevel.h"
 #include "Enemy.h"
 #include "Components/EnemyMovementComponent.h"
+#include "Components/ShotgunnerMovementComponent.h"
+#include "Components/ClassicPistol.h"
 
 Spawner::Spawner()
 {
@@ -16,10 +18,11 @@ void Spawner::Tick(int64_t deltaTime)
 {
 	//Va initier le processus de spawn à un point aléatoire une fois la condition initiale remplie (ici toute les 2 secondes pour 1 seule type ennemie)
 	Timer += deltaTime;
-	if (Timer >= 2000000)
+	if (Timer >= 2000000 && canSpawn == true)
 	{
 		Timer = 0;
 		RandomLocation();
+		canSpawn = false;
 	}
 }
 
@@ -73,6 +76,9 @@ void Spawner::DoSpawn(int X, int Y)
 {
 	Enemy* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
 	NewEnemy->position = sf::Vector2f(X, Y);
-	NewEnemy->AddComponent(new KamikazeMovementComponent());
+	NewEnemy->MovementCompo = new ShotgunnerMovementComponent();
+	NewEnemy->ShootComponent = new ClassicPistol();
+	NewEnemy->AddComponent(NewEnemy->MovementCompo);
+	NewEnemy->AddComponent(NewEnemy->ShootComponent);
 	NewEnemy->rotation = 90;
 }

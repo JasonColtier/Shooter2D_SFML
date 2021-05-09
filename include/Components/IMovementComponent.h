@@ -9,6 +9,9 @@ public:
 
 	virtual ~IMovementComponent() override  = default;
 
+	float distance = 0;
+	float speed = 0.001f;
+
 };
 
 #endif // ! IMOVEMENTCOMPONENT_H

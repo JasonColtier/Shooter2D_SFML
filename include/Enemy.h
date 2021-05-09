@@ -1,5 +1,6 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "GameObjects/GameObject.h"
+#include "GameObjects/Character.h"
 
 
 class RenderComponent;
@@ -8,7 +9,7 @@ namespace sf {
     class Texture;
 }
 
-class Enemy : public GameObject
+class Enemy : public Character
 {
 public:
 
