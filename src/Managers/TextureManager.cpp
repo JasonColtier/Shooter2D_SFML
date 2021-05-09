@@ -36,7 +36,7 @@ sf::Texture* TextureManager::GetTexturePtr(EnumTextures t)
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile(GetPath(t));//on charge l'image voulue
 		mapTextures[t] = texture;//on conserve la donnée dans la map
-		Print::PrintLog("create new texture ptr ");
+		Print::PrintLog("create new texture ptr for ",GetPath(t));
 
 		return texture;
 	}

@@ -42,25 +42,23 @@ sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex,std::string key,int zIndex
     return sprite;
 }
 
-sf::Text* RenderHandler::AddText(std::string* userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color,int size)
+sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color,int size)
 {
     
     // Create a text
-    //sf::Text* text = new sf::Text(*userText, *FontManager::GetFontPtr(FontManager::Mandalorian));
-    //text->setCharacterSize(size);
-    //text->setFillColor(color);
-    //text->setPosition(pos);
-    //
-    //TextContainer* customText = new TextContainer(text,zIndex);
-    //mapText[key] = customText;
+    sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::Mandalorian));
+    text->setCharacterSize(size);
+    text->setFillColor(color);
+    text->setPosition(pos);
+    
+    TextContainer* customText = new TextContainer(text,zIndex);
+    mapText[key] = customText;
 
-    //sortedText.push_back(customText);
+    sortedText.push_back(customText);
 
-    //// Sort using comparator function
-    //std::sort(sortedText.begin(), sortedText.end(), Comparator);
+    std::sort(sortedText.begin(), sortedText.end(), Comparator);
 
-    //return customText->text;
-    return new sf::Text();
+    return customText->text;
 } 
 
 sf::Text* RenderHandler::GetText(const std::string key) const
@@ -74,7 +72,6 @@ sf::Text* RenderHandler::GetText(const std::string key) const
 
     return nullptr;
 }
-
 
 
 void RenderHandler::RenderUpdate()
@@ -106,13 +103,4 @@ void RenderHandler::RenderUpdate()
         GameWindow::window->draw(*textContainer->text);
     }
 
-    // // Create a text
-    // sf::Text text("hello my name is Jason", *FontManager::GetFontPtr(FontManager::Mandalorian));
-    // text.setCharacterSize(100);
-    // text.setFillColor(sf::Color::Cyan);
-    // text.setPosition(100,10);
-    // // Draw it
-    // // Print::PrintLog("draw text");
-    // GameWindow::window->draw(text);
-    
 }

@@ -22,7 +22,7 @@ sf::Font* FontManager::GetFontPtr(EnumFonts f)
         sf::Font* font = new sf::Font();
         font->loadFromFile(GetPath(f));//on charge l'image voulue
         mapFonts[f] = font;//on conserve la donnée dans la map
-        Print::PrintLog("create new font ptr ");
+        Print::PrintLog("create new font ptr for ",GetPath(f));
 
         return font;
     }

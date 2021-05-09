@@ -45,6 +45,4 @@ void Enemy::Tick(int64_t deltaTime)
 void Enemy::Deactivate()
 {
 	GameObject::Deactivate();
-	ScoreManager::ModifyScore(1);//une façon d'augmenter le score rapide mais on peut faire mieux
-
 }
