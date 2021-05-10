@@ -7,7 +7,7 @@
 class VectorTools
 {
 public:
-	static sf::Vector2f NormaliseVector(sf::Vector2f& vec)
+	static sf::Vector2f NormaliseVector(const sf::Vector2f vec)
 	{
 		const auto length = Length(vec);
 		if (length != 0.0f)
@@ -17,13 +17,13 @@ public:
 		return vec;
 	}
 
-	static float Length(sf::Vector2f& vec)
+	static float Length(const sf::Vector2f vec)
 	{
 		const auto len = std::sqrt((vec.x * vec.x) + (vec.y * vec.y));
 		return len;
 	}
 
-	static void PrintVector(sf::Vector2f& vec)
+	static void PrintVector(const sf::Vector2f vec)
 	{
 		std::cout << "x : " << vec.x << " // y : " << vec.y << std::endl;
 	}

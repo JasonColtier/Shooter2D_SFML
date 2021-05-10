@@ -17,7 +17,7 @@ public:
     inline static Signal<int> m_signal;
 
 private:
-    static inline int score;
+    static inline int m_score;
 
 };
 #endif
