@@ -9,18 +9,17 @@
 class Character : public GameObject
 {
 public:
-
 	Character()
 	{
-		lifeComponent = new LifeComponent();
-		AddComponent(lifeComponent);
-	};
+		m_lifeComponent = new LifeComponent();
+		AddComponent(m_lifeComponent);
+	}
+
 	virtual ~Character() = default;
-	LifeComponent* lifeComponent;
-	ShootComponent* shootComponent = nullptr;
-	IMovementComponent* MovementCompo = nullptr;
+
+public:
+	LifeComponent* m_lifeComponent = nullptr;
+	ShootComponent* m_shootComponent = nullptr;
+	IMovementComponent* m_movementCompo = nullptr;
 };
-
-
-
 #endif //CHARACTER_H

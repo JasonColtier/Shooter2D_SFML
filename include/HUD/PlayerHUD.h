@@ -1,7 +1,7 @@
 ﻿#ifndef PlayerHUD_H
 #define PlayerHUD_H
-#include <SFML/Graphics/Text.hpp>
 
+#include <SFML/Graphics/Text.hpp>
 #include "GameObjects/GameObject.h"
 
 class Player;
@@ -9,19 +9,20 @@ class Player;
 class PlayerHUD : public GameObject
 {
 public:
-    PlayerHUD();
-    ~PlayerHUD() = default;
+	PlayerHUD();
+	~PlayerHUD() = default;
 
-    void Tick(int64_t deltaTime) override;
+	void Tick(int64_t deltaTime) override;
 
-    Player* player = nullptr; //set par le joueur en faisant spawner
-
-    sf::Text ScoreText;
+public:
+	Player* m_player = nullptr; //set par le joueur en faisant spawner
+	sf::Text m_scoreText;
 
 private:
-    sf::Sprite* healthBar;
+	void _HandleChangeScore(int score) const;
 
-    void HandleChangeScore(int score);
+private:
+	sf::Sprite* m_healthBar;
 };
 
-#endif
+#endif //PlayerHUD_H

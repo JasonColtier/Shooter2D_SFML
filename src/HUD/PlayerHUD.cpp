@@ -1,5 +1,4 @@
 ﻿#include "HUD/PlayerHUD.h"
-
 #include "GameWindow.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
@@ -7,36 +6,28 @@
 
 PlayerHUD::PlayerHUD()
 {
-    player = GameWindow::GetGameLevel()->player;
+	m_player = GameWindow::GetGameLevel()->m_player;
 
-    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::HealthBar),"healthBar",4);
+	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBar), "healthBar", 4);
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
+	m_healthBar = m_renderHandler->GetSprite("healthBar");
 
-    renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::HealthBarBG),"HealthBarBG",3);
+	if (m_healthBar)
+	{
+		m_position = sf::Vector2f(GameWindow::m_sizeWindow.x / 2 - m_healthBar->getTexture()->getSize().x / 2, GameWindow::m_sizeWindow.y - 50);
+	}
 
-    
-    
-    healthBar = renderHandler->GetSprite("healthBar");
-
-    if (healthBar)
-    {
-        position = sf::Vector2f(GameWindow::sizeWindow.x / 2 - healthBar->getTexture()->getSize().x / 2,GameWindow::sizeWindow.y - 50); 
-    }
-    
-    renderHandler->AddText("0","scoreText",3,sf::Vector2f(GameWindow::sizeWindow.x-100,0));
-
-    ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::HandleChangeScore);
-
+	m_renderHandler->AddText("0", "scoreText", 3, sf::Vector2f(GameWindow::m_sizeWindow.x - 100, 0));
+	ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::_HandleChangeScore);
 }
 
 void PlayerHUD::Tick(int64_t deltaTime)
 {
-    GameObject::Tick(deltaTime);
-
-    healthBar->setScale(player->lifeComponent->currentHealth/player->lifeComponent->maxHealth,1);
-    
+	GameObject::Tick(deltaTime);
+	m_healthBar->setScale(m_player->m_lifeComponent->m_currentHealth / m_player->m_lifeComponent->m_maxHealth, 1);
 }
 
-void PlayerHUD::HandleChangeScore(int score)
+void PlayerHUD::_HandleChangeScore(const int score) const
 {
-    renderHandler->GetText("scoreText")->setString(std::to_string(score));
+	m_renderHandler->GetText("scoreText")->setString(std::to_string(score));
 }

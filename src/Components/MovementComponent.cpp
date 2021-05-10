@@ -1,101 +1,97 @@
 ﻿#include "Components/MovementComponent.h"
-
-
 #include <any>
 #include <random>
-#include <string>
 #include <SFML/Window/Mouse.hpp>
 #include <Tools/VectorTools.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 #include "Managers/InputManager.h"
-#include "Tools/Print.h"
+
+#define PI 3.14159265f
 
 MovementComponent::MovementComponent()
 {
-
-    InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputChanged);
+	InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputChanged);
 }
 
 void MovementComponent::TickComponent(int64_t deltaTime)
 {
-    auto mousePos = GameWindow::cursorPos;
-    auto pos = Owner->position;
+	const auto MousePos = GameWindow::m_cursorPos;
+	const auto Pos = Owner->m_position;
 
-    //distance vers la souris
-    const auto deltaPosX = mousePos.x - (pos.x + Owner->offsetPos.x);
-    const auto deltaPosY = mousePos.y - (pos.y + Owner->offsetPos.y);
+	//distance vers la souris
+	const auto DeltaPosX = MousePos.x - (Pos.x + Owner->m_offsetPos.x);
+	const auto DeltaPosY = MousePos.y - (Pos.y + Owner->m_offsetPos.y);
 
-    //on normalise cette distance
-    const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
+	//on normalise cette distance
+	const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(DeltaPosX, DeltaPosY));
 
-    //rotation pour se tourner vers la souris
-    const float rot = std::atan2(deltaPosY, deltaPosX) * 180.f / std::_Pi;
-    Owner->rotation = rot + offsetAngle;
+	//rotation pour se tourner vers la souris
+	const auto rot = std::atan2(DeltaPosY, DeltaPosX) * 180.f / PI;
+	Owner->m_rotation = rot + m_offsetAngle;
 
-    //si on veut avancer
-    if (moveTowardMouse)
-    {
-        //avant d'appliquer directement l'input, on va tester cette acceleration
-        sf::Vector2f acceleration = inertia;
-        acceleration.x += normDelta.x * speed * deltaTime * 0.0001f;
-        acceleration.y += normDelta.y * speed * deltaTime * 0.0001f;
+	//si on veut avancer
+	if (m_moveTowardMouse)
+	{
+		//avant d'appliquer directement l'input, on va tester cette acceleration
+		sf::Vector2f Acceleration = m_inertia;
+		Acceleration.x += normDelta.x * m_speed * static_cast<float>(deltaTime) * 0.0001f;
+		Acceleration.y += normDelta.y * m_speed * static_cast<float>(deltaTime) * 0.0001f;
 
-        //ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
-        if (VectorTools::Length(acceleration) < maxVelocity)
-        {
-            inertia = acceleration;
-        }
-    }
+		//ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
+		if (VectorTools::Length(Acceleration) < m_maxVelocity)
+		{
+			m_inertia = Acceleration;
+		}
+	}
 
-    //la force de ralentissement
-    const auto dragForce = 1 - (drag * (deltaTime / 1000.f));
+	//la force de ralentissement
+	const auto DragForce = 1 - (m_drag * (static_cast<float>(deltaTime) / 1000.f));
 
-    //on applique cette force, proche de 0,999
-    inertia *= dragForce;
+	//on applique cette force, proche de 0,999
+	m_inertia *= DragForce;
 
-    //on set la position, toujours en fonction du deltatime
-    Owner->position = pos + (inertia * (deltaTime * 1.f));
+	//on set la position, toujours en fonction du deltatime
+	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 
 
-    /*
-     * Check for side wrap of the player's position. TP from one side of the window to the other
-     */
+	/*
+	 * Check for side wrap of the player's position. TP from one side of the window to the other
+	 */
 
-    auto window = GameWindow::window;
+	auto* Window = GameWindow::m_window;
 
-    const int leftBorder = 0;
-    const int topBorder = 0;
-    const int rightBorder = leftBorder + window->getSize().x;
-    const int bottomBorder = topBorder + window->getSize().y;
+	const auto LeftBorder = 0.f;
+	const auto TopBorder = 0.f;
+	const auto RightBorder = LeftBorder + Window->getSize().x;
+	const auto BottomBorder = TopBorder + Window->getSize().y;
 
-    //si on est trop à gauche on TP à droite
-    if (Owner->position.x < leftBorder)
-    {
-        Owner->position.x = rightBorder;
-    }
-    if (Owner->position.y < topBorder)
-    {
-        Owner->position.y = bottomBorder;
-    }
-    if (Owner->position.x > rightBorder)
-    {
-        Owner->position.x = leftBorder;
-    }
-    if (Owner->position.y > bottomBorder)
-    {
-        Owner->position.y = topBorder;
-    }
+	//si on est trop à gauche on TP à droite
+	if (Owner->m_position.x < LeftBorder)
+	{
+		Owner->m_position.x = RightBorder;
+	}
+	else if (Owner->m_position.x > RightBorder)
+	{
+		Owner->m_position.x = LeftBorder;
+	}
+	if (Owner->m_position.y < TopBorder)
+	{
+		Owner->m_position.y = BottomBorder;
+	}
+	else if (Owner->m_position.y > BottomBorder)
+	{
+		Owner->m_position.y = TopBorder;
+	}
 }
 
 void MovementComponent::OnInputChanged(const InputMapping input)
 {
-    //si on a appuyé ou relaché la touche pour bouger
-    if (input.first==Forward)
-    {
-        // Print::PrintLog("pressed forward : ",input.second);
-
-        moveTowardMouse = input.second;
-    }
+	//si on a appuyé ou relaché la touche pour bouger
+	if (input.first == InputsEnum::Forward)
+	{
+		// Print::PrintLog("pressed forward : ",input.second);
+		m_moveTowardMouse = input.second;
+	}
 }

@@ -17,11 +17,11 @@ RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_text
 
 sf::Sprite* RenderHandler::GetSprite(const std::string key) const
 {
-    auto iterator = mapSprites.find(key);
+    auto Iterator = mapSprites.find(key);
 
-    if (iterator != mapSprites.end())
+    if (Iterator != mapSprites.end())
     {
-        return iterator->second->sprite;
+        return Iterator->second->sprite;
     }
 
     return nullptr;
@@ -46,7 +46,7 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 {
     
     // Create a text
-    sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::Mandalorian));
+    sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::EnumFonts::Mandalorian));
     text->setCharacterSize(size);
     text->setFillColor(color);
     text->setPosition(pos);
@@ -63,11 +63,11 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 
 sf::Text* RenderHandler::GetText(const std::string key) const
 {
-    auto iterator = mapText.find(key);
+    auto Iterator = mapText.find(key);
 
-    if (iterator != mapText.end())
+    if (Iterator != mapText.end())
     {
-        return iterator->second->text;
+        return Iterator->second->text;
     }
 
     return nullptr;
@@ -93,14 +93,14 @@ void RenderHandler::RenderUpdate()
 
     for (auto customSprite : sortedSprites)
     {
-        customSprite->sprite->setRotation(parentGameObject->rotation);
-        customSprite->sprite->setPosition(parentGameObject->position);
-        GameWindow::window->draw(*customSprite->sprite);
+        customSprite->sprite->setRotation(parentGameObject->m_rotation);
+        customSprite->sprite->setPosition(parentGameObject->m_position);
+        GameWindow::m_window->draw(*customSprite->sprite);
     }
 
     for (auto textContainer : sortedText)
     {
-        GameWindow::window->draw(*textContainer->text);
+        GameWindow::m_window->draw(*textContainer->text);
     }
 
 }
