@@ -5,25 +5,28 @@
 
 void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 {
-	SortByAbscisse(abscisseTab);
+	_SortByAbscisse(abscisseTab);
 
-	for (auto objet1 = abscisseTab.begin(); objet1 != abscisseTab.end(); ++objet1)
+	const auto endIterator(abscisseTab.end());
+	for (auto objet1 = abscisseTab.begin(); objet1 != endIterator; ++objet1)
 	{
-		if (!(*objet1)->isActivated || !(*objet1)->collisionHandler)
+		if (!(*objet1)->m_isActivated || (*objet1)->m_collisionHandler == nullptr)
 		{
 			break;
 		}
 
-		for (auto objet2 = std::next(objet1); objet2 != abscisseTab.end(); ++objet2)
+		for (auto objet2 = std::next(objet1); objet2 != endIterator; ++objet2)
 		{
-			if ((*objet2)->isActivated && (*objet2)->collisionHandler)
+			if ((*objet2)->m_isActivated && (*objet2)->m_collisionHandler)
 			{
-				if ((*objet1)->collisionHandler->GetEndAbscisse() > (*objet2)->collisionHandler->GetStartAbscisse())
+				//Si le point avec le plus grand X du première objet est supérieur au point avec le plus petit X du deuxième objet, une collision est possible
+				if ((*objet1)->m_collisionHandler->GetEndAbscisse() > (*objet2)->m_collisionHandler->GetStartAbscisse())
 				{
-					CheckCollision((*objet1)->collisionHandler, (*objet2)->collisionHandler);
+					_CheckCollision((*objet1)->m_collisionHandler, (*objet2)->m_collisionHandler);
 				}
 				else
 				{
+					//Si la collision est impossible, comme la liste est trié en fonction du StartAbscisse, il est impossible d'avoir une collision avec le reste de la liste
 					break;
 				}
 			}
@@ -31,106 +34,89 @@ void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 			{
 				break;
 			}
-			//for (int i = 0; i < abscisseTab.size(); ++i)
-			//{
-			//	if (!abscisseTab[i]->isActivated)
-			//	{
-			//		break;
-			//	}
-			//	for (int j = i + 1; j < abscisseTab.size(); ++j)
-			//	{
-			//if (abscisseTab[i]->collisionHandler->GetEndAbscisse() > abscisseTab[j]->collisionHandler->GetStartAbscisse() && abscisseTab[j]->isActivated)
-			//{
-			//	CheckCollision(abscisseTab[i]->collisionHandler, abscisseTab[j]->collisionHandler);
-			//}
-			//else
-			//{
-			//	break;
-			//}
-			//}
-		//}
 		}
 	}
 }
 
-void CollisionManager::SortByAbscisse(std::list<GameObject*>& abscisseTab)
+void CollisionManager::_SortByAbscisse(std::list<GameObject*>& abscisseTab)
 {
 	auto abscisseSort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (!g1->collisionHandler || !g2->collisionHandler) return g1->collisionHandler > g2->collisionHandler;
-		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
-		return (g1->collisionHandler->GetStartAbscisse()) < (g2->collisionHandler->GetStartAbscisse());
+		if (!g1->m_collisionHandler || !g2->m_collisionHandler) return g1->m_collisionHandler > g2->m_collisionHandler;
+		if (g1->m_isActivated != g2->m_isActivated) return g1->m_isActivated > g2->m_isActivated;
+		return (g1->m_collisionHandler->GetStartAbscisse()) < (g2->m_collisionHandler->GetStartAbscisse());
 	};
 	abscisseTab.sort(abscisseSort);
 }
 
-void CollisionManager::CheckCollision(CollisionHandler* g1, CollisionHandler* g2)
+void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g2)
 {
-
-	for (CollisionType channel : *g1->l_ExcludedCollisionType)
+	for (auto channel : *g1->m_lExcludedCollisionType)
 	{
-		if (channel == g2->e_Type)
+		if (channel == g2->m_eType)
 		{
 			return;
 		}
 	}
+
 	//fonction mise au carré
-	const auto dist = sqrtf(pow(g2->position->x - g1->position->x, 2) + pow(g2->position->y - g1->position->y, 2));
-	const auto maxDist = g1->radius + g2->radius;
+	const auto Dist(pow(g2->m_position->x - g1->m_position->x, 2) + pow(g2->m_position->y - g1->m_position->y, 2));
+	const auto MaxDist(pow((g1->m_radius + g2->m_radius), 2));
 
 	//on compare les distances au carré et on vire sqrt
-	if (dist < maxDist)
+	if (Dist < MaxDist)
 	{
-		auto l_g1 = g1->getPoints();
-		auto l_g2 = g2->getPoints();
+		std::vector<sf::Vector2f> Lg1(g1->getPoints());
+		std::vector<sf::Vector2f> Lg2(g2->getPoints());
 
-		for (int i = 0; i < l_g1.size(); ++i)
+		const auto SizeG1(static_cast<int>(Lg1.size()));
+
+		for (auto i = 0; i < SizeG1; ++i)
 		{
-			sf::Vector2f* point_A = &l_g1[i];
-			sf::Vector2f* point_B;
+			sf::Vector2f* PointA(&Lg1[i]);
+			sf::Vector2f* PointB;
 
-			if (i + 1 >= l_g1.size())
+			if ((i + 1) >= SizeG1)
 			{
-				point_B = &l_g1[0];
+				PointB = &Lg1[0];
 			}
 			else
 			{
-				point_B = &l_g1[i + 1];
+				const auto Index(i + 1);
+				PointB = &Lg1[Index];
 			}
 
-			for (int j = 0; j < l_g2.size(); ++j)
+			const auto SizeG2(static_cast<int>(Lg2.size()));
+			for (int j = 0; j < SizeG2; ++j)
 			{
-				sf::Vector2f* point_C = &l_g2[j];
-				sf::Vector2f* point_D;
-				if ((j + 1) >= l_g2.size())
+				sf::Vector2f* PointC(&Lg2[j]);
+				sf::Vector2f* PointD;
+
+				if ((j + 1) >= SizeG2)
 				{
-					point_D = &l_g2[0];
+					PointD = &Lg2[0];
 				}
 				else
 				{
-					point_D = &l_g2[(j + 1)];
+					const auto Index(j + 1);
+					PointD = &Lg2[Index];
 				}
 
-				const auto det = (point_B->x - point_A->x) * (point_C->y - point_D->y) - (point_C->x - point_D->x) * (point_B->y - point_A->y);
+				const auto det((PointB->x - PointA->x) * (PointC->y - PointD->y) - (PointC->x - PointD->x) * (PointB->y - PointA->y));
 
 				if (det != 0.0f)
 				{
-					const auto t1 = ((point_C->x - point_A->x) * (point_C->y - point_D->y) - (point_C->x - point_D->x) * (point_C->y - point_A->y)) / det;
-					const auto t2 = ((point_B->x - point_A->x) * (point_C->y - point_A->y) - (point_C->x - point_A->x) * (point_B->y - point_A->y)) / det;
+					const auto t1 = ((PointC->x - PointA->x) * (PointC->y - PointD->y) - (PointC->x - PointD->x) * (PointC->y - PointA->y)) / det;
+					const auto t2 = ((PointB->x - PointA->x) * (PointC->y - PointA->y) - (PointC->x - PointA->x) * (PointB->y - PointA->y)) / det;
 
 					if (t1 <= 1 && t1 >= 0 && t2 <= 1 && t2 >= 0)
 					{
-						const sf::Vector2f hitPoint = sf::Vector2f((point_A->x + t1 * (point_B->x - point_A->x)), point_A->y + t1 * (point_B->y - point_A->y));
-						//une liste de comportements de collisions ?
-						//gérer les collisions en dehors ?
-						//une liste de paire de collision processed après l'update qui gère la collision de la paire
-						//prendre l'owner en const ?
-						//protéger cette fonction ?
-						//si on delete ça pète
-						//problème de réentrance possible
-						CollisionDispatcher::DispatchOnCollision(*g1->owner, *g2->owner);
+						//Voir si le hitPoint est encore utile
+						//const sf::Vector2f hitPoint = sf::Vector2f((PointA->x + t1 * (PointB->x - PointA->x)), PointA->y + t1 * (PointB->y - PointA->y));
+						//
+						CollisionDispatcher::DispatchOnCollision(*g1->m_owner, *g2->m_owner);
 						//g1->owner->OnCollision(hitPoint, g2->owner);
-						//g2->owner->OnCollision(hitPoint, g1->owner);
+						//g2->owner->OnCollision(hitPoint, g1->m_owner);
 					}
 				}
 			}

@@ -9,7 +9,7 @@
 class CollisionHandler;
 class RenderHandler;
 
-using TypeId = int;
+using TypeId = std::string;
 
 namespace sf {
 	class RenderWindow;
@@ -19,9 +19,7 @@ class GameObject
 {
 
 public:
-
 	GameObject() = default;
-
 	//TODO gerer la destruction de notre objet et la suppression des listes
 	virtual ~GameObject() = default;
 
@@ -30,39 +28,38 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
-	virtual void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject);
 	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
 	void RemoveComponent(Component* component);//supprime le component
-	
+
 	//retourne le premier component trouvé de la class souhaitée
 	template<class T>
 	T* GetComponentOfClass()
 	{
-		for (auto component : componentList)
+		for (auto component : m_lComponentList)
 		{
-			if(typeid(*component) == typeid(T))
+			auto* Tmp = dynamic_cast<T>(component);
+			if (Tmp != nullptr)
 			{
-				return dynamic_cast<T*>(component);//TODO seulment ce check là
+				return Tmp;//TODO seulment ce check là
 			}
 		}
 		return nullptr;
 	}
 
-	virtual TypeId getTypeId() { return getClassTypeId(); }
-	static TypeId getClassTypeId() { return 0; }
-	
-	bool isActivated = true;
-	float rotation = 0;
-	float scale = 0.5f;
-	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
-	sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
+	virtual TypeId GetTypeId() { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "GameObject"; }
 
-	std::list<Component*> componentList;
-	CollisionHandler* collisionHandler = nullptr;
-	RenderHandler* renderHandler = nullptr;
+public:
+	bool m_isActivated = true;
+	float m_rotation = 0;
+	float m_scale = 0.5f;
+	sf::Vector2f m_position = sf::Vector2f(0.f, 0.f);
+	sf::Vector2f m_offsetPos = sf::Vector2f(0, 0);//offset de position
 
-protected:
+	std::list<Component*> m_lComponentList;
+	CollisionHandler* m_collisionHandler = nullptr;
+	RenderHandler* m_renderHandler = nullptr;
 
 };
 
-#endif
+#endif //GAMEOBJECT_H

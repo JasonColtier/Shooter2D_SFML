@@ -1,82 +1,79 @@
 #include "Components/ShotgunnerMovementComponent.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLevel.h"
-#include "GameLoop.h"
 #include "GameWindow.h"
 #include "Components/IMovementComponent.h"
 #include "Components/Component.h"
 #include "GameObjects/Player.h"
-#include "Components/RenderHandler.h"
 #include "Tools/VectorTools.h"
-#include <ostream>
 #include <random>
 #include <valarray>
 #include <cmath>
-#include "Tools/Print.h"
 
-ShotgunnerMovementComponent::ShotgunnerMovementComponent(){}
+#define PI 3.14159265f
 
 void ShotgunnerMovementComponent::TickComponent(int64_t deltaTime)
 {
 	////TODO insérer la récup de la Position du Player ici
-	Playerposition = GameWindow::GetGameLevel()->player->position;
-	auto pos = Owner->position;
+	m_playerposition = GameWindow::GetGameLevel()->m_player->m_position;
+	const auto Pos = Owner->m_position;
 
 	//calcul de la disance avec le player
-	float deltaPosX = Playerposition.x - (pos.x + Owner->offsetPos.x);
-	float deltaPosY = Playerposition.y - (pos.y + Owner->offsetPos.y);
+	const auto DeltaPosX = m_playerposition.x - (Pos.x + Owner->m_offsetPos.x);
+	const auto DeltaPosY = m_playerposition.y - (Pos.y + Owner->m_offsetPos.y);
 
 	//normalisation de la distance
-	sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
+	const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(DeltaPosX, DeltaPosY));
 
 	//pour toujours s'orienter vers le player
-	float rot = std::atan2(deltaPosY, deltaPosX) * 180 / std::_Pi;
-	Owner->rotation = rot + offsetAngle;
+	const auto Rot = std::atan2(DeltaPosY, DeltaPosX) * 180 / PI;
+	Owner->m_rotation = Rot + static_cast<float>(m_offsetAngle);
 
 	////avant d'appliquer directement l'input, on va tester cette acceleration
-	sf::Vector2f acceleration = inertia;
-	acceleration.x += normDelta.x * speed * deltaTime * 0.0001f;
-	acceleration.y += normDelta.y * speed * deltaTime * 0.0001f;
+	sf::Vector2f Acceleration = m_inertia;
+	Acceleration.x += normDelta.x * m_speed * static_cast<float>(deltaTime) * 0.0001f;
+	Acceleration.y += normDelta.y * m_speed * static_cast<float>(deltaTime) * 0.0001f;
 
 	////ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
-	if (VectorTools::Length(acceleration) < maxVelocity)
+	if (VectorTools::Length(Acceleration) < m_maxVelocity)
 	{
-		inertia = acceleration;
+		m_inertia = Acceleration;
 	}
 
-
 	////la force de ralentissement
-	float dragForce = 1 - (drag * (deltaTime / 1000.f));
+	const auto DragForce = 1 - (m_drag * (static_cast<float>(deltaTime) / 1000.f));
 
 	////on applique cette force, proche de 0,999
-	inertia *= dragForce;
+	m_inertia *= DragForce;
 
-	////on set la position, toujours en fonction du deltatime
-	Owner->position = pos + (inertia * (deltaTime * 1.f));
+	////on set la m_position, toujours en fonction du deltatime
+	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 
 	//Dans le cas où il y a une sortie de l'écran
-	auto window = GameWindow::window;
-	int leftBorder = 0;
-	int topBorder = 0;
-	int rightBorder = leftBorder + window->getSize().x;
-	int bottomBorder = topBorder + window->getSize().y;
+	auto* Window = GameWindow::m_window;
+	const auto LeftBorder = 0.f;
+	const auto TopBorder = 0.f;
+	const auto RightBorder = LeftBorder + Window->getSize().x;
+	const auto BottomBorder = TopBorder + Window->getSize().y;
 
 	////si on est trop à gauche on TP à droite
-	if (Owner->position.x < leftBorder)
+	if (Owner->m_position.x < LeftBorder)
 	{
-		Owner->position.x = rightBorder;
-	}if (Owner->position.y < topBorder)
+		Owner->m_position.x = RightBorder;
+	}
+	else if (Owner->m_position.x > RightBorder)
 	{
-		Owner->position.y = bottomBorder;
-	}if (Owner->position.x > rightBorder)
+		Owner->m_position.x = LeftBorder;
+	}
+	if (Owner->m_position.y < TopBorder)
 	{
-		Owner->position.x = leftBorder;
-	}if (Owner->position.y > bottomBorder)
+		Owner->m_position.y = BottomBorder;
+	}
+	else if (Owner->m_position.y > BottomBorder)
 	{
-		Owner->position.y = topBorder;
+		Owner->m_position.y = TopBorder;
 	}
 
 	//calcul la distance entre le player afin de déterminer si un shoot est autorisé
-	distance = sqrt(pow((Playerposition.x - pos.x), 2) + (pow((Playerposition.y - pos.y), 2)));
-
+	m_distance = sqrt(pow((m_playerposition.x - Pos.x), 2) + (pow((m_playerposition.y - Pos.y), 2)));
 }

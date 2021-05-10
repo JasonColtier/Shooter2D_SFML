@@ -8,7 +8,7 @@ class Spawner : public GameObject
 
 public:
 
-	Spawner();
+	Spawner() = default;
 	~Spawner() override = default;
 
 	void Tick(int64_t deltaTime) override;
@@ -17,11 +17,8 @@ public:
 	void RandomLocation();
 	void DoSpawn(int X, int Y);
 
-	int64_t Timer = 0;
-	bool canSpawn = true;
-
-private:
-
+	int64_t m_timer = 0;
+	bool m_canSpawn = true;
 };
 
 #endif //SPAWNER_H

@@ -31,6 +31,7 @@ set(HEADERS
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Managers/CollisionDispatcher.h
+    ${HEADER_DIR}/Managers/TOnCollision.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h

@@ -4,13 +4,13 @@
 //todo Game object tout court ?
 BackgroundTexture::BackgroundTexture()
 {
-    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::SpaceBackground),"bg",0);
+    m_renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground),"bg",0);
 
-    auto sprite = renderHandler->GetSprite("bg");
+    auto* Sprite = m_renderHandler->GetSprite("bg");
 
-    if (sprite)
+    if (Sprite == nullptr)
     {
-        sprite->setOrigin(sf::Vector2f(0, 0));
-        sprite->setScale(sf::Vector2f(1, 1));
+        Sprite->setOrigin(sf::Vector2f(0, 0));
+        Sprite->setScale(sf::Vector2f(1, 1));
     }
 }

@@ -3,17 +3,16 @@
 
 #include "IBonus.h"
 
-class BonusHeal : public IBonus
+class BonusHeal final: public IBonus
 {
-
 public:
 	BonusHeal() = default;
 	~BonusHeal() override = default;
 
-	virtual TypeId getTypeId() override { return getClassTypeId(); }
-	static TypeId getClassTypeId() { return 4; }
+	TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "BonusHeal"; }
 
-	int pdtVie = 1;
+public:
+	int m_pdtVie = 1;
 };
-
 #endif //BONUSHEAL_H

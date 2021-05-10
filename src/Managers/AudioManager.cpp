@@ -3,58 +3,64 @@
 
 #include "Tools/Print.h"
 
-void AudioManager::PlaySound(EnumSounds enumSound, float volume)
+void AudioManager::PlaySound(const ESounds eSound, const float volume)
 {
-    if(!soundPlayer)
-        soundPlayer = new sf::Sound();
+	if (m_soundPlayer == nullptr)
+	{
+		m_soundPlayer = new sf::Sound();
+	}
 
-    soundPlayer->setBuffer(*GetSoundPtr(enumSound));
-    soundPlayer->setVolume(volume);
-    soundPlayer->play();
+	m_soundPlayer->setBuffer(*GetSoundPtr(eSound));
+	m_soundPlayer->setVolume(volume);
+	m_soundPlayer->play();
 }
 
-void AudioManager::PlayMusic(EnumSounds enumSounds)
+void AudioManager::PlayMusic(const ESounds eSound)
 {
-    musicPlayer = new sf::Music;
-    if (!musicPlayer->openFromFile(GetPath(enumSounds)))
-        return; // error
-    musicPlayer->setVolume(20);
-    musicPlayer->setLoop(true);
-    musicPlayer->play();
+	if (m_musicPlayer == nullptr)
+	{
+		m_musicPlayer = new sf::Music;
+	}
 
-    Print::PrintLog("music playing");
+	if (!m_musicPlayer->openFromFile(_GetPath(eSound)))
+	{
+		return; // error
+	}
+	m_musicPlayer->setVolume(20);
+	m_musicPlayer->setLoop(true);
+	m_musicPlayer->play();
+
+	Print::PrintLog("music playing");
 }
 
-
-const char* AudioManager::GetPath(EnumSounds s)
+const char* AudioManager::_GetPath(const ESounds eSound)
 {
-    switch (s)
-    {
-    case FireBullet : return "../medias/Sons/sniper.wav";
-    case EmicGameMusic : return "../medias/Sons/Cjbeards - Fire And Thunder.wav";
-    default: return "error audio";
-    }
+	switch (eSound)
+	{
+	case ESounds::FireBullet:
+		return "../medias/Sons/sniper.wav";
+	case ESounds::EpicGameMusic:
+		return "../medias/Sons/Cjbeards - Fire And Thunder.wav";
+	}
+	return "error audio";
 }
 
-sf::SoundBuffer* AudioManager::GetSoundPtr(EnumSounds s)
+sf::SoundBuffer* AudioManager::GetSoundPtr(const ESounds eSound)
 {
-    auto iterator = mapSons.find(s);
+	const auto Iterator(m_mapSons.find(eSound));
+	// Print::PrintLog("map size : ", mapTextures.size());
 
-    // Print::PrintLog("map size : ", mapTextures.size());
+	//si on a notre texture de chargé
+	if (Iterator != m_mapSons.end())
+	{
+		return Iterator->second;
+	}
+	//création d'un nouveau son
+	auto* soundBuffer = new sf::SoundBuffer();
+	soundBuffer->loadFromFile(_GetPath(eSound));//on charge l'image voulue
+	m_mapSons[eSound] = soundBuffer;//on conserve la donnée dans la map
+	
+	Print::PrintLog("create new sound ptr for ", _GetPath(eSound));
 
-    //si on a notre texture de chargé
-    if (iterator != mapSons.end())
-    {
-        return iterator->second;
-    }
-    else
-    {
-        //création d'une nouvelle texture
-        sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
-        soundBuffer->loadFromFile(GetPath(s));//on charge l'image voulue
-        mapSons[s] = soundBuffer;//on conserve la donnée dans la map
-        Print::PrintLog("create new sound ptr for ",GetPath(s));
-
-        return soundBuffer;
-    }
+	return soundBuffer;
 }

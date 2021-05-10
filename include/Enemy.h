@@ -1,28 +1,25 @@
-#include <SFML/Graphics/Sprite.hpp>
-#include "GameObjects/Character.h"
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include "GameObjects/Character.h"
 
+//class RenderComponent;
 
-class RenderComponent;
-
-namespace sf
-{
-    class Texture;
-}
+//namespace sf
+//{
+//	class Texture;
+//}
 
 class Enemy : public Character
 {
 public:
+	Enemy();
+	~Enemy() override = default;
 
-    Enemy();
-    ~Enemy() override = default;
-    void Tick(int64_t deltaTime) override;
-    void Deactivate() override;
+	void Tick(int64_t deltaTime) override;
 
-    virtual TypeId getTypeId() override { return getClassTypeId(); }
-    static TypeId getClassTypeId() { return 2; }
+	TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "Enemy"; }
 
-
-private:
 };
+#endif //ENEMY_H
