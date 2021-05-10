@@ -27,14 +27,14 @@ Player::Player()
 	if (sprite)
 	{
 		sprite->setOrigin(sf::Vector2f(50.f, 50.f));
-		sprite->setScale(sf::Vector2f(1.f, 1.f));
+		sprite->setScale(sf::Vector2f(scale, scale));
 	}
 
 	offsetPos = sf::Vector2f(0, 25.f);
 	shootComponent = new ClassicPistol();
 	AddComponent(shootComponent);
 
-	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>(), &rotation, 50, &position,StaticData::ShipCollision);
+	collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>({PlayerChannel, PlayerProjectileChannel, BonusChannel}), &rotation, 50, &position, StaticData::ShipCollision);
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);

@@ -36,6 +36,8 @@ public:
     virtual float GetWeaponShootNumber() const { return 1; }
     bool wantToShoot = false;
 
+    //Ajouter prise en compte de la portée de l'arme.
+
 private:
 
     float timer = 0;

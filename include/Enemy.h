@@ -1,4 +1,5 @@
 #include <SFML/Graphics/Sprite.hpp>
+#include "GameObjects/Character.h"
 
 #include "GameObjects/Character.h"
 

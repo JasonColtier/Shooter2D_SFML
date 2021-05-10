@@ -20,6 +20,8 @@ public:
 
 private:
     sf::Sprite* healthBar;
+
+    void HandleChangeScore(int score);
 };
 
 #endif

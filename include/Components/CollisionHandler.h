@@ -4,12 +4,10 @@
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
-
+#include "GameObjects/GameObject.h"
 #include "Tools/Print.h"
 
 #define PI 3.14159265
-
-class GameObject;
 
 enum CollisionType
 {
@@ -26,15 +24,21 @@ class CollisionHandler
 public:
 	CollisionHandler() = default;
 
-	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType>* t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position,const std::vector<sf::Vector2f>* t_Points)
+	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType>* t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, const std::vector<sf::Vector2f>* t_Points)
 		: owner(t_owner)
 		, e_Type(t_Type)
 		, l_ExcludedCollisionType((t_ExcludedCollisionType))
 		, position(t_Position)
 		, radius(t_radius)
 		, rotation(t_Rotation)
-		, l_Points((t_Points))
 	{
+		std::vector<sf::Vector2f>* tmp = new std::vector<sf::Vector2f>(t_Points->size());
+
+		for (sf::Vector2f point : t_Points)
+		{
+			tmp->push_back(point * owner->scale);
+		}
+		l_Points = tmp;
 	}
 
 	~CollisionHandler() = default;
@@ -92,7 +96,7 @@ public:
 
 private:
 
-	const std::vector<sf::Vector2f>* l_Points;
+	std::vector<sf::Vector2f>* l_Points;
 };
 
 #endif //CollisionHandler_H

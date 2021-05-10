@@ -33,18 +33,31 @@ Enemy::Enemy()
 	}
 	
 	auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({CollisionType::EnemyChannel}), &rotation, 50, &position, tmp);
+	collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({CollisionType::EnemyChannel, BonusChannel, EnemyProjectileChannel}), &rotation, 50, &position, tmp);
 
 }
 
 void Enemy::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
+
+	if (MovementCompo->distance <= 300)
+	{
+		//modifier le changement de vitesse par le biai d'un multiplicateur
+		MovementCompo->speed = 0.0000005f;
+		shootComponent->wantToShoot = true;
+		shootComponent->g_fireRate = 10.0f;
+		//Print::PrintLog("Shoot Enabled");		
+	}
+	else
+	{
+		MovementCompo->speed = 0.001f;
+		shootComponent->wantToShoot = false;
+		//Print::PrintLog("Shoot Not Enabled");
+	}
 }
 
 void Enemy::Deactivate()
 {
 	GameObject::Deactivate();
-	ScoreManager::ModifyScore(1);//une façon d'augmenter le score rapide mais on peut faire mieux
-
 }

@@ -29,7 +29,7 @@ public:
 
 private:
 
-	ShootComponent* shootComponent;//y accéder par le tableau
+	
 };
 
 #endif
