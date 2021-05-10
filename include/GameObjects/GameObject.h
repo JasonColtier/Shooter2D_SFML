@@ -53,6 +53,7 @@ public:
 	
 	bool isActivated = true;
 	float rotation = 0;
+	float scale = 0.5f;
 	sf::Vector2f position = sf::Vector2f(0.f, 0.f);
 	sf::Vector2f offsetPos = sf::Vector2f(0, 0);//offset de position
 

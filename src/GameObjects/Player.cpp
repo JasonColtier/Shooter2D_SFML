@@ -27,7 +27,7 @@ Player::Player()
 	if (sprite)
 	{
 		sprite->setOrigin(sf::Vector2f(50.f, 50.f));
-		sprite->setScale(sf::Vector2f(1.f, 1.f));
+		sprite->setScale(sf::Vector2f(scale, scale));
 	}
 
 	offsetPos = sf::Vector2f(0, 25.f);
