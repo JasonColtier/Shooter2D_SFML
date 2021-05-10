@@ -12,7 +12,6 @@ set(HEADERS
     ${HEADER_DIR}/Tools/VectorTools.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
-    ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/GameObjects/Player.h
     ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/SniperBullet.h
@@ -56,7 +55,6 @@ set(HEADERS
 
 set(SOURCES
     ${SOURCE_DIR}/Main.cpp
-    ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
     ${SOURCE_DIR}/GameLevel.cpp
     ${SOURCE_DIR}/GameWindow.cpp
