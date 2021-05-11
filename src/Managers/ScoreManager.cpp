@@ -4,8 +4,8 @@
 
 void ScoreManager::ModifyScore(int modif)
 {
-    score += modif;
+    m_score += modif;
     
-    m_signal(score);
+    m_signal(m_score);
 }
 

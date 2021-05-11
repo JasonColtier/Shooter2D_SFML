@@ -1,19 +1,20 @@
 ﻿#ifndef LIFECOMPONENT_H
 #define LIFECOMPONENT_H
+
 #include "Component.h"
 
 class LifeComponent : public Component
 {
 public:
+	LifeComponent() = default;
 
-    LifeComponent() = default;
-    void TickComponent(int64_t deltaTime) override;
-    
-    float ModifyHealth(float modification);
+	void TickComponent(int64_t deltaTime) override;
+	float ModifyHealth(float modification);
 
-    float maxHealth = 10;
-    float currentHealth = maxHealth;
+public:
+	float m_maxHealth = 10;
+	float m_currentHealth = m_maxHealth;
 };
 
-#endif
+#endif //LIFECOMPONENT_H
 

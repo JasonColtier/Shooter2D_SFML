@@ -1,16 +1,12 @@
 ﻿#include "GameLevel.h"
-
-#include "Enemy.h"
 #include "GameObjects/Player.h"
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "GameObjects/Bullet.h"
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
-#include "HUD/PlayerHUD.h"
+#include "GameObjects/BackgroundTexture.h"
 #include "Managers/AudioManager.h"
-
 
 GameLevel::GameLevel()
 {
@@ -19,31 +15,30 @@ GameLevel::GameLevel()
 
 void GameLevel::SpawnGameObjects()
 {
-	player = SpawnActor<Player>();
-	player->position = sf::Vector2f(300.f, 300.f);
+	m_player = SpawnActor<Player>();
+	m_player->m_position = sf::Vector2f(300.f, 300.f);
 
 	SpawnActor<BackgroundTexture>();
 	SpawnActor<Spawner>();
 
-	AudioManager::PlayMusic(AudioManager::EmicGameMusic);
+	AudioManager::PlayMusic(AudioManager::ESounds::EpicGameMusic);
 }
-
 
 void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
-	auto copy = l_gameObjects;
+	auto Copy = m_lGameObjects;
 	// Print::PrintLog("number of objects in level : ",copy.size());
-	for (GameObject* gameObject : copy)
+	for (auto* gameObject : Copy)
 	{
-		if (!gameObject->isActivated)
+		if (!gameObject->m_isActivated)
 		{
 			break;
 		}
 		gameObject->Tick(deltaTime);
 	}
 
-	CollisionManager::UpdateCollision(l_abscisseGameObjects);
+	CollisionManager::UpdateCollision(m_lAbscisseGameObjects);
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
@@ -52,25 +47,24 @@ void GameLevel::Render(sf::RenderWindow* window)
 	/*
 	 *	quand on active / désactive, on peut mettre dans une autre liste
 	 */
-	
+
 	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (g1->isActivated != g2->isActivated) return g1->isActivated > g2->isActivated;
-		if (!g1->renderHandler || !g2->renderHandler) return g1->renderHandler > g2->renderHandler;
-		return (g1->renderHandler->mapSprites.begin()->second->zIndex) < (g2->renderHandler->mapSprites.begin()->second->zIndex);
+		if (g1->m_isActivated != g2->m_isActivated) return g1->m_isActivated > g2->m_isActivated;
+		if (!g1->m_renderHandler || !g2->m_renderHandler) return g1->m_renderHandler > g2->m_renderHandler;
+		return (g1->m_renderHandler->mapSprites.begin()->second->zIndex) < (g2->m_renderHandler->mapSprites.begin()->second->zIndex);
 	};
 
 	//améliorer ce sort ? trie par insertion ?
-	
-	l_gameObjects.sort(renderPrioritySort);
+	m_lGameObjects.sort(renderPrioritySort);
 
-	for (auto* object : l_gameObjects)
+	for (auto* object : m_lGameObjects)
 	{
-		if (!object->isActivated || !object->renderHandler)
+		if (!object->m_isActivated || !object->m_renderHandler)
 		{
 			break;
 		}
-		object->renderHandler->RenderUpdate();
+		object->m_renderHandler->RenderUpdate();
 	}
 }
 
