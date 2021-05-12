@@ -17,8 +17,9 @@ Player::Player()
 {
 	Print::PrintLog("new player");
 
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
-	auto* Sprite = m_renderHandler->GetSprite("player");
+	m_renderHandler = new RenderHandler(this );
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
+	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("player");
 
 	if (Sprite)
 	{

@@ -10,97 +10,73 @@
 #include "Managers/FontManager.h"
 
 
-RenderHandler::RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture,std::string t_stringKey, int t_zIndex) : parentGameObject(t_parentGameObject)
+RenderHandler::RenderHandler(GameObject* parentGameObject) : m_parentGameObject(parentGameObject)
 {
-    AddSprite(t_texture,t_stringKey,t_zIndex);
+	
 }
 
-sf::Sprite* RenderHandler::GetSprite(const std::string key) const
+sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
 {
-    auto Iterator = mapSprites.find(key);
+	auto* sprite = new sf::Sprite(*tex);
+	auto* customSprite = new CustomContainer(std::move(key), zIndex, sprite);
 
-    if (Iterator != mapSprites.end())
-    {
-        return Iterator->second->sprite;
-    }
+	m_renderedItems.push_back(customSprite);
 
-    return nullptr;
+	// Sort using comparator function
+	std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
+
+	if (isMovable)
+	{
+		m_MovableSprites.push_back(sprite);
+	}
+
+	return sprite;
 }
 
-sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex,std::string key,int zIndex)
+sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color, int size)
 {
-    auto sprite = new sf::Sprite;
-    sprite->setTexture(*tex);
-    SpriteContainer* customSprite = new SpriteContainer(sprite,zIndex);
-    mapSprites[key] = customSprite;
-    
-    sortedSprites.push_back(customSprite);
-    
-    // Sort using comparator function
-    std::sort(sortedSprites.begin(), sortedSprites.end(), Comparator);
-    
-    return sprite;
+
+	// Create a text
+	sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::EnumFonts::Mandalorian));
+	text->setCharacterSize(size);
+	text->setFillColor(color);
+	text->setPosition(pos);
+
+	auto* customText = new CustomContainer(std::move(key), zIndex, text);
+
+	m_renderedItems.push_back(customText);
+
+	std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
+
+	return text;
 }
-
-sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color,int size)
-{
-    
-    // Create a text
-    sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::EnumFonts::Mandalorian));
-    text->setCharacterSize(size);
-    text->setFillColor(color);
-    text->setPosition(pos);
-    
-    TextContainer* customText = new TextContainer(text,zIndex);
-    mapText[key] = customText;
-
-    sortedText.push_back(customText);
-
-    std::sort(sortedText.begin(), sortedText.end(), Comparator);
-
-    return customText->text;
-} 
-
-sf::Text* RenderHandler::GetText(const std::string key) const
-{
-    auto Iterator = mapText.find(key);
-
-    if (Iterator != mapText.end())
-    {
-        return Iterator->second->text;
-    }
-
-    return nullptr;
-}
-
 
 void RenderHandler::RenderUpdate()
 {
-    // if (parentGameObject->collisionHandler)
-    // {
-    // 	std::vector<sf::Vector2f> tmp = parentGameObject->collisionHandler->getPoints();
-    // 	
-    // 	sf::Vertex vertice[4] =
-    // 	{
-    // 		tmp[0],
-    //            tmp[1],
-    //            tmp[2],
-    //            tmp[3]
-    //        };
-    //
-    // 	GameWindow::window->draw(vertice, 4, sf::Quads);
-    // }
+	// if (parentGameObject->collisionHandler)
+	// {
+	// 	std::vector<sf::Vector2f> tmp = parentGameObject->collisionHandler->getPoints();
+	// 	
+	// 	sf::Vertex vertice[4] =
+	// 	{
+	// 		tmp[0],
+	//            tmp[1],
+	//            tmp[2],
+	//            tmp[3]
+	//        };
+	//
+	// 	GameWindow::window->draw(vertice, 4, sf::Quads);
+	// }
 
-    for (auto customSprite : sortedSprites)
-    {
-        customSprite->sprite->setRotation(parentGameObject->m_rotation);
-        customSprite->sprite->setPosition(parentGameObject->m_position);
-        GameWindow::m_window->draw(*customSprite->sprite);
-    }
+	for (auto* sprite : m_MovableSprites)
+	{
+		sprite->setRotation(m_parentGameObject->m_rotation);
+		sprite->setPosition(m_parentGameObject->m_position);
+	}
 
-    for (auto textContainer : sortedText)
-    {
-        GameWindow::m_window->draw(*textContainer->text);
-    }
+	for (auto* rendered : m_renderedItems)
+	{
+		GameWindow::m_window->draw(*rendered->m_drawableItem);
+	}
 
 }

@@ -3,9 +3,11 @@ cmake_minimum_required(VERSION 3.2)
 project(Shooter2D_SFML VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 
 set(HEADERS
     ${HEADER_DIR}/Tools/Print.h
@@ -16,7 +18,6 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/SniperBullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
-    ${HEADER_DIR}/GameObjects/BackgroundTexture.h
     ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
@@ -44,13 +45,13 @@ set(HEADERS
     ${HEADER_DIR}/HUD/PlayerHUD.h
     ${HEADER_DIR}/Spawner.h
     ${HEADER_DIR}/Enemy.h
-	${HEADER_DIR}/Components/EnemyMovementComponent.h
-	${HEADER_DIR}/Components/IMovementComponent.h
+    ${HEADER_DIR}/Components/EnemyMovementComponent.h
+    ${HEADER_DIR}/Components/IMovementComponent.h
     ${HEADER_DIR}/StaticData.h
-	${HEADER_DIR}/Components/ShotgunnerMovementComponent.h
-	${HEADER_DIR}/GameObjects/EnemyGunner.h
-	${HEADER_DIR}/GameObjects/EnemyShotgunner.h
-	${HEADER_DIR}/GameObjects/EnemySniper.h
+    ${HEADER_DIR}/Components/ShotgunnerMovementComponent.h
+    ${HEADER_DIR}/GameObjects/EnemyGunner.h
+    ${HEADER_DIR}/GameObjects/EnemyShotgunner.h
+    ${HEADER_DIR}/GameObjects/EnemySniper.h
 )
 
 set(SOURCES
@@ -62,7 +63,6 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/GameObjects/SniperBullet.cpp
-    ${SOURCE_DIR}/GameObjects/BackgroundTexture.cpp
     ${SOURCE_DIR}/GameObjects/Character.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
@@ -79,14 +79,23 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
     ${SOURCE_DIR}/HUD/PlayerHUD.cpp
-	${SOURCE_DIR}/Spawner.cpp
-	${SOURCE_DIR}/Enemy.cpp
-	${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
-	${SOURCE_DIR}/Components/ShotgunnerMovementComponent.cpp
-	${SOURCE_DIR}/GameObjects/EnemyGunner.cpp
-	${SOURCE_DIR}/GameObjects/EnemyShotgunner.cpp
-	${SOURCE_DIR}/GameObjects/EnemySniper.cpp
+    ${SOURCE_DIR}/Spawner.cpp
+    ${SOURCE_DIR}/Enemy.cpp
+    ${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
+    ${SOURCE_DIR}/Components/ShotgunnerMovementComponent.cpp
+    ${SOURCE_DIR}/GameObjects/EnemyGunner.cpp
+    ${SOURCE_DIR}/GameObjects/EnemyShotgunner.cpp
+    ${SOURCE_DIR}/GameObjects/EnemySniper.cpp
 )
+
+
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
+PREFIX "SOURCES"
+FILES ${SOURCES})
+
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}"
+PREFIX "HEADERS"
+FILES ${HEADERS})
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME}

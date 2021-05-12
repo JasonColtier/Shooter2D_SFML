@@ -7,7 +7,7 @@ SniperBullet::SniperBullet()
     m_damage *= 3;
     m_speed *= 3;
 
-    auto* Sprite = m_renderHandler->GetSprite("bullet");
+    auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("bullet");
 
     if (Sprite)
     {

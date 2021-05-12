@@ -10,9 +10,10 @@
 
 Bullet::Bullet()
 {
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
+	m_renderHandler = new RenderHandler(this);
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
 
-	auto* Sprite = m_renderHandler->GetSprite("bullet");
+	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("bullet");
 	if (Sprite)
 	{
 		Sprite->setScale(sf::Vector2f(m_scale, m_scale));
