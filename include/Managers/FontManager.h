@@ -1,27 +1,30 @@
-﻿#pragma once
+﻿#ifndef FONTMANAGER_H
+#define FONTMANAGER_H
+
 #include <map>
 
 namespace sf {
-    class Font;
+	class Font;
 }
 
 class FontManager
 {
 public:
-    //tous les sons
-    enum EnumFonts { Mandalorian};
+	//tous les sons
+	enum class EnumFonts { Mandalorian };
 
-    //retourne un pointeur vers la texture
-    static sf::Font* GetFontPtr(EnumFonts f);
+	//retourne un pointeur vers la texture
+	static sf::Font* GetFontPtr(EnumFonts f);
+	~FontManager() = default;//TODO    
 
-    //une map qui associe les textures chargées en mémoire à leur nom
-    inline static std::map<EnumFonts,sf::Font*> mapFonts;
-
-    ~FontManager() = default;//TODO    
+public:
+	//une map qui associe les textures chargées en mémoire à leur nom
+	inline static std::map<EnumFonts, sf::Font*> m_mapFonts;
 
 private:
-    //retourne le path associé à un nom de texture
-    static const char* GetPath(EnumFonts f);
+	FontManager() = default;
+	//retourne le path associé à un nom de texture
+	static const char* _GetPath(EnumFonts f);
 
-    FontManager() = default;
 };
+#endif //FONTMANAGER_H

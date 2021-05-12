@@ -6,51 +6,49 @@
 #include "GameLevel.h"
 #include "Enemy.h"
 #include "Components/EnemyMovementComponent.h"
-
-Spawner::Spawner()
-{
-	
-}
+#include "Components/ShotgunnerMovementComponent.h"
+#include "Components/ShotGun.h"
 
 void Spawner::Tick(int64_t deltaTime)
 {
 	//Va initier le processus de spawn à un point aléatoire une fois la condition initiale remplie (ici toute les 2 secondes pour 1 seule type ennemie)
-	Timer += deltaTime;
-	if (Timer >= 2000000)
+	m_timer += deltaTime;
+	if (m_timer >= 2000000 && m_canSpawn == true)
 	{
-		Timer = 0;
+		m_timer = 0;
 		RandomLocation();
+		m_canSpawn = false;
 	}
 }
 
 int Spawner::ChooseSide()
 {
 	//va déterminer aléatoirement de quel côté de l'écran va spawn l'ennemi
-	int Value = std::rand() % 4;
+	const auto Value = std::rand() % 4;
 	return Value;
 }
 
 void Spawner::RandomLocation()
 {
-	auto window = GameWindow::window;
-	int Side = ChooseSide();
-	float RandomX = 0;
-	float RandomY = 0;
+	const auto* window = GameWindow::m_window;
+	const auto Side = ChooseSide();
+	auto RandomX = 0;
+	auto RandomY = 0;
 
 	switch (Side)
 	{
-	//le Spawn se fera à gauche de l'écran
+		//le Spawn se fera à gauche de l'écran
 	case 0:
 		RandomX = -1;
 		RandomY = std::rand() % window->getSize().y + 1;
 		break;
 
-	//le spawn se fera à droite de l'écran
+		//le spawn se fera à droite de l'écran
 	case 1:
 		RandomX = window->getSize().x + 1;
 		RandomY = std::rand() % window->getSize().y + 1;
 		break;
-	//le spawn se fera en haut de l'écran
+		//le spawn se fera en haut de l'écran
 	case 2:
 		RandomX = std::rand() % window->getSize().x + 1;
 		RandomY = -1;
@@ -66,14 +64,17 @@ void Spawner::RandomLocation()
 		break;
 	}
 
-	DoSpawn(RandomX,RandomY);
+	DoSpawn(RandomX, RandomY);
 }
 
 void Spawner::DoSpawn(int X, int Y)
-{ 
-	Enemy* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
-	
-	NewEnemy->position = sf::Vector2f(X, Y);
-	NewEnemy->AddComponent(new KamikazeMovementComponent());
-	NewEnemy->rotation = 90;
+{
+	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
+
+	NewEnemy->m_position = sf::Vector2f(X, Y);
+	NewEnemy->m_movementCompo = new ShotgunnerMovementComponent();
+	NewEnemy->m_shootComponent = new ShotGun();
+	NewEnemy->AddComponent(NewEnemy->m_movementCompo);
+	NewEnemy->AddComponent(NewEnemy->m_shootComponent);
+	NewEnemy->m_rotation = 90;
 }

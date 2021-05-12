@@ -3,37 +3,38 @@
 #include <map>
 
 namespace sf {
-    class Music;
-    class Sound;
-    class SoundBuffer;
+	class Music;
+	class Sound;
+	class SoundBuffer;
 }
 
 class AudioManager
 {
+
 public:
-    //tous les sons
-    enum EnumSounds { FireBullet, EmicGameMusic};
+	//tous les sons
+	enum class ESounds { FireBullet, EpicGameMusic };
 
-    static void PlaySound(EnumSounds enumSound,float volume = 20.f);
+	static void PlaySound(ESounds eSound, float volume = 20.f);
 
-    static void PlayMusic(EnumSounds enumSounds);
-    
-    //retourne un pointeur vers la texture
-    static sf::SoundBuffer* GetSoundPtr(EnumSounds s);
+	static void PlayMusic(ESounds eSound);
 
-    //une map qui associe les textures chargées en mémoire à leur nom
-    inline static std::map<EnumSounds,sf::SoundBuffer*> mapSons;
+	//retourne un pointeur vers la texture
+	static sf::SoundBuffer* GetSoundPtr(ESounds eSound);
 
-    static inline sf::Sound* soundPlayer = nullptr;
-    static inline sf::Music* musicPlayer = nullptr;
+	~AudioManager() = default;//todo
 
-    ~AudioManager() = default;//todo
+public:
+	//une map qui associe les textures chargées en mémoire à leur nom
+	inline static std::map<ESounds, sf::SoundBuffer*> m_mapSons;  // NOLINT(clang-diagnostic-exit-time-destructors)
+	static inline sf::Sound* m_soundPlayer = nullptr;
+	static inline sf::Music* m_musicPlayer = nullptr;
 
 private:
-    //retourne le path associé à un nom de texture
-    static const char* GetPath(EnumSounds s);
+	//retourne le path associé à un nom de texture
+	static const char* _GetPath(ESounds eSound);
 
-    AudioManager() = default;
+	AudioManager() = default;
 };
 
-#endif
+#endif //AUDIOMANAGER_H

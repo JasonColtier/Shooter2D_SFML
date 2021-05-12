@@ -8,20 +8,20 @@
 GameLoop::GameLoop()
 {
 	Print::PrintLog("init game loop");
-	if (GameWindow::useFullscreen)
+	if (GameWindow::m_useFullscreen)
 	{
-		GameWindow::sizeWindow.x = 1920.0f;
-		GameWindow::sizeWindow.y = 1080.0f;
-		GameWindow::window = new sf::RenderWindow(sf::VideoMode(GameWindow::sizeWindow.x, GameWindow::sizeWindow.y), GameWindow::gameName, sf::Style::Fullscreen);
+		GameWindow::m_sizeWindow.x = 1920.0f;
+		GameWindow::m_sizeWindow.y = 1080.0f;
+		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(GameWindow::m_sizeWindow.x, GameWindow::m_sizeWindow.y), GameWindow::m_gameName, sf::Style::Fullscreen);
 	}
 	else
 	{
-		GameWindow::sizeWindow.x = 1920.0f / 2;
-		GameWindow::sizeWindow.y = 1080.0f / 2;
-		GameWindow::window = new sf::RenderWindow(sf::VideoMode(GameWindow::sizeWindow.x, GameWindow::sizeWindow.y), GameWindow::gameName, sf::Style::Default);
+		GameWindow::m_sizeWindow.x = 1920.0f / 2;
+		GameWindow::m_sizeWindow.y = 1080.0f / 2;
+		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(GameWindow::m_sizeWindow.x, GameWindow::m_sizeWindow.y), GameWindow::m_gameName, sf::Style::Default);
 	}
 
-	GameWindow::window->setVerticalSyncEnabled(true);
+	GameWindow::m_window->setVerticalSyncEnabled(true);
 }
 
 GameLoop::~GameLoop()
@@ -32,31 +32,31 @@ GameLoop::~GameLoop()
 void GameLoop::StartGame()
 {
 	Print::PrintLog("start game");
-	sf::Event events;
-	sf::Clock clock;
+	sf::Event Events;
+	sf::Clock Clock;
 
 	GameWindow::LoadGameLevel();
 
 	Print::PrintLog("game level loaded");
-	
-	gameLevel = GameWindow::GetGameLevel();
+
+	m_gameLevel = GameWindow::GetGameLevel();
 
 	//la partie qui loop ! On reste dedans tant qu'on est dans le jeu
-	while (GameWindow::window->isOpen())
+	while (GameWindow::m_window->isOpen())
 	{
 
 		//dupplication de code ici à cleaner
-		GameWindow::cursorPos = sf::Mouse::getPosition();
-		GameWindow::cursorPos.x -= GameWindow::window->getPosition().x;
-		GameWindow::cursorPos.y -= GameWindow::window->getPosition().y;
+		GameWindow::m_cursorPos = sf::Mouse::getPosition();
+		GameWindow::m_cursorPos.x -= GameWindow::m_window->getPosition().x;
+		GameWindow::m_cursorPos.y -= GameWindow::m_window->getPosition().y;
 
-		//keeps cursor inside of the window
+		//keeps cursor inside of the m_window
 		//marche à peu près mais c'est pas foufou
-		int maxX = GameWindow::window->getSize().x;
-		int maxY = GameWindow::window->getSize().y;
+		int maxX = GameWindow::m_window->getSize().x;
+		int maxY = GameWindow::m_window->getSize().y;
 
-		int mX = sf::Mouse::getPosition(*GameWindow::window).x;
-		int mY = sf::Mouse::getPosition(*GameWindow::window).y;
+		int mX = sf::Mouse::getPosition(*GameWindow::m_window).x;
+		int mY = sf::Mouse::getPosition(*GameWindow::m_window).y;
 
 		// if (mX < 0 || mY < 0 || mX > maxX || mY > maxY)
 		// {
@@ -73,42 +73,40 @@ void GameLoop::StartGame()
 		//     sf::Mouse::setPosition(sf::Vector2i(mX, mY), *window);
 		// }
 
-
 		//check for closing window
-		while (GameWindow::window->pollEvent(events))
+		while (GameWindow::m_window->pollEvent(Events))
 		{
-			if (events.type == sf::Event::Closed)
+			if (Events.type == sf::Event::Closed)
 			{
 				//TODO call destructeurs
-				GameWindow::window->close();
+				GameWindow::m_window->close();
 			}
 
-			// catch the resize events
-			if (events.type == sf::Event::Resized)
+			// catch the resize Events
+			if (Events.type == sf::Event::Resized)
 			{
 				// update the view to the new size of the window
-				sf::FloatRect visibleArea(0, 0, events.size.width, events.size.height);
-				GameWindow::window->setView(sf::View(visibleArea));
+				sf::FloatRect visibleArea(0, 0, Events.size.width, Events.size.height);
+				GameWindow::m_window->setView(sf::View(visibleArea));
 			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
-			GameWindow::window->close();
-
+			GameWindow::m_window->close();
 		}
 
 		/*
 		* updating game
 		*/
 
-		updateTime = 0;
+		m_updateTime = 0;
 		//tant qu'on a pas atteint le nombre de fps voulu on continue les updates
-		while (updateTime < (1.0 / targetFPS) * 1000000 - updateSurplus)
+		while (m_updateTime < (1.0 / m_targetFPS) * 1000000 - m_updateSurplus)
 		{
-			deltaTime = clock.restart().asMicroseconds(); //on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
-			updateTime += deltaTime;
+			m_deltaTime = Clock.restart().asMicroseconds(); //on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
+			m_updateTime += m_deltaTime;
 
-			Update();
+			_Update();
 		}
 
 		//pour sortir du while il faut nécessairement dépasser le temps alloué pour atteindre nos FPS donc on reprend à partir de ce temps dépassé pour la prochaine update
@@ -116,29 +114,23 @@ void GameLoop::StartGame()
 		/*
 		*  rendering game
 		*/
-		Render();
-		updateSurplus = updateTime - ((1.0 / targetFPS) * 1000000);
-
+		_Render();
+		m_updateSurplus = m_updateTime - ((1.0 / m_targetFPS) * 1000000);
 	}
-
 }
 
-void GameLoop::Update()
+void GameLoop::_Update()
 {
 	InputManager::HandleInputs();
-
-	gameLevel->Update(deltaTime);
+	m_gameLevel->Update(m_deltaTime);
 	// Print::PrintLog(LOG,"updateTime : ",updateTime);
 	// Print::PrintLog("deltatime : ", deltaTime);
 }
 
-void GameLoop::Render() const
+void GameLoop::_Render() const
 {
 	// Print::PrintLog(LOG,"render : ");
-
-	GameWindow::window->clear();
-
-	gameLevel->Render(GameWindow::window);
-
-	GameWindow::window->display();
+	GameWindow::m_window->clear();
+	m_gameLevel->Render(GameWindow::m_window);
+	GameWindow::m_window->display();
 }

@@ -7,25 +7,24 @@
 class VectorTools
 {
 public:
-    static sf::Vector2f NormaliseVector(sf::Vector2f& vec)
-    {
-        float length = Length(vec);
-        if (length != 0)
-            return sf::Vector2f(vec.x / length, vec.y / length);
-        else
-            return vec;
-    }
+	static sf::Vector2f NormaliseVector(const sf::Vector2f vec)
+	{
+		const auto length = Length(vec);
+		if (length != 0.0f)
+		{
+			return sf::Vector2f(vec.x / length, vec.y / length);
+		}
+		return vec;
+	}
 
-    static float Length(sf::Vector2f& vec)
-    {
-        float len = std::sqrt((vec.x * vec.x) + (vec.y * vec.y));
-        // if(len < 1)
-        //     len = 1;
-        return len;
-    }
+	static float Length(const sf::Vector2f vec)
+	{
+		const auto len = std::sqrt((vec.x * vec.x) + (vec.y * vec.y));
+		return len;
+	}
 
-    static void PrintVector(sf::Vector2f& vec)
-    {
-        std::cout << "x : "<<vec.x<< " // y : "<<vec.y<<std::endl;
-    }
+	static void PrintVector(const sf::Vector2f vec)
+	{
+		std::cout << "x : " << vec.x << " // y : " << vec.y << std::endl;
+	}
 };

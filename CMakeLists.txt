@@ -12,7 +12,6 @@ set(HEADERS
     ${HEADER_DIR}/Tools/VectorTools.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
-    ${HEADER_DIR}/TestSignalSimple.h
     ${HEADER_DIR}/GameObjects/Player.h
     ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/SniperBullet.h
@@ -31,6 +30,7 @@ set(HEADERS
     ${HEADER_DIR}/Managers/CollisionManager.h
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Managers/CollisionDispatcher.h
+    ${HEADER_DIR}/Managers/TOnCollision.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
@@ -46,12 +46,15 @@ set(HEADERS
     ${HEADER_DIR}/Enemy.h
 	${HEADER_DIR}/Components/EnemyMovementComponent.h
 	${HEADER_DIR}/Components/IMovementComponent.h
-    ${HEADER_DIR}/StaticData.h  
+    ${HEADER_DIR}/StaticData.h
+	${HEADER_DIR}/Components/ShotgunnerMovementComponent.h
+	${HEADER_DIR}/GameObjects/EnemyGunner.h
+	${HEADER_DIR}/GameObjects/EnemyShotgunner.h
+	${HEADER_DIR}/GameObjects/EnemySniper.h
 )
 
 set(SOURCES
     ${SOURCE_DIR}/Main.cpp
-    ${SOURCE_DIR}/TestSignalSimple.cpp
     ${SOURCE_DIR}/GameLoop.cpp
     ${SOURCE_DIR}/GameLevel.cpp
     ${SOURCE_DIR}/GameWindow.cpp
@@ -79,6 +82,10 @@ set(SOURCES
 	${SOURCE_DIR}/Spawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
 	${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
+	${SOURCE_DIR}/Components/ShotgunnerMovementComponent.cpp
+	${SOURCE_DIR}/GameObjects/EnemyGunner.cpp
+	${SOURCE_DIR}/GameObjects/EnemyShotgunner.cpp
+	${SOURCE_DIR}/GameObjects/EnemySniper.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

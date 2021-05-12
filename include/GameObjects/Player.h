@@ -3,14 +3,7 @@
 
 #include "Character.h"
 #include "GameObject.h"
-#include "Components/ShootComponent.h"
 #include "Managers/InputManager.h"
-
-class RenderHandler;
-
-namespace sf {
-	class Texture;
-}
 
 class Player : public Character
 {
@@ -21,15 +14,10 @@ public:
 	void Tick(int64_t deltaTime) override;
 
 	//quand on détecte un changement d'input
-	void OnInputChanged(InputMapping input);
+	void OnInputChanged(InputMapping input) const;
 
-	virtual TypeId getTypeId() override { return getClassTypeId(); }
-	static TypeId getClassTypeId() { return 1; }
-
-
-private:
-
-	ShootComponent* shootComponent;//y accéder par le tableau
+	virtual TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "Player"; }
 };
 
-#endif
+#endif //PLAYER_H

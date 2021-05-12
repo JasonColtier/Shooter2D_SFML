@@ -5,60 +5,43 @@
 #include "Components/CollisionHandler.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Character.h"
-#include "Tools/Print.h"
 
-#define PI 3.14159265
+#define PI 3.14159265f
 
 Bullet::Bullet()
 {
-    // Print::PrintLog("new bullet !");
-    renderHandler = new RenderHandler(this,TextureManager::GetTexturePtr(TextureManager::Bullet),"bullet",2);
+	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
 
-    auto sprite = renderHandler->GetSprite("bullet");
+	auto* Sprite = m_renderHandler->GetSprite("bullet");
+	if (Sprite)
+	{
+		Sprite->setScale(sf::Vector2f(m_scale, m_scale));
+		Sprite->setOrigin(10, 5);
+	}
 
-    if (sprite)
-    {
-        sprite->setScale(scale);
-        sprite->setOrigin(10,5);
-    }
-
-    auto* tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -4.0f), sf::Vector2f(0.0f, 9.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(0.0f, -9.0f) };
-    collisionHandler = new CollisionHandler(this, CollisionType::PlayerProjectileChannel, new std::vector<CollisionType>({CollisionType::PlayerChannel}), &rotation, 10, &position, tmp);
+	auto* Tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -4.0f), sf::Vector2f(0.0f, 9.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(0.0f, -9.0f) };
+	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, new std::vector<CollisionType>(), &m_rotation, 10, &m_position, Tmp);
 }
 
-void Bullet::Tick(int64_t deltaTime)
+void Bullet::Tick(const int64_t deltaTime)
 {
-    GameObject::Tick(deltaTime);
-    
-    if(autoDestroyDelay > 0)
-    {
-        timer += deltaTime;
-        if(timer > autoDestroyDelay * 1000000)
-        {
-            Deactivate();
-            return;
-        }
-    }
-    
-    
-    sf::Vector2f forward(cos(rotation * PI / 180), sin(rotation * PI / 180));
+	if (m_autoDestroyDelay > 0)
+	{
+		m_timer += static_cast<float>(deltaTime);
+		if (m_timer > m_autoDestroyDelay * 1000000)
+		{
+			Deactivate();
+			return;
+		}
+	}
+	const sf::Vector2f forward(cosf(m_rotation * PI / 180.f), sinf(m_rotation * PI / 180.f));
 
-    position += (forward / 1000.f * (deltaTime * 1.f)) * speed * speedMultiplier;
+	m_position += (forward / 1000.f * (static_cast<float>(deltaTime) * 1.f)) * GetSpeed();
 
-    if(!GameWindow::CheckIfInsideWindow(this))
-    {
-        Deactivate();
-    }
+	if (!GameWindow::CheckIfInsideWindow(this))
+	{
+		Deactivate();
+	}
 
-    GameObject::Tick(deltaTime);
-}
-
-void Bullet::OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
-{
-    if(typeid(*otherObject) == typeid(Enemy))
-    {
-        auto enemy = dynamic_cast<Enemy*>(otherObject);
-        enemy->lifeComponent->ModifyHealth(-damage*damageMultiplier);
-        Deactivate();
-    }
+	GameObject::Tick(deltaTime);
 }

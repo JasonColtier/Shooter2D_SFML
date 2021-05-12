@@ -3,37 +3,32 @@
 
 void GameObject::AddComponent(Component* component)
 {
-    componentList.push_back(component);
-    component->Owner = this;
+	m_lComponentList.push_back(component);
+	component->Owner = this;
 }
 
 void GameObject::RemoveComponent(Component* component)
 {
-    componentList.remove(component);
-}
-
-
-void GameObject::OnCollision(sf::Vector2f hitPoint, GameObject* otherObject)
-{
+	m_lComponentList.remove(component);
 }
 
 void GameObject::Tick(int64_t deltaTime)
 {
-    for (Component* component : componentList)
-    {
-        component->TickComponent(deltaTime);
-    }
+	for (Component* component : m_lComponentList)
+	{
+		component->TickComponent(deltaTime);
+	}
 }
 
 void GameObject::Activate()
 {
-    isActivated = true;
+	m_isActivated = true;
 }
 
 void GameObject::Deactivate()
 {
-    if(isActivated)
-    {
-        isActivated = false;
-    }
+	if (m_isActivated)
+	{
+		m_isActivated = false;
+	}
 }

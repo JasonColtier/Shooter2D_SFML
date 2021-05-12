@@ -7,36 +7,34 @@ class GameLevel;
 
 namespace sf
 {
-    class Clock;
-    class RenderWindow;
+	class Clock;
+	class RenderWindow;
 }
 
 class GameLoop : public Singleton<GameLoop>
 {
-
-    friend class Singleton<GameLoop>;
+	friend class Singleton<GameLoop>;
 
 public:
-    
-
-    void StartGame();
+	void StartGame();
 
 private:
-    GameLoop();
-    ~GameLoop();
-    
-    float targetFPS = 60.0f;
+	GameLoop();
+	~GameLoop();
 
-    //temps entre chaque frame
-    int64_t deltaTime; //en microsecondes !
-    int updateTime = 0;//temps pour faire toutes les boucles updates avant un rendu
-    int updateSurplus = 0;//temps pour faire toutes les boucles updates avant un rendu
+	//update all game objects
+	void _Update();
+	//after all updates, one render
+	void _Render() const;
 
-    GameLevel* gameLevel;
+private:
+	//temps entre chaque frame
+	int64_t m_deltaTime; //en microsecondes !
+	int m_updateTime = 0;//temps pour faire toutes les boucles updates avant un rendu
+	int m_updateSurplus = 0;//temps pour faire toutes les boucles updates avant un rendu
+	float m_targetFPS = 60.0f;
 
-    //update all game objects
-    void Update();
-    //after all updates, one render
-    void Render() const;
+	GameLevel* m_gameLevel;
+
 };
 #endif

@@ -1,7 +1,6 @@
 ﻿#ifndef RenderHandler_H
 #define RenderHandler_H
 
-#include <list>
 #include <map>
 #include <string>
 #include <vector>
@@ -42,9 +41,7 @@ struct TextContainer : CustomContainer
     }
 };
 
-
 typedef std::pair<std::string, SpriteContainer*> pairKeySprite;
-
 
 class RenderHandler
 {
@@ -56,7 +53,6 @@ public:
 
     std::map<std::string, SpriteContainer*> mapSprites;
     std::vector<SpriteContainer*> sortedSprites;
-
 
     std::map<std::string, TextContainer*> mapText;
     std::vector<TextContainer*> sortedText;

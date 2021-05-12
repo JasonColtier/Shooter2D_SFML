@@ -1,19 +1,22 @@
 ﻿#include "Components/ShotGun.h"
 #include "GameWindow.h"
 #include "GameObjects/Bullet.h"
-
+#include "Components/CollisionHandler.h"
 
 ShotGun::ShotGun()
 {
-    g_shootNumber = 5;
-    g_fireRate = 8.f;
-    g_dispersion = 10;
+	m_shootNumber = 5;
+	m_fireRate = 2.f;
+	m_dispersion = 10;
 }
 
 void ShotGun::ShootBullet(int initialAngle)
 {
-    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
-    bullet->position = Owner->position;
-    bullet->rotation = Owner->rotation + initialAngle;
-    bullet->autoDestroyDelay = 0.4f;
+	auto* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
+	bullet->m_position = Owner->m_position;
+	bullet->m_rotation = Owner->m_rotation + static_cast<float>(initialAngle);
+	bullet->m_autoDestroyDelay = 0.4f;
+
+	bullet->m_collisionHandler->m_eType = CollisionType::EnemyProjectileChannel;
+	bullet->m_collisionHandler->m_lExcludedCollisionType = new std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 }

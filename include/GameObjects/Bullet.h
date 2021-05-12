@@ -8,30 +8,31 @@ class Bullet : public GameObject
 public:
 
 	Bullet();
-	virtual ~Bullet() = default;
+	~Bullet() override = default;
 
 	void Tick(int64_t deltaTime) override;
 
-	void OnCollision(sf::Vector2f hitPoint, GameObject* otherObject) override;
-
-	virtual TypeId getTypeId() override { return getClassTypeId(); }
-	static TypeId getClassTypeId() { return 3; }
+	TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "Bullet"; }
 
 	float GetDammage() const
 	{
-		return damage;
+		return m_damage * m_damageMultiplier;
 	}
 
-	sf::Vector2f scale = sf::Vector2f(1, 1);
-	float autoDestroyDelay = 0;
-	float speedMultiplier = 1.f;
-	float damageMultiplier = 1.f;
+	float GetSpeed() const
+	{
+		return m_speed * m_speedMultiplier;
+	}
+
+	//sf::Vector2f scale = sf::Vector2f(1, 1);
+	float m_autoDestroyDelay = 0;
+	float m_speedMultiplier = 1.f;
+	float m_damageMultiplier = 1.f;
 
 protected:
-	float speed = 0.5f;
-	float timer = 0.f;
-	float damage = 1.f;
+	float m_speed = 0.5f;
+	float m_timer = 0.f;
+	float m_damage = 1.f;
 };
-
-
 #endif //BULLET_H

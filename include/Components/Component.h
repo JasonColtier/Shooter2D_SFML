@@ -12,6 +12,7 @@ public:
 	virtual ~Component() = default;
 	virtual void TickComponent(int64_t deltaTime = 0) = 0;
 
+public:
 	GameObject* Owner = nullptr;
 
 };

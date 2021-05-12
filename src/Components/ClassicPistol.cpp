@@ -1,25 +1,22 @@
 ﻿#include "Components/ClassicPistol.h"
-
-
 #include "GameWindow.h"
 #include "GameObjects/Bullet.h"
 #include "Managers/AudioManager.h"
+#include "Components/CollisionHandler.h"
 
 ClassicPistol::ClassicPistol()
 {
-    g_shootNumber = 1;
-    g_fireRate = 2.f;
-    g_dispersion = 15.f;
+	m_shootNumber = 1;
+	m_fireRate = 2.f;
+	m_dispersion = 15.f;
 }
 
-void ClassicPistol::ShootBullet(int initialAngle)
+void ClassicPistol::ShootBullet(const int initialAngle)
 {
-    
-    
-    Bullet* bullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
-    bullet->position = Owner->position;
-    bullet->rotation = Owner->rotation + initialAngle;
-
-    AudioManager::PlaySound(AudioManager::FireBullet,10);
-
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>();
+	NewBullet->m_position = Owner->m_position;
+	NewBullet->m_rotation = Owner->m_rotation + static_cast<float>(initialAngle);
+	NewBullet->m_collisionHandler->m_eType = CollisionType::PlayerProjectileChannel;
+	NewBullet->m_collisionHandler->m_lExcludedCollisionType = new std::vector<CollisionType>({CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }
