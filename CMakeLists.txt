@@ -22,6 +22,7 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
+    ${HEADER_DIR}/GameObjects/BonusMultipleShot.h
     ${HEADER_DIR}/GameObjects/Spawner.h
     ${HEADER_DIR}/GameObjects/Enemy.h
     ${HEADER_DIR}/GameLevel.h
@@ -35,6 +36,7 @@ set(HEADERS
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Managers/CollisionDispatcher.h
     ${HEADER_DIR}/Managers/TOnCollision.h
+    ${HEADER_DIR}/Managers/BonusSpawner.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
