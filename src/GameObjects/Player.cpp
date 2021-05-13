@@ -34,7 +34,7 @@ Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 	m_shootComponent = new ClassicPistol();
 	AddComponent(m_shootComponent);
 
-	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
+	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);

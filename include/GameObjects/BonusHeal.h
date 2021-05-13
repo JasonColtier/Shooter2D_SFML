@@ -3,6 +3,7 @@
 
 #include "IBonus.h"
 #include "Components/RenderHandler.h"
+#include "Managers/TextureManager.h"
 
 class BonusHeal final: public IBonus
 {

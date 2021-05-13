@@ -41,7 +41,7 @@ public:
 				auto* tmp = dynamic_cast<T*>(object);
 				if (tmp)
 				{
-					tmp->Activate(args...);
+					tmp->Activate(args...); 
 					return tmp;
 				}
 			}
