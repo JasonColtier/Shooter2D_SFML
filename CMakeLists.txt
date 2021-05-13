@@ -36,7 +36,6 @@ set(HEADERS
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
-    ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionHandler.h
     ${HEADER_DIR}/Components/MovementComponent.h
     ${HEADER_DIR}/Components/LifeComponent.h

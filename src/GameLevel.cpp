@@ -6,6 +6,7 @@
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
 #include "Managers/AudioManager.h"
+#include "Managers/TextureManager.h"
 
 GameLevel::GameLevel()
 {
@@ -17,7 +18,7 @@ void GameLevel::SpawnGameObjects()
 	m_player = SpawnActor<Player>(sf::Vector2f(300.f, 300.f));
 	//m_player->m_position = sf::Vector2f(300.f, 300.f);
 
-	auto* background = SpawnActor<GameObject>();
+	auto* background = SpawnActor<GameObject>(sf::Vector2f(0.f, 0.f));
 	background->m_renderHandler = new RenderHandler(background);
 	background->m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
 
