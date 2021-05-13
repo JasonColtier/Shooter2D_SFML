@@ -8,9 +8,10 @@
 
 Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) :GameObject(position, offsetPos, scale, rotation)
 {
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
+	m_renderHandler = new RenderHandler(this);
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
 
-	auto* Sprite = m_renderHandler->GetSprite("bullet");
+	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("bullet");
 	if (Sprite)
 	{
 		Sprite->setScale(sf::Vector2f(m_scale, m_scale));

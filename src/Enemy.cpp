@@ -15,9 +15,10 @@ Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float r
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
 
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
+	m_renderHandler = new RenderHandler(this);
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
 
-	auto* Sprite = m_renderHandler->GetSprite("enemy");
+	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("enemy");
 
 	if (Sprite)
 	{

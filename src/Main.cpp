@@ -44,8 +44,8 @@
 //}
 
 int main()
-{
-	GameLoop::GetInstance()->StartGame();
+{    
+    GameLoop::GetInstance()->StartGame(); 
 
 	//auto* tmp1 = spawn<A>(4);
 	//std::cout << tmp1->m_i << std::endl;

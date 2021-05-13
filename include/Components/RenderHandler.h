@@ -11,66 +11,66 @@ class GameObject;
 
 namespace sf
 {
-    class RenderWindow;
+	class RenderWindow;
 }
 
 
 struct CustomContainer
 {
-    int zIndex = 0;
+
+	CustomContainer(std::string key, int zIndex, sf::Drawable* drawable) : m_key(key), m_zIndex(zIndex), m_drawableItem(drawable)
+	{
+	}
+
+	int m_zIndex = 0;//index de notre élément 
+	std::string m_key;//clé pour le retrouver car les data sont dans le render handler
+	sf::Drawable* m_drawableItem;//élément à rendre
 };
 
 //Un container pour associer une sprite à un index
-struct SpriteContainer : CustomContainer
-{
-    sf::Sprite* sprite;
-
-    SpriteContainer(sf::Sprite* t_sprite, int t_zIndex) : sprite(t_sprite)
-    {
-        zIndex = t_zIndex;
-    }
-};
-
-struct TextContainer : CustomContainer
-{
-    sf::Text* text;
-
-    TextContainer(sf::Text* t_text, int t_zIndex) : text(t_text)
-    {
-        zIndex = t_zIndex;
-    }
-};
-
-typedef std::pair<std::string, SpriteContainer*> pairKeySprite;
 
 class RenderHandler
 {
 public:
 
-    RenderHandler(GameObject* t_parentGameObject, sf::Texture* t_texture, std::string t_stringKey, int t_zIndex);
+	RenderHandler(GameObject* parentGameObject);
 
-    GameObject* parentGameObject;
+	template <class T>
+	T* GetRenderedItemWithKey(std::string key)
+	{
+		for (auto item : m_renderedItems)
+		{
+			if (item->m_key == key)
+			{
+				return dynamic_cast<T*>(item->m_drawableItem);
+			}
+		}
 
-    std::map<std::string, SpriteContainer*> mapSprites;
-    std::vector<SpriteContainer*> sortedSprites;
+		return nullptr;
+	}
 
-    std::map<std::string, TextContainer*> mapText;
-    std::vector<TextContainer*> sortedText;
-    
-    sf::Sprite* AddSprite(sf::Texture* tex, std::string key, int zIndex);
-    sf::Sprite* GetSprite(std::string key) const;
+	sf::Sprite* AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
 
-    sf::Text* AddText(std::string userText,std::string key,int zIndex,sf::Vector2f pos = sf::Vector2f(0,0),sf::Color color = sf::Color::White,int size = 30);
-    sf::Text* GetText(std::string key) const;
-    
-    //un comparateur pour 
-    static bool Comparator(CustomContainer* a, CustomContainer* b)
-    {
-        return a->zIndex < b->zIndex;
-    };
+	sf::Text* AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
+
+	//un comparateur pour sort par zIndex
+	static bool Comparator(CustomContainer* a, CustomContainer* b)
+	{
+		return a->m_zIndex < b->m_zIndex;
+	};
 
 
-    void RenderUpdate();
+	void RenderUpdate();
+
+
+	//le gameobject qui possède ce renderHandler
+	GameObject* m_parentGameObject;
+
+	//le vecteur des éléments à rendre
+	std::vector<CustomContainer*> m_renderedItems;
+
+	//le vecteur de sprites dont il faut updater la position
+	std::vector<sf::Sprite*> m_MovableSprites;
 };
 
 #endif //RenderHandler_H

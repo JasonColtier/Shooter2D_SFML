@@ -5,7 +5,6 @@
 #include "Components/RenderHandler.h"
 #include "Spawner.h"
 #include "Components/CollisionHandler.h"
-#include "GameObjects/BackgroundTexture.h"
 #include "Managers/AudioManager.h"
 
 GameLevel::GameLevel()
@@ -18,7 +17,10 @@ void GameLevel::SpawnGameObjects()
 	m_player = SpawnActor<Player>(sf::Vector2f(300.f, 300.f));
 	//m_player->m_position = sf::Vector2f(300.f, 300.f);
 
-	SpawnActor<BackgroundTexture>(sf::Vector2f(0.f, 0.f));
+	auto* background = SpawnActor<GameObject>();
+	background->m_renderHandler = new RenderHandler(background);
+	background->m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
+
 	SpawnActor<Spawner>(sf::Vector2f(300.f, 300.f));
 
 	AudioManager::PlayMusic(AudioManager::ESounds::EpicGameMusic);
@@ -52,7 +54,7 @@ void GameLevel::Render(sf::RenderWindow* window)
 	{
 		if (g1->m_isActivated != g2->m_isActivated) return g1->m_isActivated > g2->m_isActivated;
 		if (!g1->m_renderHandler || !g2->m_renderHandler) return g1->m_renderHandler > g2->m_renderHandler;
-		return (g1->m_renderHandler->mapSprites.begin()->second->zIndex) < (g2->m_renderHandler->mapSprites.begin()->second->zIndex);
+		return (g1->m_renderHandler->m_renderedItems.at(0)->m_zIndex) < (g2->m_renderHandler->m_renderedItems.at(0)->m_zIndex);
 	};
 
 	//améliorer ce sort ? trie par insertion ?

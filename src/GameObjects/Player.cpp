@@ -19,8 +19,10 @@
 Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
 {
 	Print::PrintLog("new player");
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
-	auto* Sprite = m_renderHandler->GetSprite("player");
+
+	m_renderHandler = new RenderHandler(this );
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
+	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("player");
 
 	if (Sprite)
 	{
