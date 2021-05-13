@@ -12,6 +12,7 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(HEADERS
     ${HEADER_DIR}/Tools/Print.h
     ${HEADER_DIR}/Tools/VectorTools.h
+    ${HEADER_DIR}/Tools/SMath.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/GameObjects/Player.h
@@ -34,7 +35,6 @@ set(HEADERS
     ${HEADER_DIR}/Managers/TOnCollision.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
-    ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionHandler.h
     ${HEADER_DIR}/Components/MovementComponent.h

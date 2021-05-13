@@ -1,19 +1,22 @@
 ﻿#include "GameObjects/Player.h"
-#include <random>
-#include <SFML/Window/Mouse.hpp>
-#include "GameLevel.h"
 #include "Components/CollisionHandler.h"
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/ClassicPistol.h"
-#include "Components/LifeComponent.h"
 #include "Components/MovementComponent.h"
 #include "Tools/Print.h"
-#include "Tools/VectorTools.h"
 #include "Components/RenderHandler.h"
 #include "HUD/PlayerHUD.h"
+#include "Managers/TextureManager.h"
 
-Player::Player()
+//#include <random>
+//#include <SFML/Window/Mouse.hpp>
+//#include "GameLevel.h"
+//#include "Components/LifeComponent.h"
+//#include "Tools/VectorTools.h"
+
+
+Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
 {
 	Print::PrintLog("new player");
 
@@ -31,11 +34,11 @@ Player::Player()
 	m_shootComponent = new ClassicPistol();
 	AddComponent(m_shootComponent);
 
-	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, new std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
+	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
-	auto* hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
+	auto* hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>(m_position);
 	hud->m_player = this;
 }
 

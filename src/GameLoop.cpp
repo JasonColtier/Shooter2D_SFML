@@ -12,13 +12,13 @@ GameLoop::GameLoop()
 	{
 		GameWindow::m_sizeWindow.x = 1920.0f;
 		GameWindow::m_sizeWindow.y = 1080.0f;
-		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(GameWindow::m_sizeWindow.x, GameWindow::m_sizeWindow.y), GameWindow::m_gameName, sf::Style::Fullscreen);
+		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(static_cast<unsigned int>(GameWindow::m_sizeWindow.x), static_cast<unsigned int>(GameWindow::m_sizeWindow.y)), GameWindow::m_gameName, sf::Style::Fullscreen);
 	}
 	else
 	{
 		GameWindow::m_sizeWindow.x = 1920.0f / 2;
 		GameWindow::m_sizeWindow.y = 1080.0f / 2;
-		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(GameWindow::m_sizeWindow.x, GameWindow::m_sizeWindow.y), GameWindow::m_gameName, sf::Style::Default);
+		GameWindow::m_window = new sf::RenderWindow(sf::VideoMode(static_cast<unsigned int>(GameWindow::m_sizeWindow.x), static_cast<unsigned int>(GameWindow::m_sizeWindow.y)), GameWindow::m_gameName, sf::Style::Default);
 	}
 
 	GameWindow::m_window->setVerticalSyncEnabled(true);
@@ -86,7 +86,7 @@ void GameLoop::StartGame()
 			if (Events.type == sf::Event::Resized)
 			{
 				// update the view to the new size of the window
-				sf::FloatRect visibleArea(0, 0, Events.size.width, Events.size.height);
+				sf::FloatRect visibleArea(0, 0, static_cast<float>(Events.size.width), static_cast<float>(Events.size.height));
 				GameWindow::m_window->setView(sf::View(visibleArea));
 			}
 		}
@@ -101,10 +101,10 @@ void GameLoop::StartGame()
 
 		m_updateTime = 0;
 		//tant qu'on a pas atteint le nombre de fps voulu on continue les updates
-		while (m_updateTime < (1.0 / m_targetFPS) * 1000000 - m_updateSurplus)
+		while (m_updateTime < (1.0 / static_cast<double>(m_targetFPS)) * 1000000 - m_updateSurplus)
 		{
 			m_deltaTime = Clock.restart().asMicroseconds(); //on utilise les microsec pour éviter de travailler avec des nombres minuscules et garder en précision
-			m_updateTime += m_deltaTime;
+			m_updateTime += static_cast<int>(m_deltaTime);
 
 			_Update();
 		}
@@ -115,7 +115,7 @@ void GameLoop::StartGame()
 		*  rendering game
 		*/
 		_Render();
-		m_updateSurplus = m_updateTime - ((1.0 / m_targetFPS) * 1000000);
+		m_updateSurplus = m_updateTime - static_cast<int>(((1.0 / static_cast<double>(m_targetFPS)) * 1000000));
 	}
 }
 
