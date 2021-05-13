@@ -29,7 +29,7 @@ void Spawner::Tick(int64_t deltaTime)
 
 void Spawner::DoSpawn()
 {
-	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();	
+	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>(sf::Vector2f(0.f, 0.f));	
 	RandomLocation(NewEnemy);
 	RandomMovement(NewEnemy);
 	RandomShoot(NewEnemy);

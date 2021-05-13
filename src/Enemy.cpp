@@ -12,10 +12,11 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
+#include "Managers/TextureManager.h"
 
 using std::vector;
 
-Enemy::Enemy()
+Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos , float scale , float rotation ) : Character(position, offsetPos, scale, rotation)
 {
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
