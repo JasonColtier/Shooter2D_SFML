@@ -3,12 +3,7 @@
 
 #include "GameObjects/Character.h"
 
-//class RenderComponent;
-
-//namespace sf
-//{
-//	class Texture;
-//}
+class Spawner;
 
 class Enemy : public Character
 {
@@ -17,9 +12,12 @@ public:
 	~Enemy() override = default;
 
 	void Tick(int64_t deltaTime) override;
+	void OnDeath();
 
 	TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "Enemy"; }
+
+	Spawner* m_enemySpawner = nullptr;
 
 };
 #endif //ENEMY_H

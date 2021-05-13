@@ -8,9 +8,14 @@
 #include <random>
 #include <valarray>
 #include "Components/CollisionHandler.h"
-#include "Managers/TextureManager.h"
+#include "Spawner.h"
+#include <vector>
+#include <iostream>
+#include <iterator>
 
-Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
+using std::vector;
+
+Enemy::Enemy()
 {
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
@@ -37,15 +42,35 @@ void Enemy::Tick(int64_t deltaTime)
 	if (m_movementCompo->m_distance <= 300)
 	{
 		//modifier le changement de vitesse par le biai d'un multiplicateur
-		m_movementCompo->m_speed = 0.0000005f;
-		m_shootComponent->m_wantToShoot = true;
+		//m_movementCompo->m_speed = 0.0000005f;
+		//m_shootComponent->m_wantToShoot = true;
 		m_shootComponent->m_fireRate = 10.0f;
 		//Print::PrintLog("Shoot Enabled");		
 	}
 	else
 	{
-		m_movementCompo->m_speed = 0.001f;
+		//m_movementCompo->m_speed = 0.001f;
 		m_shootComponent->m_wantToShoot = false;
 		//Print::PrintLog("Shoot Not Enabled");
 	}
+
+	
+}
+
+void Enemy::OnDeath()
+{
+	if(m_lifeComponent->m_currentHealth <= 0)
+	{
+		auto ListEnnemi = m_enemySpawner->m_EnemyList;
+
+		for (Enemy* currentEnemy : ListEnnemi)
+		{
+			if (currentEnemy == this)
+			{
+				m_enemySpawner->m_EnemyList.remove(currentEnemy);
+			}
+		}
+		
+	}
+	
 }
