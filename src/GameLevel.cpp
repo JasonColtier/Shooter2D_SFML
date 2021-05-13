@@ -3,7 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "Spawner.h"
+#include "GameObjects/Spawner.h"
 #include "Components/CollisionHandler.h"
 #include "Managers/AudioManager.h"
 

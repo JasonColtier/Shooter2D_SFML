@@ -21,6 +21,8 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
+    ${HEADER_DIR}/GameObjects/Spawner.h
+    ${HEADER_DIR}/GameObjects/Enemy.h
     ${HEADER_DIR}/GameLevel.h
     ${HEADER_DIR}/GameLoop.h
     ${HEADER_DIR}/GameWindow.h
@@ -43,8 +45,6 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
     ${HEADER_DIR}/HUD/PlayerHUD.h
-    ${HEADER_DIR}/Spawner.h
-    ${HEADER_DIR}/Enemy.h
     ${HEADER_DIR}/Components/EnemyMovementComponent.h
     ${HEADER_DIR}/Components/IMovementComponent.h
     ${HEADER_DIR}/StaticData.h
@@ -64,6 +64,8 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/GameObjects/SniperBullet.cpp
     ${SOURCE_DIR}/GameObjects/Character.cpp
+    ${SOURCE_DIR}/GameObjects/Spawner.cpp
+    ${SOURCE_DIR}/GameObjects/Enemy.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
     ${SOURCE_DIR}/Managers/ScoreManager.cpp
@@ -79,8 +81,7 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
     ${SOURCE_DIR}/HUD/PlayerHUD.cpp
-    ${SOURCE_DIR}/Spawner.cpp
-    ${SOURCE_DIR}/Enemy.cpp
+
     ${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
     ${SOURCE_DIR}/Components/ShotgunnerMovementComponent.cpp
     ${SOURCE_DIR}/GameObjects/EnemyGunner.cpp

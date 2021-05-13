@@ -1,10 +1,10 @@
-#include "Spawner.h"
+#include "GameObjects/Spawner.h"
 #include "GameLoop.h"
 #include <random>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameWindow.h"
 #include "GameLevel.h"
-#include "Enemy.h"
+#include "GameObjects/Enemy.h"
 #include "Components/EnemyMovementComponent.h"
 #include "Components/ShotgunnerMovementComponent.h"
 #include "Components/ShotGun.h"

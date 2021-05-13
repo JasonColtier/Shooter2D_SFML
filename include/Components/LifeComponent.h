@@ -12,8 +12,14 @@ public:
 	float ModifyHealth(float modification);
 
 public:
-	float m_maxHealth = 10;
+	float m_maxHealth = 1;
 	float m_currentHealth = m_maxHealth;
+
+private:
+	void _SpawnBonus();
+
+	
+	int m_chanceToSpawnBonus = 100;  // en %
 };
 
 #endif //LIFECOMPONENT_H

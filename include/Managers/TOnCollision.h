@@ -1,7 +1,7 @@
 #ifndef TONCOLLISION_H
 #define TONCOLLISION_H
 
-#include "Enemy.h"
+#include "GameObjects/Enemy.h"
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"

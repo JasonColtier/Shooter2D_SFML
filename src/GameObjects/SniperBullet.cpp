@@ -1,5 +1,5 @@
 ﻿#include "GameObjects/SniperBullet.h"
-#include "Enemy.h"
+#include "GameObjects/Enemy.h"
 #include "Components/RenderHandler.h"
 
 SniperBullet::SniperBullet()
