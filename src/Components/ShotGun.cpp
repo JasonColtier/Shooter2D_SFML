@@ -5,9 +5,9 @@
 
 ShotGun::ShotGun()
 {
-	m_shootNumber = 5;
-	m_fireRate = 2.f;
-	m_dispersion = 10;
+	m_baseShootNumber = 5;
+	m_baseFireRate = 7.f;
+	m_baseDispersion = 10;
 }
 
 void ShotGun::ShootBullet(int initialAngle)

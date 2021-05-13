@@ -1,4 +1,4 @@
-﻿#include "Components/MovementComponent.h"
+﻿#include "Components/PlayerMovementComponent.h"
 #include <any>
 #include <random>
 #include <SFML/Window/Mouse.hpp>
@@ -10,12 +10,12 @@
 #include "Tools/SMath.h"
 
 
-MovementComponent::MovementComponent()
+PlayerMovementComponent::PlayerMovementComponent()
 {
-	InputManager::GetSignal().Connect<MovementComponent>(this, &MovementComponent::OnInputChanged);
+	InputManager::GetSignal().Connect<PlayerMovementComponent>(this, &PlayerMovementComponent::OnInputChanged);
 }
 
-void MovementComponent::TickComponent(int64_t deltaTime)
+void PlayerMovementComponent::TickComponent(int64_t deltaTime)
 {
 	const auto MousePos = GameWindow::m_cursorPos;
 	const auto Pos = Owner->m_position;
@@ -36,11 +36,11 @@ void MovementComponent::TickComponent(int64_t deltaTime)
 	{
 		//avant d'appliquer directement l'input, on va tester cette acceleration
 		sf::Vector2f Acceleration = m_inertia;
-		Acceleration.x += normDelta.x * m_speed * static_cast<float>(deltaTime) * 0.0001f;
-		Acceleration.y += normDelta.y * m_speed * static_cast<float>(deltaTime) * 0.0001f;
+		Acceleration.x += normDelta.x * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
+		Acceleration.y += normDelta.y * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
 
 		//ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
-		if (VectorTools::Length(Acceleration) < m_maxVelocity)
+		if (VectorTools::Length(Acceleration) < GetMaxVelocity())
 		{
 			m_inertia = Acceleration;
 		}
@@ -53,7 +53,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
 	m_inertia *= DragForce;
 
 	//on set la position, toujours en fonction du deltatime
-	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+	Owner->m_position = Pos + (m_inertia);
 
 
 	/*
@@ -86,7 +86,7 @@ void MovementComponent::TickComponent(int64_t deltaTime)
 	}
 }
 
-void MovementComponent::OnInputChanged(const InputMapping input)
+void PlayerMovementComponent::OnInputChanged(const InputMapping input)
 {
 	//si on a appuyé ou relaché la touche pour bouger
 	if (input.first == InputsEnum::Forward)

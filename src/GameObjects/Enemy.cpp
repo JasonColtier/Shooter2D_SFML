@@ -42,7 +42,7 @@ void Enemy::Tick(int64_t deltaTime)
 		//modifier le changement de vitesse par le biai d'un multiplicateur
 		m_movementCompo->m_speed = 0.0000005f;
 		m_shootComponent->m_wantToShoot = true;
-		m_shootComponent->m_fireRate = 10.0f;
+		m_shootComponent->m_baseFireRate = 10.0f;
 		//Print::PrintLog("Shoot Enabled");		
 	}
 	else

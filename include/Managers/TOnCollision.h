@@ -1,11 +1,18 @@
 #ifndef TONCOLLISION_H
 #define TONCOLLISION_H
 
+#include "Components/PlayerMovementComponent.h"
+#include "Components/ShotGun.h"
+#include "Components/Sniper.h"
+#include "GameObjects/BonusFireRate.h"
 #include "GameObjects/Enemy.h"
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
+#include "GameObjects/BonusMovementSpeed.h"
 #include "GameObjects/BonusMultipleShot.h"
+#include "GameObjects/BonusShotgun.h"
+#include "GameObjects/BonusSniper.h"
 #include "Tools/Print.h"
 
 template <typename GameObject1, typename GameObject2>
@@ -64,9 +71,64 @@ struct OnCollision<Player, BonusMultipleShot>
     {
         auto shoot = player.GetComponentOfClass<ShootComponent>();
 
-        shoot->m_shootNumber ++;
+        shoot->m_baseShootNumber ++;
         Print::PrintLog("multiple shoot ! ");
         bonusMultipleShot.Deactivate();
+    }
+};
+
+template <>
+struct OnCollision<Player, BonusFireRate>
+{
+    static void Reaction(Player& player, BonusFireRate& bonusFireRate)
+    {
+        auto shoot = player.GetComponentOfClass<ShootComponent>();
+
+        shoot->m_fireRateModifier *= 0.5f;
+        Print::PrintLog("fire rate up ! ");
+        bonusFireRate.Deactivate();
+    }
+};
+
+template <>
+struct OnCollision<Player, BonusShotgun>
+{
+    static void Reaction(Player& player, BonusShotgun& bonusShotgun)
+    {
+        player.RemoveComponent(player.GetComponentOfClass<ShootComponent>());
+        auto* shotGun = new ShotGun();
+        player.AddComponent(shotGun);
+        player.m_shootComponent  = shotGun;
+        
+        Print::PrintLog("shotgun ! ");
+        bonusShotgun.Deactivate();
+    }
+};
+
+template <>
+struct OnCollision<Player, BonusSniper>
+{
+    static void Reaction(Player& player, BonusSniper& bonusSniper)
+    {
+        player.RemoveComponent(player.GetComponentOfClass<ShootComponent>());
+        auto* sniper = new Sniper();
+        player.AddComponent(sniper);
+        player.m_shootComponent  = sniper;
+        
+        Print::PrintLog("sniper ! ");
+        bonusSniper.Deactivate();
+    }
+};
+
+template <>
+struct OnCollision<Player, BonusMovementSpeed>
+{
+    static void Reaction(Player& player, BonusMovementSpeed& movementSpeed)
+    {
+        player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.5;
+        
+        Print::PrintLog("movement speed up ! ");
+        movementSpeed.Deactivate();
     }
 };
 

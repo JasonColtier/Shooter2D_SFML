@@ -21,6 +21,6 @@ SniperBullet::SniperBullet(sf::Vector2f position, sf::Vector2f offsetPos, float 
 //    if(typeid(*otherObject) == typeid(Enemy))
 //    {
 //        auto enemy = dynamic_cast<Enemy*>(otherObject);
-//        enemy->m_lifeComponent->ModifyHealth(-m_damage*m_damageMultiplier);
+//        enemy->m_lifeComponent->ModifyHealth(-m_damage*m_baseDamageMultiplier);
 //    }
 //}

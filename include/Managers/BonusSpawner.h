@@ -1,8 +1,12 @@
 ﻿#ifndef BONUSSPAWNER_H
 #define BONUSSPAWNER_H
 #include "GameWindow.h"
+#include "GameObjects/BonusFireRate.h"
 #include "GameObjects/BonusHeal.h"
+#include "GameObjects/BonusMovementSpeed.h"
 #include "GameObjects/BonusMultipleShot.h"
+#include "GameObjects/BonusShotgun.h"
+#include "GameObjects/BonusSniper.h"
 
 //typelist 
 template <typename ...types>
@@ -11,7 +15,8 @@ struct TypeList
 };
 
 //toutes les classes bonus disponibles
-using BonusTypes = TypeList<BonusHeal, BonusMultipleShot>;
+using BonusTypes = TypeList<BonusHeal, BonusMultipleShot,BonusFireRate,BonusShotgun,BonusSniper,BonusMovementSpeed>;
+// using BonusTypes = TypeList<BonusMovementSpeed>;
 
 //la template de base
 template <typename ...Types>
@@ -31,7 +36,7 @@ struct SpawnBonus<TypeList<CurrentBonus, OtherBonus...>>
         if (current != wantedBonus)
         {
             current++;
-            SpawnBonus<TypeList<OtherBonus...>>::DoSpawn(current, wantedBonus, pos);
+            SpawnBonus<TypeList<OtherBonus...>>::DoSpawn(current, wantedBonus, pos);//si on a pas la bonne class, on repasse dans la fonction avec le reste de la typelist
         }
         else
         {
@@ -54,7 +59,8 @@ class BonusSpawner
 {
 public:
 
-    static const int m_numberOfBonus = 2; //nombre de bonus dans notre typelist
+    static const int m_numberOfBonus = 6; //nombre de bonus dans notre typelist
+    // static const int m_numberOfBonus = 1; //nombre de bonus dans notre typelist
     static const int m_chanceToSpawnBonus = 100; // en %
 
     static void RollBonus(sf::Vector2f pos)

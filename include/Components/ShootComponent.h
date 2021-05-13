@@ -20,15 +20,32 @@ public:
 	virtual float GetWeaponFireRate() const { return 1; }
 	virtual float GetWeaponShootNumber() const { return 1; }
 
+	float GetFireRate()
+	{
+		return m_baseFireRate * m_fireRateModifier;
+	}
+
+	int GetShootNumber()
+	{
+		return m_baseShootNumber + m_additionnalShootNumber;
+	}
+
 public:
 	//modifiées par les amélioration globales de partie, sont indépendantes des armes récupérées
-	int m_shootNumber = 1; //nombre de tir quand on shoot, doit être incrémenté de 2 en 2
-	float m_fireRate = 2.f; //vitesse de tir, plus c'est grand plus on tire souvent
-	float m_dispersion = 15.f;//angle
-	float m_damageMultiplier = 1.f;//TODO
-	float m_velocityMultiplier = 1.f;//TODO
+	int m_baseShootNumber = 1; //nombre de tir quand on shoot, doit être incrémenté de 2 en 2
+	int m_additionnalShootNumber = 0;
+	
+	float m_baseFireRate = 2.f; //vitesse de tir, plus c'est petit plus on tire souvent
+	float m_fireRateModifier = 1;
+	
+	float m_baseDispersion = 15.f;//angle
+	
+	float m_baseDamageMultiplier = 1.f;//TODO
+	float m_baseVelocityMultiplier = 1.f;//TODO
+	//TODO Ajouter prise en compte de la portée de l'arme.
+
+	
 	bool m_wantToShoot = false;
-	//Ajouter prise en compte de la portée de l'arme.
 
 private:
 	float m_timer = 0;

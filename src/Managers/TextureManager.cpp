@@ -17,6 +17,10 @@ const char* TextureManager::_GetPath(const ETextures t)
 	case ETextures::HealthBarBG: return "../medias/Textures/HealthBar_BG.png";
 	case ETextures::Heart: return "../medias/Textures/heart.png";
 	case ETextures::MultipleShot: return "../medias/Textures/multipleShot.png";
+	case ETextures::FireRate: return "../medias/Textures/fireRate.png";
+	case ETextures::Shotgun: return "../medias/Textures/shotgun.png";
+	case ETextures::Sniper: return "../medias/Textures/sniper.png";
+	case ETextures::SpeedArrow: return "../medias/Textures/speedArrow.png";
 	}
 	return "error texture";
 }

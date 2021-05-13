@@ -23,6 +23,10 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
     ${HEADER_DIR}/GameObjects/BonusMultipleShot.h
+    ${HEADER_DIR}/GameObjects/BonusShotgun.h
+    ${HEADER_DIR}/GameObjects/BonusSniper.h
+    ${HEADER_DIR}/GameObjects/BonusFireRate.h
+    ${HEADER_DIR}/GameObjects/BonusMovementSpeed.h
     ${HEADER_DIR}/GameObjects/Spawner.h
     ${HEADER_DIR}/GameObjects/Enemy.h
     ${HEADER_DIR}/GameLevel.h
@@ -41,7 +45,7 @@ set(HEADERS
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
     ${HEADER_DIR}/Components/CollisionHandler.h
-    ${HEADER_DIR}/Components/MovementComponent.h
+    ${HEADER_DIR}/Components/PlayerMovementComponent.h
     ${HEADER_DIR}/Components/LifeComponent.h
     ${HEADER_DIR}/Components/Sniper.h
     ${HEADER_DIR}/Components/ShotGun.h
@@ -77,7 +81,7 @@ set(SOURCES
     ${SOURCE_DIR}/Components/CollisionHandler.cpp
     ${SOURCE_DIR}/Components/RenderHandler.cpp
     ${SOURCE_DIR}/Components/ShootComponent.cpp
-    ${SOURCE_DIR}/Components/MovementComponent.cpp
+    ${SOURCE_DIR}/Components/PlayerMovementComponent.cpp
     ${SOURCE_DIR}/Components/Sniper.cpp
     ${SOURCE_DIR}/Components/ShotGun.cpp
     ${SOURCE_DIR}/Components/ClassicPistol.cpp

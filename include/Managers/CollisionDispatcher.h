@@ -4,6 +4,7 @@
 #include <functional>
 #include <stdexcept>
 #include "TOnCollision.h"
+#include "GameObjects/BonusMovementSpeed.h"
 
 using FnType = std::function<void(GameObject&, GameObject&)>;
 
@@ -11,7 +12,7 @@ template<typename ...types>
 struct TypeList
 {};
 
-using AllCollisionTypes = TypeList<Player, Enemy, Bullet, BonusHeal,BonusMultipleShot>;
+using AllCollisionTypes = TypeList<Player, Enemy, Bullet, BonusHeal,BonusMultipleShot,BonusFireRate,BonusShotgun,BonusSniper,BonusMovementSpeed>;
 
 template<template<typename, typename> class Functor, typename T1, typename T2TypeList>
 struct DispatchOnT2

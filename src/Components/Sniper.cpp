@@ -4,9 +4,9 @@
 
 Sniper::Sniper()
 {
-    m_shootNumber = 1;
-    m_fireRate = 10.f;
-    m_dispersion = 0.f;
+    m_baseShootNumber = 1;
+    m_baseFireRate = 18.f;
+    m_baseDispersion = 0.f;
 }
 
 void Sniper::ShootBullet(int initialAngle)

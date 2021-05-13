@@ -1,10 +1,7 @@
 ﻿#ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
 #include <map>
-#include <string>
-#include <vector>
 #include <SFML/Graphics/Texture.hpp>
-#include "Singleton.h"
 
 
 class TextureManager
@@ -12,7 +9,7 @@ class TextureManager
 public:
 
 	//toutes les textures
-	enum class ETextures { Ship, Bullet, SpaceBackground, ShipEnemy, HealthBar, HealthBarBG,Heart,MultipleShot };
+	enum class ETextures { Ship, Bullet, SpaceBackground, ShipEnemy, HealthBar, HealthBarBG,Heart,MultipleShot,FireRate,Shotgun,Sniper,SpeedArrow };
 
 	//retourne un pointeur vers la texture
 	static sf::Texture* GetTexturePtr(ETextures t);

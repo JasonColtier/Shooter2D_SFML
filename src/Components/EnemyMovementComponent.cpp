@@ -30,11 +30,11 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 
 	////avant d'appliquer directement l'input, on va tester cette acceleration
 	sf::Vector2f acceleration = m_inertia;
-	acceleration.x += normDelta.x * m_speed * static_cast<float>(deltaTime) * 0.0001f;
-	acceleration.y += normDelta.y * m_speed * static_cast<float>(deltaTime) * 0.0001f;
+	acceleration.x += normDelta.x * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
+	acceleration.y += normDelta.y * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
 
 	////ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
-	if (VectorTools::Length(acceleration) < m_maxVelocity)
+	if (VectorTools::Length(acceleration) < GetMaxVelocity())
 	{
 		m_inertia = acceleration;
 	}

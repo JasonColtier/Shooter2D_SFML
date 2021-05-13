@@ -53,7 +53,8 @@ void RenderHandler::RenderUpdate()
 {
     // if (m_parentGameObject->m_collisionHandler)
     // {
-    //     std::vector<sf::Vector2f> tmp = m_parentGameObject->m_collisionHandler->getPoints();
+    //     std::vector<sf::Vector2f> tmp;
+    //     m_parentGameObject->m_collisionHandler->GetPoints(tmp);
     //
     //     sf::Vertex vertice[4] =
     //     {
