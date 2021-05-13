@@ -14,7 +14,7 @@ void LifeComponent::TickComponent(int64_t deltaTime)
     
 }
 
-float LifeComponent::ModifyHealth(float modification)
+void LifeComponent::ModifyHealth(float modification)
 {
     m_currentHealth += modification;
 
@@ -27,26 +27,8 @@ float LifeComponent::ModifyHealth(float modification)
         Print::PrintLog(typeid(*Owner).name()," is dead ! ");
         
         m_currentHealth = 0;
-        if(dynamic_cast<Enemy*>(Owner))
-        {
-            ScoreManager::ModifyScore(1);//une façon d'augmenter le score
-			_SpawnBonus();
-        }
         Owner->Deactivate();
     }
     // Print::PrintLog("modified health, new life is : ",m_currentHealth);
-    return m_currentHealth;
 }
 
-void LifeComponent::_SpawnBonus()
-{
-	//random
-	int range = 100 - 1;
-	int num = rand() % range;
-
-	if(num <= m_chanceToSpawnBonus)
-	{
-		GameWindow::GetGameLevel()->SpawnActor<BonusHeal>()->m_position = Owner->m_position;
-		Print::PrintLog("spawned bonus !");
-	}
-}

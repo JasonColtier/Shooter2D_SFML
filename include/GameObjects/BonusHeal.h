@@ -12,7 +12,7 @@ public:
 		m_renderHandler = new RenderHandler(this);
 		m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Heart), "heart", 3);
 	};
-	~BonusHeal() override = default;
+	~BonusHeal() override = default; 
 
 	TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "BonusHeal"; }

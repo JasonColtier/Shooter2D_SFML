@@ -8,6 +8,8 @@
 #include <random>
 #include <valarray>
 #include "Components/CollisionHandler.h"
+#include "GameObjects/BonusHeal.h"
+#include "Managers/ScoreManager.h"
 
 Enemy::Enemy()
 {
@@ -46,5 +48,26 @@ void Enemy::Tick(int64_t deltaTime)
 		m_movementCompo->m_speed = 0.001f;
 		m_shootComponent->m_wantToShoot = false;
 		//Print::PrintLog("Shoot Not Enabled");
+	}
+}
+
+void Enemy::Deactivate()
+{
+	GameObject::Deactivate();
+
+	ScoreManager::ModifyScore(1);//une façon d'augmenter le score
+	_SpawnBonus();	
+}
+
+void Enemy::_SpawnBonus()
+{
+	//random
+	int range = 100 - 1;
+	int num = rand() % range;
+
+	if(num <= m_chanceToSpawnBonus)
+	{
+		GameWindow::GetGameLevel()->SpawnActor<BonusHeal>()->m_position = m_position;
+		Print::PrintLog("spawned bonus !");
 	}
 }

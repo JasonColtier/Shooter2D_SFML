@@ -42,7 +42,7 @@ public:
 
 	std::vector<sf::Vector2f> getPoints(/* prend en ref un vecteur  ou Move*/) const
 	{
-		std::vector<sf::Vector2f> l_pointsInWorld(m_lPoints->size());
+		std::vector<sf::Vector2f> l_pointsInWorld;
 
 		for (const auto point : *m_lPoints)
 		{
@@ -52,7 +52,7 @@ public:
 			const auto x = point.x * cosf(angle) - point.y * sinf(angle);
 			const auto y = point.x * sinf(angle) + point.y * cosf(angle);
 
-			l_pointsInWorld.emplace_back(sf::Vector2f(-x + m_position->x, y + m_position->y));
+			l_pointsInWorld.push_back(sf::Vector2f(-x + m_position->x, y + m_position->y));
 		}
 		return 	l_pointsInWorld;
 	}

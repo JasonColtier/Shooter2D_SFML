@@ -37,10 +37,10 @@ public:
 	{
 		for (auto component : m_lComponentList)
 		{
-			auto* Tmp = dynamic_cast<T>(component);
+			auto* Tmp = dynamic_cast<T*>(component);
 			if (Tmp != nullptr)
 			{
-				return Tmp;//TODO seulment ce check là
+				return Tmp;
 			}
 		}
 		return nullptr;

@@ -21,5 +21,13 @@ public:
 	TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "Enemy"; }
 
+	void Deactivate() override;
+
+private:
+	void _SpawnBonus();
+
+	int m_chanceToSpawnBonus = 100;  // en %
+
+
 };
 #endif //ENEMY_H

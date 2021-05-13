@@ -5,6 +5,7 @@
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
+#include "Tools/Print.h"
 
 template<typename GameObject1, typename GameObject2>
 struct OnCollision
@@ -46,7 +47,14 @@ struct OnCollision<Player, BonusHeal>
 {
 	static void Reaction(Player& player, BonusHeal& bonusHeal)
 	{
+		auto life = player.GetComponentOfClass<LifeComponent>();
 
+		// if(life->m_currentHealth != life->m_maxHealth && life->m_currentHealth !=0)
+		// {
+			life->ModifyHealth(bonusHeal.m_pdtVie);
+			Print::PrintLog("take heal ! ");
+			bonusHeal.Deactivate();
+		// }
 	}
 };
 #endif //TONCOLLISION_H
