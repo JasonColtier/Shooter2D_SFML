@@ -1,10 +1,13 @@
 #ifndef TONCOLLISION_H
 #define TONCOLLISION_H
 
+#include <iostream>
 #include "Enemy.h"
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
+#include <list>
+#include <iterator>
 
 template<typename GameObject1, typename GameObject2>
 struct OnCollision
@@ -36,7 +39,8 @@ struct OnCollision<Enemy, Bullet>
 	static void Reaction(Enemy& enemy, Bullet& bullet)
 	{
 		std::cout << "Collision Ennemy, Bullet" << std::endl;
-		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()) * bullet.m_damageMultiplier);
+		enemy.OnDeath();
+		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()) * bullet.m_damageMultiplier);		
 		bullet.Deactivate();
 	}
 };

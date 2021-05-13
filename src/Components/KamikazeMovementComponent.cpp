@@ -1,4 +1,4 @@
-#include "Components/EnemyMovementComponent.h"
+#include "Components/KamikazeMovementComponent.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLevel.h"
 #include "GameWindow.h"
@@ -9,8 +9,7 @@
 #include <random>
 #include <valarray>
 #include <cmath>
-
-#define PI 3.14159265f
+#include "Tools/SMath.h"
 
 void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {

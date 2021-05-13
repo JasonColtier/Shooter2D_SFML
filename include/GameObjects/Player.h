@@ -9,7 +9,7 @@ class Player : public Character
 {
 public:
 
-	Player();
+	Player(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
 	~Player() override = default;
 	void Tick(int64_t deltaTime) override;
 

@@ -3,14 +3,16 @@
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
 #include "Managers/ScoreManager.h"
+#include "Managers/TextureManager.h"
 
-PlayerHUD::PlayerHUD()
+PlayerHUD::PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : GameObject(position, offsetPos, scale, rotation)
 {
 	m_player = GameWindow::GetGameLevel()->m_player;
 
-	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBar), "healthBar", 4);
+	m_renderHandler = new RenderHandler(this);
 	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
-	m_healthBar = m_renderHandler->GetSprite("healthBar");
+	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBar), "healthBar", 4);
+	m_healthBar = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("healthBar");
 
 	if (m_healthBar)
 	{
@@ -29,5 +31,5 @@ void PlayerHUD::Tick(int64_t deltaTime)
 
 void PlayerHUD::_HandleChangeScore(const int score) const
 {
-	m_renderHandler->GetText("scoreText")->setString(std::to_string(score));
+	m_renderHandler->GetRenderedItemWithKey<sf::Text>("scoreText")->setString(std::to_string(score));
 }

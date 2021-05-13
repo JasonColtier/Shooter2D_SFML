@@ -34,7 +34,7 @@ public:
 	inline static sf::Vector2f m_sizeWindow;
 	inline static sf::Vector2i m_cursorPos;
 	//global parameters
-	inline static bool m_useFullscreen = false;
+	inline static bool m_useFullscreen = true;
 	inline static std::string m_gameName = "Shooter 2D SFML";  // NOLINT(clang-diagnostic-exit-time-destructors)
 
 private:

@@ -4,13 +4,13 @@
 #include "Components/IMovementComponent.h"
 #include "GameObjects/GameObject.h"
 
-class ShotgunnerMovementComponent : public IMovementComponent
+class RunAwayMovementComponent : public IMovementComponent
 {
 public:
 
-	ShotgunnerMovementComponent() = default;
+	RunAwayMovementComponent() = default;
 
-	virtual ~ShotgunnerMovementComponent() override = default;
+	virtual ~RunAwayMovementComponent() override = default;
 
 	virtual void TickComponent(int64_t deltaTime = 0) override;
 
