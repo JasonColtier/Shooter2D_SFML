@@ -67,11 +67,11 @@ void Spawner::RandomLocation()
 	DoSpawn(RandomX, RandomY);
 }
 
-void Spawner::DoSpawn(int X, int Y)
+void Spawner::DoSpawn(const int X, const int Y)
 {
-	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>();
+	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>(sf::Vector2f(static_cast<float>(X), static_cast<float>(Y)));
 
-	NewEnemy->m_position = sf::Vector2f(X, Y);
+	//NewEnemy->m_position = sf::Vector2f(static_cast<float>(X), static_cast<float>(Y));
 	NewEnemy->m_movementCompo = new ShotgunnerMovementComponent();
 	NewEnemy->m_shootComponent = new ShotGun();
 	NewEnemy->AddComponent(NewEnemy->m_movementCompo);

@@ -4,12 +4,16 @@
 #include <SFML/Graphics/Text.hpp>
 #include "GameObjects/GameObject.h"
 
+namespace sf {
+	class Sprite;
+}
+
 class Player;
 
 class PlayerHUD : public GameObject
 {
 public:
-	PlayerHUD();
+	PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
 	~PlayerHUD() = default;
 
 	void Tick(int64_t deltaTime) override;

@@ -29,12 +29,12 @@ private:
 
 private:
 	//temps entre chaque frame
-	int64_t m_deltaTime; //en microsecondes !
+	int64_t m_deltaTime = 0; //en microsecondes !
 	int m_updateTime = 0;//temps pour faire toutes les boucles updates avant un rendu
 	int m_updateSurplus = 0;//temps pour faire toutes les boucles updates avant un rendu
 	float m_targetFPS = 60.0f;
 
-	GameLevel* m_gameLevel;
+	GameLevel* m_gameLevel = nullptr;
 
 };
 #endif

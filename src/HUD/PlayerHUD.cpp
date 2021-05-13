@@ -3,8 +3,9 @@
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
 #include "Managers/ScoreManager.h"
+#include "Managers/TextureManager.h"
 
-PlayerHUD::PlayerHUD()
+PlayerHUD::PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : GameObject(position, offsetPos, scale, rotation)
 {
 	m_player = GameWindow::GetGameLevel()->m_player;
 

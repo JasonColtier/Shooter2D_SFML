@@ -9,8 +9,7 @@
 #include <random>
 #include <valarray>
 #include <cmath>
-
-#define PI 3.14159265f
+#include "Tools/SMath.h"
 
 void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {

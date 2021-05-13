@@ -3,9 +3,8 @@
 
 #include <vector>
 #include <SFML/System/Vector2.hpp>
-#include "GameObjects/GameObject.h"
 
-#define PI 3.14159265f
+class GameObject;
 
 enum class CollisionType
 {
@@ -19,43 +18,25 @@ enum class CollisionType
 class CollisionHandler
 {
 public:
-	CollisionHandler() = default;
 
-	CollisionHandler(GameObject* t_owner, CollisionType t_Type, std::vector<CollisionType>* t_ExcludedCollisionType, float* t_Rotation, float t_radius, sf::Vector2f* t_Position, const std::vector<sf::Vector2f>* t_Points)
-		: m_owner(t_owner)
-		, m_eType(t_Type)
-		, m_lExcludedCollisionType((t_ExcludedCollisionType))
-		, m_position(t_Position)
-		, m_radius(t_radius)
-		, m_rotation(t_Rotation)
+	CollisionHandler(GameObject* owner, const CollisionType type, std::vector<CollisionType> excludedCollisionType, float* rotation, const float radius, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints)
+		: m_owner(owner)
+		, m_eType(type)
+		, m_lExcludedCollisionType(std::move(excludedCollisionType))
+		, m_position(position)
+		, m_radius(radius)
+		, m_rotation(rotation)
 	{
-		m_lPoints = t_Points;
-		//std::vector<sf::Vector2f>* tmp = new std::vector<sf::Vector2f>(t_Points->size());
-		//for (sf::Vector2f point : t_Points)
-		//{
-		//	tmp->push_back(point * owner->scale);
-		//}
-		//l_Points = tmp;
+		SetPoints(lPoints);
 	}
 
 	~CollisionHandler() = default;
 
-	std::vector<sf::Vector2f> getPoints(/* prend en ref un vecteur  ou Move*/) const
-	{
-		std::vector<sf::Vector2f> l_pointsInWorld;
+	void Initialise(GameObject* owner, CollisionType type, float* rotation, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints, std::vector<CollisionType> excludedCollisionType = std::vector<CollisionType>(), float radius = 0);
 
-		for (const auto point : *m_lPoints)
-		{
-			const float angle = -(*m_rotation) * PI / 180;
+	void SetPoints(const std::vector<sf::Vector2f>& lPoints);
 
-			//fonction à part avec un joli nom
-			const auto x = point.x * cosf(angle) - point.y * sinf(angle);
-			const auto y = point.x * sinf(angle) + point.y * cosf(angle);
-
-			l_pointsInWorld.push_back(sf::Vector2f(-x + m_position->x, y + m_position->y));
-		}
-		return 	l_pointsInWorld;
-	}
+	void GetPoints(std::vector<sf::Vector2f>& vec) const;
 
 	float GetStartAbscisse() const
 	{
@@ -69,12 +50,14 @@ public:
 
 	GameObject* m_owner;
 	CollisionType m_eType;
-	std::vector<CollisionType>* m_lExcludedCollisionType;
+	std::vector<CollisionType> m_lExcludedCollisionType;
 	sf::Vector2f* m_position;
 	float m_radius;
 	float* m_rotation;
 
 private:
-	const std::vector<sf::Vector2f>* m_lPoints;
+
+	std::vector<sf::Vector2f> m_lPoints;
 };
+
 #endif //CollisionHandler_H

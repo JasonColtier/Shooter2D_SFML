@@ -2,6 +2,7 @@
 #include "Components/CollisionHandler.h"
 #include "GameObjects/GameObject.h"
 #include "Managers/CollisionDispatcher.h"
+#include "Tools/SMath.h"
 
 void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
 {
@@ -51,7 +52,7 @@ void CollisionManager::_SortByAbscisse(std::list<GameObject*>& abscisseTab)
 
 void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g2)
 {
-	for (auto channel : *g1->m_lExcludedCollisionType)
+	for (auto channel : g1->m_lExcludedCollisionType)
 	{
 		if (channel == g2->m_eType)
 		{
@@ -60,14 +61,18 @@ void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g
 	}
 
 	//fonction mise au carré
-	const auto Dist(pow(g2->m_position->x - g1->m_position->x, 2) + pow(g2->m_position->y - g1->m_position->y, 2));
-	const auto MaxDist(pow((g1->m_radius + g2->m_radius), 2));
+	auto Dist((g2->m_position->x - g1->m_position->x) + (g2->m_position->y - g1->m_position->y));
+	SMath::Pow(Dist, 2);
+	auto MaxDist(g1->m_radius + g2->m_radius);
+	SMath::Pow(MaxDist, 2);
 
 	//on compare les distances au carré et on vire sqrt
 	if (Dist < MaxDist)
 	{
-		std::vector<sf::Vector2f> Lg1(g1->getPoints());
-		std::vector<sf::Vector2f> Lg2(g2->getPoints());
+		std::vector<sf::Vector2f> Lg1;
+		g1->GetPoints(Lg1);
+		std::vector<sf::Vector2f> Lg2;
+		g2->GetPoints(Lg2);
 
 		const auto SizeG1(static_cast<int>(Lg1.size()));
 
@@ -115,6 +120,7 @@ void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g
 						//const sf::Vector2f hitPoint = sf::Vector2f((PointA->x + t1 * (PointB->x - PointA->x)), PointA->y + t1 * (PointB->y - PointA->y));
 						//
 						CollisionDispatcher::DispatchOnCollision(*g1->m_owner, *g2->m_owner);
+						return;
 						//g1->owner->OnCollision(hitPoint, g2->owner);
 						//g2->owner->OnCollision(hitPoint, g1->m_owner);
 					}

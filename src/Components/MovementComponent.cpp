@@ -7,8 +7,8 @@
 #include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 #include "Managers/InputManager.h"
+#include "Tools/SMath.h"
 
-#define PI 3.14159265f
 
 MovementComponent::MovementComponent()
 {
