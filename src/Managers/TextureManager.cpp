@@ -15,6 +15,7 @@ const char* TextureManager::_GetPath(const ETextures t)
 	case ETextures::ShipEnemy: return "../medias/Textures/Enemy.png";
 	case ETextures::HealthBar: return "../medias/Textures/HealthBar.png";
 	case ETextures::HealthBarBG: return "../medias/Textures/HealthBar_BG.png";
+	case ETextures::Heart: return "../medias/Textures/heart.png";
 	}
 	return "error texture";
 }

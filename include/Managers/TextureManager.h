@@ -12,7 +12,7 @@ class TextureManager
 public:
 
 	//toutes les textures
-	enum class ETextures { Ship, Bullet, SpaceBackground, ShipEnemy, HealthBar, HealthBarBG };
+	enum class ETextures { Ship, Bullet, SpaceBackground, ShipEnemy, HealthBar, HealthBarBG,Heart };
 
 	//retourne un pointeur vers la texture
 	static sf::Texture* GetTexturePtr(ETextures t);
