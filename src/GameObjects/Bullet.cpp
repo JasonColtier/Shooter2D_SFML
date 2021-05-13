@@ -1,14 +1,12 @@
 ﻿#include "GameObjects/Bullet.h"
-
-#include "Enemy.h"
 #include "GameWindow.h"
 #include "Components/CollisionHandler.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Character.h"
+#include "Managers/TextureManager.h"
+#include "Tools/SMath.h"
 
-#define PI 3.14159265f
-
-Bullet::Bullet()
+Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) :GameObject(position, offsetPos, scale, rotation)
 {
 	m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
 
@@ -19,8 +17,8 @@ Bullet::Bullet()
 		Sprite->setOrigin(10, 5);
 	}
 
-	auto* Tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -4.0f), sf::Vector2f(0.0f, 9.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(0.0f, -9.0f) };
-	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, new std::vector<CollisionType>(), &m_rotation, 10, &m_position, Tmp);
+	const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(-9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f) };
+	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, std::vector<CollisionType>(), &m_rotation, 10, &m_position, Tmp);
 }
 
 void Bullet::Tick(const int64_t deltaTime)

@@ -10,6 +10,7 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(HEADERS
     ${HEADER_DIR}/Tools/Print.h
     ${HEADER_DIR}/Tools/VectorTools.h
+    ${HEADER_DIR}/Tools/SMath.h
     ${HEADER_DIR}/Signal.h
     ${HEADER_DIR}/Singleton.h
     ${HEADER_DIR}/GameObjects/Player.h

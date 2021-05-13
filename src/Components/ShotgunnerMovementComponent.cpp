@@ -9,8 +9,8 @@
 #include <random>
 #include <valarray>
 #include <cmath>
+#include "Tools/SMath.h"
 
-#define PI 3.14159265f
 
 void ShotgunnerMovementComponent::TickComponent(int64_t deltaTime)
 {

@@ -15,11 +15,11 @@ GameLevel::GameLevel()
 
 void GameLevel::SpawnGameObjects()
 {
-	m_player = SpawnActor<Player>();
-	m_player->m_position = sf::Vector2f(300.f, 300.f);
+	m_player = SpawnActor<Player>(sf::Vector2f(300.f, 300.f));
+	//m_player->m_position = sf::Vector2f(300.f, 300.f);
 
-	SpawnActor<BackgroundTexture>();
-	SpawnActor<Spawner>();
+	SpawnActor<BackgroundTexture>(sf::Vector2f(0.f, 0.f));
+	SpawnActor<Spawner>(sf::Vector2f(300.f, 300.f));
 
 	AudioManager::PlayMusic(AudioManager::ESounds::EpicGameMusic);
 }
@@ -27,7 +27,7 @@ void GameLevel::SpawnGameObjects()
 void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
-	auto Copy = m_lGameObjects;
+	auto Copy = m_lObjectsActivate;
 	// Print::PrintLog("number of objects in level : ",copy.size());
 	for (auto* gameObject : Copy)
 	{
@@ -38,7 +38,7 @@ void GameLevel::Update(int64_t deltaTime)
 		gameObject->Tick(deltaTime);
 	}
 
-	CollisionManager::UpdateCollision(m_lAbscisseGameObjects);
+	CollisionManager::UpdateCollision(m_lObjectsWithCollision);
 }
 
 void GameLevel::Render(sf::RenderWindow* window)
@@ -56,9 +56,9 @@ void GameLevel::Render(sf::RenderWindow* window)
 	};
 
 	//améliorer ce sort ? trie par insertion ?
-	m_lGameObjects.sort(renderPrioritySort);
+	m_lObjectsActivate.sort(renderPrioritySort);
 
-	for (auto* object : m_lGameObjects)
+	for (auto* object : m_lObjectsActivate)
 	{
 		if (!object->m_isActivated || !object->m_renderHandler)
 		{
@@ -68,3 +68,45 @@ void GameLevel::Render(sf::RenderWindow* window)
 	}
 }
 
+void GameLevel::AddObjectWithCollision(CollisionHandler& object)
+{
+	//static_assert(object.GetCollisionHandler());
+	//const auto LastObject = m_lObjectsWithCollision.end();
+	//for (auto firstObject = m_lObjectsWithCollision.begin(); firstObject != LastObject; ++firstObject);
+	//{
+	//}
+	m_lObjectsWithCollision.push_back(object.m_owner);
+}
+
+void GameLevel::EraseObjectWithCollision(GameObject& object)
+{
+	m_lObjectsWithCollision.remove(&object);
+}
+
+void GameLevel::AddObjectRendered(RenderHandler& object)
+{
+	//auto ZIndex = object.
+}
+
+void GameLevel::EraseObjectRendered(GameObject& object)
+{
+}
+
+void GameLevel::ActivateObject(GameObject& object, bool newObject)
+{
+	if (newObject)
+	{
+		m_lObjectsActivate.push_back(&object);
+	}
+	else
+	{
+		m_lObjectsDeactivate.remove(&object);
+		m_lObjectsActivate.push_back(&object);
+	}
+}
+
+void GameLevel::DeactivateObject(GameObject& object)
+{
+	m_lObjectsActivate.remove(&object);
+	m_lObjectsDeactivate.push_back(&object);
+}

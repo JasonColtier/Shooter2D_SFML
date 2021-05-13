@@ -8,8 +8,9 @@
 #include <random>
 #include <valarray>
 #include "Components/CollisionHandler.h"
+#include "Managers/TextureManager.h"
 
-Enemy::Enemy()
+Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
 {
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
@@ -24,8 +25,8 @@ Enemy::Enemy()
 		Sprite->setScale(sf::Vector2f(1.f, 1.f));
 	}
 
-	auto* Tmp = new std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, new std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }), &m_rotation, 50, &m_position, Tmp);
+	const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
+	m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }), &m_rotation, 50, &m_position, Tmp);
 }
 
 void Enemy::Tick(int64_t deltaTime)

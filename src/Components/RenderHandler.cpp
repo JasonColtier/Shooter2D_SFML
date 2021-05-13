@@ -76,20 +76,21 @@ sf::Text* RenderHandler::GetText(const std::string key) const
 
 void RenderHandler::RenderUpdate()
 {
-    // if (parentGameObject->collisionHandler)
-    // {
-    // 	std::vector<sf::Vector2f> tmp = parentGameObject->collisionHandler->getPoints();
-    // 	
-    // 	sf::Vertex vertice[4] =
-    // 	{
-    // 		tmp[0],
-    //            tmp[1],
-    //            tmp[2],
-    //            tmp[3]
-    //        };
-    //
-    // 	GameWindow::window->draw(vertice, 4, sf::Quads);
-    // }
+     //if (parentGameObject->GetCollisionHandler())
+     //{
+     //    std::vector<sf::Vector2f> tmp;
+     //	parentGameObject->GetCollisionHandler()->GetPoints(tmp);
+     //	
+     //	sf::Vertex vertice[4] =
+     //	{
+     //		tmp[0],
+     //           tmp[1],
+     //           tmp[2],
+     //           tmp[3]
+     //       };
+    
+     //	GameWindow::m_window->draw(vertice, 4, sf::Quads);
+     //}
 
     for (auto customSprite : sortedSprites)
     {
