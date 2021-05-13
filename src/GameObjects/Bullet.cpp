@@ -2,6 +2,7 @@
 
 #include "GameObjects/Enemy.h"
 #include "GameWindow.h"
+#include "StaticData.h"
 #include "Components/CollisionHandler.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Character.h"
@@ -20,8 +21,7 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 		Sprite->setOrigin(10, 5);
 	}
 
-	const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(-9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f) };
-	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, std::vector<CollisionType>(), &m_rotation, 10, &m_position, Tmp);
+	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, std::vector<CollisionType>(), &m_rotation, 10, &m_position, StaticData::BulletCollision);
 }
 
 void Bullet::Tick(const int64_t deltaTime)

@@ -11,6 +11,7 @@
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
 #include "GameObjects/BonusHeal.h"
+#include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
 
 Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos , float scale , float rotation ) :  Character(position, offsetPos, scale, rotation)
@@ -57,18 +58,5 @@ void Enemy::Deactivate()
 	GameObject::Deactivate();
 
 	ScoreManager::ModifyScore(1);//une façon d'augmenter le score
-	_SpawnBonus();	
-}
-
-void Enemy::_SpawnBonus()
-{
-	//random
-	int range = 100 - 1;
-	int num = rand() % range;
-
-	if(num <= m_chanceToSpawnBonus)
-	{
-		GameWindow::GetGameLevel()->SpawnActor<BonusHeal>()->m_position = m_position;
-		Print::PrintLog("spawned bonus !");
-	}
+	BonusSpawner::RollBonus(m_position);
 }

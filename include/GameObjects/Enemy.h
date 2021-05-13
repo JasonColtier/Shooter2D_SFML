@@ -3,12 +3,7 @@
 
 #include "GameObjects/Character.h"
 
-//class RenderComponent;
 
-//namespace sf
-//{
-//	class Texture;
-//}
 
 class Enemy : public Character
 {
@@ -23,10 +18,6 @@ public:
 
 	void Deactivate() override;
 
-private:
-	void _SpawnBonus();
-
-	int m_chanceToSpawnBonus = 100;  // en %
 
 
 };

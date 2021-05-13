@@ -5,56 +5,69 @@
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
+#include "GameObjects/BonusMultipleShot.h"
 #include "Tools/Print.h"
 
-template<typename GameObject1, typename GameObject2>
+template <typename GameObject1, typename GameObject2>
 struct OnCollision
 {
-	static void Reaction(GameObject1&, GameObject2&) {}
+    static void Reaction(GameObject1&, GameObject2&)
+    {
+    }
 };
 
-template<>
+template <>
 struct OnCollision<Player, Enemy>
 {
-	static void Reaction(Player& player, Enemy& enemy)
-	{
-		std::cout << "Collision Enemy, Player" << std::endl;
-	}
+    static void Reaction(Player& player, Enemy& enemy)
+    {
+        std::cout << "Collision Enemy, Player" << std::endl;
+    }
 };
 
-template<>
+template <>
 struct OnCollision<Player, Bullet>
 {
-	static void Reaction(Player& player, Bullet& bullet)
-	{
-
-	}
+    static void Reaction(Player& player, Bullet& bullet)
+    {
+    }
 };
 
-template<>
+template <>
 struct OnCollision<Enemy, Bullet>
 {
-	static void Reaction(Enemy& enemy, Bullet& bullet)
-	{
-		std::cout << "Collision Ennemy, Bullet" << std::endl;
-		enemy.m_lifeComponent->ModifyHealth(-bullet.GetDammage());
-		bullet.Deactivate();
-	}
+    static void Reaction(Enemy& enemy, Bullet& bullet)
+    {
+        std::cout << "Collision Ennemy, Bullet" << std::endl;
+        enemy.m_lifeComponent->ModifyHealth(-bullet.GetDammage());
+        bullet.Deactivate();
+    }
 };
 
-template<>
+template <>
 struct OnCollision<Player, BonusHeal>
 {
-	static void Reaction(Player& player, BonusHeal& bonusHeal)
-	{
-		auto life = player.GetComponentOfClass<LifeComponent>();
+    static void Reaction(Player& player, BonusHeal& bonusHeal)
+    {
+        auto life = player.GetComponentOfClass<LifeComponent>();
 
-		// if(life->m_currentHealth != life->m_maxHealth && life->m_currentHealth !=0)
-		// {
-			life->ModifyHealth(bonusHeal.m_pdtVie);
-			Print::PrintLog("take heal ! ");
-			bonusHeal.Deactivate();
-		// }
-	}
+        life->ModifyHealth(bonusHeal.m_pdtVie);
+        Print::PrintLog("take heal ! ");
+        bonusHeal.Deactivate();
+    }
 };
+
+template <>
+struct OnCollision<Player, BonusMultipleShot>
+{
+    static void Reaction(Player& player, BonusMultipleShot& bonusMultipleShot)
+    {
+        auto shoot = player.GetComponentOfClass<ShootComponent>();
+
+        shoot->m_shootNumber ++;
+        Print::PrintLog("multiple shoot ! ");
+        bonusMultipleShot.Deactivate();
+    }
+};
+
 #endif //TONCOLLISION_H

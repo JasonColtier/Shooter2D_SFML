@@ -11,7 +11,7 @@ template<typename ...types>
 struct TypeList
 {};
 
-using AllCollisionTypes = TypeList<Player, Enemy, Bullet, BonusHeal>;
+using AllCollisionTypes = TypeList<Player, Enemy, Bullet, BonusHeal,BonusMultipleShot>;
 
 template<template<typename, typename> class Functor, typename T1, typename T2TypeList>
 struct DispatchOnT2
