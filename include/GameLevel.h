@@ -34,21 +34,20 @@ public:
 	template<class T = GameObject, typename ...Args>
 	T* SpawnActor(Args ...args)
 	{
-		for (auto* object : m_lObjectsActivate)
+		for (auto* object : m_lObjectsDeactivate)
 		{
 			if (!object->m_isActivated)
 			{
 				auto* tmp = dynamic_cast<T*>(object);
 				if (tmp)
 				{
-					tmp->Activate(args...); 
+					tmp->Activate(args...);
+					ActivateObject(*tmp, false);
 					return tmp;
 				}
 			}
 		}
 		T* newObject = new T(args...);
-		m_lObjectsActivate.push_back(newObject);
-		m_lObjectsWithCollision.push_back(newObject);
 		return newObject;
 	}
 

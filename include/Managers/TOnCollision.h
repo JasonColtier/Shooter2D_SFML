@@ -9,8 +9,6 @@
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
-#include <list>
-#include <iterator>
 #include "GameObjects/BonusMovementSpeed.h"
 #include "GameObjects/BonusMultipleShot.h"
 #include "GameObjects/BonusShotgun.h"
@@ -30,7 +28,8 @@ struct OnCollision<Player, Enemy>
 {
     static void Reaction(Player& player, Enemy& enemy)
     {
-        // std::cout << "Collision Enemy, Player" << std::endl;
+        player.GetComponentOfClass<LifeComponent>()->CollisionDamage(0);
+        enemy.GetComponentOfClass<LifeComponent>()->CollisionDamage(5);
     }
 };
 
@@ -39,6 +38,11 @@ struct OnCollision<Player, Bullet>
 {
     static void Reaction(Player& player, Bullet& bullet)
     {
+        if(player.m_isActivated)
+        {
+            // player.GetComponentOfClass<LifeComponent>()->ModifyHealth(-bullet.GetDammage());
+            bullet.Deactivate();
+        }
     }
 };
 
@@ -125,7 +129,7 @@ struct OnCollision<Player, BonusMovementSpeed>
 {
     static void Reaction(Player& player, BonusMovementSpeed& movementSpeed)
     {
-        player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.5;
+        player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.3;
 
         Print::PrintLog("movement speed up ! ");
         movementSpeed.Deactivate();

@@ -100,6 +100,7 @@ void GameLevel::ActivateObject(GameObject& object, bool newObject)
 	if (newObject)
 	{
 		m_lObjectsActivate.push_back(&object);
+		m_lObjectsWithCollision.push_back(&object);
 	}
 	else
 	{

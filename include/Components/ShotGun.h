@@ -5,7 +5,7 @@
 class ShotGun : public ShootComponent
 {
 public:
-    ShotGun()
+    ShotGun(Character* characterShooter) : ShootComponent(characterShooter)
     {
         m_baseShootNumber = 5;
         m_baseFireRate = 7.f;

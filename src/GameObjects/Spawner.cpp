@@ -100,16 +100,16 @@ void Spawner::RandomShoot(Enemy* EnemytoSpawn)
     switch (Random)
     {
     case 0:
-        EnemytoSpawn->SetShootComponent(new ClassicPistol());
+        EnemytoSpawn->SetShootComponent(new ClassicPistol(EnemytoSpawn));
         break;
 
     case 1:
-        EnemytoSpawn->SetShootComponent(new ShotGun());
+        EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
 
         break;
 
     case 2:
-        EnemytoSpawn->SetShootComponent(new Sniper());
+        EnemytoSpawn->SetShootComponent(new Sniper(EnemytoSpawn));
 
         break;
     }

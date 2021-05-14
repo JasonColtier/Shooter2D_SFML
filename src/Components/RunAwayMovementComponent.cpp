@@ -61,7 +61,7 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 		Owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}
 	//sinon : va se rapprocher du joueur et peut l'attaquer
-	else
+	else if(m_distance > 400)
 	{
 		Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}

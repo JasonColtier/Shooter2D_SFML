@@ -6,15 +6,18 @@
 #include "GameObjects/GameObject.h"
 #include "Managers/TextureManager.h"
 
+class Character;
+
 class Bullet : public GameObject
 {
 public:
 
-	Bullet(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false);
+	Bullet(Character* characterShooter,sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false,float autoDestroy = 0);
 	~Bullet() override = default;
 
-	void Activate(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false);
-
+	void Activate(Character* characterShooter,sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false,float autoDestroy=0);
+	void Deactivate() override;
+	
 	void Tick(int64_t deltaTime) override;
 
 	TypeId GetTypeId() override { return GetClassTypeId(); }
@@ -36,6 +39,7 @@ public:
 	float m_damageMultiplier = 1.f;
 
 	bool m_piercing = false; //transperce les ennemis ?
+	Character* m_CharacterShooter = nullptr;
 
 protected:
 	float m_speed = 0.5f;

@@ -6,7 +6,7 @@
 class ClassicPistol : public ShootComponent
 {
 public:
-	ClassicPistol();
+	ClassicPistol(Character* characterShooter);
 	void ShootBullet(int initialAngle) override;
 };
 

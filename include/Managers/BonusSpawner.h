@@ -61,7 +61,7 @@ public:
 
     static const int m_numberOfBonus = 6; //nombre de bonus dans notre typelist
     // static const int m_numberOfBonus = 1; //nombre de bonus dans notre typelist
-    static const int m_chanceToSpawnBonus = 10; // en %
+    static const int m_chanceToSpawnBonus = 100; // en %
 
     static void RollBonus(sf::Vector2f pos)
     {

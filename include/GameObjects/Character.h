@@ -12,11 +12,14 @@ public:
 	Character(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f)
 		: GameObject(position, offsetPos, scale, rotation)
 	{
-		m_lifeComponent = new LifeComponent();
-		AddComponent(m_lifeComponent);
+		Activate(position,offsetPos,scale,rotation);
 	}
 
 	virtual ~Character() = default;
+
+	virtual void Activate(sf::Vector2f position,sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
+
+	virtual void Deactivate() override;
 
 	void SetShootComponent(ShootComponent* shootComponent)
 	{

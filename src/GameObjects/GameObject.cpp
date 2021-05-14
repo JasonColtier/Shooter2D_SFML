@@ -12,6 +12,8 @@ GameObject::GameObject(sf::Vector2f position, sf::Vector2f offsetPos, float scal
 	, m_rotation(rotation)
 {
 	GameWindow::GetGameLevel()->ActivateObject(*this, true);
+
+	Print::PrintLog("new game object");
 }
 
 
@@ -26,6 +28,7 @@ void GameObject::RemoveComponent(Component* component)
 {
 	m_lComponentList.remove(component);
 	delete component;
+	component = nullptr;
 }
 
 void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::Vector2f>& points, std::vector<CollisionType> excludedCollisionType, float radius)
@@ -61,7 +64,7 @@ void GameObject::Activate(const sf::Vector2f position, const sf::Vector2f offset
 	m_scale = scale;
 	m_rotation = rotation;
 
-	GameWindow::GetGameLevel()->ActivateObject(*this, false);
+	Print::PrintLog("++ activate ", typeid(*this).name());
 }
 
 void GameObject::Deactivate()
@@ -77,5 +80,7 @@ void GameObject::Deactivate()
 	}
 	m_lComponentList.clear();
 	GameWindow::GetGameLevel()->DeactivateObject(*this);
+
+	Print::PrintLog("-- deactivate ", typeid(*this).name());
 
 }
