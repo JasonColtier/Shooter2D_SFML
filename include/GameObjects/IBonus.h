@@ -14,7 +14,7 @@ public:
 	{
 		GameObject::Activate(position, offsetPos, scale, rotation);
 		
-		SetCollisionHandler(CollisionType::BonusChannel, StaticData::BonusCollision, 50, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
+		SetCollisionHandler(CollisionType::BonusChannel, StaticData::BonusCollision, 35, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
 	};
 
 	void Deactivate() override

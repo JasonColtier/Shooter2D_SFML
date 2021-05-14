@@ -30,15 +30,15 @@ void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::V
 	}
 }
 
-void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
 	if (m_renderHandler != nullptr)
 	{
-		m_renderHandler->Initialise(tex, key, zIndex, isMovable);
+		m_renderHandler->Initialise(tex, key, zIndex, isMovable,origin,scale);
 	}
 	else
 	{
-		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable);
+		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable,origin,scale);
 	}
 }
 

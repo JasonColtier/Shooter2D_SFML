@@ -66,7 +66,7 @@ public:
 		return m_renderHandler;
 	}
 
-	void SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	void SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true,sf::Vector2f origin = sf::Vector2f(0, 0),float scale = 1.f);
 	void SetRenderHandler(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 public:
 

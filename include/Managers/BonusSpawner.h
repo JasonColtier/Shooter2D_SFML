@@ -16,7 +16,7 @@ struct TypeList
 
 //toutes les classes bonus disponibles
 using BonusTypes = TypeList<BonusShotgun,BonusHeal, BonusMultipleShot,BonusFireRate,BonusSniper,BonusMovementSpeed>;
-// using BonusTypes = TypeList<BonusMovementSpeed>;
+// using BonusTypes = TypeList<BonusHeal>;
 
 //la template de base
 template <typename ...Types>

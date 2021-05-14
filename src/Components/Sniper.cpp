@@ -12,31 +12,22 @@
 
 void Sniper::ShootBullet(int initialAngle)
 {
-	m_baseShootNumber = 1;
-	m_baseFireRate = 10.f;
-	m_baseDispersion = 20.f;
-	
-	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 1);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
 	if (dynamic_cast<Player*>(m_owner))
 	{
+		Print::PrintLog("player sniper bullet");
 		ColType = CollisionType::PlayerProjectileChannel;
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
 	else
 	{
+		Print::PrintLog("enemy sniper bullet");
 		ColType = CollisionType::EnemyProjectileChannel;
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
-	for (auto t : ExcludeColType)
-	{
-		if (t == CollisionType::EnemyChannel && dynamic_cast<Player*>(m_owner))
-		{
-			std::cout << "Player fire enemy bullet" << std::endl;
-			std::cout << "  " << std::endl;
-		}
-	}
+	
 	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

@@ -15,7 +15,8 @@ public:
 	{
 		IBonus::Activate(position, offsetPos, scale, rotation);
 		
-		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::MultipleShot), "MultipleShot", 3);
+		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::MultipleShot), "MultiplsShot", 3,true,sf::Vector2f(25,25),1);
+
 	}
 
 	void Deactivate() override
