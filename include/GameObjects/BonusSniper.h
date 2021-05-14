@@ -14,6 +14,8 @@ public:
 	
 	void Activate(sf::Vector2f position = sf::Vector2f(0,0), sf::Vector2f offsetPos = sf::Vector2f(0,0), float scale = 1.f, float rotation = 0) override
 	{
+		IBonus::Activate(position, offsetPos, scale, rotation);
+		
 		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Sniper), "Sniper", 3);
 	};
 

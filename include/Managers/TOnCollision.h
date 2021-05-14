@@ -40,6 +40,7 @@ struct OnCollision<Player, Bullet>
     {
         if(player.m_isActivated)
         {
+            Print::PrintLog("player collision bullet");
             // player.GetComponentOfClass<LifeComponent>()->ModifyHealth(-bullet.GetDammage());
             bullet.Deactivate();
         }

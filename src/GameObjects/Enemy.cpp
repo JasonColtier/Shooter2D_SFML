@@ -69,6 +69,8 @@ void Enemy::Deactivate()
 
     auto ListEnnemi = m_enemySpawner->m_EnemyList;
 
+    ScoreManager::ModifyScore(1);//une façon d'augmenter le score rapide mais on peut faire mieux
+    
     for (Enemy* currentEnemy : ListEnnemi)
     {
         if (currentEnemy == this)

@@ -14,8 +14,7 @@ public:
 	{
 		GameObject::Activate(position, offsetPos, scale, rotation);
 		
-		const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(-25.0f, -25.0f), sf::Vector2f(25.0f, -25.0f), sf::Vector2f(25.0f, 25.0f), sf::Vector2f(-25.0f, 25.0f) };
-		SetCollisionHandler(CollisionType::BonusChannel, Tmp, 10, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
+		SetCollisionHandler(CollisionType::BonusChannel, StaticData::BonusCollision, 50, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
 	};
 
 	void Deactivate() override

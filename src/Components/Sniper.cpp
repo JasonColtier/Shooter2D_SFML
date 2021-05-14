@@ -37,9 +37,6 @@ void Sniper::ShootBullet(int initialAngle)
 			std::cout << "  " << std::endl;
 		}
 	}
-	//if(dynamic_cast<Player*>(m_owner) && E)
 	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
-	//bullet->GetCollisionHandler()->m_eType = CollisionType::PlayerProjectileChannel;
-	//bullet->GetCollisionHandler()->m_lExcludedCollisionType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

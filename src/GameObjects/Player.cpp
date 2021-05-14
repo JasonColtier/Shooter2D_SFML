@@ -34,9 +34,8 @@ void Player::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale
 	}
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	SetShootComponent(new Sniper(this));
-	// m_shootComponent->m_isPlayer = true;
-	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }));
+	SetShootComponent(new ClassicPistol(this));
+	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }));
 
 	AddComponent(new PlayerMovementComponent());
 

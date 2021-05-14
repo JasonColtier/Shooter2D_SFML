@@ -84,31 +84,6 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
     return text;
 }
 
-void RenderHandler::RemoveSprite(sf::Sprite* sprite)
-{
-    for (int i = 0; i < m_renderedItems.size(); ++i) 
-    {
-        if(m_renderedItems[i]->m_drawableItem == sprite)
-        {
-            auto it = m_renderedItems.begin() + i;
-            m_renderedItems.erase(it);
-            break;
-        }
-    }
-
-    for (int i = 0; i < m_MovableSprites.size(); ++i)
-    {
-        if(m_MovableSprites[i] == sprite)
-        {
-            auto it = m_MovableSprites.begin() + i;
-            m_MovableSprites.erase(it);
-            break;
-        }
-    }
-
-    delete sprite;
-}
-
 void RenderHandler::RenderUpdate()
 {
 	if (m_owner->GetCollisionHandler())
@@ -127,15 +102,15 @@ void RenderHandler::RenderUpdate()
 		GameWindow::m_window->draw(vertice, 4, sf::Quads);
 	}
 
-	//for (auto* sprite : m_MovableSprites)
-	//{
-	//	sprite->setRotation(m_owner->m_rotation);
-	//	sprite->setPosition(m_owner->m_position);
-	//}
+	for (auto* sprite : m_MovableSprites)
+	{
+		sprite->setRotation(m_owner->m_rotation);
+		sprite->setPosition(m_owner->m_position);
+	}
 
-	//for (auto* rendered : m_renderedItems)
-	//{
-	//	GameWindow::m_window->draw(*rendered->m_drawableItem);
-	//}
+	for (auto* rendered : m_renderedItems)
+	{
+		GameWindow::m_window->draw(*rendered->m_drawableItem);
+	}
 
 }
