@@ -6,6 +6,8 @@
 #include "Components/PlayerMovementComponent.h"
 #include "Tools/Print.h"
 #include "Components/RenderHandler.h"
+#include "Components/ShotGun.h"
+#include "Components/Sniper.h"
 #include "HUD/PlayerHUD.h"
 #include "Managers/TextureManager.h"
 

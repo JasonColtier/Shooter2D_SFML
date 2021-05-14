@@ -12,8 +12,8 @@ public:
     virtual ~ShootComponent() override = default;
 
     ShootComponent(ShootComponent& shootComponent) :
-        m_fireRateModifier(shootComponent.m_fireRateModifier),
         m_additionnalShootNumber(shootComponent.m_additionnalShootNumber),
+        m_fireRateModifier(shootComponent.m_fireRateModifier),
         m_baseVelocityMultiplier(shootComponent.m_baseVelocityMultiplier)
     {
     }

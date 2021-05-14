@@ -30,7 +30,7 @@ struct OnCollision<Player, Enemy>
 {
     static void Reaction(Player& player, Enemy& enemy)
     {
-        std::cout << "Collision Enemy, Player" << std::endl;
+        // std::cout << "Collision Enemy, Player" << std::endl;
     }
 };
 
@@ -45,12 +45,16 @@ struct OnCollision<Player, Bullet>
 template <>
 struct OnCollision<Enemy, Bullet>
 {
-	static void Reaction(Enemy& enemy, Bullet& bullet)
-	{
-		std::cout << "Collision Ennemy, Bullet" << std::endl;
-		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()));		
-		bullet.Deactivate();
-	}
+    static void Reaction(Enemy& enemy, Bullet& bullet)
+    {
+        if(enemy.m_isActivated)
+        {
+            std::cout << "Collision Ennemy, Bullet" << std::endl;
+            enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()));
+            if (!bullet.m_piercing)//si on ne transperce pas les ennemis on est détruit
+                bullet.Deactivate(); 
+        }
+    }
 };
 
 template <>
@@ -71,10 +75,10 @@ struct OnCollision<Player, BonusMultipleShot>
 {
     static void Reaction(Player& player, BonusMultipleShot& bonusMultipleShot)
     {
-        auto shoot = player.GetComponentOfClass<ShootComponent>();
+        auto* shoot = player.GetComponentOfClass<ShootComponent>();
 
-        shoot->m_baseShootNumber ++;
-        Print::PrintLog("multiple shoot ! ");
+        shoot->m_additionnalShootNumber ++;
+        Print::PrintLog("multiple shoot ! : ",shoot->m_additionnalShootNumber);
         bonusMultipleShot.Deactivate();
     }
 };
@@ -86,7 +90,7 @@ struct OnCollision<Player, BonusFireRate>
     {
         auto shoot = player.GetComponentOfClass<ShootComponent>();
 
-        shoot->m_fireRateModifier *= 0.5f;
+        shoot->m_fireRateModifier *= bonusFireRate.m_fireRateUpAmount;
         Print::PrintLog("fire rate up ! ");
         bonusFireRate.Deactivate();
     }
@@ -98,7 +102,7 @@ struct OnCollision<Player, BonusShotgun>
     static void Reaction(Player& player, BonusShotgun& bonusShotgun)
     {
         player.SetShootComponent(new ShotGun(*player.GetShootComponent()));
-        
+
         Print::PrintLog("shotgun ! ");
         bonusShotgun.Deactivate();
     }
@@ -110,7 +114,7 @@ struct OnCollision<Player, BonusSniper>
     static void Reaction(Player& player, BonusSniper& bonusSniper)
     {
         player.SetShootComponent(new Sniper(*player.GetShootComponent()));
-        
+
         Print::PrintLog("sniper ! ");
         bonusSniper.Deactivate();
     }
@@ -122,7 +126,7 @@ struct OnCollision<Player, BonusMovementSpeed>
     static void Reaction(Player& player, BonusMovementSpeed& movementSpeed)
     {
         player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.5;
-        
+
         Print::PrintLog("movement speed up ! ");
         movementSpeed.Deactivate();
     }

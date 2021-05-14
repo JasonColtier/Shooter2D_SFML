@@ -49,6 +49,31 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
     return text;
 }
 
+void RenderHandler::RemoveSprite(sf::Sprite* sprite)
+{
+    for (int i = 0; i < m_renderedItems.size(); ++i) 
+    {
+        if(m_renderedItems[i]->m_drawableItem == sprite)
+        {
+            auto it = m_renderedItems.begin() + i;
+            m_renderedItems.erase(it);
+            break;
+        }
+    }
+
+    for (int i = 0; i < m_MovableSprites.size(); ++i)
+    {
+        if(m_MovableSprites[i] == sprite)
+        {
+            auto it = m_MovableSprites.begin() + i;
+            m_MovableSprites.erase(it);
+            break;
+        }
+    }
+
+    delete sprite;
+}
+
 void RenderHandler::RenderUpdate()
 {
     // if (m_parentGameObject->m_collisionHandler)

@@ -9,10 +9,10 @@
 #include "Managers/TextureManager.h"
 #include "Tools/SMath.h"
 
-Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) :GameObject(position, offsetPos, scale, rotation)
+Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation, sf::Texture* texture,bool piercing) :GameObject(position, offsetPos, scale, rotation),m_piercing(piercing)
 {
 	m_renderHandler = new RenderHandler(this);
-	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
+	m_renderHandler->AddSprite(texture, "bullet", 2);
 
 	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("bullet");
 	if (Sprite)
@@ -22,6 +22,11 @@ Bullet::Bullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 	}
 
 	m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, std::vector<CollisionType>(), &m_rotation, 10, &m_position, StaticData::BulletCollision);
+}
+
+void Bullet::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation, sf::Texture* texture, bool piercing)
+{
+	
 }
 
 void Bullet::Tick(const int64_t deltaTime)

@@ -59,6 +59,10 @@ public:
 		return a->m_zIndex < b->m_zIndex;
 	};
 
+	void RemoveSprite(sf::Sprite* sprite);
+
+	void RemoveText(sf::Text* text);
+
 
 	void RenderUpdate();
 

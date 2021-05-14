@@ -20,7 +20,8 @@ public:
 
 public:
 	Player* m_player = nullptr; //set par le joueur en faisant spawner
-	sf::Text m_scoreText;
+	sf::Text* m_deltatimeText;
+	
 
 private:
 	void _HandleChangeScore(int score) const;

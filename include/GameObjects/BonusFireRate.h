@@ -17,6 +17,8 @@ public:
 
 	TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "BonusFireRate"; }
+
+	float m_fireRateUpAmount = 0.8f;
 };
 
 #endif //BONUSHEAL_H
