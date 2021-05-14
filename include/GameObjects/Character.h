@@ -18,9 +18,28 @@ public:
 
 	virtual ~Character() = default;
 
+	void SetShootComponent(ShootComponent* shootComponent)
+	{
+		if(m_shootComponent != nullptr)
+		{
+			RemoveComponent(m_shootComponent);
+		}
+		
+		AddComponent(shootComponent);
+		m_shootComponent = shootComponent;
+	};
+
+	ShootComponent* GetShootComponent() const
+	{
+		return m_shootComponent;
+	}
+
 public:
 	LifeComponent* m_lifeComponent = nullptr;
-	ShootComponent* m_shootComponent = nullptr;
 	IMovementComponent* m_movementCompo = nullptr;
+
+private:
+	ShootComponent* m_shootComponent = nullptr;
+
 };
 #endif //CHARACTER_H

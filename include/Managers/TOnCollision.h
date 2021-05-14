@@ -95,10 +95,7 @@ struct OnCollision<Player, BonusShotgun>
 {
     static void Reaction(Player& player, BonusShotgun& bonusShotgun)
     {
-        player.RemoveComponent(player.GetComponentOfClass<ShootComponent>());
-        auto* shotGun = new ShotGun();
-        player.AddComponent(shotGun);
-        player.m_shootComponent  = shotGun;
+        player.SetShootComponent(new ShotGun(*player.GetShootComponent()));
         
         Print::PrintLog("shotgun ! ");
         bonusShotgun.Deactivate();
@@ -110,10 +107,7 @@ struct OnCollision<Player, BonusSniper>
 {
     static void Reaction(Player& player, BonusSniper& bonusSniper)
     {
-        player.RemoveComponent(player.GetComponentOfClass<ShootComponent>());
-        auto* sniper = new Sniper();
-        player.AddComponent(sniper);
-        player.m_shootComponent  = sniper;
+        player.SetShootComponent(new Sniper(*player.GetShootComponent()));
         
         Print::PrintLog("sniper ! ");
         bonusSniper.Deactivate();

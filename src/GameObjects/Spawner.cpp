@@ -73,8 +73,7 @@ void Spawner::DoSpawn(const int X, const int Y)
 
 	//NewEnemy->m_position = sf::Vector2f(static_cast<float>(X), static_cast<float>(Y));
 	NewEnemy->m_movementCompo = new ShotgunnerMovementComponent();
-	NewEnemy->m_shootComponent = new ShotGun();
+	NewEnemy->SetShootComponent(new ShotGun());
 	NewEnemy->AddComponent(NewEnemy->m_movementCompo);
-	NewEnemy->AddComponent(NewEnemy->m_shootComponent);
 	NewEnemy->m_rotation = 90;
 }

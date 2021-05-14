@@ -32,8 +32,7 @@ Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 	}
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	m_shootComponent = new ClassicPistol();
-	AddComponent(m_shootComponent);
+	SetShootComponent(new ClassicPistol());
 
 	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
 	AddComponent(new PlayerMovementComponent());
@@ -52,7 +51,7 @@ void Player::OnInputChanged(const InputMapping input) const
 {
 	if (input.first == InputsEnum::Shoot)
 	{
-		m_shootComponent->m_wantToShoot = input.second;
+		GetShootComponent()->m_wantToShoot = input.second;
 	}
 	if (input.first == InputsEnum::DebugNum1)
 	{

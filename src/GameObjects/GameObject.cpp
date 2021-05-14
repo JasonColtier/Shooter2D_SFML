@@ -25,6 +25,7 @@ void GameObject::AddComponent(Component* component)
 void GameObject::RemoveComponent(Component* component)
 {
 	m_lComponentList.remove(component);
+	delete component;
 }
 
 void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::Vector2f>& points, std::vector<CollisionType> excludedCollisionType, float radius)
