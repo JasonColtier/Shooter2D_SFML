@@ -30,10 +30,14 @@ void LifeComponent::ModifyHealth(float modification)
 
     if(m_currentHealth < 0)
     {
-        Print::PrintLog(typeid(*Owner).name()," is dead ! ");
+        Print::PrintLog(typeid(*m_owner).name()," is dead ! ");
         
         m_currentHealth = 0;
-        Owner->Deactivate();
+        if(dynamic_cast<Enemy*>(m_owner))
+        {
+            ScoreManager::ModifyScore(1);//une façon d'augmenter le score rapide mais on peut faire mieux
+        }
+        m_owner->Deactivate();
     }
     // Print::PrintLog("modified health, new life is : ",m_currentHealth);
 }

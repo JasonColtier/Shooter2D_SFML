@@ -4,9 +4,8 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
-
-//#include "Components/Component.h"
 
 class Component;
 class RenderHandler;
@@ -16,6 +15,7 @@ enum class CollisionType;
 using TypeId = std::string;
 
 namespace sf {
+	class Texture;
 	class RenderWindow;
 }
 
@@ -29,7 +29,7 @@ public:
 
 	virtual void Tick(int64_t deltaTime);
 
-	virtual void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
+	void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
 	virtual void Deactivate();
 
 	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
@@ -58,27 +58,27 @@ public:
 		return m_collisionHandler;
 	}
 
-	void SetCollisionHandler(CollisionType type, const std::vector<sf::Vector2f>& points, std::vector<CollisionType> excludedCollisionType = std::vector<CollisionType>(), float radius = 0);
+	void SetCollisionHandler(CollisionType type, const std::vector<sf::Vector2f>& points, float radius = 0, std::vector<CollisionType> excludedCollisionType = std::vector<CollisionType>());
 
 	RenderHandler* GetRenderHandler() const
 	{
 		return m_renderHandler;
 	}
 
-	void SetRenderHandler();
-
+	void SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	void SetRenderHandler(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 public:
 
 	sf::Vector2f m_position = sf::Vector2f(0.f, 0.f);
 	sf::Vector2f m_offsetPos = sf::Vector2f(0.f, 0.f);//offset de position
-	
+
 	bool m_isActivated = true;
 	float m_scale = 0.5f;
 	float m_rotation = 0;
-	
+
 	std::list<Component*> m_lComponentList;
 
-	//private:
+private:
 	CollisionHandler* m_collisionHandler = nullptr;
 	RenderHandler* m_renderHandler = nullptr;
 

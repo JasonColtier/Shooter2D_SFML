@@ -55,7 +55,7 @@ struct OnCollision<Enemy, Bullet>
         {
             std::cout << "Collision Ennemy, Bullet" << std::endl;
             enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()));
-            if (!bullet.m_piercing)//si on ne transperce pas les ennemis on est détruit
+            if (!bullet.m_piercing)//si on ne transperce pas les ennemis on est dï¿½truit
                 bullet.Deactivate(); 
         }
     }

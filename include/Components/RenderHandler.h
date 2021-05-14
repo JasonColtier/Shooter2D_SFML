@@ -33,7 +33,12 @@ class RenderHandler
 {
 public:
 
-	RenderHandler(GameObject* parentGameObject);
+	RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	RenderHandler(GameObject* parentGameObject, std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
+
+	void Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	void Initialise(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
+	void Reset();
 
 	template <class T>
 	T* GetRenderedItemWithKey(std::string key)
@@ -68,7 +73,7 @@ public:
 
 
 	//le gameobject qui possède ce renderHandler
-	GameObject* m_parentGameObject;
+	GameObject* m_owner;
 
 	//le vecteur des éléments à rendre
 	std::vector<CustomContainer*> m_renderedItems;

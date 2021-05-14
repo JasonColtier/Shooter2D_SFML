@@ -1,16 +1,41 @@
 #include "Components/CollisionHandler.h"
+
+#include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 #include "Tools/SMath.h"
 
-void CollisionHandler::Initialise(GameObject* owner, const CollisionType type, float* rotation, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints, std::vector<CollisionType> excludedCollisionType, const float radius)
+
+
+CollisionHandler::CollisionHandler(GameObject* owner, const CollisionType type, float* rotation, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints, const float radius, std::vector<CollisionType> excludedCollisionType)
+	: m_owner(owner)
+	, m_eType(type)
+	, m_lExcludedCollisionType(std::move(excludedCollisionType))
+	, m_position(position)
+	, m_radius(radius)
+	, m_rotation(rotation)
+{
+	SetPoints(lPoints);
+	GameWindow::GetGameLevel()->AddObjectWithCollision(*this);
+}
+
+
+void CollisionHandler::Initialise(GameObject* owner, const CollisionType type, float* rotation, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints, const float radius, std::vector<CollisionType> excludedCollisionType)
 {
 	m_owner = owner;
 	m_eType = type;
-	m_lExcludedCollisionType = std::move(excludedCollisionType);
+	m_lExcludedCollisionType = excludedCollisionType;
 	m_rotation = rotation;
 	m_radius = radius;
 	m_position = position;
 	SetPoints(lPoints);
+	GameWindow::GetGameLevel()->AddObjectWithCollision(*this);
+}
+
+void CollisionHandler::Reset()
+{
+	m_lPoints.clear();
+	m_lExcludedCollisionType.clear();
+	GameWindow::GetGameLevel()->RemoveObjectWithCollision(*m_owner);
 }
 
 void CollisionHandler::SetPoints(const std::vector<sf::Vector2f>& lPoints)
@@ -41,4 +66,14 @@ void CollisionHandler::GetPoints(std::vector<sf::Vector2f>& vec) const
 		NewPoint.y += m_position->y;
 		vec[i] = NewPoint;
 	}
+}
+
+float CollisionHandler::GetStartAbscisse() const
+{
+	return (m_position->x - (m_radius * m_owner->m_scale));
+}
+
+float CollisionHandler::GetEndAbscisse() const
+{
+	return (m_position->x + (m_radius * m_owner->m_scale));
 }

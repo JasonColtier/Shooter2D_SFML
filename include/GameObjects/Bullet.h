@@ -12,12 +12,11 @@ class Bullet : public GameObject
 {
 public:
 
-	Bullet(Character* characterShooter,sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false,float autoDestroy = 0);
+	Bullet(float delay, sf::Vector2f position, float rotation = 0.f, float scale = 1.f, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f));
 	~Bullet() override = default;
 
-	void Activate(Character* characterShooter,sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f,sf::Texture* texture = TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet),bool piercing = false,float autoDestroy=0);
+	void Activate(float delay, sf::Vector2f position, float rotation = 0.f, float scale = 1.f, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f));
 	void Deactivate() override;
-	
 	void Tick(int64_t deltaTime) override;
 
 	TypeId GetTypeId() override { return GetClassTypeId(); }
