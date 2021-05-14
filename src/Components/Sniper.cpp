@@ -18,7 +18,7 @@ void Sniper::ShootBullet(int initialAngle)
 	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
-	if (m_isPlayer)
+	if (dynamic_cast<Player*>(m_owner))
 	{
 		ColType = CollisionType::PlayerProjectileChannel;
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });

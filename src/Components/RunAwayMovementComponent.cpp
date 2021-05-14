@@ -15,18 +15,18 @@
 void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 {
 	m_playerposition = GameWindow::GetGameLevel()->m_player->m_position;
-	const auto Pos = Owner->m_position;
+	const auto Pos = m_owner->m_position;
 
 	//calcul de la disance avec le player
-	const auto DeltaPosX = m_playerposition.x - (Pos.x + Owner->m_offsetPos.x);
-	const auto DeltaPosY = m_playerposition.y - (Pos.y + Owner->m_offsetPos.y);
+	const auto DeltaPosX = m_playerposition.x - (Pos.x + m_owner->m_offsetPos.x);
+	const auto DeltaPosY = m_playerposition.y - (Pos.y + m_owner->m_offsetPos.y);
 
 	//normalisation de la distance
 	const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(DeltaPosX, DeltaPosY));
 
 	//pour toujours s'orienter vers le player
 	const auto Rot = std::atan2(DeltaPosY, DeltaPosX) * 180 / PI;
-	Owner->m_rotation = (Rot + static_cast<float>(m_offsetAngle));
+	m_owner->m_rotation = (Rot + static_cast<float>(m_offsetAngle));
 	if (m_distance < 300.f)
 	{
 		m_offsetAngle = -90;
@@ -58,12 +58,12 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 	//quand le joueur est trop près : va prendre ses distance
 	if (m_distance < 300)
 	{
-		Owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+		m_owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}
 	//sinon : va se rapprocher du joueur et peut l'attaquer
 	else
 	{
-		Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+		m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}
 
 	//Dans le cas où il y a une sortie de l'écran
@@ -74,21 +74,21 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 	const auto BottomBorder = TopBorder + Window->getSize().y;
 
 	//va à la bordure de l'écran opposé quand il sort de l'écran
-	if (Owner->m_position.x < LeftBorder)
+	if (m_owner->m_position.x < LeftBorder)
 	{
-		Owner->m_position.x = RightBorder;
+		m_owner->m_position.x = RightBorder;
 	}
-	else if (Owner->m_position.x > RightBorder)
+	else if (m_owner->m_position.x > RightBorder)
 	{
-		Owner->m_position.x = LeftBorder;
+		m_owner->m_position.x = LeftBorder;
 	}
-	if (Owner->m_position.y < TopBorder)
+	if (m_owner->m_position.y < TopBorder)
 	{
-		Owner->m_position.y = BottomBorder;
+		m_owner->m_position.y = BottomBorder;
 	}
-	else if (Owner->m_position.y > BottomBorder)
+	else if (m_owner->m_position.y > BottomBorder)
 	{
-		Owner->m_position.y = TopBorder;
+		m_owner->m_position.y = TopBorder;
 	}
 
 	//calcul la distance

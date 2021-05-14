@@ -3,6 +3,7 @@
 #include "StaticData.h"
 #include "GameObjects/Bullet.h"
 #include "Components/CollisionHandler.h"
+#include "GameObjects/Player.h"
 
 ShotGun::ShotGun()
 {
@@ -16,7 +17,7 @@ void ShotGun::ShootBullet(int initialAngle)
 	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.4f, m_owner->m_position, m_owner->m_rotation + static_cast<float>(initialAngle), 1.f);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
-	if (m_isPlayer)
+	if (dynamic_cast<Player*>(m_owner))
 	{
 		ColType = CollisionType::PlayerProjectileChannel;
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
