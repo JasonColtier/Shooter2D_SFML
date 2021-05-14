@@ -8,7 +8,7 @@
 #include "Managers/ScoreManager.h"
 #include "Managers/TextureManager.h"
 
-PlayerHUD::PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : GameObject(position, offsetPos, scale, rotation)
+void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
 {
 	m_player = GameWindow::GetGameLevel()->m_player;
 
@@ -26,8 +26,8 @@ PlayerHUD::PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos, float scale,
 	GetRenderHandler()->AddText("0", "scoreText", 3, sf::Vector2f(GameWindow::m_sizeWindow.x - 100, 0));
 	ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::_HandleChangeScore);
 
-	m_renderHandler->AddText("deltatime : ","deltatimeText",3,sf::Vector2f(20,20),sf::Color::Cyan,15);
-	m_deltatimeText = m_renderHandler->GetRenderedItemWithKey<sf::Text>("deltatimeText");
+	GetRenderHandler()->AddText("deltatime : ","deltatimeText",3,sf::Vector2f(20,20),sf::Color::Cyan,15);
+	m_deltatimeText = GetRenderHandler()->GetRenderedItemWithKey<sf::Text>("deltatimeText");
 }
 
 void PlayerHUD::Tick(int64_t deltaTime)

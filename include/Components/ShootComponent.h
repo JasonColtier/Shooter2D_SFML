@@ -24,6 +24,8 @@ public:
     {
     }
 
+    
+    
     //gestion du délai entre les tirs
     virtual void TickComponent(int64_t deltaTime = 0) override;
 

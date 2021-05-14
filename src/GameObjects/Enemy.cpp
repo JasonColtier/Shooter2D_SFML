@@ -20,10 +20,6 @@
 #include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
 
-Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
-{
-    Activate(position,offsetPos,scale,rotation);
-}
 
 void Enemy::Tick(int64_t deltaTime)
 {
@@ -51,10 +47,9 @@ void Enemy::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale,
     //Au moment du spawn
     Print::PrintLog("here comes a new challenger");
 
-    m_renderHandler = new RenderHandler(this);
-    m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
+    SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
 
-    auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("enemy");
+    auto Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("enemy");
 
     if (Sprite)
     {
@@ -62,7 +57,7 @@ void Enemy::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale,
         Sprite->setScale(sf::Vector2f(1.f, 1.f));
     }
 
-    m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, std::vector<CollisionType>({CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel}), &m_rotation, 50, &m_position, StaticData::ShipCollision);
+    SetCollisionHandler(CollisionType::EnemyChannel, StaticData::ShipCollision,50, std::vector<CollisionType>({CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel}));
 }
 
 void Enemy::Deactivate()

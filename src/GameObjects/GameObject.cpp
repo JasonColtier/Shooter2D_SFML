@@ -4,16 +4,6 @@
 #include "Components/CollisionHandler.h"
 #include "Components/RenderHandler.h"
 
-GameObject::GameObject(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
-	: m_position(position)
-	, m_offsetPos(offsetPos)
-	, m_scale(scale)
-	, m_rotation(rotation)
-{
-	GameWindow::GetGameLevel()->ActivateObject(*this, true);
-
-	Print::PrintLog("new game object");
-}
 
 void GameObject::AddComponent(Component* component)
 {
@@ -62,6 +52,11 @@ void GameObject::SetRenderHandler(std::string userText, std::string key, int zIn
 	{
 		m_renderHandler = new RenderHandler(this, userText, key, zIndex, pos, color, size);
 	}
+}
+
+GameObject::GameObject()
+{
+	GameWindow::GetGameLevel()->ActivateObject(*this, true);
 }
 
 void GameObject::Tick(int64_t deltaTime)

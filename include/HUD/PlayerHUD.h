@@ -13,9 +13,16 @@ class Player;
 class PlayerHUD : public GameObject
 {
 public:
-	PlayerHUD(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
+
+	PlayerHUD() =default;
 	~PlayerHUD() = default;
 
+	void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
+	void Deactivate() override
+	{
+		GameObject::Deactivate();
+	}
+	
 	void Tick(int64_t deltaTime) override;
 
 public:

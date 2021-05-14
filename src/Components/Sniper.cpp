@@ -5,19 +5,17 @@
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
-#include "GameObjects/SniperBullet.h"
+#include "GameObjects/Bullet.h"
 #include "Managers/AudioManager.h"
 #include "GameObjects/Player.h"
 
-Sniper::Sniper()
-{
-	m_shootNumber = 1;
-	m_fireRate = 10.f;
-	m_dispersion = 0.f;
-}
 
 void Sniper::ShootBullet(int initialAngle)
 {
+	m_baseShootNumber = 1;
+	m_baseFireRate = 10.f;
+	m_baseDispersion = 20.f;
+	
 	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
