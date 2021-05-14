@@ -3,7 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "Spawner.h"
+#include "GameObjects/Spawner.h"
 #include "Components/CollisionHandler.h"
 #include "Managers/AudioManager.h"
 #include "Managers/TextureManager.h"
@@ -83,6 +83,7 @@ void GameLevel::ActivateObject(GameObject& object, const bool newObject)
 	if (newObject)
 	{
 		m_lObjectsActivate.push_back(&object);
+		// m_lObjectsWithCollision.push_back(&object);
 	}
 	else
 	{

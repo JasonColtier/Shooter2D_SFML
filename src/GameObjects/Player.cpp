@@ -3,22 +3,23 @@
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/ClassicPistol.h"
-#include "Components/MovementComponent.h"
+#include "Components/PlayerMovementComponent.h"
 #include "Tools/Print.h"
 #include "Components/RenderHandler.h"
 #include "Components/Sniper.h"
 #include "HUD/PlayerHUD.h"
 #include "Managers/TextureManager.h"
 
-//#include <random>
-//#include <SFML/Window/Mouse.hpp>
-//#include "GameLevel.h"
-//#include "Components/LifeComponent.h"
-//#include "Tools/VectorTools.h"
 
-
-Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Character(position, offsetPos, scale, rotation)
+void Player::Tick(int64_t deltaTime)
 {
+	GameObject::Tick(deltaTime);
+}
+
+void Player::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
+{
+	Character::Activate(position, offsetPos, scale, rotation);
+	
 	Print::PrintLog("new player");
 
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
@@ -33,28 +34,26 @@ Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 	}
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	m_shootComponent = new Sniper();
-	AddComponent(m_shootComponent);
-	m_shootComponent->m_isPlayer = true;
-	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }));
-	//m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, &m_rotation, &m_position, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }));
-	AddComponent(new MovementComponent());
+	SetShootComponent(new ClassicPistol(this));
+	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }));
+
+	AddComponent(new PlayerMovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
-	auto* hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>(m_position);
+	auto* hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
 	hud->m_player = this;
 }
 
-void Player::Tick(int64_t deltaTime)
+void Player::Deactivate()
 {
-	GameObject::Tick(deltaTime);
+	Character::Deactivate();
 }
 
 void Player::OnInputChanged(const InputMapping input) const
 {
 	if (input.first == InputsEnum::Shoot)
 	{
-		m_shootComponent->m_wantToShoot = input.second;
+		GetShootComponent()->m_wantToShoot = input.second;
 	}
 	if (input.first == InputsEnum::DebugNum1)
 	{

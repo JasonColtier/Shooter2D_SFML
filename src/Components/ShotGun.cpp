@@ -5,12 +5,6 @@
 #include "Components/CollisionHandler.h"
 #include "GameObjects/Player.h"
 
-ShotGun::ShotGun()
-{
-	m_shootNumber = 5;
-	m_fireRate = 2.f;
-	m_dispersion = 10;
-}
 
 void ShotGun::ShootBullet(int initialAngle)
 {

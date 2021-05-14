@@ -1,33 +1,35 @@
-#ifndef BONUSHEAL_H
-#define BONUSHEAL_H
+#ifndef BONUSSNIPER_H
+#define BONUSSNIPER_H
 
 #include "IBonus.h"
 #include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
-class BonusHeal final: public IBonus
+class BonusSniper : public IBonus
 {
 public:
-	BonusHeal() = default;
-	~BonusHeal() override = default;
-
+	
+	~BonusSniper() override = default;
+	BonusSniper() = default;
+	
 	void Activate(sf::Vector2f position = sf::Vector2f(0,0), sf::Vector2f offsetPos = sf::Vector2f(0,0), float scale = 1.f, float rotation = 0) override
 	{
 		IBonus::Activate(position, offsetPos, scale, rotation);
 		
-		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Heart), "heart", 3);
-	}
+		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Sniper), "Sniper", 3);
+	};
 
 	void Deactivate() override
 	{
 		IBonus::Deactivate();
 	}
 	
-	TypeId GetTypeId() override { return GetClassTypeId(); }
-	static TypeId GetClassTypeId() { return "BonusHeal"; }
 
-public:
-	int m_pdtVie = 1;
+
+	TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "BonusSniper"; }
+
+
 };
 
-#endif //BONUSHEAL_H
+#endif

@@ -42,13 +42,13 @@ public:
 				if (tmp)
 				{
 					tmp->Activate(args...);
+					ActivateObject(*tmp, false);
 					return tmp;
 				}
 			//}
 		}
-		T* newObject = new T(args...);
-		//m_lObjectsActivate.push_back(newObject);
-		//m_lObjectsWithCollision.push_back(newObject);
+		T* newObject = new T();
+		newObject->Activate(args...);
 		return newObject;
 	}
 

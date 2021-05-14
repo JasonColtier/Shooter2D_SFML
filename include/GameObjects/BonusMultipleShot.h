@@ -1,33 +1,30 @@
-#ifndef BONUSHEAL_H
-#define BONUSHEAL_H
+#ifndef BONUSMULTIPLESHOT_H
+#define BONUSMULTIPLESHOT_H
 
 #include "IBonus.h"
 #include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
-class BonusHeal final: public IBonus
+class BonusMultipleShot : public IBonus
 {
 public:
-	BonusHeal() = default;
-	~BonusHeal() override = default;
+	BonusMultipleShot() = default;
+	~BonusMultipleShot() override = default;
 
 	void Activate(sf::Vector2f position = sf::Vector2f(0,0), sf::Vector2f offsetPos = sf::Vector2f(0,0), float scale = 1.f, float rotation = 0) override
 	{
 		IBonus::Activate(position, offsetPos, scale, rotation);
 		
-		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Heart), "heart", 3);
+		SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::MultipleShot), "MultipleShot", 3);
 	}
 
 	void Deactivate() override
 	{
 		IBonus::Deactivate();
 	}
-	
-	TypeId GetTypeId() override { return GetClassTypeId(); }
-	static TypeId GetClassTypeId() { return "BonusHeal"; }
 
-public:
-	int m_pdtVie = 1;
+	TypeId GetTypeId() override { return GetClassTypeId(); }
+	static TypeId GetClassTypeId() { return "BonusMultipleShot"; }
 };
 
 #endif //BONUSHEAL_H
