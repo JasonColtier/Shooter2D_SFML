@@ -23,8 +23,6 @@ void Player::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale
 	Print::PrintLog("new player");
 
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
-	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
-	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
 	auto* Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("player");
 
 	if (Sprite)

@@ -74,7 +74,7 @@ void GameObject::Activate(const sf::Vector2f position, const sf::Vector2f offset
 	m_scale = scale;
 	m_rotation = rotation;
 
-	Print::PrintLog("++ activate ", typeid(*this).name());
+	// Print::PrintLog("++ activate ", typeid(*this).name());
 }
 
 void GameObject::Deactivate()
@@ -94,6 +94,6 @@ void GameObject::Deactivate()
 	}
 	GameWindow::GetGameLevel()->DeactivateObject(*this);
 
-	Print::PrintLog("-- deactivate ", typeid(*this).name());
+	// Print::PrintLog("-- deactivate ", typeid(*this).name());
 
 }
