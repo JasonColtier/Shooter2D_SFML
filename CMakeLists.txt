@@ -51,7 +51,6 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
     ${HEADER_DIR}/HUD/PlayerHUD.h
-    ${HEADER_DIR}/Components/EnemyMovementComponent.h
     ${HEADER_DIR}/Components/IMovementComponent.h
 	${HEADER_DIR}/Components/KamikazeMovementComponent.h
     ${HEADER_DIR}/StaticData.h
@@ -85,12 +84,6 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
     ${SOURCE_DIR}/HUD/PlayerHUD.cpp
-
-    ${SOURCE_DIR}/Components/EnemyMovementComponent.cpp
-    ${SOURCE_DIR}/Components/ShotgunnerMovementComponent.cpp
-    ${SOURCE_DIR}/GameObjects/EnemyGunner.cpp
-    ${SOURCE_DIR}/GameObjects/EnemyShotgunner.cpp
-    ${SOURCE_DIR}/GameObjects/EnemySniper.cpp
 	${SOURCE_DIR}/Components/KamikazeMovementComponent.cpp
 	${SOURCE_DIR}/Components/RunAwayMovementComponent.cpp
 )

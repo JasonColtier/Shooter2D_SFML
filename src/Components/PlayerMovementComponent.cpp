@@ -53,7 +53,7 @@ void PlayerMovementComponent::TickComponent(int64_t deltaTime)
 	m_inertia *= DragForce;
 
 	//on set la position, toujours en fonction du deltatime
-	Owner->m_position = Pos + (m_inertia);
+	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime)));
 
 
 	/*

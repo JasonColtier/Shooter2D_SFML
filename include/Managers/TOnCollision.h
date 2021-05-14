@@ -45,17 +45,10 @@ struct OnCollision<Player, Bullet>
 template <>
 struct OnCollision<Enemy, Bullet>
 {
-    static void Reaction(Enemy& enemy, Bullet& bullet)
-    {
-        std::cout << "Collision Ennemy, Bullet" << std::endl;
-        enemy.m_lifeComponent->ModifyHealth(-bullet.GetDammage());
-        bullet.Deactivate();
-    }
 	static void Reaction(Enemy& enemy, Bullet& bullet)
 	{
 		std::cout << "Collision Ennemy, Bullet" << std::endl;
-		enemy.OnDeath();
-		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()) * bullet.m_damageMultiplier);		
+		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()));		
 		bullet.Deactivate();
 	}
 };

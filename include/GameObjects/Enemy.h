@@ -4,6 +4,7 @@
 #include "GameObjects/Character.h"
 
 
+class Spawner;
 
 class Enemy : public Character
 {
@@ -18,7 +19,7 @@ public:
 
 	void Deactivate() override;
 
-
+	Spawner* m_enemySpawner = nullptr;
 
 };
 #endif //ENEMY_H

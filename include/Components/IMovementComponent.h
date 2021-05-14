@@ -20,10 +20,10 @@ public:
 	}
 	
 	float m_distance = 0;
-	float m_speed = 0.001f;
+	float m_speed = 0.00001f;
 	float m_speedModifier = 1.f;
 	
-	float m_maxVelocity = 0.003f;
+	float m_maxVelocity = 0.00008f;
 	float m_velocityModifier = 1.f;
 	
 
