@@ -15,18 +15,18 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {
 	const auto* Level = GameWindow::GetGameLevel();
 	m_playerposition = Level->m_player->m_position;
-	const auto Pos = Owner->m_position;
+	const auto Pos = m_owner->m_position;
 
 	//calcul de la disance avec le player
-	const auto deltaPosX = m_playerposition.x - (Pos.x + Owner->m_offsetPos.x);
-	const auto deltaPosY = m_playerposition.y - (Pos.y + Owner->m_offsetPos.y);
+	const auto deltaPosX = m_playerposition.x - (Pos.x + m_owner->m_offsetPos.x);
+	const auto deltaPosY = m_playerposition.y - (Pos.y + m_owner->m_offsetPos.y);
 
 	//normalisation de la distance
 	const sf::Vector2f normDelta = VectorTools::NormaliseVector(sf::Vector2f(deltaPosX, deltaPosY));
 
 	//pour toujours s'orienter vers le player
 	const float rot = (std::atan2(deltaPosY, deltaPosX)) * 180.0f / PI;
-	Owner->m_rotation = rot + m_offsetAngle;
+	m_owner->m_rotation = rot + m_offsetAngle;
 
 	////avant d'appliquer directement l'input, on va tester cette acceleration
 	sf::Vector2f acceleration = m_inertia;
@@ -46,7 +46,7 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 	m_inertia *= dragForce;
 
 	////on set la position, toujours en fonction du deltatime
-	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+	m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 
 	//Dans le cas où il y a une sortie de l'écran
 	const auto* window = GameWindow::m_window;
@@ -56,21 +56,21 @@ void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 	const auto bottomBorder = topBorder + static_cast<float>(window->getSize().y);
 
 	////si on est trop à gauche on TP à droite
-	if (Owner->m_position.x < leftBorder)
+	if (m_owner->m_position.x < leftBorder)
 	{
-		Owner->m_position.x = rightBorder;
+		m_owner->m_position.x = rightBorder;
 	}
-	else if (Owner->m_position.x > rightBorder)
+	else if (m_owner->m_position.x > rightBorder)
 	{
-		Owner->m_position.x = leftBorder;
+		m_owner->m_position.x = leftBorder;
 	}
-	if (Owner->m_position.y < topBorder)
+	if (m_owner->m_position.y < topBorder)
 	{
-		Owner->m_position.y = bottomBorder;
+		m_owner->m_position.y = bottomBorder;
 	}
-	else if (Owner->m_position.y > bottomBorder)
+	else if (m_owner->m_position.y > bottomBorder)
 	{
-		Owner->m_position.y = topBorder;
+		m_owner->m_position.y = topBorder;
 	}
 
 	//calcul la distance entre le player afin de déterminer si un shoot est autorisé

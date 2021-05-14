@@ -12,7 +12,8 @@ public:
 		: GameObject(position, offsetPos, scale, rotation)
 	{
 		const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(-25.0f, -25.0f), sf::Vector2f(25.0f, -25.0f), sf::Vector2f(25.0f, 25.0f), sf::Vector2f(-25.0f, 25.0f) };
-		m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }, & m_rotation, 10, & m_position, Tmp);
+		SetCollisionHandler(CollisionType::BonusChannel, Tmp, 10, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
+		//m_collisionHandler = new CollisionHandler(this, CollisionType::BonusChannel, &m_rotation, &m_position, Tmp, 10, std::vector<CollisionType>{CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel });
 	}
 	virtual ~IBonus() override = default;
 };

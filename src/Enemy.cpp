@@ -14,11 +14,11 @@ Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float r
 {
 	//Au moment du spawn
 	Print::PrintLog("here comes a new challenger");
+	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
+	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
+	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
 
-	m_renderHandler = new RenderHandler(this);
-	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::ShipEnemy), "enemy", 1);
-
-	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("enemy");
+	auto* Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("enemy");
 
 	if (Sprite)
 	{
@@ -27,7 +27,8 @@ Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float r
 	}
 
 	const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
-	m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }), &m_rotation, 50, &m_position, Tmp);
+	SetCollisionHandler(CollisionType::EnemyChannel, Tmp, 50, std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }));
+	//m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, &m_rotation, &m_position, Tmp, 50, std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }));
 }
 
 void Enemy::Tick(int64_t deltaTime)

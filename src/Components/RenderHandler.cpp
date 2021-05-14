@@ -10,9 +10,43 @@
 #include "Managers/FontManager.h"
 
 
-RenderHandler::RenderHandler(GameObject* parentGameObject) : m_parentGameObject(parentGameObject)
+RenderHandler::RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable) : m_owner(parentGameObject)
 {
-	
+	AddSprite(tex, key, zIndex, isMovable);
+	GameWindow::GetGameLevel()->AddObjectRendered(*this);
+}
+
+RenderHandler::RenderHandler(GameObject* parentGameObject, std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color, int size) : m_owner(parentGameObject)
+{
+	AddText(userText, key, zIndex, pos, color, size);
+	GameWindow::GetGameLevel()->AddObjectRendered(*this);
+}
+
+void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+{
+	AddSprite(tex, key, zIndex, isMovable);
+	GameWindow::GetGameLevel()->AddObjectRendered(*this);
+}
+
+void RenderHandler::Initialise(std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color, int size)
+{
+	AddText(userText, key, zIndex, pos, color, size);
+	GameWindow::GetGameLevel()->AddObjectRendered(*this);
+}
+
+void RenderHandler::Reset()
+{
+	for (auto* container : m_renderedItems)
+	{
+		delete container;
+	}
+	m_renderedItems.clear();
+	for (auto* sprite : m_MovableSprites)
+	{
+		delete sprite;
+	}
+	m_MovableSprites.clear();
+	GameWindow::GetGameLevel()->RemoveObjectRendered(*m_owner);
 }
 
 sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
@@ -53,30 +87,31 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 
 void RenderHandler::RenderUpdate()
 {
-	// if (parentGameObject->collisionHandler)
-	// {
-	// 	std::vector<sf::Vector2f> tmp = parentGameObject->collisionHandler->getPoints();
-	// 	
-	// 	sf::Vertex vertice[4] =
-	// 	{
-	// 		tmp[0],
-	//            tmp[1],
-	//            tmp[2],
-	//            tmp[3]
-	//        };
-	//
-	// 	GameWindow::window->draw(vertice, 4, sf::Quads);
-	// }
-
-	for (auto* sprite : m_MovableSprites)
+	if (m_owner->GetCollisionHandler())
 	{
-		sprite->setRotation(m_parentGameObject->m_rotation);
-		sprite->setPosition(m_parentGameObject->m_position);
+		std::vector<sf::Vector2f> tmp;
+		m_owner->GetCollisionHandler()->GetPoints(tmp);
+
+		sf::Vertex vertice[4] =
+		{
+			tmp[0],
+				tmp[1],
+				tmp[2],
+				tmp[3]
+		};
+
+		GameWindow::m_window->draw(vertice, 4, sf::Quads);
 	}
 
-	for (auto* rendered : m_renderedItems)
-	{
-		GameWindow::m_window->draw(*rendered->m_drawableItem);
-	}
+	//for (auto* sprite : m_MovableSprites)
+	//{
+	//	sprite->setRotation(m_owner->m_rotation);
+	//	sprite->setPosition(m_owner->m_position);
+	//}
+
+	//for (auto* rendered : m_renderedItems)
+	//{
+	//	GameWindow::m_window->draw(*rendered->m_drawableItem);
+	//}
 
 }

@@ -6,6 +6,7 @@
 #include "Components/MovementComponent.h"
 #include "Tools/Print.h"
 #include "Components/RenderHandler.h"
+#include "Components/Sniper.h"
 #include "HUD/PlayerHUD.h"
 #include "Managers/TextureManager.h"
 
@@ -20,9 +21,10 @@ Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 {
 	Print::PrintLog("new player");
 
-	m_renderHandler = new RenderHandler(this );
-	m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
-	auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("player");
+	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
+	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
+	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1);
+	auto* Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("player");
 
 	if (Sprite)
 	{
@@ -31,10 +33,11 @@ Player::Player(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float
 	}
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	m_shootComponent = new ClassicPistol();
+	m_shootComponent = new Sniper();
 	AddComponent(m_shootComponent);
-
-	m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }), &m_rotation, 50, &m_position, StaticData::ShipCollision);
+	m_shootComponent->m_isPlayer = true;
+	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }));
+	//m_collisionHandler = new CollisionHandler(this, CollisionType::PlayerChannel, &m_rotation, &m_position, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel, CollisionType::BonusChannel }));
 	AddComponent(new MovementComponent());
 
 	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
