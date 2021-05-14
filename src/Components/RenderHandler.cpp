@@ -1,6 +1,7 @@
 ﻿#include "Components/RenderHandler.h"
 
 #include <map>
+#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -10,9 +11,9 @@
 #include "Managers/FontManager.h"
 
 
-RenderHandler::RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable) : m_owner(parentGameObject)
+RenderHandler::RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale) : m_owner(parentGameObject)
 {
-	AddSprite(tex, key, zIndex, isMovable);
+	AddSprite(tex, key, zIndex, isMovable,origin,scale);
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
@@ -22,9 +23,9 @@ RenderHandler::RenderHandler(GameObject* parentGameObject, std::string userText,
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
-void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
-	AddSprite(tex, key, zIndex, isMovable);
+	AddSprite(tex, key, zIndex, isMovable,origin,scale);
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
@@ -49,12 +50,15 @@ void RenderHandler::Reset()
 	GameWindow::GetGameLevel()->RemoveObjectRendered(*m_owner);
 }
 
-sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
     auto* sprite = new sf::Sprite(*tex);
     auto* customSprite = new CustomContainer(std::move(key), zIndex, sprite);
 
-    m_renderedItems.push_back(customSprite);
+	sprite->setOrigin(origin);
+	sprite->setScale(sf::Vector2f(scale,scale));
+
+	m_renderedItems.push_back(customSprite);
 
     // Sort using comparator function
     std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
@@ -86,8 +90,17 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 
 void RenderHandler::RenderUpdate()
 {
+
+
+	
 	if (m_owner->GetCollisionHandler())
 	{
+		auto radius = m_owner->GetCollisionHandler()->m_radius;
+		sf::CircleShape circle(radius);
+		circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
+		circle.setFillColor(sf::Color::Green);
+		GameWindow::m_window->draw(circle);
+		
 		std::vector<sf::Vector2f> tmp;
 		m_owner->GetCollisionHandler()->GetPoints(tmp);
 
@@ -102,15 +115,15 @@ void RenderHandler::RenderUpdate()
 		GameWindow::m_window->draw(vertice, 4, sf::Quads);
 	}
 
-	for (auto* sprite : m_MovableSprites)
-	{
-		sprite->setRotation(m_owner->m_rotation);
-		sprite->setPosition(m_owner->m_position);
-	}
-
-	for (auto* rendered : m_renderedItems)
-	{
-		GameWindow::m_window->draw(*rendered->m_drawableItem);
-	}
+	// for (auto* sprite : m_MovableSprites)
+	// {
+	// 	sprite->setRotation(m_owner->m_rotation);
+	// 	sprite->setPosition(m_owner->m_position);
+	// }
+	//
+	// for (auto* rendered : m_renderedItems)
+	// {
+	// 	GameWindow::m_window->draw(*rendered->m_drawableItem);
+	// }
 
 }

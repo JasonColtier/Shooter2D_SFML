@@ -30,15 +30,15 @@ void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::V
 	}
 }
 
-void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
 	if (m_renderHandler != nullptr)
 	{
-		m_renderHandler->Initialise(tex, key, zIndex, isMovable);
+		m_renderHandler->Initialise(tex, key, zIndex, isMovable,origin,scale);
 	}
 	else
 	{
-		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable);
+		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable,origin,scale);
 	}
 }
 
@@ -74,7 +74,7 @@ void GameObject::Activate(const sf::Vector2f position, const sf::Vector2f offset
 	m_scale = scale;
 	m_rotation = rotation;
 
-	Print::PrintLog("++ activate ", typeid(*this).name());
+	// Print::PrintLog("++ activate ", typeid(*this).name());
 }
 
 void GameObject::Deactivate()
@@ -94,6 +94,6 @@ void GameObject::Deactivate()
 	}
 	GameWindow::GetGameLevel()->DeactivateObject(*this);
 
-	Print::PrintLog("-- deactivate ", typeid(*this).name());
+	// Print::PrintLog("-- deactivate ", typeid(*this).name());
 
 }

@@ -33,10 +33,10 @@ class RenderHandler
 {
 public:
 
-	RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable = true,sf::Vector2f origin = sf::Vector2f(0, 0),float scale = 1);
 	RenderHandler(GameObject* parentGameObject, std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 
-	void Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	void Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true,sf::Vector2f origin = sf::Vector2f(0, 0),float scale = 1);
 	void Initialise(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 	void Reset();
 
@@ -54,7 +54,7 @@ public:
 		return nullptr;
 	}
 
-	sf::Sprite* AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	sf::Sprite* AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true,sf::Vector2f origin = sf::Vector2f(0,0),float scale = 1.f);
 
 	sf::Text* AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 

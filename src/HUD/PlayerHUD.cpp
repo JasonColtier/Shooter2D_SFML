@@ -35,7 +35,7 @@ void PlayerHUD::Tick(int64_t deltaTime)
 	GameObject::Tick(deltaTime);
 	m_healthBar->setScale(m_player->m_lifeComponent->m_currentHealth / m_player->m_lifeComponent->m_maxHealth, 1);
 	std::string tmp = "deltatime : ";
-	m_deltatimeText->setString(tmp.append(std::to_string(deltaTime)));
+	m_deltatimeText->setString(tmp.append(std::to_string(deltaTime)).append(" microsec"));
 }
 
 void PlayerHUD::_HandleChangeScore(const int score) const

@@ -29,7 +29,6 @@ void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
 	auto Copy = m_lObjectsActivate;
-	// Print::PrintLog("number of objects in level : ",copy.size());
 	for (auto* gameObject : Copy)
 	{
 		gameObject->Tick(deltaTime);
