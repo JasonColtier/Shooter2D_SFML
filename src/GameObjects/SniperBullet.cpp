@@ -2,12 +2,12 @@
 #include "Enemy.h"
 #include "Components/RenderHandler.h"
 
-SniperBullet::SniperBullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Bullet(position, offsetPos, scale, rotation)
+SniperBullet::SniperBullet(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation) : Bullet(1, position, rotation, scale, offsetPos)
 {
 	m_damage *= 3;
 	m_speed *= 3;
 
-    auto* Sprite = m_renderHandler->GetRenderedItemWithKey<sf::Sprite>("bullet");
+	auto* Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("bullet");
 
 	if (Sprite)
 	{

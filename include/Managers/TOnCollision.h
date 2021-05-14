@@ -20,7 +20,7 @@ struct OnCollision<Player, Enemy>
 {
 	static void Reaction(Player& player, Enemy& enemy)
 	{
-		std::cout << "Collision Enemy, Player" << std::endl;
+		//std::cout << "Collision Enemy, Player" << std::endl;
 	}
 };
 

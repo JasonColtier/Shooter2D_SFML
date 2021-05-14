@@ -4,35 +4,23 @@
 #include "Managers/CollisionDispatcher.h"
 #include "Tools/SMath.h"
 
-void CollisionManager::UpdateCollision(std::list<GameObject*>& abscisseTab)
+void CollisionManager::UpdateCollision(std::list<GameObject*> abscisseTab)
 {
 	_SortByAbscisse(abscisseTab);
 
 	const auto endIterator(abscisseTab.end());
 	for (auto objet1 = abscisseTab.begin(); objet1 != endIterator; ++objet1)
 	{
-		if (!(*objet1)->m_isActivated || (*objet1)->m_collisionHandler == nullptr)
-		{
-			break;
-		}
-
 		for (auto objet2 = std::next(objet1); objet2 != endIterator; ++objet2)
 		{
-			if ((*objet2)->m_isActivated && (*objet2)->m_collisionHandler)
+			//Si le point avec le plus grand X du première objet est supérieur au point avec le plus petit X du deuxième objet, une collision est possible
+			if ((*objet1)->GetCollisionHandler()->GetEndAbscisse() > (*objet2)->GetCollisionHandler()->GetStartAbscisse())
 			{
-				//Si le point avec le plus grand X du première objet est supérieur au point avec le plus petit X du deuxième objet, une collision est possible
-				if ((*objet1)->m_collisionHandler->GetEndAbscisse() > (*objet2)->m_collisionHandler->GetStartAbscisse())
-				{
-					_CheckCollision((*objet1)->m_collisionHandler, (*objet2)->m_collisionHandler);
-				}
-				else
-				{
-					//Si la collision est impossible, comme la liste est trié en fonction du StartAbscisse, il est impossible d'avoir une collision avec le reste de la liste
-					break;
-				}
+				_CheckCollision((*objet1)->GetCollisionHandler(), (*objet2)->GetCollisionHandler());
 			}
 			else
 			{
+				//Si la collision est impossible, comme la liste est trié en fonction du StartAbscisse, il est impossible d'avoir une collision avec le reste de la liste
 				break;
 			}
 		}
@@ -43,9 +31,7 @@ void CollisionManager::_SortByAbscisse(std::list<GameObject*>& abscisseTab)
 {
 	auto abscisseSort = [](GameObject* const g1, GameObject* const g2) -> bool
 	{
-		if (!g1->m_collisionHandler || !g2->m_collisionHandler) return g1->m_collisionHandler > g2->m_collisionHandler;
-		if (g1->m_isActivated != g2->m_isActivated) return g1->m_isActivated > g2->m_isActivated;
-		return (g1->m_collisionHandler->GetStartAbscisse()) < (g2->m_collisionHandler->GetStartAbscisse());
+		return (g1->GetCollisionHandler()->GetStartAbscisse()) < (g2->GetCollisionHandler()->GetStartAbscisse());
 	};
 	abscisseTab.sort(abscisseSort);
 }

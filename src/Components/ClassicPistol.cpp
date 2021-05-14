@@ -1,8 +1,10 @@
 ﻿#include "Components/ClassicPistol.h"
 #include "GameWindow.h"
+#include "StaticData.h"
 #include "GameObjects/Bullet.h"
 #include "Managers/AudioManager.h"
 #include "Components/CollisionHandler.h"
+#include "GameObjects/Player.h"
 
 ClassicPistol::ClassicPistol()
 {
@@ -13,10 +15,23 @@ ClassicPistol::ClassicPistol()
 
 void ClassicPistol::ShootBullet(const int initialAngle)
 {
-	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(Owner->m_position);
-	//NewBullet->m_position = Owner->m_position;
-	NewBullet->m_rotation = Owner->m_rotation + static_cast<float>(initialAngle);
-	NewBullet->m_collisionHandler->m_eType = CollisionType::PlayerProjectileChannel;
-	NewBullet->m_collisionHandler->m_lExcludedCollisionType = std::vector<CollisionType>({CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + static_cast<float>(initialAngle));
+	CollisionType ColType;
+	std::vector<CollisionType> ExcludeColType;
+	if (dynamic_cast<Player*>(m_owner))
+	{
+		ColType = CollisionType::PlayerProjectileChannel;
+		ExcludeColType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	}
+	else
+	{
+		ColType = CollisionType::EnemyProjectileChannel;
+		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	}
+	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
+	//NewBullet->m_position = m_owner->m_position;
+	//NewBullet->m_rotation = m_owner->m_rotation + static_cast<float>(initialAngle);
+	//NewBullet->GetCollisionHandler()->m_eType = CollisionType::PlayerProjectileChannel;
+	//NewBullet->GetCollisionHandler()->m_lExcludedCollisionType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

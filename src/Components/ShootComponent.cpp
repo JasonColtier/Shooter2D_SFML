@@ -1,4 +1,6 @@
 ﻿#include "Components/ShootComponent.h"
+
+#include "GameObjects/Player.h"
 #include "Tools/Print.h"
 
 void ShootComponent::TickComponent(int64_t deltaTime)
