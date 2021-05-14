@@ -2,6 +2,7 @@
 #define SPAWNER_H
 
 #include "GameObjects/GameObject.h"
+#include "Enemy.h"
 
 class Spawner : public GameObject
 {
@@ -15,9 +16,12 @@ public:
 
 	void Tick(int64_t deltaTime) override;
 
-	int ChooseSide();
-	void RandomLocation();
-	void DoSpawn(int X, int Y);
+	void DoSpawn();
+	void RandomLocation(Enemy* EnemytoSpawn);
+	void RandomMovement(Enemy* EnemytoSpawn);
+	void RandomShoot(Enemy* EnemytoSpawn);
+
+	std::list<Enemy*> m_EnemyList;	
 
 	int64_t m_timer = 0;
 	bool m_canSpawn = true;

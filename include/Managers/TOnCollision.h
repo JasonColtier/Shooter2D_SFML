@@ -9,6 +9,8 @@
 #include "GameObjects/Bullet.h"
 #include "GameObjects/Player.h"
 #include "GameObjects/BonusHeal.h"
+#include <list>
+#include <iterator>
 #include "GameObjects/BonusMovementSpeed.h"
 #include "GameObjects/BonusMultipleShot.h"
 #include "GameObjects/BonusShotgun.h"
@@ -49,6 +51,13 @@ struct OnCollision<Enemy, Bullet>
         enemy.m_lifeComponent->ModifyHealth(-bullet.GetDammage());
         bullet.Deactivate();
     }
+	static void Reaction(Enemy& enemy, Bullet& bullet)
+	{
+		std::cout << "Collision Ennemy, Bullet" << std::endl;
+		enemy.OnDeath();
+		enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()) * bullet.m_damageMultiplier);		
+		bullet.Deactivate();
+	}
 };
 
 template <>

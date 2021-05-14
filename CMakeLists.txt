@@ -53,11 +53,9 @@ set(HEADERS
     ${HEADER_DIR}/HUD/PlayerHUD.h
     ${HEADER_DIR}/Components/EnemyMovementComponent.h
     ${HEADER_DIR}/Components/IMovementComponent.h
+	${HEADER_DIR}/Components/KamikazeMovementComponent.h
     ${HEADER_DIR}/StaticData.h
-    ${HEADER_DIR}/Components/ShotgunnerMovementComponent.h
-    ${HEADER_DIR}/GameObjects/EnemyGunner.h
-    ${HEADER_DIR}/GameObjects/EnemyShotgunner.h
-    ${HEADER_DIR}/GameObjects/EnemySniper.h
+	${HEADER_DIR}/Components/RunAwayMovementComponent.h
 )
 
 set(SOURCES
@@ -93,6 +91,8 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/EnemyGunner.cpp
     ${SOURCE_DIR}/GameObjects/EnemyShotgunner.cpp
     ${SOURCE_DIR}/GameObjects/EnemySniper.cpp
+	${SOURCE_DIR}/Components/KamikazeMovementComponent.cpp
+	${SOURCE_DIR}/Components/RunAwayMovementComponent.cpp
 )
 
 
