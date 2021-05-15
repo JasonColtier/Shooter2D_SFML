@@ -25,6 +25,11 @@ set(HEADERS
     ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
+    ${HEADER_DIR}/GameObjects/BonusFireRate.h
+    ${HEADER_DIR}/GameObjects/BonusShotgun.h
+    ${HEADER_DIR}/GameObjects/BonusSniper.h
+    ${HEADER_DIR}/GameObjects/BonusMovementSpeed.h
+    ${HEADER_DIR}/GameObjects/BonusMultipleShot.h
 	${HEADER_DIR}/GameObjects/EnemySpawner.h
 	${HEADER_DIR}/GameObjects/Enemy.h    
     ${HEADER_DIR}/Managers/TextureManager.h

@@ -3,23 +3,16 @@
 #include "GameObjects/Player.h"
 #include "Components/RenderHandler.h"
 #include "GameWindow.h"
-#include "Tools/VectorTools.h"
 #include "Tools/Print.h"
-#include <random>
-#include <valarray>
 #include "Components/CollisionHandler.h"
-#include <vector>
-#include <iostream>
-#include <iterator>
 #include "Managers/TextureManager.h"
-
+#include "Components/IMovementComponent.h"
 #include "StaticData.h"
-#include "Components/CollisionHandler.h"
-#include "GameObjects/BonusHeal.h"
+#include "Components/LifeComponent.h"
 #include "GameObjects/EnemySpawner.h"
 #include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
-
+#include "Components/ShootComponent.h"
 
 void Enemy::Tick(int64_t deltaTime)
 {

@@ -1,6 +1,7 @@
 ﻿#ifndef LIFECOMPONENT_H
 #define LIFECOMPONENT_H
 
+#include <cstdint>
 #include "Component.h"
 
 class LifeComponent : public Component
@@ -21,13 +22,13 @@ public:
 	}
 
 public:
-	float m_maxHealth = 1;
+	float m_maxHealth = 1.f;
 	float m_currentHealth = m_maxHealth;
 	float m_collisionDamageCooldown = 2.f;
-	bool m_canTakeDamageOnCollision;
+	bool m_canTakeDamageOnCollision = true;
 
 private:
-	float m_timer;
+	float m_timer = 0.f;
 
 	
 };

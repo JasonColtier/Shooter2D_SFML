@@ -20,10 +20,10 @@ public:
 
 	bool m_gameIsPlaying = true;
 
+	~GameLoop() = default;
 
 private:
 	GameLoop();
-	~GameLoop();
 
 	//update all game objects
 	void _Update();

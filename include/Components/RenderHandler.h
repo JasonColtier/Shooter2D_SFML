@@ -1,7 +1,6 @@
 ﻿#ifndef RenderHandler_H
 #define RenderHandler_H
 
-#include <map>
 #include <string>
 #include <vector>
 #include <SFML/Graphics/Sprite.hpp>
@@ -77,7 +76,6 @@ public:
 
 
 	void RenderUpdate();
-
 
 	//le gameobject qui possède ce renderHandler
 	GameObject* m_owner;

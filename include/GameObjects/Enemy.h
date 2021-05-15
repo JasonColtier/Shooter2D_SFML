@@ -3,7 +3,6 @@
 
 #include "GameObjects/Character.h"
 
-
 class EnemySpawner;
 
 class Enemy : public Character
@@ -24,7 +23,7 @@ public:
 	EnemySpawner* m_enemySpawner = nullptr;
 
 private:
-	int m_enemyMaxHealth = 3;
+	float m_enemyMaxHealth = 3.f;
 
 };
 #endif //ENEMY_H

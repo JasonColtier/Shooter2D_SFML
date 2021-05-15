@@ -1,6 +1,4 @@
 #include "GameObjects/EnemySpawner.h"
-#include "GameLoop.h"
-#include <random>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameWindow.h"
 #include "GameLevel.h"
@@ -9,12 +7,9 @@
 #include "Components/RunAwayMovementComponent.h"
 #include "Components/ShotGun.h"
 #include "Components/ClassicPistol.h"
+#include "Components/LifeComponent.h"
 #include "Components/Sniper.h"
-#include "Tools/Print.h"
-#include "Components/IMovementComponent.h"
 #include "GameObjects/Character.h"
-#include <list>
-#include <iterator>
 
 void EnemySpawner::Tick(int64_t deltaTime)
 {
@@ -41,7 +36,7 @@ void EnemySpawner::Tick(int64_t deltaTime)
 void EnemySpawner::DoSpawn(float lifeMultiply)
 {
 	//Pour le spawn de l'ennemi
-	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>(sf::Vector2f(0.f, 0.f));	
+	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>(sf::Vector2f(0.f, 0.f));
 	RandomLocation(NewEnemy);
 	RandomMovement(NewEnemy);
 	RandomShoot(NewEnemy);
@@ -51,7 +46,7 @@ void EnemySpawner::DoSpawn(float lifeMultiply)
 	//Pour changer la quantité initiale de PV en fonction de la difficulté actuelle
 	NewEnemy->m_lifeComponent->m_maxHealth = NewEnemy->m_lifeComponent->m_maxHealth * lifeMultiply;
 	NewEnemy->m_lifeComponent->m_currentHealth = NewEnemy->m_lifeComponent->m_maxHealth;
-		
+
 }
 
 void EnemySpawner::RandomLocation(Enemy* EnemytoSpawn)
@@ -85,9 +80,11 @@ void EnemySpawner::RandomLocation(Enemy* EnemytoSpawn)
 		RandomX = std::rand() % window->getSize().x + 1;
 		RandomY = window->getSize().y + 1;
 		break;
+	default:
+		break;
 	}
 
-	EnemytoSpawn->m_position = sf::Vector2f(RandomX, RandomY);
+	EnemytoSpawn->m_position = sf::Vector2f(static_cast<float>(RandomX), static_cast<float>(RandomY));
 }
 
 void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)

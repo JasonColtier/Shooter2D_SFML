@@ -3,7 +3,6 @@
 
 #include <mutex>
 #include <iostream>
-#include <ostream>
 
 template <typename T>
 class Singleton

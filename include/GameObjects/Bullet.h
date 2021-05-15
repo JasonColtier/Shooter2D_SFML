@@ -10,7 +10,7 @@ class Bullet : public GameObject
 public:
 
 	Bullet() = default;
-	virtual ~Bullet() = default;
+	virtual ~Bullet() override = default;
 	
 	void Activate(float delay, sf::Vector2f position, float rotation = 0.f, float scale = 1.f, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f));
 	void Deactivate() override;

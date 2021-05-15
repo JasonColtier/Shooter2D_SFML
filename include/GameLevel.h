@@ -7,11 +7,7 @@
 #include "GameObjects/GameObject.h"
 #include <cstdarg>
 
-class Component;
-class GameObject;
-class CollisionManager;
 class Player;
-class CollisionHandler;
 
 namespace sf
 {

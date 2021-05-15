@@ -24,10 +24,6 @@ GameLoop::GameLoop()
     GameWindow::m_window->setVerticalSyncEnabled(true);
 }
 
-GameLoop::~GameLoop()
-{
-    std::cout << "destruction";
-}
 
 void GameLoop::StartGame()
 {

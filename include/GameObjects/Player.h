@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "Character.h"
-#include "GameObject.h"
 #include "HUD/PlayerHUD.h"
 #include "Managers/InputManager.h"
 

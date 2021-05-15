@@ -1,7 +1,5 @@
 ﻿#include "Components/ShootComponent.h"
-
 #include "GameObjects/Player.h"
-#include "Tools/Print.h"
 
 void ShootComponent::TickComponent(int64_t deltaTime)
 {
@@ -17,7 +15,7 @@ void ShootComponent::TickComponent(int64_t deltaTime)
 			for (int i = 0; i < GetShootNumber(); ++i)
 			{
 				const auto offsetAngle = (GetShootNumber() - 1) / 2;
-				ShootBullet(-90.f + ((i - offsetAngle) * m_baseDispersion));
+				ShootBullet(-90 + ((i - offsetAngle) * m_baseDispersion));
 			}
 		}
 	}

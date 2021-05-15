@@ -3,7 +3,6 @@
 
 #include <cstdint>
 #include "Component.h"
-#include "Managers/InputManager.h"
 
 class Character;
 
@@ -46,12 +45,12 @@ public:
     //modifiées par les amélioration globales de partie, sont indépendantes des armes récupérées
     int m_baseShootNumber = 1; //nombre de tir quand on shoot, doit être incrémenté de 2 en 2
     int m_additionnalShootNumber = 0;
-	float m_range;//portée du tir 
+	float m_range = 0.f;//portée du tir 
 
     float m_baseFireRate = 2.f; //vitesse de tir, plus c'est petit plus on tire souvent
     float m_fireRateModifier = 1;
 
-    float m_baseDispersion = 15.f; //angle
+    int m_baseDispersion = 15; //angle
     float m_baseDamageMultiplier = 1.f; //TODO
 
     float m_baseVelocityMultiplier = 1.f; //TODO

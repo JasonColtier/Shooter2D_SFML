@@ -2,9 +2,10 @@
 #define CHARACTER_H
 
 #include "GameObject.h"
-#include "Components/LifeComponent.h"
-#include "Components/IMovementComponent.h"
-#include "Components/ShootComponent.h"
+
+class LifeComponent;
+class IMovementComponent;
+class ShootComponent;
 
 class Character : public GameObject
 {
@@ -17,16 +18,7 @@ public:
 
 	virtual void Deactivate() override;
 
-	void SetShootComponent(ShootComponent* shootComponent)
-	{
-		if (m_shootComponent != nullptr)
-		{
-			RemoveComponent(m_shootComponent);
-		}
-
-		AddComponent(shootComponent);
-		m_shootComponent = shootComponent;
-	};
+	void SetShootComponent(ShootComponent* shootComponent);
 
 	ShootComponent* GetShootComponent() const
 	{

@@ -1,6 +1,5 @@
 ﻿#include "Managers/AudioManager.h"
 #include <SFML/Audio.hpp>
-
 #include "Tools/Print.h"
 
 void AudioManager::PlaySound(const ESounds eSound, const float volume)

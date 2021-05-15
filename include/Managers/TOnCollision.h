@@ -1,6 +1,7 @@
 #ifndef TONCOLLISION_H
 #define TONCOLLISION_H
 
+#include "Components/LifeComponent.h"
 #include "Components/PlayerMovementComponent.h"
 #include "Components/ShotGun.h"
 #include "Components/Sniper.h"
@@ -73,7 +74,7 @@ struct OnCollision<Player, BonusHeal>
 {
     static bool Reaction(Player& player, BonusHeal& bonusHeal)
     {
-        auto life = player.GetComponentOfClass<LifeComponent>();
+        auto* life = player.GetComponentOfClass<LifeComponent>();
 
         life->ModifyHealth(bonusHeal.m_pdtVie);
         Print::PrintLog("take heal ! ");
@@ -141,7 +142,7 @@ struct OnCollision<Player, BonusMovementSpeed>
 {
     static bool Reaction(Player& player, BonusMovementSpeed& movementSpeed)
     {
-        player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.3;
+        player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.3f;
 
         Print::PrintLog("movement speed up ! ");
         movementSpeed.Deactivate();

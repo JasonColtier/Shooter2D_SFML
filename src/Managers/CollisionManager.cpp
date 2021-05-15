@@ -3,8 +3,7 @@
 #include "GameObjects/GameObject.h"
 #include "Managers/CollisionDispatcher.h"
 #include "Tools/SMath.h"
-#include "GameObjects/Bullet.h"
-#include "GameObjects/Enemy.h"
+
 void CollisionManager::UpdateCollision(std::list<GameObject*> abscisseTab)
 {
 	_SortByAbscisse(abscisseTab);

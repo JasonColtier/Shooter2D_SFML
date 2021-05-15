@@ -2,7 +2,6 @@
 #define BONUSHEAL_H
 
 #include "IBonus.h"
-#include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
 class BonusHeal final: public IBonus
@@ -28,7 +27,7 @@ public:
 	static TypeId GetClassTypeId() { return "BonusHeal"; }
 
 public:
-	int m_pdtVie = 1;
+	float m_pdtVie = 1.f;
 };
 
 #endif //BONUSHEAL_H

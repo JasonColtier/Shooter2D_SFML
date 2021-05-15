@@ -3,7 +3,6 @@
 #include <map>
 #include <SFML/Graphics/Texture.hpp>
 
-
 class TextureManager
 {
 public:
@@ -16,8 +15,6 @@ public:
 
 	//une map qui associe les textures chargées en mémoire à leur nom
 	inline static std::map<ETextures, sf::Texture*> mapTextures;  // NOLINT(clang-diagnostic-exit-time-destructors)
-
-	~TextureManager();
 
 private:
 

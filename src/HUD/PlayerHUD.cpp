@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Text.hpp>
 
 #include "GameWindow.h"
+#include "Components/LifeComponent.h"
 #include "Components/RenderHandler.h"
 #include "GameObjects/Player.h"
 #include "Managers/ScoreManager.h"
@@ -11,8 +12,6 @@
 void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
 {
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
-	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
-	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
 	GetRenderHandler()->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBar), "healthBar", 4);
 	m_healthBar = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("healthBar");
 
@@ -32,9 +31,8 @@ void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float sc
 void PlayerHUD::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
-	GameWindow::GetGameLevel()->m_player;
 
-	auto player = GameWindow::GetGameLevel()->m_player;
+	const auto* player = GameWindow::GetGameLevel()->m_player;
 	if(player)
 	{
 		m_healthBar->setScale(player->m_lifeComponent->m_currentHealth / player->m_lifeComponent->m_maxHealth, 1);

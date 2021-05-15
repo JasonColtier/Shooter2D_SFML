@@ -1,6 +1,6 @@
-﻿#pragma once
-#include <complex>
-#include <ostream>
+﻿#ifndef VECTORTOOLS_H
+#define VECTORTOOLS_H
+
 #include <iostream>
 #include <SFML/System/Vector2.hpp>
 
@@ -28,3 +28,4 @@ public:
 		std::cout << "x : " << vec.x << " // y : " << vec.y << std::endl;
 	}
 };
+#endif //VECTORTOOLS_H

@@ -1,13 +1,7 @@
 ﻿#include "Components/RenderHandler.h"
 
-#include <map>
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 #include "GameWindow.h"
-#include "Components/CollisionHandler.h"
-#include "GameObjects/GameObject.h"
 #include "Managers/FontManager.h"
 
 
@@ -95,8 +89,7 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 
 void RenderHandler::RenderUpdate()
 {
-
-
+	//Utilisé pour le debug de collision, permet d'afficher les collisions des objets
 	
 	// if (m_owner->GetCollisionHandler())
 	// {
