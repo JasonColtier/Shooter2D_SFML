@@ -38,7 +38,7 @@ public:
 	CollisionType m_eType;
 	std::vector<CollisionType> m_lExcludedCollisionType;
 	sf::Vector2f* m_position;
-	float m_radius;
+	float m_rayon;
 	float* m_rotation;
 
 private:

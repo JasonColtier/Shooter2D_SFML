@@ -10,35 +10,35 @@ class Character : public GameObject
 {
 public:
 
-    Character() = default;
-    virtual ~Character() = default;
+	Character() = default;
+	virtual ~Character() = default;
 
-    virtual void Activate(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
+	virtual void Activate(sf::Vector2f position, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
 
-    virtual void Deactivate() override;
+	virtual void Deactivate() override;
 
-    void SetShootComponent(ShootComponent* shootComponent)
-    {
-        if (m_shootComponent != nullptr)
-        {
-            RemoveComponent(m_shootComponent);
-        }
+	void SetShootComponent(ShootComponent* shootComponent)
+	{
+		if (m_shootComponent != nullptr)
+		{
+			RemoveComponent(m_shootComponent);
+		}
 
-        AddComponent(shootComponent);
-        m_shootComponent = shootComponent;
-    };
+		AddComponent(shootComponent);
+		m_shootComponent = shootComponent;
+	};
 
-    ShootComponent* GetShootComponent() const
-    {
-        return m_shootComponent;
-    }
+	ShootComponent* GetShootComponent() const
+	{
+		return m_shootComponent;
+	}
 
 public:
-    LifeComponent* m_lifeComponent = nullptr;
-    IMovementComponent* m_movementCompo = nullptr;
+	LifeComponent* m_lifeComponent = nullptr;
+	IMovementComponent* m_movementCompo = nullptr;
 
 private:
 
-    ShootComponent* m_shootComponent = nullptr;
+	ShootComponent* m_shootComponent = nullptr;
 };
 #endif //CHARACTER_H

@@ -104,12 +104,12 @@ void Spawner::RandomShoot(Enemy* EnemytoSpawn)
         break;
 
     case 1:
-        EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
+        EnemytoSpawn->SetShootComponent(new ClassicPistol(EnemytoSpawn));
 
         break;
 
     case 2:
-        EnemytoSpawn->SetShootComponent(new Sniper(EnemytoSpawn));
+        EnemytoSpawn->SetShootComponent(new ClassicPistol(EnemytoSpawn));
 
         break;
     }

@@ -12,7 +12,7 @@
 
 void Sniper::ShootBullet(int initialAngle)
 {
-	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 1);
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
 	if (dynamic_cast<Player*>(m_owner))
@@ -28,6 +28,6 @@ void Sniper::ShootBullet(int initialAngle)
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
 	
-	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
+	NewBullet->SetCollisionHandler(ColType, StaticData::BulletSniperCollision, 70.f, ExcludeColType);
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

@@ -65,7 +65,7 @@ void Enemy::Deactivate()
     Character::Deactivate();
 
     ScoreManager::ModifyScore(1); //une façon d'augmenter le score
-    BonusSpawner::RollBonus(m_position);
+    //BonusSpawner::RollBonus(m_position);
 
     auto ListEnnemi = m_enemySpawner->m_EnemyList;
 
