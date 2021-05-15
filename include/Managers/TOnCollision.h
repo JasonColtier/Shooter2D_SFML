@@ -35,7 +35,7 @@ struct OnCollision<Player, Enemy>
 {
 	static void Reaction(Player& player, Enemy& enemy)
 	{
-		player.GetComponentOfClass<LifeComponent>()->CollisionDamage(0);
+		player.GetComponentOfClass<LifeComponent>()->CollisionDamage(1);
 		enemy.GetComponentOfClass<LifeComponent>()->CollisionDamage(5);
 	}
 };
@@ -48,7 +48,7 @@ struct OnCollision<Player, Bullet>
 		if (player.m_isActivated)
 		{
 			Print::PrintLog("player collision bullet");
-			// player.GetComponentOfClass<LifeComponent>()->ModifyHealth(-bullet.GetDammage());
+			player.GetComponentOfClass<LifeComponent>()->ModifyHealth(-bullet.GetDammage());
 			bullet.Deactivate();
 		}
 	}
@@ -63,7 +63,6 @@ struct OnCollision<Bullet, Enemy>
 		{
 			std::cout << "Collision Ennemy, Bullet" << std::endl;
 			enemy.m_lifeComponent->ModifyHealth(-(bullet.GetDammage()));
-			//if (!bullet.m_piercing)//si on ne transperce pas les ennemis on est d�truit
 			bullet.Deactivate();
 		}
 	}

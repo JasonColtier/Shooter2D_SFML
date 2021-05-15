@@ -24,7 +24,7 @@ void Player::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1,true,sf::Vector2f(50,50),m_scale);
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	SetShootComponent(new Sniper(this));
+	SetShootComponent(new ClassicPistol(this));
 	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }));
 
 	AddComponent(new PlayerMovementComponent());
