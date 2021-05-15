@@ -8,11 +8,12 @@
 #include <random>
 #include <valarray>
 #include "Components/CollisionHandler.h"
-#include "Spawner.h"
+#include "EnemySpawner.h"
 #include <vector>
 #include <iostream>
 #include <iterator>
 #include "Managers/TextureManager.h"
+#include "Components/BaseEnemyMovementComponent.h"
 
 using std::vector;
 
@@ -34,28 +35,29 @@ Enemy::Enemy(sf::Vector2f position, sf::Vector2f offsetPos , float scale , float
 
 	const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(0.0f, -25.0f), sf::Vector2f(50.0f, 25.0f), sf::Vector2f(0.0f, 10.0f), sf::Vector2f(-50.0f, 25.0f) };
 	m_collisionHandler = new CollisionHandler(this, CollisionType::EnemyChannel, std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel }), &m_rotation, 50, &m_position, Tmp);
+	
 }
 
 void Enemy::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
 
-	if (m_movementCompo->m_distance <= 300)
+	if (static_cast<BaseEnemyMovemementComponent*>(m_movementCompo)->m_escape == false)
 	{
-		//modifier le changement de vitesse par le biai d'un multiplicateur
-		//m_movementCompo->m_speed = 0.0000005f;
-		//m_shootComponent->m_wantToShoot = true;
-		m_shootComponent->m_fireRate = 10.0f;
-		//Print::PrintLog("Shoot Enabled");		
+
+		if (m_movementCompo->m_distance <= m_shootComponent->m_range)
+		{			
+			m_shootComponent->m_wantToShoot = true;				
+		}
+		else
+		{
+			m_shootComponent->m_wantToShoot = false;
+		}
 	}
 	else
 	{
-		//m_movementCompo->m_speed = 0.001f;
 		m_shootComponent->m_wantToShoot = false;
-		//Print::PrintLog("Shoot Not Enabled");
-	}
-
-	
+	}	
 }
 
 void Enemy::OnDeath()
@@ -69,6 +71,7 @@ void Enemy::OnDeath()
 			if (currentEnemy == this)
 			{
 				m_enemySpawner->m_EnemyList.remove(currentEnemy);
+				m_enemySpawner->m_nbEnemyEliminated++;
 			}
 		}
 		

@@ -7,10 +7,11 @@ class IMovementComponent : public Component
 {
 public:
 
+	IMovementComponent() = default;
 	virtual ~IMovementComponent() override  = default;
 
 	float m_distance = 0;
-	float m_speed = 0.001f;
+	float m_speed = 0.001f;	
 
 };
 

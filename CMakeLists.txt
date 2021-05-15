@@ -43,12 +43,13 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
     ${HEADER_DIR}/HUD/PlayerHUD.h
-    ${HEADER_DIR}/Spawner.h
+    ${HEADER_DIR}/EnemySpawner.h
     ${HEADER_DIR}/Enemy.h
 	${HEADER_DIR}/Components/KamikazeMovementComponent.h
 	${HEADER_DIR}/Components/IMovementComponent.h
     ${HEADER_DIR}/StaticData.h
 	${HEADER_DIR}/Components/RunAwayMovementComponent.h
+	${HEADER_DIR}/Components/BaseEnemyMovementComponent.h
 )
 
 set(SOURCES
@@ -76,10 +77,11 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
     ${SOURCE_DIR}/HUD/PlayerHUD.cpp
-	${SOURCE_DIR}/Spawner.cpp
+	${SOURCE_DIR}/EnemySpawner.cpp
 	${SOURCE_DIR}/Enemy.cpp
 	${SOURCE_DIR}/Components/KamikazeMovementComponent.cpp
 	${SOURCE_DIR}/Components/RunAwayMovementComponent.cpp
+	${SOURCE_DIR}/Components/BaseEnemyMovementComponent.cpp
 )
 
 

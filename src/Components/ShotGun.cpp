@@ -8,6 +8,7 @@ ShotGun::ShotGun()
 	m_shootNumber = 5;
 	m_fireRate = 2.f;
 	m_dispersion = 10;
+	m_range = 450.f;
 }
 
 void ShotGun::ShootBullet(int initialAngle)

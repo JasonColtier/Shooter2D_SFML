@@ -3,7 +3,7 @@
 
 #include "GameObjects/Character.h"
 
-class Spawner;
+class EnemySpawner;
 
 class Enemy : public Character
 {
@@ -17,7 +17,8 @@ public:
 	TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "Enemy"; }
 
-	Spawner* m_enemySpawner = nullptr;
+	EnemySpawner* m_enemySpawner = nullptr;
+	
 
 };
 #endif //ENEMY_H

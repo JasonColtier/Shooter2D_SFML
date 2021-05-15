@@ -1,4 +1,4 @@
-#include "Spawner.h"
+#include "EnemySpawner.h"
 #include "GameLoop.h"
 #include <random>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -16,28 +16,45 @@
 #include <list>
 #include <iterator>
 
-void Spawner::Tick(int64_t deltaTime)
+void EnemySpawner::Tick(int64_t deltaTime)
 {
 	m_timer += deltaTime;
-	if (m_timer >= 2000000 && m_EnemyList.size() != 2)
+	//Va faire le spawn d'un ennemi quand les conditions sont remplies
+	if (m_timer >= 2000000 && m_EnemyList.size() != m_maxEnnemy)
 	{
 		m_timer = 0;
-		DoSpawn();
+		DoSpawn(m_lifeMultiply);
 		m_canSpawn = false;
+	}
+
+	//Gestion du changement de difficulté
+	if (m_nbEnemyEliminated == m_targetKills)
+	{
+		//remet le compteur d'élimination à 0, 
+		m_nbEnemyEliminated = 0;
+		m_targetKills = m_targetKills * 2;
+		m_maxEnnemy++;
+		m_lifeMultiply = m_lifeMultiply + 0.5f;
 	}
 }
 
-void Spawner::DoSpawn()
+void EnemySpawner::DoSpawn(float lifeMultiply)
 {
+	//Pour le spawn de l'ennemi
 	auto* NewEnemy = GameWindow::GetGameLevel()->SpawnActor<Enemy>(sf::Vector2f(0.f, 0.f));	
 	RandomLocation(NewEnemy);
 	RandomMovement(NewEnemy);
 	RandomShoot(NewEnemy);
 	NewEnemy->m_enemySpawner = this;
-	m_EnemyList.push_back(NewEnemy);	
+	m_EnemyList.push_back(NewEnemy);
+
+	//Pour changer la quantité initiale de PV en fonction de la difficulté actuelle
+	NewEnemy->m_lifeComponent->m_maxHealth = NewEnemy->m_lifeComponent->m_maxHealth * lifeMultiply;
+	NewEnemy->m_lifeComponent->m_currentHealth = NewEnemy->m_lifeComponent->m_maxHealth;
+		
 }
 
-void Spawner::RandomLocation(Enemy* EnemytoSpawn)
+void EnemySpawner::RandomLocation(Enemy* EnemytoSpawn)
 {
 	const auto* window = GameWindow::m_window;
 	const auto Side = std::rand() % 4;
@@ -73,7 +90,7 @@ void Spawner::RandomLocation(Enemy* EnemytoSpawn)
 	EnemytoSpawn->m_position = sf::Vector2f(RandomX, RandomY);
 }
 
-void Spawner::RandomMovement(Enemy* EnemytoSpawn)
+void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)
 {
 	//va choisir une valeur aléatoire entre 0 et 1 (car 2 types de MovementComponents existants pour les ennemis)
 	//et va attribuer au nouvel ennemi le MovementComponent correspondant
@@ -85,14 +102,14 @@ void Spawner::RandomMovement(Enemy* EnemytoSpawn)
 		break;
 
 	case 1:
-		EnemytoSpawn->m_movementCompo = new RunAwayMovementComponent();
+		EnemytoSpawn->m_movementCompo = new KamikazeMovementComponent();
 		break;
 	}
 
 	EnemytoSpawn->AddComponent(EnemytoSpawn->m_movementCompo);
 }
 
-void Spawner::RandomShoot(Enemy* EnemytoSpawn)
+void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 {
 	//va choisir une valeur aléatoire entre 0 et 2 (car 3 types de ShootComponents existants)
 	//et va attribuer au nouvel ennemi le ShootComponent correspondant
@@ -100,7 +117,7 @@ void Spawner::RandomShoot(Enemy* EnemytoSpawn)
 	switch (Random)
 	{
 	case 0:
-		EnemytoSpawn->m_shootComponent = new ClassicPistol();
+		EnemytoSpawn->m_shootComponent = new ShotGun();
 		break;
 
 	case 1:
@@ -108,7 +125,7 @@ void Spawner::RandomShoot(Enemy* EnemytoSpawn)
 		break;
 
 	case 2:
-		EnemytoSpawn->m_shootComponent = new Sniper();
+		EnemytoSpawn->m_shootComponent = new ShotGun();
 		break;
 	}
 

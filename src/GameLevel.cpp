@@ -3,7 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "Spawner.h"
+#include "EnemySpawner.h"
 #include "Components/CollisionHandler.h"
 #include "Managers/AudioManager.h"
 #include "Managers/TextureManager.h"
@@ -22,7 +22,7 @@ void GameLevel::SpawnGameObjects()
 	background->m_renderHandler = new RenderHandler(background);
 	background->m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
 
-	SpawnActor<Spawner>(sf::Vector2f(300.f, 300.f));
+	SpawnActor<EnemySpawner>(sf::Vector2f(300.f, 300.f));
 
 	AudioManager::PlayMusic(AudioManager::ESounds::EpicGameMusic);
 }

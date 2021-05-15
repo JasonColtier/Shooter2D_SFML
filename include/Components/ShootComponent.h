@@ -28,6 +28,7 @@ public:
 	float m_damageMultiplier = 1.f;//TODO
 	float m_velocityMultiplier = 1.f;//TODO
 	bool m_wantToShoot = false;
+	float m_range;//portée du tir 
 	//Ajouter prise en compte de la portée de l'arme.
 
 private:
