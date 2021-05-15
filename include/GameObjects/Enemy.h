@@ -23,5 +23,8 @@ public:
 
 	Spawner* m_enemySpawner = nullptr;
 
+private:
+	int m_enemyMaxHealth = 3;
+
 };
 #endif //ENEMY_H

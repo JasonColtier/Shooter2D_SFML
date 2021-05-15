@@ -39,11 +39,13 @@ void Enemy::Tick(int64_t deltaTime)
         GetShootComponent()->m_wantToShoot = false;
         //Print::PrintLog("Shoot Not Enabled");
     }
+
+    GetComponentOfClass<LifeComponent>()->SetMaxHealth(m_enemyMaxHealth);
 }
 
 void Enemy::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
 {
-    Character::Activate(position,offsetPos,scale,rotation);
+    Character::Activate(position, offsetPos, scale, rotation);
     //Au moment du spawn
     Print::PrintLog("here comes a new challenger");
 
@@ -57,20 +59,19 @@ void Enemy::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale,
         Sprite->setScale(sf::Vector2f(1.f, 1.f));
     }
 
-    SetCollisionHandler(CollisionType::EnemyChannel, StaticData::ShipCollision,50, std::vector<CollisionType>({CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel}));
+    SetCollisionHandler(CollisionType::EnemyChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({CollisionType::EnemyChannel, CollisionType::BonusChannel, CollisionType::EnemyProjectileChannel}));
 }
 
 void Enemy::Deactivate()
 {
     Character::Deactivate();
 
-    ScoreManager::ModifyScore(1); //une façon d'augmenter le score
-    //BonusSpawner::RollBonus(m_position);
+    BonusSpawner::RollBonus(m_position);
 
     auto ListEnnemi = m_enemySpawner->m_EnemyList;
 
-    ScoreManager::ModifyScore(1);//une façon d'augmenter le score rapide mais on peut faire mieux
-    
+    ScoreManager::ModifyScore(1); //une façon d'augmenter le score rapide mais on peut faire mieux
+
     for (Enemy* currentEnemy : ListEnnemi)
     {
         if (currentEnemy == this)

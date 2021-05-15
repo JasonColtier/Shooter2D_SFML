@@ -10,7 +10,7 @@ class CollisionManager
 {
 public:
 	/// <summary>
-	///	Appelée à chaque frame pour actualiser les collisions entre les objets
+	///	Appelée à chaque tick pour actualiser les collisions entre les objets
 	/// </summary>
 	/// <param name="abscisseTab"> Liste des objets </param>
 	static void UpdateCollision(std::list<GameObject*> abscisseTab);

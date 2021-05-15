@@ -93,37 +93,44 @@ void RenderHandler::RenderUpdate()
 
 
 	
-	if (m_owner->GetCollisionHandler())
-	{
-		auto radius = m_owner->GetCollisionHandler()->m_rayon;
-		sf::CircleShape circle(radius);
-		circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
-		circle.setFillColor(sf::Color::Green);
-		GameWindow::m_window->draw(circle);
-		
-		std::vector<sf::Vector2f> tmp;
-		m_owner->GetCollisionHandler()->GetPoints(tmp);
-
-		sf::Vertex vertice[4] =
-		{
-			tmp[0],
-				tmp[1],
-				tmp[2],
-				tmp[3]
-		};
-
-		GameWindow::m_window->draw(vertice, 4, sf::Quads);
-	}
-
-	// for (auto* sprite : m_MovableSprites)
+	// if (m_owner->GetCollisionHandler())
 	// {
-	// 	sprite->setRotation(m_owner->m_rotation);
-	// 	sprite->setPosition(m_owner->m_position);
-	// }
+	// 	auto radius = m_owner->GetCollisionHandler()->m_radius;
+	// 	sf::CircleShape circle(radius);
+	// 	circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
+	// 	circle.setFillColor(sf::Color::Green);
+	// 	GameWindow::m_window->draw(circle);
 	//
-	// for (auto* rendered : m_renderedItems)
-	// {
-	// 	GameWindow::m_window->draw(*rendered->m_drawableItem);
+	// 	
+	// 	
+	// 	std::vector<sf::Vector2f> tmp;
+	// 	m_owner->GetCollisionHandler()->GetPoints(tmp);
+	//
+	// 	sf::Vertex vertice[4] =
+	// 	{
+	// 		tmp[0],
+	// 			tmp[1],
+	// 			tmp[2],
+	// 			tmp[3]
+	// 	};
+	//
+	// 	GameWindow::m_window->draw(vertice, 4, sf::Quads);
+	//
+	// 	sf::CircleShape center(3);
+	// 	center.setPosition(sf::Vector2f(m_owner->m_position.x,m_owner->m_position.y));
+	// 	center.setFillColor(sf::Color::Magenta);
+	// 	GameWindow::m_window->draw(center);
 	// }
+
+	for (auto* sprite : m_MovableSprites)
+	{
+		sprite->setRotation(m_owner->m_rotation);
+		sprite->setPosition(m_owner->m_position);
+	}
+	
+	for (auto* rendered : m_renderedItems)
+	{
+		GameWindow::m_window->draw(*rendered->m_drawableItem);
+	}
 
 }

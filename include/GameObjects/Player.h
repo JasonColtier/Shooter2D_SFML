@@ -3,6 +3,7 @@
 
 #include "Character.h"
 #include "GameObject.h"
+#include "HUD/PlayerHUD.h"
 #include "Managers/InputManager.h"
 
 class Player : public Character
@@ -22,6 +23,10 @@ public:
 
 	virtual TypeId GetTypeId() override { return GetClassTypeId(); }
 	static TypeId GetClassTypeId() { return "Player"; }
+
+private:
+	PlayerHUD* m_hud = nullptr;
+	int m_signalSlotID = 0;
 };
 
 #endif //PLAYER_H

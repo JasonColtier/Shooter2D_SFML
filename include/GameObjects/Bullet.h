@@ -34,7 +34,6 @@ public:
 	float m_speedMultiplier = 1.f;
 	float m_damageMultiplier = 1.f;
 
-	bool m_piercing = false; //transperce les ennemis ?
 	Character* m_CharacterShooter = nullptr;
 
 protected:
