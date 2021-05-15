@@ -5,6 +5,7 @@
 #include "Components/RenderHandler.h"
 #include "GameObjects/Spawner.h"
 #include "Components/CollisionHandler.h"
+#include "HUD/EndScreenHUD.h"
 #include "Managers/AudioManager.h"
 #include "Managers/TextureManager.h"
 
@@ -75,6 +76,11 @@ void GameLevel::AddObjectRendered(RenderHandler& object)
 void GameLevel::RemoveObjectRendered(GameObject& object)
 {
 	m_lObjectsRendered.remove(&object);
+}
+
+void GameLevel::EndGame()
+{
+	SpawnActor<EndScreenHUD>();
 }
 
 void GameLevel::ActivateObject(GameObject& object, const bool newObject)

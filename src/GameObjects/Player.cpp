@@ -4,9 +4,8 @@
 #include "StaticData.h"
 #include "Components/ClassicPistol.h"
 #include "Components/PlayerMovementComponent.h"
-#include "Tools/Print.h"
-#include "Components/RenderHandler.h"
 #include "Components/Sniper.h"
+#include "Tools/Print.h"
 #include "HUD/PlayerHUD.h"
 #include "Managers/TextureManager.h"
 
@@ -25,19 +24,26 @@ void Player::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Ship), "player", 1,true,sf::Vector2f(50,50),m_scale);
 
 	m_offsetPos = sf::Vector2f(0, 25.f);
-	SetShootComponent(new ClassicPistol(this));
+	SetShootComponent(new Sniper(this));
 	SetCollisionHandler(CollisionType::PlayerChannel, StaticData::ShipCollision, 50, std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::PlayerProjectileChannel }));
 
 	AddComponent(new PlayerMovementComponent());
 
-	InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
-	auto* hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
-	hud->m_player = this;
+	m_signalSlotID = InputManager::GetSignal().Connect<Player>(this, &Player::OnInputChanged);
+	
+	m_hud = GameWindow::GetGameLevel()->SpawnActor<PlayerHUD>();
+	m_hud->m_player = this;
 }
 
 void Player::Deactivate()
 {
 	Character::Deactivate();
+
+	m_hud->Deactivate();
+
+	InputManager::GetSignal().Disconnect(m_signalSlotID);
+
+	GameWindow::GetGameLevel()->EndGame();
 }
 
 void Player::OnInputChanged(const InputMapping input) const

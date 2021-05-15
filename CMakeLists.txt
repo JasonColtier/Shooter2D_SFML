@@ -50,6 +50,7 @@ set(HEADERS
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
     ${HEADER_DIR}/HUD/PlayerHUD.h
+    ${HEADER_DIR}/HUD/EndScreenHUD.h
     ${HEADER_DIR}/Components/IMovementComponent.h
 	${HEADER_DIR}/Components/KamikazeMovementComponent.h
     ${HEADER_DIR}/StaticData.h
@@ -82,6 +83,7 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
     ${SOURCE_DIR}/HUD/PlayerHUD.cpp
+    ${SOURCE_DIR}/HUD/EndScreenHUD.cpp
 	${SOURCE_DIR}/Components/KamikazeMovementComponent.cpp
 	${SOURCE_DIR}/Components/RunAwayMovementComponent.cpp
 )

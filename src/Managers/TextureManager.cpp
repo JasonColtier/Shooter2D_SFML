@@ -28,7 +28,6 @@ const char* TextureManager::_GetPath(const ETextures t)
 sf::Texture* TextureManager::GetTexturePtr(ETextures t)
 {
 	const auto Iterator(mapTextures.find(t));
-	// Print::PrintLog("map size : ", mapTextures.size());
 
 	//si on a notre texture de chargé
 	if (Iterator != mapTextures.end())

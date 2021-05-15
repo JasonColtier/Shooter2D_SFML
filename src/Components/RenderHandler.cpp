@@ -92,7 +92,7 @@ void RenderHandler::RenderUpdate()
 {
 
 
-	//
+	
 	// if (m_owner->GetCollisionHandler())
 	// {
 	// 	auto radius = m_owner->GetCollisionHandler()->m_radius;
@@ -100,6 +100,8 @@ void RenderHandler::RenderUpdate()
 	// 	circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
 	// 	circle.setFillColor(sf::Color::Green);
 	// 	GameWindow::m_window->draw(circle);
+	//
+	// 	
 	// 	
 	// 	std::vector<sf::Vector2f> tmp;
 	// 	m_owner->GetCollisionHandler()->GetPoints(tmp);
@@ -113,6 +115,11 @@ void RenderHandler::RenderUpdate()
 	// 	};
 	//
 	// 	GameWindow::m_window->draw(vertice, 4, sf::Quads);
+	//
+	// 	sf::CircleShape center(3);
+	// 	center.setPosition(sf::Vector2f(m_owner->m_position.x,m_owner->m_position.y));
+	// 	center.setFillColor(sf::Color::Magenta);
+	// 	GameWindow::m_window->draw(center);
 	// }
 
 	for (auto* sprite : m_MovableSprites)

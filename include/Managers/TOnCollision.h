@@ -28,7 +28,7 @@ struct OnCollision<Player, Enemy>
 {
     static void Reaction(Player& player, Enemy& enemy)
     {
-        player.GetComponentOfClass<LifeComponent>()->CollisionDamage(0);
+        player.GetComponentOfClass<LifeComponent>()->CollisionDamage(10);
         enemy.GetComponentOfClass<LifeComponent>()->CollisionDamage(5);
     }
 };

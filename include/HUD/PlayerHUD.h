@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include "GameObjects/GameObject.h"
+#include "Managers/ScoreManager.h"
 
 namespace sf {
 	class Sprite;
@@ -18,9 +19,14 @@ public:
 	~PlayerHUD() = default;
 
 	void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
+
 	void Deactivate() override
 	{
 		GameObject::Deactivate();
+
+		m_player = nullptr;
+		m_deltatimeText = nullptr;
+		ScoreManager::GetSignal().Disconnect(m_signalID);
 	}
 	
 	void Tick(int64_t deltaTime) override;
@@ -35,6 +41,7 @@ private:
 
 private:
 	sf::Sprite* m_healthBar;
+	int m_signalID = 0;
 };
 
 #endif //PlayerHUD_H
