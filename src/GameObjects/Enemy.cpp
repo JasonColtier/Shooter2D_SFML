@@ -16,7 +16,7 @@
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
 #include "GameObjects/BonusHeal.h"
-#include "GameObjects/Spawner.h"
+#include "GameObjects/EnemySpawner.h"
 #include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
 
@@ -77,6 +77,7 @@ void Enemy::Deactivate()
         if (currentEnemy == this)
         {
             m_enemySpawner->m_EnemyList.remove(currentEnemy);
+            m_enemySpawner->m_nbEnemyEliminated++;
         }
     }
 }
