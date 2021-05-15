@@ -24,7 +24,7 @@ class GameLevel
 
 public:
     GameLevel();
-    virtual ~GameLevel() = default;
+    virtual ~GameLevel();
 
     void SpawnGameObjects();
     //called by the game loop

@@ -15,7 +15,7 @@ public:
 
 	//retourne un pointeur vers la texture
 	static sf::Font* GetFontPtr(EnumFonts f);
-	~FontManager() = default;//TODO    
+	~FontManager();   
 
 public:
 	//une map qui associe les textures chargées en mémoire à leur nom

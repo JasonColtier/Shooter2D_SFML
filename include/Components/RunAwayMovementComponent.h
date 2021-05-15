@@ -1,8 +1,8 @@
-#ifndef SHOTGUNNERMOVEMENTCOMPONENT_H
-#define SHOTGUNNERMOVEMENTCOMPONENT_H
+#ifndef RUNAWAYMOVEMENTCOMPONENT_H
+#define RUNAWAYMOVEMENTCOMPONENT_H
 
+#include <SFML/System/Vector2.hpp>
 #include "Components/IMovementComponent.h"
-#include "GameObjects/GameObject.h"
 
 class RunAwayMovementComponent : public IMovementComponent
 {
@@ -27,4 +27,4 @@ private:
 	//float speed = 0.001f;//l'acceleration de notre vaisseau
 };
 
-#endif // !SHOTGUNNERMOVEMENTCOMPONENT_H
+#endif

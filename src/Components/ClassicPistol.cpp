@@ -6,7 +6,7 @@
 #include "Components/CollisionHandler.h"
 #include "GameObjects/Player.h"
 
-ClassicPistol::ClassicPistol(Character* characterShooter) : ShootComponent(characterShooter)
+ClassicPistol::ClassicPistol()
 {
 	m_baseShootNumber = 1;
 	m_baseFireRate = 2.f;

@@ -14,6 +14,10 @@
 void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {
 	const auto* Level = GameWindow::GetGameLevel();
+
+	if(!Level->m_player)
+		return;
+	
 	m_playerposition = Level->m_player->m_position;
 	const auto Pos = m_owner->m_position;
 

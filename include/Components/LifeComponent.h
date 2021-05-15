@@ -21,7 +21,7 @@ public:
 	}
 
 public:
-	float m_maxHealth = 10;
+	float m_maxHealth = 1;
 	float m_currentHealth = m_maxHealth;
 	float m_collisionDamageCooldown = 2.f;
 	bool m_canTakeDamageOnCollision;

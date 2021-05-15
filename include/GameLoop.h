@@ -17,7 +17,9 @@ class GameLoop : public Singleton<GameLoop>
 
 public:
 	void StartGame();
-	void EndGame();
+
+	bool m_gameIsPlaying = true;
+
 
 private:
 	GameLoop();
@@ -36,6 +38,5 @@ private:
 	float m_targetFPS = 60.0f;
 
 	GameLevel* m_gameLevel = nullptr;
-
 };
 #endif

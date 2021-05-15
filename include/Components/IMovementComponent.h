@@ -1,4 +1,4 @@
-#ifndef  IMOVEMENTCOMPONENT_H
+#ifndef IMOVEMENTCOMPONENT_H
 #define IMOVEMENTCOMPONENT_H
 
 #include "Component.h"

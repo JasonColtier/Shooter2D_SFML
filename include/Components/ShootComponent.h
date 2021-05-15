@@ -10,22 +10,19 @@ class Character;
 class ShootComponent : public Component
 {
 public:
-    ShootComponent(Character* characterShooter) : m_characterShooter(characterShooter)
-    {
-        
-    }
+    ShootComponent() = default;
+    
     virtual ~ShootComponent() override = default;
 
     ShootComponent(ShootComponent& shootComponent) :
         m_additionnalShootNumber(shootComponent.m_additionnalShootNumber),
         m_fireRateModifier(shootComponent.m_fireRateModifier),
-        m_baseVelocityMultiplier(shootComponent.m_baseVelocityMultiplier),
-        m_characterShooter(shootComponent.m_characterShooter)
+        m_baseVelocityMultiplier(shootComponent.m_baseVelocityMultiplier)
+    
     {
     }
 
-    
-    
+
     //gestion du délai entre les tirs
     virtual void TickComponent(int64_t deltaTime = 0) override;
 
@@ -55,13 +52,10 @@ public:
 
     float m_baseDispersion = 15.f; //angle
     float m_baseDamageMultiplier = 1.f; //TODO
-    
+
     float m_baseVelocityMultiplier = 1.f; //TODO
-    //TODO Ajouter prise en compte de la portée de l'arme.
 
     bool m_wantToShoot = false;
-
-    Character* m_characterShooter = nullptr;
 
 private:
     float m_timer = 0;

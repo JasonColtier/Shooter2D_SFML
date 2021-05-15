@@ -23,6 +23,15 @@ RenderHandler::RenderHandler(GameObject* parentGameObject, std::string userText,
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
+RenderHandler::~RenderHandler()
+{
+	for (auto element : m_renderedItems)
+	{
+		delete element;
+		element = nullptr;
+	}
+}
+
 void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
 	AddSprite(tex, key, zIndex, isMovable,origin,scale);
@@ -42,10 +51,6 @@ void RenderHandler::Reset()
 		delete container;
 	}
 	m_renderedItems.clear();
-	for (auto* sprite : m_MovableSprites)
-	{
-		delete sprite;
-	}
 	m_MovableSprites.clear();
 	GameWindow::GetGameLevel()->RemoveObjectRendered(*m_owner);
 }

@@ -1,5 +1,6 @@
 #include "GameObjects/Character.h"
 
+
 void Character::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
 {
     GameObject::Activate(position,offsetPos,scale,rotation);
@@ -14,5 +15,5 @@ void Character::Deactivate()
 
     m_shootComponent = nullptr;
     m_lifeComponent = nullptr;
-    m_movementCompo = nullptr;
+    m_movementComponent = nullptr;
 }
