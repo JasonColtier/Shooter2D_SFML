@@ -46,6 +46,7 @@ public:
     //modifiées par les amélioration globales de partie, sont indépendantes des armes récupérées
     int m_baseShootNumber = 1; //nombre de tir quand on shoot, doit être incrémenté de 2 en 2
     int m_additionnalShootNumber = 0;
+	float m_range;//portée du tir 
 
     float m_baseFireRate = 2.f; //vitesse de tir, plus c'est petit plus on tire souvent
     float m_fireRateModifier = 1;

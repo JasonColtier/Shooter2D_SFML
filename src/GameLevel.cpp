@@ -5,7 +5,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "GameObjects/Spawner.h"
+#include "GameObjects/EnemySpawner.h"
 #include "Components/CollisionHandler.h"
 #include "HUD/EndScreenHUD.h"
 #include "Managers/AudioManager.h"
@@ -43,7 +43,7 @@ void GameLevel::SpawnGameObjects()
     auto* background = SpawnActor<GameObject>();
     background->SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
 
-    SpawnActor<Spawner>();
+    SpawnActor<EnemySpawner>();
 
     AudioManager::PlayMusic(AudioManager::ESounds::EpicGameMusic);
 }

@@ -11,6 +11,7 @@ public:
         m_baseShootNumber = 1;
         m_baseFireRate = 18.f;
         m_baseDispersion = 20.f;
+        m_range = 10000.f;
     };
 
     Sniper(ShootComponent& shootComponent) : ShootComponent(shootComponent)
@@ -18,6 +19,7 @@ public:
         m_baseShootNumber = 1;
         m_baseFireRate = 18.f;
         m_baseDispersion = 20.f;
+        m_range = 10000.f;
     }
 
     void ShootBullet(int initialAngle) override;

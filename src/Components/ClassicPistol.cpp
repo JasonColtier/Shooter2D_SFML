@@ -11,6 +11,7 @@ ClassicPistol::ClassicPistol()
 	m_baseShootNumber = 1;
 	m_baseFireRate = 2.f;
 	m_baseDispersion = 15.f;
+	m_range = 5000.f;
 }
 
 void ClassicPistol::ShootBullet(const int initialAngle)

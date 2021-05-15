@@ -10,6 +10,7 @@ public:
         m_baseShootNumber = 5;
         m_baseFireRate = 7.f;
         m_baseDispersion = 10;
+        m_range = 450.f;
     };
 
     ShotGun(ShootComponent& shootComponent) : ShootComponent(shootComponent)
@@ -17,6 +18,7 @@ public:
         m_baseShootNumber = 5;
         m_baseFireRate = 7.f;
         m_baseDispersion = 10;
+        m_range = 450.f;
     };
 
     void ShootBullet(int initialAngle) override;

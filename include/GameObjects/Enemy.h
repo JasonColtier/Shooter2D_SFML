@@ -4,7 +4,7 @@
 #include "GameObjects/Character.h"
 
 
-class Spawner;
+class EnemySpawner;
 
 class Enemy : public Character
 {
@@ -21,7 +21,7 @@ public:
 	static TypeId GetClassTypeId() { return "Enemy"; }
 
 
-	Spawner* m_enemySpawner = nullptr;
+	EnemySpawner* m_enemySpawner = nullptr;
 
 private:
 	int m_enemyMaxHealth = 3;

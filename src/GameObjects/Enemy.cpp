@@ -16,7 +16,7 @@
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
 #include "GameObjects/BonusHeal.h"
-#include "GameObjects/Spawner.h"
+#include "GameObjects/EnemySpawner.h"
 #include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
 
@@ -68,7 +68,7 @@ void Enemy::Deactivate()
 
     BonusSpawner::RollBonus(m_position);
 
-    ScoreManager::ModifyScore(1); //une façon d'augmenter le score rapide mais on peut faire mieux
+    ScoreManager::ModifyScore(1); //une faï¿½on d'augmenter le score rapide mais on peut faire mieux
 
     m_enemySpawner->m_EnemyList.remove(this);
 }

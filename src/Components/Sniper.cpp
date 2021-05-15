@@ -10,6 +10,7 @@
 #include "GameObjects/Player.h"
 
 
+
 void Sniper::ShootBullet(int initialAngle)
 {
 	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);

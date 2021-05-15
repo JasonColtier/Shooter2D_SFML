@@ -7,6 +7,7 @@ class IMovementComponent : public Component
 {
 public:
 
+	IMovementComponent() = default;
 	virtual ~IMovementComponent() override  = default;
 
 	float GetSpeed()
