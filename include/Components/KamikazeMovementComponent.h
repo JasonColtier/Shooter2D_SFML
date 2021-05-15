@@ -1,9 +1,10 @@
 #ifndef KAMIKAZEMOVEMENTCOMPONENT_H
 #define KAMIKAZEMOVEMENTCOMPONENT_H
 
-#include "Components/IMovementComponent.h"
+#include <SFML/System/Vector2.hpp>
+
 #include "BaseEnemyMovementComponent.h"
-#include "GameObjects/GameObject.h"
+#include "Components/IMovementComponent.h"
 
 class KamikazeMovementComponent : public BaseEnemyMovemementComponent
 {
@@ -16,5 +17,5 @@ public:
 
 };
 
-#endif // !ENEMYMOVEMENTCOMPONENT_H
+#endif
 

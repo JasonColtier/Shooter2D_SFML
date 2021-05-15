@@ -6,10 +6,8 @@
 
 class Spawner : public GameObject
 {
-
 public:
-
-
+	
 	Spawner() = default;	
 	~Spawner() override = default;
 

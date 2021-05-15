@@ -1,9 +1,9 @@
-#ifndef SHOTGUNNERMOVEMENTCOMPONENT_H
-#define SHOTGUNNERMOVEMENTCOMPONENT_H
+#ifndef RUNAWAYMOVEMENTCOMPONENT_H
+#define RUNAWAYMOVEMENTCOMPONENT_H
 
+#include <SFML/System/Vector2.hpp>
 #include "Components/IMovementComponent.h"
 #include"Components/BaseEnemyMovementComponent.h"
-#include "GameObjects/GameObject.h"
 
 class RunAwayMovementComponent : public BaseEnemyMovemementComponent
 {
@@ -18,4 +18,4 @@ public:
 	
 };
 
-#endif // !SHOTGUNNERMOVEMENTCOMPONENT_H
+#endif

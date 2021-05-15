@@ -49,6 +49,7 @@ TextureManager::~TextureManager()
 	for (auto& mapTexture : mapTextures)
 	{
 		delete mapTexture.second;
+		mapTexture.second = nullptr;
 	}
 
 	mapTextures.clear();

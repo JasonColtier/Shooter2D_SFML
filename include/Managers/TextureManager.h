@@ -20,10 +20,12 @@ public:
 	~TextureManager();
 
 private:
+
+	TextureManager()= default;
+	
 	//retourne le path associé à un nom de texture
 	static const char* _GetPath(ETextures t);
 
-	TextureManager() = default;
 };
 
 #endif

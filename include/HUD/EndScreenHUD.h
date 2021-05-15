@@ -1,5 +1,5 @@
-﻿#ifndef EndScreenHUD_H
-#define EndScreenHUD_H
+﻿#ifndef ENDSCREENHUD_H
+#define ENDSCREENHUD_H
 
 #include <SFML/Graphics/Text.hpp>
 #include "GameObjects/GameObject.h"
@@ -25,9 +25,6 @@ public:
 
 	}
 
-private:
-
-private:
 };
 
 #endif //PlayerHUD_H

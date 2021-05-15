@@ -10,8 +10,6 @@
 
 void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
 {
-	m_player = GameWindow::GetGameLevel()->m_player;
-
 	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
 	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
 	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::HealthBarBG), "HealthBarBG", 3);
@@ -34,7 +32,13 @@ void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float sc
 void PlayerHUD::Tick(int64_t deltaTime)
 {
 	GameObject::Tick(deltaTime);
-	m_healthBar->setScale(m_player->m_lifeComponent->m_currentHealth / m_player->m_lifeComponent->m_maxHealth, 1);
+	GameWindow::GetGameLevel()->m_player;
+
+	auto player = GameWindow::GetGameLevel()->m_player;
+	if(player)
+	{
+		m_healthBar->setScale(player->m_lifeComponent->m_currentHealth / player->m_lifeComponent->m_maxHealth, 1);
+	}
 	std::string tmp = "deltatime : ";
 	m_deltatimeText->setString(tmp.append(std::to_string(deltaTime)).append(" microsec"));
 }

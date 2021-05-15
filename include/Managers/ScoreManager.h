@@ -17,6 +17,8 @@ public:
     inline static Signal<int> m_signal;
 
 private:
+    ScoreManager() = default;
+    
     static inline int m_score;
 
 };

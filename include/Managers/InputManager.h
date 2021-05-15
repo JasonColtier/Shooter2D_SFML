@@ -46,8 +46,6 @@ private:
 	inline static InputMapping m_forward = std::make_pair(InputsEnum::Forward, false);
 	inline static InputMapping m_debugNum1 = std::make_pair(InputsEnum::DebugNum1, false);
 	inline static InputMapping m_debugNum2 = std::make_pair(InputsEnum::DebugNum2, false);
-
-
 };
 
 #endif

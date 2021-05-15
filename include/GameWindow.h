@@ -14,11 +14,17 @@ namespace sf {
 class GameWindow
 {
 public:
-	static void LoadGameLevel()
+	
+	static GameLevel* LoadGameLevel()
 	{
+		if(m_currentGameLevel != nullptr)
+			delete m_currentGameLevel;
+		
 		m_currentGameLevel = new GameLevel();
 		Print::PrintLog("game level created");
 		m_currentGameLevel->SpawnGameObjects();
+
+		return m_currentGameLevel;
 	}
 
 	static GameLevel* GetGameLevel()
@@ -38,6 +44,8 @@ public:
 	inline static std::string m_gameName = "Shooter 2D SFML";  // NOLINT(clang-diagnostic-exit-time-destructors)
 
 private:
+	GameWindow() = default;
+	
 	inline static GameLevel* m_currentGameLevel;
 };
 

@@ -16,7 +16,7 @@ public:
 	static void UpdateCollision(std::list<GameObject*> abscisseTab);
 
 private:
-
+ 
 	CollisionManager() = default;
 
 	/// <summary>

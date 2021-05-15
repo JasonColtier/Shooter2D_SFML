@@ -28,7 +28,7 @@ void CollisionManager::UpdateCollision(std::list<GameObject*> abscisseTab)
 		}
 	}
 }
-
+ 
 void CollisionManager::_SortByAbscisse(std::list<GameObject*>& abscisseTab)
 {
 	auto abscisseSort = [](GameObject* const g1, GameObject* const g2) -> bool
