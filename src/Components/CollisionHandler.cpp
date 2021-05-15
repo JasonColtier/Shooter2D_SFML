@@ -11,7 +11,7 @@ CollisionHandler::CollisionHandler(GameObject* owner, const CollisionType type, 
 	, m_eType(type)
 	, m_lExcludedCollisionType(std::move(excludedCollisionType))
 	, m_position(position)
-	, m_radius(radius)
+	, m_rayon(radius)
 	, m_rotation(rotation)
 {
 	SetPoints(lPoints);
@@ -23,9 +23,9 @@ void CollisionHandler::Initialise(GameObject* owner, const CollisionType type, f
 {
 	m_owner = owner;
 	m_eType = type;
-	m_lExcludedCollisionType = excludedCollisionType;
+	m_lExcludedCollisionType = std::move(excludedCollisionType);
 	m_rotation = rotation;
-	m_radius = radius;
+	m_rayon = radius;
 	m_position = position;
 	SetPoints(lPoints);
 	GameWindow::GetGameLevel()->AddObjectWithCollision(*this);
@@ -45,7 +45,7 @@ void CollisionHandler::SetPoints(const std::vector<sf::Vector2f>& lPoints)
 	m_lPoints.resize(Size);
 	for (size_t i = 0; i < Size; ++i)
 	{
-		m_lPoints[i] = lPoints[i] * m_owner->m_scale;
+		m_lPoints[i] = lPoints[i] /** m_owner->m_scale*/;
 	}
 }
 
@@ -70,10 +70,10 @@ void CollisionHandler::GetPoints(std::vector<sf::Vector2f>& vec) const
 
 float CollisionHandler::GetStartAbscisse() const
 {
-	return (m_position->x - (m_radius * m_owner->m_scale));
+	return (m_position->x - m_rayon);
 }
 
 float CollisionHandler::GetEndAbscisse() const
 {
-	return (m_position->x + (m_radius * m_owner->m_scale));
+	return (m_position->x + m_rayon);
 }

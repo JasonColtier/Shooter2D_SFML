@@ -3,7 +3,8 @@
 #include "GameObjects/GameObject.h"
 #include "Managers/CollisionDispatcher.h"
 #include "Tools/SMath.h"
-
+#include "GameObjects/Bullet.h"
+#include "GameObjects/Enemy.h"
 void CollisionManager::UpdateCollision(std::list<GameObject*> abscisseTab)
 {
 	_SortByAbscisse(abscisseTab);
@@ -13,6 +14,7 @@ void CollisionManager::UpdateCollision(std::list<GameObject*> abscisseTab)
 	{
 		for (auto objet2 = std::next(objet1); objet2 != endIterator; ++objet2)
 		{
+
 			//Si le point avec le plus grand X du première objet est supérieur au point avec le plus petit X du deuxième objet, une collision est possible
 			if ((*objet1)->GetCollisionHandler()->GetEndAbscisse() > (*objet2)->GetCollisionHandler()->GetStartAbscisse())
 			{
@@ -46,12 +48,10 @@ void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g
 		}
 	}
 
-	//fonction mise au carré
-	auto Dist((g2->m_position->x - g1->m_position->x) + (g2->m_position->y - g1->m_position->y));
-	SMath::Pow(Dist, 2);
-	auto MaxDist(g1->m_radius + g2->m_radius);
+	auto Dist(SMath::GetDistanceBetweenPoints(*g1->m_position, *g2->m_position));
+	auto MaxDist(g1->m_rayon + g2->m_rayon);
 	SMath::Pow(MaxDist, 2);
-
+	
 	//on compare les distances au carré et on vire sqrt
 	if (Dist < MaxDist)
 	{
@@ -102,13 +102,8 @@ void CollisionManager::_CheckCollision(CollisionHandler* g1, CollisionHandler* g
 
 					if (t1 <= 1 && t1 >= 0 && t2 <= 1 && t2 >= 0)
 					{
-						//Voir si le hitPoint est encore utile
-						//const sf::Vector2f hitPoint = sf::Vector2f((PointA->x + t1 * (PointB->x - PointA->x)), PointA->y + t1 * (PointB->y - PointA->y));
-						//
 						CollisionDispatcher::DispatchOnCollision(*g1->m_owner, *g2->m_owner);
 						return;
-						//g1->owner->OnCollision(hitPoint, g2->owner);
-						//g2->owner->OnCollision(hitPoint, g1->m_owner);
 					}
 				}
 			}

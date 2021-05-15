@@ -95,7 +95,7 @@ void RenderHandler::RenderUpdate()
 	
 	if (m_owner->GetCollisionHandler())
 	{
-		auto radius = m_owner->GetCollisionHandler()->m_radius;
+		auto radius = m_owner->GetCollisionHandler()->m_rayon;
 		sf::CircleShape circle(radius);
 		circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
 		circle.setFillColor(sf::Color::Green);
