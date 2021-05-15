@@ -23,13 +23,14 @@ class GameObject
 {
 
 public:
-	GameObject(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
-	//TODO gerer la destruction de notre objet et la suppression des listes
+
+	GameObject();
+	
 	virtual ~GameObject() = default;
 
 	virtual void Tick(int64_t deltaTime);
 
-	void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
+	virtual void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f);
 	virtual void Deactivate();
 
 	void AddComponent(Component* component);//ajoute un nouveau component à la liste de nos components
@@ -41,7 +42,7 @@ public:
 	{
 		for (auto component : m_lComponentList)
 		{
-			auto* Tmp = dynamic_cast<T>(component);
+			auto* Tmp = dynamic_cast<T*>(component);
 			if (Tmp != nullptr)
 			{
 				return Tmp;
@@ -65,7 +66,7 @@ public:
 		return m_renderHandler;
 	}
 
-	void SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true);
+	void SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable = true,sf::Vector2f origin = sf::Vector2f(0, 0),float scale = 1.f);
 	void SetRenderHandler(std::string userText, std::string key, int zIndex, sf::Vector2f pos = sf::Vector2f(0, 0), sf::Color color = sf::Color::White, int size = 30);
 public:
 

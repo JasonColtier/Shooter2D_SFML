@@ -6,11 +6,11 @@
 #include "Components/CollisionHandler.h"
 #include "GameObjects/Player.h"
 
-ClassicPistol::ClassicPistol()
+ClassicPistol::ClassicPistol(Character* characterShooter) : ShootComponent(characterShooter)
 {
-	m_shootNumber = 1;
-	m_fireRate = 2.f;
-	m_dispersion = 15.f;
+	m_baseShootNumber = 1;
+	m_baseFireRate = 2.f;
+	m_baseDispersion = 15.f;
 }
 
 void ClassicPistol::ShootBullet(const int initialAngle)
@@ -29,9 +29,5 @@ void ClassicPistol::ShootBullet(const int initialAngle)
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
 	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
-	//NewBullet->m_position = m_owner->m_position;
-	//NewBullet->m_rotation = m_owner->m_rotation + static_cast<float>(initialAngle);
-	//NewBullet->GetCollisionHandler()->m_eType = CollisionType::PlayerProjectileChannel;
-	//NewBullet->GetCollisionHandler()->m_lExcludedCollisionType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

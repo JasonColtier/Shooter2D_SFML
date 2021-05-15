@@ -3,7 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "Spawner.h"
+#include "GameObjects/Spawner.h"
 #include "Components/CollisionHandler.h"
 #include "Managers/AudioManager.h"
 #include "Managers/TextureManager.h"
@@ -29,7 +29,6 @@ void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
 	auto Copy = m_lObjectsActivate;
-	// Print::PrintLog("number of objects in level : ",copy.size());
 	for (auto* gameObject : Copy)
 	{
 		gameObject->Tick(deltaTime);
@@ -83,6 +82,7 @@ void GameLevel::ActivateObject(GameObject& object, const bool newObject)
 	if (newObject)
 	{
 		m_lObjectsActivate.push_back(&object);
+		// m_lObjectsWithCollision.push_back(&object);
 	}
 	else
 	{

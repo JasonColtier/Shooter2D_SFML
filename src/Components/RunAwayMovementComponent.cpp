@@ -39,8 +39,8 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 
 	////avant d'appliquer directement l'input, on va tester cette acceleration
 	sf::Vector2f Acceleration = m_inertia;
-	Acceleration.x += normDelta.x * m_speed * static_cast<float>(deltaTime) * 0.0001f;
-	Acceleration.y += normDelta.y * m_speed * static_cast<float>(deltaTime) * 0.0001f;
+	Acceleration.x += normDelta.x * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
+	Acceleration.y += normDelta.y * GetSpeed() * static_cast<float>(deltaTime) * 0.0001f;
 
 	////ton vérifie que l'acceleration ne sera pas trop grande avant de l'appliquer
 	if (VectorTools::Length(Acceleration) < m_maxVelocity)
@@ -61,7 +61,7 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 		m_owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}
 	//sinon : va se rapprocher du joueur et peut l'attaquer
-	else
+	else if(m_distance > 400)
 	{
 		m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 	}

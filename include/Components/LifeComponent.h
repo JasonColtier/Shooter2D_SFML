@@ -9,11 +9,19 @@ public:
 	LifeComponent() = default;
 
 	void TickComponent(int64_t deltaTime) override;
-	float ModifyHealth(float modification);
+	void ModifyHealth(float modification);
+	void CollisionDamage(float damageOnCollision);
 
 public:
-	float m_maxHealth = 10;
+	float m_maxHealth = 1;
 	float m_currentHealth = m_maxHealth;
+	float m_collisionDamageCooldown = 2.f;
+	bool m_canTakeDamageOnCollision;
+
+private:
+	float m_timer;
+
+	
 };
 
 #endif //LIFECOMPONENT_H

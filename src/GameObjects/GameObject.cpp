@@ -4,14 +4,6 @@
 #include "Components/CollisionHandler.h"
 #include "Components/RenderHandler.h"
 
-GameObject::GameObject(sf::Vector2f position, sf::Vector2f offsetPos, float scale, float rotation)
-	: m_position(position)
-	, m_offsetPos(offsetPos)
-	, m_scale(scale)
-	, m_rotation(rotation)
-{
-	GameWindow::GetGameLevel()->ActivateObject(*this, true);
-}
 
 void GameObject::AddComponent(Component* component)
 {
@@ -22,6 +14,8 @@ void GameObject::AddComponent(Component* component)
 void GameObject::RemoveComponent(Component* component)
 {
 	m_lComponentList.remove(component);
+	delete component;
+	component = nullptr;
 }
 
 void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::Vector2f>& points, float radius, std::vector<CollisionType> excludedCollisionType)
@@ -36,15 +30,15 @@ void GameObject::SetCollisionHandler(CollisionType type, const std::vector<sf::V
 	}
 }
 
-void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+void GameObject::SetRenderHandler(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
 	if (m_renderHandler != nullptr)
 	{
-		m_renderHandler->Initialise(tex, key, zIndex, isMovable);
+		m_renderHandler->Initialise(tex, key, zIndex, isMovable,origin,scale);
 	}
 	else
 	{
-		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable);
+		m_renderHandler = new RenderHandler(this, tex, key, zIndex, isMovable,origin,scale);
 	}
 }
 
@@ -58,6 +52,11 @@ void GameObject::SetRenderHandler(std::string userText, std::string key, int zIn
 	{
 		m_renderHandler = new RenderHandler(this, userText, key, zIndex, pos, color, size);
 	}
+}
+
+GameObject::GameObject()
+{
+	GameWindow::GetGameLevel()->ActivateObject(*this, true);
 }
 
 void GameObject::Tick(int64_t deltaTime)
@@ -75,7 +74,7 @@ void GameObject::Activate(const sf::Vector2f position, const sf::Vector2f offset
 	m_scale = scale;
 	m_rotation = rotation;
 
-	GameWindow::GetGameLevel()->ActivateObject(*this, false);
+	// Print::PrintLog("++ activate ", typeid(*this).name());
 }
 
 void GameObject::Deactivate()
@@ -94,4 +93,7 @@ void GameObject::Deactivate()
 		m_collisionHandler->Reset();
 	}
 	GameWindow::GetGameLevel()->DeactivateObject(*this);
+
+	// Print::PrintLog("-- deactivate ", typeid(*this).name());
+
 }

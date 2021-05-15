@@ -1,6 +1,7 @@
 ﻿#include "Components/RenderHandler.h"
 
 #include <map>
+#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -10,9 +11,9 @@
 #include "Managers/FontManager.h"
 
 
-RenderHandler::RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable) : m_owner(parentGameObject)
+RenderHandler::RenderHandler(GameObject* parentGameObject, sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale) : m_owner(parentGameObject)
 {
-	AddSprite(tex, key, zIndex, isMovable);
+	AddSprite(tex, key, zIndex, isMovable,origin,scale);
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
@@ -22,9 +23,9 @@ RenderHandler::RenderHandler(GameObject* parentGameObject, std::string userText,
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
-void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
-	AddSprite(tex, key, zIndex, isMovable);
+	AddSprite(tex, key, zIndex, isMovable,origin,scale);
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
 }
 
@@ -49,46 +50,57 @@ void RenderHandler::Reset()
 	GameWindow::GetGameLevel()->RemoveObjectRendered(*m_owner);
 }
 
-sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable)
+sf::Sprite* RenderHandler::AddSprite(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
 {
-	auto* sprite = new sf::Sprite(*tex);
-	auto* customSprite = new CustomContainer(std::move(key), zIndex, sprite);
+    auto* sprite = new sf::Sprite(*tex);
+    auto* customSprite = new CustomContainer(std::move(key), zIndex, sprite);
+
+	sprite->setOrigin(origin);
+	sprite->setScale(sf::Vector2f(scale,scale));
 
 	m_renderedItems.push_back(customSprite);
 
-	// Sort using comparator function
-	std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
+    // Sort using comparator function
+    std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
 
-	if (isMovable)
-	{
-		m_MovableSprites.push_back(sprite);
-	}
+    if (isMovable)
+    {
+        m_MovableSprites.push_back(sprite);
+    }
 
-	return sprite;
+    return sprite;
 }
 
 sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zIndex, sf::Vector2f pos, sf::Color color, int size)
 {
+    // Create a text
+    sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::EnumFonts::Mandalorian));
+    text->setCharacterSize(size);
+    text->setFillColor(color);
+    text->setPosition(pos);
 
-	// Create a text
-	sf::Text* text = new sf::Text(userText, *FontManager::GetFontPtr(FontManager::EnumFonts::Mandalorian));
-	text->setCharacterSize(size);
-	text->setFillColor(color);
-	text->setPosition(pos);
+    auto* customText = new CustomContainer(std::move(key), zIndex, text);
 
-	auto* customText = new CustomContainer(std::move(key), zIndex, text);
+    m_renderedItems.push_back(customText);
 
-	m_renderedItems.push_back(customText);
+    std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
 
-	std::sort(m_renderedItems.begin(), m_renderedItems.end(), Comparator);
-
-	return text;
+    return text;
 }
 
 void RenderHandler::RenderUpdate()
 {
+
+
+	
 	if (m_owner->GetCollisionHandler())
 	{
+		auto radius = m_owner->GetCollisionHandler()->m_radius;
+		sf::CircleShape circle(radius);
+		circle.setPosition(sf::Vector2f(m_owner->m_position.x - radius,m_owner->m_position.y - radius));
+		circle.setFillColor(sf::Color::Green);
+		GameWindow::m_window->draw(circle);
+		
 		std::vector<sf::Vector2f> tmp;
 		m_owner->GetCollisionHandler()->GetPoints(tmp);
 
@@ -103,15 +115,15 @@ void RenderHandler::RenderUpdate()
 		GameWindow::m_window->draw(vertice, 4, sf::Quads);
 	}
 
-	//for (auto* sprite : m_MovableSprites)
-	//{
-	//	sprite->setRotation(m_owner->m_rotation);
-	//	sprite->setPosition(m_owner->m_position);
-	//}
-
-	//for (auto* rendered : m_renderedItems)
-	//{
-	//	GameWindow::m_window->draw(*rendered->m_drawableItem);
-	//}
+	// for (auto* sprite : m_MovableSprites)
+	// {
+	// 	sprite->setRotation(m_owner->m_rotation);
+	// 	sprite->setPosition(m_owner->m_position);
+	// }
+	//
+	// for (auto* rendered : m_renderedItems)
+	// {
+	// 	GameWindow::m_window->draw(*rendered->m_drawableItem);
+	// }
 
 }

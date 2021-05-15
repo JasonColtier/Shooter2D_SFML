@@ -1,4 +1,6 @@
 ﻿#include "GameObjects/Bullet.h"
+
+#include "GameObjects/Enemy.h"
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
@@ -6,26 +8,6 @@
 #include "GameObjects/Character.h"
 #include "Managers/TextureManager.h"
 #include "Tools/SMath.h"
-
-Bullet::Bullet(float delay, sf::Vector2f position, float rotation, float scale, sf::Vector2f offsetPos)
-	: GameObject(position, offsetPos, scale, rotation)
-	, m_autoDestroyDelay(delay)
-{
-	std::cout << "New Bullet " << std::endl;
-	SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
-	//m_renderHandler = new RenderHandler(this, TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
-	//m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::Bullet), "bullet", 2);
-
-	auto* Sprite = GetRenderHandler()->GetRenderedItemWithKey<sf::Sprite>("bullet");
-	if (Sprite)
-	{
-		Sprite->setScale(sf::Vector2f(scale, scale));
-		Sprite->setOrigin(10, 5);
-	}
-
-	//const auto Tmp = std::vector<sf::Vector2f>{ sf::Vector2f(9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f), sf::Vector2f(-9.0f, 0.0f), sf::Vector2f(0.0f, 4.0f) };
-	//SetCollisionHandler(CollisionType::BonusChannel, StaticData::BulletCollision, 10);
-}
 
 void Bullet::Activate(float delay, sf::Vector2f position, float rotation, float scale, sf::Vector2f offsetPos)
 {
@@ -37,7 +19,7 @@ void Bullet::Activate(float delay, sf::Vector2f position, float rotation, float 
 		Sprite->setScale(sf::Vector2f(scale, scale));
 		Sprite->setOrigin(10, 5);
 	}
-	//SetCollisionHandler(CollisionType::BonusChannel, StaticData::BulletCollision, 10);
+	SetCollisionHandler(CollisionType::BonusChannel, StaticData::BulletCollision, 10);
 	GameObject::Activate(position, offsetPos, scale, rotation);
 }
 
