@@ -28,6 +28,6 @@ void Sniper::ShootBullet(int initialAngle)
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
 	
-	NewBullet->SetCollisionHandler(ColType, StaticData::BulletSniperCollision, 70.f, ExcludeColType);
+	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f*10, ExcludeColType);
 	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

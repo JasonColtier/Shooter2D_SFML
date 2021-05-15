@@ -24,7 +24,8 @@ void PlayerHUD::Activate(sf::Vector2f position, sf::Vector2f offsetPos, float sc
 	}
 
 	GetRenderHandler()->AddText("0", "scoreText", 3, sf::Vector2f(GameWindow::m_sizeWindow.x - 100, 0));
-	ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::_HandleChangeScore);
+
+	m_signalID = ScoreManager::GetSignal().Connect<PlayerHUD>(this, &PlayerHUD::_HandleChangeScore);
 
 	GetRenderHandler()->AddText("deltatime : ","deltatimeText",3,sf::Vector2f(20,20),sf::Color::Cyan,15);
 	m_deltatimeText = GetRenderHandler()->GetRenderedItemWithKey<sf::Text>("deltatimeText");

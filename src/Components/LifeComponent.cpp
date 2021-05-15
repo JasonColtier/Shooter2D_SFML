@@ -28,7 +28,7 @@ void LifeComponent::ModifyHealth(float modification)
     if(m_currentHealth > m_maxHealth)
         m_currentHealth = m_maxHealth;
 
-    if(m_currentHealth < 0)
+    if(m_currentHealth <= 0)
     {
         Print::PrintLog(typeid(*m_owner).name()," is dead ! ");
         
