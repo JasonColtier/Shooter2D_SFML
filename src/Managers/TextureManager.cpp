@@ -15,6 +15,12 @@ const char* TextureManager::_GetPath(const ETextures t)
 	case ETextures::ShipEnemy: return "../medias/Textures/Enemy.png";
 	case ETextures::HealthBar: return "../medias/Textures/HealthBar.png";
 	case ETextures::HealthBarBG: return "../medias/Textures/HealthBar_BG.png";
+	case ETextures::Heart: return "../medias/Textures/heart.png";
+	case ETextures::MultipleShot: return "../medias/Textures/multipleShot.png";
+	case ETextures::FireRate: return "../medias/Textures/fireRate.png";
+	case ETextures::Shotgun: return "../medias/Textures/shotgun.png";
+	case ETextures::Sniper: return "../medias/Textures/sniper.png";
+	case ETextures::SpeedArrow: return "../medias/Textures/speedArrow.png";
 	}
 	return "error texture";
 }
@@ -22,7 +28,6 @@ const char* TextureManager::_GetPath(const ETextures t)
 sf::Texture* TextureManager::GetTexturePtr(ETextures t)
 {
 	const auto Iterator(mapTextures.find(t));
-	// Print::PrintLog("map size : ", mapTextures.size());
 
 	//si on a notre texture de chargé
 	if (Iterator != mapTextures.end())

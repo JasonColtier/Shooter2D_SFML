@@ -1,6 +1,13 @@
 ﻿#include "Components/Sniper.h"
+
+#include <SFML/Graphics/Sprite.hpp>
+
 #include "GameWindow.h"
-#include "GameObjects/SniperBullet.h"
+#include "StaticData.h"
+#include "Components/CollisionHandler.h"
+#include "GameObjects/Bullet.h"
+#include "Managers/AudioManager.h"
+#include "GameObjects/Player.h"
 
 Sniper::Sniper()
 {
@@ -12,7 +19,22 @@ Sniper::Sniper()
 
 void Sniper::ShootBullet(int initialAngle)
 {
-    auto* bullet = GameWindow::GetGameLevel()->SpawnActor<SniperBullet>(Owner->m_position);
-    //bullet->m_position = Owner->m_position;
-    bullet->m_rotation = Owner->m_rotation + initialAngle;
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
+	CollisionType ColType;
+	std::vector<CollisionType> ExcludeColType;
+	if (dynamic_cast<Player*>(m_owner))
+	{
+		Print::PrintLog("player sniper bullet");
+		ColType = CollisionType::PlayerProjectileChannel;
+		ExcludeColType = std::vector<CollisionType>({ CollisionType::PlayerChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	}
+	else
+	{
+		Print::PrintLog("enemy sniper bullet");
+		ColType = CollisionType::EnemyProjectileChannel;
+		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
+	}
+	
+	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f*10, ExcludeColType);
+	AudioManager::PlaySound(AudioManager::ESounds::FireBullet, 10);
 }

@@ -17,6 +17,7 @@ class GameLoop : public Singleton<GameLoop>
 
 public:
 	void StartGame();
+	void EndGame();
 
 private:
 	GameLoop();

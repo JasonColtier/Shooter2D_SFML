@@ -18,7 +18,7 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 
 	const auto Pos = Owner->m_position;
 
-	//Pour le comportement spécifique aux mouvements (peut être à modifier)
+	//Pour le comportement spï¿½cifique aux mouvements (peut ï¿½tre ï¿½ modifier)
 	if (300 < m_distance && m_distance < 350)
 	{
 		m_canMove = true;

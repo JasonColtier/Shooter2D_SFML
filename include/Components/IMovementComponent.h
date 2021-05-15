@@ -10,8 +10,23 @@ public:
 	IMovementComponent() = default;
 	virtual ~IMovementComponent() override  = default;
 
+	float GetSpeed()
+	{
+		return m_speed * m_speedModifier;
+	}
+
+	float GetMaxVelocity()
+	{
+		return m_maxVelocity * m_velocityModifier;
+	}
+	
 	float m_distance = 0;
-	float m_speed = 0.001f;	
+	float m_speed = 0.00004f;
+	float m_speedModifier = 1.f;
+	
+	float m_maxVelocity = 0.0002f;
+	float m_velocityModifier = 1.f;
+	
 
 };
 

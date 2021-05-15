@@ -1,11 +1,49 @@
 ﻿#include "Managers/InputManager.h"
 
+
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+
+#include "GameWindow.h"
 
 
 void InputManager::HandleInputs()
 {
+    sf::Event Events;
+
+    while (GameWindow::m_window->pollEvent(Events))
+    {
+        if (Events.type == sf::Event::Closed)
+        {
+            //TODO call destructeurs
+            GameWindow::m_window->close();
+        }
+
+        // catch the resize Events
+        if (Events.type == sf::Event::Resized)
+        {
+            // update the view to the new size of the window
+            sf::FloatRect visibleArea(0, 0, static_cast<float>(Events.size.width), static_cast<float>(Events.size.height));
+            GameWindow::m_window->setView(sf::View(visibleArea));
+        }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        GameWindow::m_window->close();
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+    {
+        if(GameWindow::GetGameLevel()->m_player == nullptr)
+        {
+            
+        }
+    }
+
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)
         || sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
@@ -43,6 +81,8 @@ void InputManager::HandleInputs()
     {
         SendSignalIfNewInput(m_debugNum2, false);
     }
+
+    
 }
 
 void InputManager::SendSignalIfNewInput(InputMapping& input, bool pressed)

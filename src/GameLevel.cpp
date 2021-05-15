@@ -5,6 +5,7 @@
 #include "Components/RenderHandler.h"
 #include "EnemySpawner.h"
 #include "Components/CollisionHandler.h"
+#include "HUD/EndScreenHUD.h"
 #include "Managers/AudioManager.h"
 #include "Managers/TextureManager.h"
 
@@ -16,11 +17,9 @@ GameLevel::GameLevel()
 void GameLevel::SpawnGameObjects()
 {
 	m_player = SpawnActor<Player>(sf::Vector2f(300.f, 300.f));
-	//m_player->m_position = sf::Vector2f(300.f, 300.f);
 
-	auto* background = SpawnActor<GameObject>(sf::Vector2f(0.f, 0.f));
-	background->m_renderHandler = new RenderHandler(background);
-	background->m_renderHandler->AddSprite(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
+	auto* background = SpawnActor<GameObject>();
+	background->SetRenderHandler(TextureManager::GetTexturePtr(TextureManager::ETextures::SpaceBackground), "bg", 0, false);
 
 	SpawnActor<EnemySpawner>(sf::Vector2f(300.f, 300.f));
 
@@ -31,13 +30,8 @@ void GameLevel::Update(int64_t deltaTime)
 {
 	//une copie temporaire pour pouvoir instancier et ajouter de nouveaux objets dans l_gameObjects à l'intérieur de la loop
 	auto Copy = m_lObjectsActivate;
-	// Print::PrintLog("number of objects in level : ",copy.size());
 	for (auto* gameObject : Copy)
 	{
-		if (!gameObject->m_isActivated)
-		{
-			break;
-		}
 		gameObject->Tick(deltaTime);
 	}
 
@@ -46,60 +40,55 @@ void GameLevel::Update(int64_t deltaTime)
 
 void GameLevel::Render(sf::RenderWindow* window)
 {
-	//TODO commenter un peu tout ça
-	/*
-	 *	quand on active / désactive, on peut mettre dans une autre liste
-	 */
-
-	auto renderPrioritySort = [](GameObject* const g1, GameObject* const g2) -> bool
+	for (auto* object : m_lObjectsRendered)
 	{
-		if (g1->m_isActivated != g2->m_isActivated) return g1->m_isActivated > g2->m_isActivated;
-		if (!g1->m_renderHandler || !g2->m_renderHandler) return g1->m_renderHandler > g2->m_renderHandler;
-		return (g1->m_renderHandler->m_renderedItems.at(0)->m_zIndex) < (g2->m_renderHandler->m_renderedItems.at(0)->m_zIndex);
-	};
-
-	//améliorer ce sort ? trie par insertion ?
-	m_lObjectsActivate.sort(renderPrioritySort);
-
-	for (auto* object : m_lObjectsActivate)
-	{
-		if (!object->m_isActivated || !object->m_renderHandler)
-		{
-			break;
-		}
-		object->m_renderHandler->RenderUpdate();
+		object->GetRenderHandler()->RenderUpdate();
 	}
 }
 
 void GameLevel::AddObjectWithCollision(CollisionHandler& object)
 {
-	//static_assert(object.GetCollisionHandler());
-	//const auto LastObject = m_lObjectsWithCollision.end();
-	//for (auto firstObject = m_lObjectsWithCollision.begin(); firstObject != LastObject; ++firstObject);
-	//{
-	//}
 	m_lObjectsWithCollision.push_back(object.m_owner);
 }
 
-void GameLevel::EraseObjectWithCollision(GameObject& object)
+void GameLevel::RemoveObjectWithCollision(GameObject& object)
 {
 	m_lObjectsWithCollision.remove(&object);
 }
 
 void GameLevel::AddObjectRendered(RenderHandler& object)
 {
-	//auto ZIndex = object.
+	//On effectue dans cette fonction un trie par insertion ce qui permet de faire le moins de tries inutiles
+	const auto ZIndez = object.m_renderedItems[0]->m_zIndex;
+
+	const auto LastObject = m_lObjectsRendered.end();
+	for (auto FirstObject = m_lObjectsRendered.begin();FirstObject != LastObject; ++FirstObject)
+	{
+		if ((*FirstObject)->GetRenderHandler()->m_renderedItems[0]->m_zIndex > ZIndez)
+		{
+			m_lObjectsRendered.insert(FirstObject, object.m_owner);
+			return;
+		}
+	}
+	m_lObjectsRendered.push_back(object.m_owner);
 }
 
-void GameLevel::EraseObjectRendered(GameObject& object)
+void GameLevel::RemoveObjectRendered(GameObject& object)
 {
+	m_lObjectsRendered.remove(&object);
 }
 
-void GameLevel::ActivateObject(GameObject& object, bool newObject)
+void GameLevel::EndGame()
+{
+	SpawnActor<EndScreenHUD>();
+}
+
+void GameLevel::ActivateObject(GameObject& object, const bool newObject)
 {
 	if (newObject)
 	{
 		m_lObjectsActivate.push_back(&object);
+		// m_lObjectsWithCollision.push_back(&object);
 	}
 	else
 	{

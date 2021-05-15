@@ -32,7 +32,6 @@ GameLoop::~GameLoop()
 void GameLoop::StartGame()
 {
 	Print::PrintLog("start game");
-	sf::Event Events;
 	sf::Clock Clock;
 
 	GameWindow::LoadGameLevel();
@@ -74,26 +73,7 @@ void GameLoop::StartGame()
 		// }
 
 		//check for closing window
-		while (GameWindow::m_window->pollEvent(Events))
-		{
-			if (Events.type == sf::Event::Closed)
-			{
-				//TODO call destructeurs
-				GameWindow::m_window->close();
-			}
-
-			// catch the resize Events
-			if (Events.type == sf::Event::Resized)
-			{
-				// update the view to the new size of the window
-				sf::FloatRect visibleArea(0, 0, static_cast<float>(Events.size.width), static_cast<float>(Events.size.height));
-				GameWindow::m_window->setView(sf::View(visibleArea));
-			}
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		{
-			GameWindow::m_window->close();
-		}
+		
 
 		/*
 		* updating game
@@ -119,17 +99,19 @@ void GameLoop::StartGame()
 	}
 }
 
+void GameLoop::EndGame()
+{
+	
+}
+
 void GameLoop::_Update()
 {
 	InputManager::HandleInputs();
 	m_gameLevel->Update(m_deltaTime);
-	// Print::PrintLog(LOG,"updateTime : ",updateTime);
-	// Print::PrintLog("deltatime : ", deltaTime);
 }
 
 void GameLoop::_Render() const
 {
-	// Print::PrintLog(LOG,"render : ");
 	GameWindow::m_window->clear();
 	m_gameLevel->Render(GameWindow::m_window);
 	GameWindow::m_window->display();
