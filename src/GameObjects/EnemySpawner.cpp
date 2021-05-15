@@ -102,7 +102,7 @@ void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)
 		break;
 
 	case 1:
-		EnemytoSpawn->m_movementCompo = new KamikazeMovementComponent();
+		EnemytoSpawn->m_movementCompo = new RunAwayMovementComponent();
 		break;
 	}
 
@@ -117,7 +117,7 @@ void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 	switch (Random)
 	{
 	case 0:
-		EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
+		EnemytoSpawn->SetShootComponent(new ClassicPistol(EnemytoSpawn));
 		break;
 
 	case 1:
@@ -125,7 +125,7 @@ void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 		break;
 
 	case 2:
-		EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
+		EnemytoSpawn->SetShootComponent(new Sniper(EnemytoSpawn));
 		break;
 	}
 }

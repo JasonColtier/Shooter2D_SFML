@@ -77,6 +77,7 @@ void Enemy::Deactivate()
         if (currentEnemy == this)
         {
             m_enemySpawner->m_EnemyList.remove(currentEnemy);
+            m_enemySpawner->m_nbEnemyEliminated++;
         }
     }
 }
