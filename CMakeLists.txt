@@ -10,27 +10,23 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 
 set(HEADERS
+	${HEADER_DIR}/StaticData.h
+	${HEADER_DIR}/Signal.h
+    ${HEADER_DIR}/Singleton.h
+	${HEADER_DIR}/GameLevel.h
+    ${HEADER_DIR}/GameLoop.h
+    ${HEADER_DIR}/GameWindow.h
     ${HEADER_DIR}/Tools/Print.h
     ${HEADER_DIR}/Tools/VectorTools.h
-    ${HEADER_DIR}/Tools/SMath.h
-    ${HEADER_DIR}/Signal.h
-    ${HEADER_DIR}/Singleton.h
+    ${HEADER_DIR}/Tools/SMath.h    
     ${HEADER_DIR}/GameObjects/Player.h
     ${HEADER_DIR}/GameObjects/Bullet.h
     ${HEADER_DIR}/GameObjects/GameObject.h
     ${HEADER_DIR}/GameObjects/Character.h
     ${HEADER_DIR}/GameObjects/IBonus.h
     ${HEADER_DIR}/GameObjects/BonusHeal.h
-    ${HEADER_DIR}/GameObjects/BonusMultipleShot.h
-    ${HEADER_DIR}/GameObjects/BonusShotgun.h
-    ${HEADER_DIR}/GameObjects/BonusSniper.h
-    ${HEADER_DIR}/GameObjects/BonusFireRate.h
-    ${HEADER_DIR}/GameObjects/BonusMovementSpeed.h
-    ${HEADER_DIR}/GameObjects/Spawner.h
-    ${HEADER_DIR}/GameObjects/Enemy.h
-    ${HEADER_DIR}/GameLevel.h
-    ${HEADER_DIR}/GameLoop.h
-    ${HEADER_DIR}/GameWindow.h
+	${HEADER_DIR}/GameObjects/EnemySpawner.h
+	${HEADER_DIR}/GameObjects/Enemy.h    
     ${HEADER_DIR}/Managers/TextureManager.h
     ${HEADER_DIR}/Managers/AudioManager.h
     ${HEADER_DIR}/Managers/ScoreManager.h
@@ -39,7 +35,6 @@ set(HEADERS
     ${HEADER_DIR}/Managers/InputManager.h
     ${HEADER_DIR}/Managers/CollisionDispatcher.h
     ${HEADER_DIR}/Managers/TOnCollision.h
-    ${HEADER_DIR}/Managers/BonusSpawner.h
     ${HEADER_DIR}/Components/Component.h
     ${HEADER_DIR}/Components/RenderHandler.h
     ${HEADER_DIR}/Components/ShootComponent.h
@@ -49,15 +44,13 @@ set(HEADERS
     ${HEADER_DIR}/Components/Sniper.h
     ${HEADER_DIR}/Components/ShotGun.h
     ${HEADER_DIR}/Components/ClassicPistol.h
-    ${HEADER_DIR}/HUD/PlayerHUD.h
-    ${HEADER_DIR}/EnemySpawner.h
-    ${HEADER_DIR}/Enemy.h
-    ${HEADER_DIR}/HUD/EndScreenHUD.h
-    ${HEADER_DIR}/Components/IMovementComponent.h
 	${HEADER_DIR}/Components/KamikazeMovementComponent.h
-    ${HEADER_DIR}/StaticData.h
+	${HEADER_DIR}/Components/IMovementComponent.h
 	${HEADER_DIR}/Components/RunAwayMovementComponent.h
 	${HEADER_DIR}/Components/BaseEnemyMovementComponent.h
+    ${HEADER_DIR}/HUD/PlayerHUD.h      	
+    ${HEADER_DIR}/HUD/EndScreenHUD.h
+	
 )
 
 set(SOURCES
@@ -69,8 +62,8 @@ set(SOURCES
     ${SOURCE_DIR}/GameObjects/Player.cpp
     ${SOURCE_DIR}/GameObjects/Bullet.cpp
     ${SOURCE_DIR}/GameObjects/Character.cpp
-    ${SOURCE_DIR}/GameObjects/Spawner.cpp
-    ${SOURCE_DIR}/GameObjects/Enemy.cpp
+	${SOURCE_DIR}/GameObjects/EnemySpawner.cpp
+	${SOURCE_DIR}/GameObjects/Enemy.cpp
     ${SOURCE_DIR}/Managers/TextureManager.cpp
     ${SOURCE_DIR}/Managers/AudioManager.cpp
     ${SOURCE_DIR}/Managers/ScoreManager.cpp
@@ -85,13 +78,13 @@ set(SOURCES
     ${SOURCE_DIR}/Components/ShotGun.cpp
     ${SOURCE_DIR}/Components/ClassicPistol.cpp
     ${SOURCE_DIR}/Components/LifeComponent.cpp
-    ${SOURCE_DIR}/HUD/PlayerHUD.cpp
-	${SOURCE_DIR}/EnemySpawner.cpp
-	${SOURCE_DIR}/Enemy.cpp
-    ${SOURCE_DIR}/HUD/EndScreenHUD.cpp
 	${SOURCE_DIR}/Components/KamikazeMovementComponent.cpp
 	${SOURCE_DIR}/Components/RunAwayMovementComponent.cpp
 	${SOURCE_DIR}/Components/BaseEnemyMovementComponent.cpp
+    ${SOURCE_DIR}/HUD/PlayerHUD.cpp
+	${SOURCE_DIR}/HUD/EndScreenHUD.cpp
+	
+	
 )
 
 

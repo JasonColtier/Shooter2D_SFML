@@ -1,10 +1,10 @@
-#include "EnemySpawner.h"
+#include "GameObjects/EnemySpawner.h"
 #include "GameLoop.h"
 #include <random>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameWindow.h"
 #include "GameLevel.h"
-#include "Enemy.h"
+#include "GameObjects/Enemy.h"
 #include "Components/KamikazeMovementComponent.h"
 #include "Components/RunAwayMovementComponent.h"
 #include "Components/ShotGun.h"
@@ -117,17 +117,15 @@ void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 	switch (Random)
 	{
 	case 0:
-		EnemytoSpawn->m_shootComponent = new ShotGun();
+		EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
 		break;
 
 	case 1:
-		EnemytoSpawn->m_shootComponent = new ShotGun();
+		EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
 		break;
 
 	case 2:
-		EnemytoSpawn->m_shootComponent = new ShotGun();
+		EnemytoSpawn->SetShootComponent(new ShotGun(EnemytoSpawn));
 		break;
 	}
-
-	EnemytoSpawn->AddComponent(EnemytoSpawn->m_shootComponent);
 }

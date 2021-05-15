@@ -9,13 +9,7 @@
 #include "Managers/AudioManager.h"
 #include "GameObjects/Player.h"
 
-Sniper::Sniper()
-{
-    m_shootNumber = 1;
-    m_fireRate = 10.f;
-    m_dispersion = 0.f;
-    m_range = 10000.f;
-}
+
 
 void Sniper::ShootBullet(int initialAngle)
 {

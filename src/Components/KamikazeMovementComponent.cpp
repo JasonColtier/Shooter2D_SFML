@@ -14,6 +14,6 @@
 void KamikazeMovementComponent::TickComponent(int64_t deltaTime)
 {
 	BaseEnemyMovemementComponent::TickComponent(deltaTime);
-	const auto Pos = Owner->m_position;
-	Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+	const auto Pos = m_owner->m_position;
+	m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 }

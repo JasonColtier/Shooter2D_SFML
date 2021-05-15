@@ -16,7 +16,7 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 {
 	BaseEnemyMovemementComponent::TickComponent(deltaTime);
 
-	const auto Pos = Owner->m_position;
+	const auto Pos = m_owner->m_position;
 
 	//Pour le comportement sp�cifique aux mouvements (peut �tre � modifier)
 	if (300 < m_distance && m_distance < 350)
@@ -40,12 +40,12 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 		if (m_escape == false)
 		{
 			m_offsetAngle = 90.f;
-			Owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+			m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 		}
 		else
 		{
 			m_offsetAngle = -90.f;
-			Owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
+			m_owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 		}
 		
 	}

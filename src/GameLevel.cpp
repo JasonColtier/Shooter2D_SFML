@@ -3,7 +3,7 @@
 #include "Tools/Print.h"
 #include "Managers/CollisionManager.h"
 #include "Components/RenderHandler.h"
-#include "EnemySpawner.h"
+#include "GameObjects/EnemySpawner.h"
 #include "Components/CollisionHandler.h"
 #include "HUD/EndScreenHUD.h"
 #include "Managers/AudioManager.h"
