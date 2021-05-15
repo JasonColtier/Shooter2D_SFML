@@ -24,26 +24,28 @@
 template <typename GameObject1, typename GameObject2>
 struct OnCollision
 {
-	static void Reaction(GameObject1& g1, GameObject2& g2)
+	static bool Reaction(GameObject1& g1, GameObject2& g2)
 	{
-		OnCollision<GameObject2, GameObject1>::Reaction(g2, g1);
+		return false;
+		//OnCollision<GameObject2, GameObject1>::Reaction(g2, g1);
 	}
 };
 
 template <>
 struct OnCollision<Player, Enemy>
 {
-	static void Reaction(Player& player, Enemy& enemy)
+	static bool Reaction(Player& player, Enemy& enemy)
 	{
 		player.GetComponentOfClass<LifeComponent>()->CollisionDamage(0);
 		enemy.GetComponentOfClass<LifeComponent>()->CollisionDamage(5);
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, Bullet>
 {
-	static void Reaction(Player& player, Bullet& bullet)
+	static bool Reaction(Player& player, Bullet& bullet)
 	{
 		if (player.m_isActivated)
 		{
@@ -51,13 +53,14 @@ struct OnCollision<Player, Bullet>
 			// player.GetComponentOfClass<LifeComponent>()->ModifyHealth(-bullet.GetDammage());
 			bullet.Deactivate();
 		}
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Bullet, Enemy>
 {
-	static void Reaction(Bullet& bullet, Enemy& enemy)
+	static bool Reaction(Bullet& bullet, Enemy& enemy)
 	{
 		if (enemy.m_isActivated)
 		{
@@ -66,81 +69,88 @@ struct OnCollision<Bullet, Enemy>
 			//if (!bullet.m_piercing)//si on ne transperce pas les ennemis on est d�truit
 			bullet.Deactivate();
 		}
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusHeal>
 {
-	static void Reaction(Player& player, BonusHeal& bonusHeal)
+	static bool Reaction(Player& player, BonusHeal& bonusHeal)
 	{
 		auto life = player.GetComponentOfClass<LifeComponent>();
 
 		life->ModifyHealth(bonusHeal.m_pdtVie);
 		Print::PrintLog("take heal ! ");
 		bonusHeal.Deactivate();
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusMultipleShot>
 {
-	static void Reaction(Player& player, BonusMultipleShot& bonusMultipleShot)
+	static bool Reaction(Player& player, BonusMultipleShot& bonusMultipleShot)
 	{
 		auto* shoot = player.GetComponentOfClass<ShootComponent>();
 
 		shoot->m_additionnalShootNumber++;
 		Print::PrintLog("multiple shoot ! : ", shoot->m_additionnalShootNumber);
 		bonusMultipleShot.Deactivate();
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusFireRate>
 {
-	static void Reaction(Player& player, BonusFireRate& bonusFireRate)
+	static bool Reaction(Player& player, BonusFireRate& bonusFireRate)
 	{
 		auto shoot = player.GetComponentOfClass<ShootComponent>();
 
 		shoot->m_fireRateModifier *= bonusFireRate.m_fireRateUpAmount;
 		Print::PrintLog("fire rate up ! ");
 		bonusFireRate.Deactivate();
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusShotgun>
 {
-	static void Reaction(Player& player, BonusShotgun& bonusShotgun)
+	static bool Reaction(Player& player, BonusShotgun& bonusShotgun)
 	{
 		player.SetShootComponent(new ShotGun(*player.GetShootComponent()));
 
 		Print::PrintLog("shotgun ! ");
 		bonusShotgun.Deactivate();
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusSniper>
 {
-	static void Reaction(Player& player, BonusSniper& bonusSniper)
+	static bool Reaction(Player& player, BonusSniper& bonusSniper)
 	{
 		player.SetShootComponent(new Sniper(*player.GetShootComponent()));
 
 		Print::PrintLog("sniper ! ");
 		bonusSniper.Deactivate();
+		return true;
 	}
 };
 
 template <>
 struct OnCollision<Player, BonusMovementSpeed>
 {
-	static void Reaction(Player& player, BonusMovementSpeed& movementSpeed)
+	static bool Reaction(Player& player, BonusMovementSpeed& movementSpeed)
 	{
 		player.GetComponentOfClass<PlayerMovementComponent>()->m_maxVelocity *= 1.3;
 
 		Print::PrintLog("movement speed up ! ");
 		movementSpeed.Deactivate();
+		return true;
 	}
 };
 
