@@ -2,7 +2,6 @@
 #define BONUSMOVEMENTSPEED_H
 
 #include "IBonus.h"
-#include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
 class BonusMovementSpeed : public IBonus

@@ -3,39 +3,32 @@
 #include "GameObjects/Player.h"
 #include "Components/RenderHandler.h"
 #include "GameWindow.h"
-#include "Tools/VectorTools.h"
 #include "Tools/Print.h"
-#include <random>
-#include <valarray>
 #include "Components/CollisionHandler.h"
-#include <vector>
-#include <iostream>
-#include <iterator>
 #include "Managers/TextureManager.h"
-
+#include "Components/IMovementComponent.h"
 #include "StaticData.h"
-#include "Components/CollisionHandler.h"
-#include "GameObjects/BonusHeal.h"
+#include "Components/LifeComponent.h"
 #include "GameObjects/EnemySpawner.h"
 #include "Managers/BonusSpawner.h"
 #include "Managers/ScoreManager.h"
-
+#include "Components/ShootComponent.h"
 
 void Enemy::Tick(int64_t deltaTime)
 {
     GameObject::Tick(deltaTime);
 
-    if (m_movementCompo->m_distance <= 300)
+    if (m_movementComponent->m_distance <= 300)
     {
         //modifier le changement de vitesse par le biai d'un multiplicateur
-        //m_movementCompo->m_speed = 0.0000005f;
+        //m_movementComponent->m_speed = 0.0000005f;
         GetShootComponent()->m_wantToShoot = true;
         GetShootComponent()->m_baseFireRate = 10.0f;
         //Print::PrintLog("Shoot Enabled");		
     }
     else
     {
-        //m_movementCompo->m_speed = 0.001f;
+        //m_movementComponent->m_speed = 0.001f;
         GetShootComponent()->m_wantToShoot = false;
         //Print::PrintLog("Shoot Not Enabled");
     }
@@ -68,16 +61,7 @@ void Enemy::Deactivate()
 
     BonusSpawner::RollBonus(m_position);
 
-    auto ListEnnemi = m_enemySpawner->m_EnemyList;
+    ScoreManager::ModifyScore(1); //une faï¿½on d'augmenter le score rapide mais on peut faire mieux
 
-    ScoreManager::ModifyScore(1); //une façon d'augmenter le score rapide mais on peut faire mieux
-
-    for (Enemy* currentEnemy : ListEnnemi)
-    {
-        if (currentEnemy == this)
-        {
-            m_enemySpawner->m_EnemyList.remove(currentEnemy);
-            m_enemySpawner->m_nbEnemyEliminated++;
-        }
-    }
+    m_enemySpawner->m_EnemyList.remove(this);
 }

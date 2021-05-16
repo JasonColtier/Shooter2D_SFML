@@ -22,6 +22,18 @@ sf::Font* FontManager::GetFontPtr(EnumFonts f)
 	return font;
 }
 
+FontManager::~FontManager()
+{
+	for (auto pair : m_mapFonts)
+	{
+		if (pair.second != nullptr)
+		{
+			delete pair.second;
+			pair.second = nullptr;
+		}
+	}
+}
+
 const char* FontManager::_GetPath(const EnumFonts f)
 {
 	switch (f)

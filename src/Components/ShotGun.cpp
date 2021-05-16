@@ -23,7 +23,4 @@ void ShotGun::ShootBullet(int initialAngle)
 		ExcludeColType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 	}
 	NewBullet->SetCollisionHandler(ColType, StaticData::BulletCollision, 9.f, ExcludeColType);
-
-	//bullet->GetCollisionHandler()->m_eType = CollisionType::EnemyProjectileChannel;
-	//bullet->GetCollisionHandler()->m_lExcludedCollisionType = std::vector<CollisionType>({ CollisionType::EnemyChannel, CollisionType::EnemyProjectileChannel, CollisionType::PlayerProjectileChannel });
 }

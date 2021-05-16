@@ -2,7 +2,6 @@
 #define BONUSFIRERATE_H
 
 #include "IBonus.h"
-#include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
 class BonusFireRate : public IBonus

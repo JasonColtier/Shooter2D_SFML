@@ -17,11 +17,13 @@ class GameLoop : public Singleton<GameLoop>
 
 public:
 	void StartGame();
-	void EndGame();
+
+	bool m_gameIsPlaying = true;
+
+	~GameLoop() = default;
 
 private:
 	GameLoop();
-	~GameLoop();
 
 	//update all game objects
 	void _Update();
@@ -36,6 +38,5 @@ private:
 	float m_targetFPS = 60.0f;
 
 	GameLevel* m_gameLevel = nullptr;
-
 };
 #endif

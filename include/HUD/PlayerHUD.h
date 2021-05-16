@@ -1,5 +1,5 @@
-﻿#ifndef PlayerHUD_H
-#define PlayerHUD_H
+﻿#ifndef PLAYERHUD_H
+#define PLAYERHUD_H
 
 #include <SFML/Graphics/Text.hpp>
 #include "GameObjects/GameObject.h"
@@ -15,8 +15,8 @@ class PlayerHUD : public GameObject
 {
 public:
 
-	PlayerHUD() =default;
-	~PlayerHUD() = default;
+	PlayerHUD() = default;
+	~PlayerHUD() override = default;
 
 	void Activate(sf::Vector2f position = sf::Vector2f(0.f, 0.f), sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f), float scale = 1.f, float rotation = 0.f) override;
 
@@ -24,23 +24,21 @@ public:
 	{
 		GameObject::Deactivate();
 
-		m_player = nullptr;
 		m_deltatimeText = nullptr;
 		ScoreManager::GetSignal().Disconnect(m_signalID);
 	}
-	
+
 	void Tick(int64_t deltaTime) override;
 
 public:
-	Player* m_player = nullptr; //set par le joueur en faisant spawner
-	sf::Text* m_deltatimeText;
-	
+	sf::Text* m_deltatimeText = nullptr;
+
 
 private:
 	void _HandleChangeScore(int score) const;
 
 private:
-	sf::Sprite* m_healthBar;
+	sf::Sprite* m_healthBar = nullptr;
 	int m_signalID = 0;
 };
 

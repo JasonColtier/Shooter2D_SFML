@@ -26,7 +26,7 @@ public:
 
 	GameObject();
 	
-	virtual ~GameObject() = default;
+	virtual ~GameObject();
 
 	virtual void Tick(int64_t deltaTime);
 
@@ -73,7 +73,6 @@ public:
 	sf::Vector2f m_position = sf::Vector2f(0.f, 0.f);
 	sf::Vector2f m_offsetPos = sf::Vector2f(0.f, 0.f);//offset de position
 
-	bool m_isActivated = true;
 	float m_scale = 0.5f;
 	float m_rotation = 0;
 

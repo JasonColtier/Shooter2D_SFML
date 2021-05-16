@@ -1,6 +1,4 @@
 ﻿#include "GameObjects/Bullet.h"
-
-#include "GameObjects/Enemy.h"
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"

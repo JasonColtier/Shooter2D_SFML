@@ -4,7 +4,6 @@
 #include <functional>
 #include <stdexcept>
 #include "TOnCollision.h"
-#include "GameObjects/BonusMovementSpeed.h"
 
 using FnType = std::function<void(GameObject&, GameObject&)>;
 

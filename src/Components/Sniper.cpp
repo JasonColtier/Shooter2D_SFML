@@ -1,7 +1,4 @@
 ﻿#include "Components/Sniper.h"
-
-#include <SFML/Graphics/Sprite.hpp>
-
 #include "GameWindow.h"
 #include "StaticData.h"
 #include "Components/CollisionHandler.h"
@@ -13,7 +10,7 @@
 
 void Sniper::ShootBullet(int initialAngle)
 {
-	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10);
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.f, m_owner->m_position, m_owner->m_rotation + initialAngle, 10.f);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
 	if (dynamic_cast<Player*>(m_owner))

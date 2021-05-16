@@ -3,7 +3,6 @@
 
 #include "GameObject.h"
 #include "StaticData.h"
-#include "Components/CollisionHandler.h"
 
 class IBonus : public GameObject
 {

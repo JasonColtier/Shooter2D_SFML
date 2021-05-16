@@ -7,11 +7,7 @@
 #include "GameObjects/GameObject.h"
 #include <cstdarg>
 
-class Component;
-class GameObject;
-class CollisionManager;
 class Player;
-class CollisionHandler;
 
 namespace sf
 {
@@ -24,7 +20,7 @@ class GameLevel
 
 public:
     GameLevel();
-    virtual ~GameLevel() = default;
+    virtual ~GameLevel();
 
     void SpawnGameObjects();
     //called by the game loop

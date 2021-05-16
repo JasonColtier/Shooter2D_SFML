@@ -2,13 +2,13 @@
 #define SPAWNER_H
 
 #include "GameObjects/GameObject.h"
-#include "Enemy.h"
+
+class Enemy;
 
 class EnemySpawner : public GameObject
 {
 
 public:
-
 
 	EnemySpawner() = default;
 	~EnemySpawner() override = default;
@@ -22,7 +22,7 @@ public:
 	{
 		GameObject::Deactivate();
 	}
-	
+
 	void Tick(int64_t deltaTime) override;
 
 	void DoSpawn(float lifeMultiply);

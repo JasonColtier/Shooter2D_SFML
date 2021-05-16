@@ -1,16 +1,5 @@
 #include "Components/RunAwayMovementComponent.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "GameLevel.h"
-#include "GameWindow.h"
-#include "Components/IMovementComponent.h"
-#include "Components/Component.h"
-#include "GameObjects/Player.h"
-#include "Tools/VectorTools.h"
-#include <random>
-#include <valarray>
-#include <cmath>
-#include "Tools/SMath.h"
-
+#include "GameObjects/GameObject.h"
 
 void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 {
@@ -39,12 +28,12 @@ void RunAwayMovementComponent::TickComponent(int64_t deltaTime)
 	{
 		if (m_escape == false)
 		{
-			m_offsetAngle = 90.f;
+			m_offsetAngle = 90;
 			m_owner->m_position = Pos + (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 		}
 		else
 		{
-			m_offsetAngle = -90.f;
+			m_offsetAngle = -90;
 			m_owner->m_position = Pos - (m_inertia * (static_cast<float>(deltaTime) * 1.f));
 		}
 		

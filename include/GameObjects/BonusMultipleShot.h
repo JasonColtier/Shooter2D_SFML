@@ -2,7 +2,6 @@
 #define BONUSMULTIPLESHOT_H
 
 #include "IBonus.h"
-#include "Components/RenderHandler.h"
 #include "Managers/TextureManager.h"
 
 class BonusMultipleShot : public IBonus

@@ -3,8 +3,6 @@
 #include "Tools/Print.h"
 
 
-//std::map<TextureManager::ETextures, sf::Texture*> TextureManager::mapTextures;
-
 const char* TextureManager::_GetPath(const ETextures t)
 {
 	switch (t)
@@ -42,15 +40,4 @@ sf::Texture* TextureManager::GetTexturePtr(ETextures t)
 	Print::PrintLog("create new texture ptr for ", _GetPath(t));
 
 	return texture;
-}
-
-TextureManager::~TextureManager()
-{
-	for (auto& mapTexture : mapTextures)
-	{
-		delete mapTexture.second;
-	}
-
-	mapTextures.clear();
-	Print::PrintLog("destruction of textureManager finished ");
 }

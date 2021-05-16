@@ -22,7 +22,7 @@ public:
 	//retourne un pointeur vers la texture
 	static sf::SoundBuffer* GetSoundPtr(ESounds eSound);
 
-	~AudioManager() = default;//todo
+	~AudioManager();
 
 public:
 	//une map qui associe les textures chargées en mémoire à leur nom

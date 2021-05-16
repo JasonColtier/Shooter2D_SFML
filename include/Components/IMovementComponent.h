@@ -1,4 +1,4 @@
-#ifndef  IMOVEMENTCOMPONENT_H
+#ifndef IMOVEMENTCOMPONENT_H
 #define IMOVEMENTCOMPONENT_H
 
 #include "Component.h"
@@ -10,12 +10,12 @@ public:
 	IMovementComponent() = default;
 	virtual ~IMovementComponent() override  = default;
 
-	float GetSpeed()
+	float GetSpeed() const
 	{
 		return m_speed * m_speedModifier;
 	}
 
-	float GetMaxVelocity()
+	float GetMaxVelocity() const
 	{
 		return m_maxVelocity * m_velocityModifier;
 	}
