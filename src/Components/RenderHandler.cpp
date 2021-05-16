@@ -1,13 +1,7 @@
 ﻿#include "Components/RenderHandler.h"
 
-#include <map>
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 #include "GameWindow.h"
-#include "Components/CollisionHandler.h"
-#include "GameObjects/GameObject.h"
 #include "Managers/FontManager.h"
 
 
@@ -21,6 +15,15 @@ RenderHandler::RenderHandler(GameObject* parentGameObject, std::string userText,
 {
 	AddText(userText, key, zIndex, pos, color, size);
 	GameWindow::GetGameLevel()->AddObjectRendered(*this);
+}
+
+RenderHandler::~RenderHandler()
+{
+	for (auto element : m_renderedItems)
+	{
+		delete element;
+		element = nullptr;
+	}
 }
 
 void RenderHandler::Initialise(sf::Texture* tex, std::string key, int zIndex, bool isMovable,sf::Vector2f origin,float scale)
@@ -42,10 +45,6 @@ void RenderHandler::Reset()
 		delete container;
 	}
 	m_renderedItems.clear();
-	for (auto* sprite : m_MovableSprites)
-	{
-		delete sprite;
-	}
 	m_MovableSprites.clear();
 	GameWindow::GetGameLevel()->RemoveObjectRendered(*m_owner);
 }
@@ -90,8 +89,7 @@ sf::Text* RenderHandler::AddText(std::string userText, std::string key, int zInd
 
 void RenderHandler::RenderUpdate()
 {
-
-
+	//Utilisé pour le debug de collision, permet d'afficher les collisions des objets
 	
 	// if (m_owner->GetCollisionHandler())
 	// {

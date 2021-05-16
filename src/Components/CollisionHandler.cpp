@@ -1,10 +1,7 @@
 #include "Components/CollisionHandler.h"
-
 #include "GameWindow.h"
 #include "GameObjects/GameObject.h"
 #include "Tools/SMath.h"
-
-
 
 CollisionHandler::CollisionHandler(GameObject* owner, const CollisionType type, float* rotation, sf::Vector2f* position, const std::vector<sf::Vector2f>& lPoints, const float radius, std::vector<CollisionType> excludedCollisionType)
 	: m_owner(owner)

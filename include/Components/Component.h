@@ -1,8 +1,6 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <cstdint>
-
 class GameObject;
 
 class Component

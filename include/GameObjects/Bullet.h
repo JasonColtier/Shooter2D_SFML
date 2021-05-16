@@ -10,7 +10,7 @@ class Bullet : public GameObject
 public:
 
 	Bullet() = default;
-	virtual ~Bullet() = default;
+	virtual ~Bullet() override = default;
 	
 	void Activate(float delay, sf::Vector2f position, float rotation = 0.f, float scale = 1.f, sf::Vector2f offsetPos = sf::Vector2f(0.f, 0.f));
 	void Deactivate() override;
@@ -29,12 +29,9 @@ public:
 		return m_speed * m_speedMultiplier;
 	}
 
-	//sf::Vector2f scale = sf::Vector2f(1, 1);
 	float m_autoDestroyDelay = 0;
 	float m_speedMultiplier = 1.f;
 	float m_damageMultiplier = 1.f;
-
-	Character* m_CharacterShooter = nullptr;
 
 protected:
 	float m_speed = 0.5f;

@@ -1,8 +1,6 @@
 #ifndef SMATH_H
 #define SMATH_H
 
-#include <corecrt_math.h>
-#include <type_traits>
 #include <SFML/System/Vector2.hpp>
 
 constexpr float PI = 3.14159265f;

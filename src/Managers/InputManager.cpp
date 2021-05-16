@@ -1,12 +1,12 @@
 ﻿#include "Managers/InputManager.h"
 
-
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 
+#include "GameLoop.h"
 #include "GameWindow.h"
 
 
@@ -18,7 +18,6 @@ void InputManager::HandleInputs()
     {
         if (Events.type == sf::Event::Closed)
         {
-            //TODO call destructeurs
             GameWindow::m_window->close();
         }
 
@@ -37,9 +36,10 @@ void InputManager::HandleInputs()
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
     {
+        //si on est bien mort
         if(GameWindow::GetGameLevel()->m_player == nullptr)
         {
-            
+            GameLoop::GetInstance()->StartGame();
         }
     }
 

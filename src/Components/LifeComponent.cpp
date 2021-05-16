@@ -1,12 +1,6 @@
 ﻿#include "Components/LifeComponent.h"
-
-
-
 #include "GameWindow.h"
-#include "GameObjects/BonusHeal.h"
-#include "GameObjects/Enemy.h"
 #include "GameObjects/GameObject.h"
-#include "Managers/ScoreManager.h"
 #include "Tools/Print.h"
 
 void LifeComponent::TickComponent(int64_t deltaTime)

@@ -6,12 +6,6 @@
 #include "IMovementComponent.h"
 #include "Managers/InputManager.h"
 
-namespace std {
-	class any;
-}
-
-// typedef class InputManager InputMapping;
-
 class PlayerMovementComponent : public IMovementComponent
 {
 public:
