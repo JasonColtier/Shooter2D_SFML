@@ -28,8 +28,8 @@ void EnemySpawner::Tick(int64_t deltaTime)
 		//remet le compteur d'élimination à 0, 
 		m_nbEnemyEliminated = 0;
 		m_targetKills = m_targetKills * 2;
-		m_maxEnnemy++;
-		m_lifeMultiply = m_lifeMultiply + 0.5f;
+		m_maxEnnemy += 2;
+		m_lifeMultiply = m_lifeMultiply + 0.25f;
 	}
 }
 
@@ -51,6 +51,8 @@ void EnemySpawner::DoSpawn(float lifeMultiply)
 
 void EnemySpawner::RandomLocation(Enemy* EnemytoSpawn)
 {
+	srand(time(0));
+
 	const auto* window = GameWindow::m_window;
 	const auto Side = std::rand() % 4;
 	auto RandomX = 0;
@@ -89,6 +91,7 @@ void EnemySpawner::RandomLocation(Enemy* EnemytoSpawn)
 
 void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)
 {
+	srand(time(0));
 	//va choisir une valeur aléatoire entre 0 et 1 (car 2 types de MovementComponents existants pour les ennemis)
 	//et va attribuer au nouvel ennemi le MovementComponent correspondant
 	const auto Random = std::rand() % 2;
@@ -108,6 +111,7 @@ void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)
 
 void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 {
+	srand(time(0));
 	//va choisir une valeur aléatoire entre 0 et 2 (car 3 types de ShootComponents existants)
 	//et va attribuer au nouvel ennemi le ShootComponent correspondant
 	const auto Random = std::rand() % 3;

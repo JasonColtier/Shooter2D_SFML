@@ -18,19 +18,13 @@ void Enemy::Tick(int64_t deltaTime)
 {
     GameObject::Tick(deltaTime);
 
-    if (m_movementComponent->m_distance <= 300)
+    if (m_movementComponent->m_distance <= GetShootComponent()->m_range)
     {
-        //modifier le changement de vitesse par le biai d'un multiplicateur
-        //m_movementComponent->m_speed = 0.0000005f;
-        GetShootComponent()->m_wantToShoot = true;
-        GetShootComponent()->m_baseFireRate = 10.0f;
-        //Print::PrintLog("Shoot Enabled");		
+       GetShootComponent()->m_wantToShoot = true;	
     }
     else
-    {
-        //m_movementComponent->m_speed = 0.001f;
-        GetShootComponent()->m_wantToShoot = false;
-        //Print::PrintLog("Shoot Not Enabled");
+    {        
+       GetShootComponent()->m_wantToShoot = false;
     }
 
     GetComponentOfClass<LifeComponent>()->SetMaxHealth(m_enemyMaxHealth);
@@ -64,4 +58,6 @@ void Enemy::Deactivate()
     ScoreManager::ModifyScore(1); //une fa�on d'augmenter le score rapide mais on peut faire mieux
 
     m_enemySpawner->m_EnemyList.remove(this);
+
+    m_enemySpawner->m_nbEnemyEliminated++;
 }
