@@ -27,7 +27,7 @@ public:
 	static TypeId GetClassTypeId() { return "BonusHeal"; }
 
 public:
-	float m_pdtVie = 1.f;
+	float m_pdtVie = 10.f;
 };
 
 #endif //BONUSHEAL_H

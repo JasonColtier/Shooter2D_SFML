@@ -25,11 +25,10 @@ void EnemySpawner::Tick(int64_t deltaTime)
 	//Gestion du changement de difficulté
 	if (m_nbEnemyEliminated == m_targetKills)
 	{
-		//remet le compteur d'élimination à 0, 
 		m_nbEnemyEliminated = 0;
 		m_targetKills = m_targetKills * 2;
 		m_maxEnnemy += 2;
-		m_lifeMultiply = m_lifeMultiply + 0.25f;
+		m_lifeMultiply = m_lifeMultiply + 0.1f;
 	}
 }
 
@@ -104,6 +103,8 @@ void EnemySpawner::RandomMovement(Enemy* EnemytoSpawn)
 	case 1:
 		EnemytoSpawn->m_movementComponent = new RunAwayMovementComponent();
 		break;
+	default:
+		break;
 	}
 
 	EnemytoSpawn->AddComponent(EnemytoSpawn->m_movementComponent);
@@ -127,6 +128,8 @@ void EnemySpawner::RandomShoot(Enemy* EnemytoSpawn)
 
 	case 2:
 		EnemytoSpawn->SetShootComponent(new Sniper());
+		break;
+	default:
 		break;
 	}
 }

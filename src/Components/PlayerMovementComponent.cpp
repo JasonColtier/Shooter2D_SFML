@@ -8,6 +8,7 @@
 
 PlayerMovementComponent::PlayerMovementComponent()
 {
+	m_maxVelocity = 0.0004f;
 	InputManager::GetSignal().Connect<PlayerMovementComponent>(this, &PlayerMovementComponent::OnInputChanged);
 }
 
