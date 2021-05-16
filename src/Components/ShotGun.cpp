@@ -9,7 +9,7 @@
 
 void ShotGun::ShootBullet(int initialAngle)
 {
-	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(0.4f, m_owner->m_position, m_owner->m_rotation + static_cast<float>(initialAngle), 1.f);
+	auto* NewBullet = GameWindow::GetGameLevel()->SpawnActor<Bullet>(1.f, m_owner->m_position, m_owner->m_rotation + static_cast<float>(initialAngle), 1.f);
 	CollisionType ColType;
 	std::vector<CollisionType> ExcludeColType;
 	if (dynamic_cast<Player*>(m_owner))
