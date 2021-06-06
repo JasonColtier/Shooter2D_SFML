@@ -1,7 +1,14 @@
 # Shouter2D_SFML
 
-L’objectif pour les étudiants est de réaliser un jeu vidéo de type shooter. Au travers cette réalisation ils découvriront des problématiques qu’ont rencontrés les développeurs
-au début de l’histoire du jeu vidéo.
-Ils devront réaliser un shooter où le joueur devra tirer sur des ennemis qui apparaissent aléatoirement. Le déplacement des ennemis doit aussi être mis en place par les
-étudiants (IA). Il devront gérer les collisions, pourront créer différentes armes et devront mettre en place un système de difficulté croissante. Un ATH montrera le niveau de vie
-restant (ou nombre de vies) ainsi que le score. L’architecture mise en place devra être souple pour permettre suffisamment l’extension.
+L'objectif de ce projet est de réaliser un moteur de jeu permettant de jouer à un jeu vidéo de type shooter 2D
+
+Fonctionnalités : 
+- boucle de rafraichissement avec un nombre de FPS paramétrable
+- gestion des collisions
+- architecture en components inspirée de Unreal
+- gestion de la mémoire avec mise en commun des textures et des sons
+- gestion de la mémoire avec système de réincarnation des objets pour éviter les new / destroy
+- création des ennemis avec association aléatoires de components
+- système de difficulté croissante
+
+L’architecture mise en place devra être souple pour permettre suffisamment l’extension.
